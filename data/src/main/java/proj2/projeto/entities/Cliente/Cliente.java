@@ -1,6 +1,10 @@
 package proj2.projeto.entities.Cliente;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import proj2.projeto.entities.CodPostal.CodPostal;
 import proj2.projeto.entities.Obra.Orcamento.Fatura;
 import proj2.projeto.entities.Obra.Orcamento.Orcamento;
@@ -10,10 +14,21 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 
 @Entity
+@AllArgsConstructor @NoArgsConstructor
+@Getter @Setter
 @Table(name = "cliente")
 public class Cliente {
+    @Getter
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @SequenceGenerator(
+            name = "cliente_sequence",
+            sequenceName = "cliente_sequence",
+            allocationSize = 1
+    )
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "cliente_sequence"
+    )
     @Column(name = "id", nullable = false)
     private Integer id;
 
@@ -52,100 +67,19 @@ public class Cliente {
     @OneToMany(mappedBy = "cliente")
     private Set<Reclamacao> reclamacaos = new LinkedHashSet<>();
 
-    public Integer getId() {
-        return id;
+    public Cliente(String nome, String email, Integer telemovel, String password, String rua, Integer numeroPorta, CodPostal codPostal, TipoCliente tipoCliente) {
+        this.nome = nome;
+        this.email = email;
+        this.telemovel = telemovel;
+        this.password = password;
+        this.rua = rua;
+        this.numeroPorta = numeroPorta;
+        this.codPostal = codPostal;
+        this.tipoCliente = tipoCliente;
     }
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public Integer getTelemovel() {
-        return telemovel;
-    }
-
-    public void setTelemovel(Integer telemovel) {
-        this.telemovel = telemovel;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getRua() {
-        return rua;
-    }
-
-    public void setRua(String rua) {
-        this.rua = rua;
-    }
-
-    public Integer getNumeroPorta() {
-        return numeroPorta;
-    }
-
-    public void setNumeroPorta(Integer numeroPorta) {
-        this.numeroPorta = numeroPorta;
-    }
-
-    public CodPostal getCodPostal() {
-        return codPostal;
-    }
-
-    public void setCodPostal(CodPostal codPostal) {
-        this.codPostal = codPostal;
-    }
-
-    public TipoCliente getTipoCliente() {
-        return tipoCliente;
-    }
-
-    public void setTipoCliente(TipoCliente tipoCliente) {
-        this.tipoCliente = tipoCliente;
-    }
-
-    public Set<Fatura> getFaturas() {
-        return faturas;
-    }
-
-    public void setFaturas(Set<Fatura> faturas) {
-        this.faturas = faturas;
-    }
-
-    public Set<Orcamento> getOrcamentos() {
-        return orcamentos;
-    }
-
-    public void setOrcamentos(Set<Orcamento> orcamentos) {
-        this.orcamentos = orcamentos;
-    }
-
-    public Set<Reclamacao> getReclamacaos() {
-        return reclamacaos;
-    }
-
-    public void setReclamacaos(Set<Reclamacao> reclamacaos) {
-        this.reclamacaos = reclamacaos;
     }
 
 }
