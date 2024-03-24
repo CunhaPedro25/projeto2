@@ -7,12 +7,14 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import proj2.projeto.entities.Cliente.Cliente;
 import proj2.projeto.entities.Cliente.ClienteRepository;
+import proj2.projeto.entities.Cliente.TipoCliente;
+import proj2.projeto.entities.Cliente.TipoClienteRepository;
+import proj2.projeto.entities.CodPostal.CodPostal;
+import proj2.projeto.entities.CodPostal.CodPostalRepository;
 
 @SpringBootApplication
 public class ProjetoApplication {
 
-	@Autowired
- private ClienteRepository clienteRepository;
 
 
 
@@ -23,12 +25,14 @@ public class ProjetoApplication {
 
 
 	@Bean
-	public CommandLineRunner commandLineRunner1(ClienteRepository clienteRepository){
+	public CommandLineRunner commandLineRunner1(ClienteRepository clienteRepository, CodPostalRepository codPostalRepository, TipoClienteRepository tipoClienteRepository){
 		return (args ->{
-			var cliente = new Cliente();
+			var codPostal = new CodPostal(4935,"Viana");
+			codPostalRepository.save(codPostal);
+			var tipoCli = new TipoCliente("Lazy");
+			tipoClienteRepository.save(tipoCli);
+			var cliente = new Cliente("Miguel","mail.com",456789,"password","rua das ruas",69,codPostal,tipoCli);
 			clienteRepository.save(cliente);//CRIAR OU ATUALIZAR
-			clienteRepository.delete(cliente);
-			clienteRepository.findById(cliente.getId());
 		});
 	}
 

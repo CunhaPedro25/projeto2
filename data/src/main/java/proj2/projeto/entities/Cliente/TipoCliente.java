@@ -13,6 +13,10 @@ public class TipoCliente {
     @Column(name = "tipo", length = Integer.MAX_VALUE)
     private String tipo;
 
+    public TipoCliente( String tipo) {
+        this.tipo = tipo;
+    }
+
     public Integer getId() {
         return id;
     }
