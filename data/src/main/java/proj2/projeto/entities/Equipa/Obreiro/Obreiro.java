@@ -3,6 +3,7 @@ package proj2.projeto.entities.Equipa.Obreiro;
 import jakarta.persistence.*;
 import proj2.projeto.entities.Equipa.Equipa;
 
+//TODO ADD the field "password" to this entity (DataBase ASAP).
 @Entity
 @Table(name = "obreiro")
 public class Obreiro {
