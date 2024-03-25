@@ -3,8 +3,7 @@ package proj2.projeto.entities.Obra.Estado;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import proj2.projeto.entities.Estado.Estado;
-import proj2.projeto.entities.Estado.EstadoRepository;
+
 
 import java.util.List;
 import java.util.Objects;
