@@ -11,19 +11,18 @@ import java.util.Optional;
 @Service
 public class ClienteService {
   private final ClienteRepository clienteRepository;
-
   @Autowired
   public ClienteService(ClienteRepository clienteRepository){ this.clienteRepository = clienteRepository;}
   public List<Cliente> getClientes(){ return clienteRepository.findAll();}
 
-  public void addNewCliente(Cliente newCliente){
+  public void addNew(Cliente newCliente){
     Optional<Cliente> clienteByEmail = clienteRepository.findByEmail(newCliente.getEmail());
     if (clienteByEmail.isPresent()){
       throw new IllegalStateException("email taken");
     }
     clienteRepository.save(newCliente);
   }
-  public void deleteCliente(Long clienteId){
+  public void delete(Long clienteId){
     boolean exists = clienteRepository.existsById(clienteId);
     if (!exists){
       throw new IllegalStateException("cliente with id"+clienteId+"does not exist");
@@ -32,11 +31,14 @@ public class ClienteService {
     }
   }
   @Transactional
-  public void updatecliente(Long id,String name, String email){
+  public void update(Long id,String name, String email,String password){
     Cliente cliente = clienteRepository.findById(id).orElseThrow(()-> new IllegalStateException( "cliente with id "+ id + " does not exist! "));
 
     if (name != null && !name.isEmpty() && !Objects.equals(cliente.getNome(), name)){
       cliente.setNome(name);
+    }
+    if (password != null && !password.isEmpty() && !Objects.equals(cliente.getPassword(), password)){
+      cliente.setPassword(password);
     }
     if (email != null && !email.isEmpty() && !Objects.equals(cliente.getEmail(),email)) {
       Optional<Cliente> clienteOptional = clienteRepository.findByEmail(email);
