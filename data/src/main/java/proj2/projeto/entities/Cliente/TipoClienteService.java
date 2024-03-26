@@ -17,7 +17,7 @@ public class TipoClienteService {
   public void addNew(TipoCliente newTipoCliente){
     Optional<TipoCliente> TipoClienteByTipo = TipoClienteRepository.findByTipo(newTipoCliente.getTipo());
     if (TipoClienteByTipo.isPresent()){
-      throw new IllegalStateException("email taken");
+      throw new IllegalStateException("tipo de cliente already exists");
     }
     TipoClienteRepository.save(newTipoCliente);
   }

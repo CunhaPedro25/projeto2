@@ -15,14 +15,14 @@ public class EtapaService {
   @Autowired
   public EtapaService(EtapaRepository EtapaRepository){ this.EtapaRepository = EtapaRepository;}
   public List<Etapa> getEtapas(){ return EtapaRepository.findAll();}
-  /*
-
 
   public void addNew(Etapa newEtapa){
+    /*
     Optional<Etapa> EtapaByOrcamento = EtapaRepository.findByOrcamento_Id(newEtapa.getOrcamento().getId());
     if (EtapaByOrcamento.isPresent()){
       throw new IllegalStateException("A etapa que esta a tentar inserir");
     }
+     */
     EtapaRepository.save(newEtapa);
   }
   public void delete(Long EtapaId){
@@ -34,23 +34,12 @@ public class EtapaService {
     }
   }
   @Transactional
-  public void update(Long id,String name, String email,String password){
+  public void update(Long id,String desc){
     Etapa Etapa = EtapaRepository.findById(id).orElseThrow(()-> new IllegalStateException( "Etapa with id "+ id + " does not exist! "));
 
-    if (name != null && !name.isEmpty() && !Objects.equals(Etapa.getNome(), name)){
-      Etapa.setNome(name);
-    }
-    if (password != null && !password.isEmpty() && !Objects.equals(Etapa.getPassword(), password)){
-      Etapa.setPassword(password);
-    }
-    if (email != null && !email.isEmpty() && !Objects.equals(Etapa.getEmail(),email)) {
-      Optional<Etapa> EtapaOptional = EtapaRepository.findByEmail(email);
-      if (EtapaOptional.isPresent()){
-        throw new IllegalStateException("email taken");
-      }else {
-        Etapa.setEmail(email);
-      }
+    if (desc != null && !desc.isEmpty() && !Objects.equals(Etapa.getDescricao(), desc)){
+      Etapa.setDescricao(desc);
     }
   }
-   */
+
 }
