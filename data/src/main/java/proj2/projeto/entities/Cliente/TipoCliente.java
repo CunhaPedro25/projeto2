@@ -1,8 +1,11 @@
 package proj2.projeto.entities.Cliente;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 
 @Entity
+@AllArgsConstructor @NoArgsConstructor
 @Table(name = "tipo_cliente")
 public class TipoCliente {
     @Id

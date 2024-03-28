@@ -5,7 +5,7 @@ import proj2.projeto.entities.Equipa.Equipa;
 
 @Entity
 @Table(name = "obra")
-public class Obra {
+public class    Obra {
     @Id
     @Column(name = "id", nullable = false)
     private Integer id;
