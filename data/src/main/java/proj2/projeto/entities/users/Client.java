@@ -3,30 +3,17 @@ package proj2.projeto.entities.users;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import proj2.projeto.entities.*;
 import proj2.projeto.entities.enums.ClientType;
-import proj2.projeto.entities.Zipcode;
+
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 @Getter
 @Setter
 @Entity
 @Table(name = "client")
-public class Client {
-  @Id
-  @Column(name = "id", nullable = false)
-  private Integer id;
-
-  @Column(name = "name", length = 70)
-  private String name;
-
-  @Column(name = "email", nullable = false, length = 254)
-  private String email;
-
-  @Column(name = "password", nullable = false, length = Integer.MAX_VALUE)
-  private String password;
-
-  @Column(name = "phone", nullable = false, length = Integer.MAX_VALUE)
-  private String phone;
-
+public class Client extends User {
   @Column(name = "address", length = Integer.MAX_VALUE)
   private String address;
 
@@ -41,7 +28,30 @@ public class Client {
   @JoinColumn(name = "client_type", nullable = false)
   private ClientType clientType;
 
-  @Column(name = "active")
-  private Boolean active;
+  @OneToMany(mappedBy = "client")
+  private Set<Budget> budgets = new LinkedHashSet<>();
 
+  @OneToMany(mappedBy = "client")
+  private Set<Complaint> complaints = new LinkedHashSet<>();
+
+  @OneToMany(mappedBy = "client")
+  private Set<Invoice> invoices = new LinkedHashSet<>();
+
+  @OneToMany(mappedBy = "client")
+  private Set<Project> projects = new LinkedHashSet<>();
+
+  public Client() {}
+
+  public Client(String name, String email, String password, String phone, ClientType clientType) {
+    super(name, email, password, phone);
+    this.clientType = clientType;
+  }
+
+  public Client(String name, String email, String password, String phone, String address, Integer door, Zipcode zipcode, ClientType clientType) {
+    super(name, email, password, phone);
+    this.address = address;
+    this.door = door;
+    this.zipcode = zipcode;
+    this.clientType = clientType;
+  }
 }

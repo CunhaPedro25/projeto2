@@ -1,19 +1,16 @@
-package proj2.projeto.services;
+package proj2.projeto.services.users;
 
 import jakarta.transaction.Transactional;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import proj2.projeto.entities.users.User;
 import proj2.projeto.repositories.users.UserRepository;
 
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
-@Service
-public class UserService<T> {
+public abstract class UserService<T extends User> {
   private final UserRepository<T> userRepository;
 
-  @Autowired
   public UserService(UserRepository<T> userRepository) {
     this.userRepository = userRepository;
   }
@@ -45,7 +42,7 @@ public class UserService<T> {
   }
 
   @Transactional
-  public void update(Long id, String email, String phone) {
+  public void update(Long id, String name, String email, String phone) {
     T user = userRepository.findById(id)
             .orElseThrow(() -> new IllegalStateException("User with id " + id + " does not exist"));
 
@@ -54,8 +51,17 @@ public class UserService<T> {
     }
 
     if (email != null && !email.isEmpty() && !Objects.equals(user.getEmail(), email)) {
-      Optional<T> userOptional = userRepository.findByEmail(email);
-      if (userOptional.isPresent()) {
+      Optional<T> userRepositoryByEmail = userRepository.findByEmail(email);
+      if (userRepositoryByEmail.isPresent()) {
+        throw new IllegalStateException("Email already taken");
+      } else {
+        user.setEmail(email);
+      }
+    }
+
+    if (phone != null && !phone.isEmpty() && !Objects.equals(user.getPhone(), phone)) {
+      Optional<T> userRepositoryByPhone = userRepository.findByPhone(phone);
+      if (userRepositoryByPhone.isPresent()) {
         throw new IllegalStateException("Email already taken");
       } else {
         user.setEmail(email);

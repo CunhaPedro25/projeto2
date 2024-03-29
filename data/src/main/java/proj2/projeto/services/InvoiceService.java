@@ -1,27 +1,28 @@
 package proj2.projeto.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import proj2.projeto.entities.Obra.Orcamento.Fatura;
-import proj2.projeto.entities.Obra.Orcamento.FaturaRepository;
+import org.springframework.stereotype.Service;
+import proj2.projeto.entities.Invoice;
+import proj2.projeto.repositories.InvoiceRepository;
 
 import java.util.List;
 
+@Service
 public class InvoiceService {
-  private final FaturaRepository faturaRepository;
+  private final InvoiceRepository invoiceRepository;
   @Autowired
-  public FaturaService(FaturaRepository faturaRepository){ this.faturaRepository = faturaRepository;}
-  public List<Fatura> getFaturas(){ return faturaRepository.findAll();}
-  //TODO Develop the constraints for saving a new "Fatura"
-  public void addNew(Fatura newFatura){
-    faturaRepository.save(newFatura);
+  public InvoiceService(InvoiceRepository invoiceRepository){ this.invoiceRepository = invoiceRepository;}
+  public List<Invoice> getInvoice(){ return invoiceRepository.findAll();}
+
+  public void addNew(Invoice newInvoice){
+    invoiceRepository.save(newInvoice);
   }
-  public void delete(Long FaturaId){
-    boolean exists = faturaRepository.existsById(FaturaId);
+  public void delete(Long id){
+    boolean exists = invoiceRepository.existsById(id);
     if (!exists){
-      throw new IllegalStateException("The Fatura with id"+FaturaId+"does not exist");
+      throw new IllegalStateException("The Fatura with id"+id+"does not exist");
     }else{
-      faturaRepository.deleteById(FaturaId);
+      invoiceRepository.deleteById(id);
     }
   }
-  //TODO Ask how would update work
 }

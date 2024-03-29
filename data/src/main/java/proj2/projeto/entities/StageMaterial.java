@@ -25,4 +25,12 @@ public class StageMaterial {
   @Column(name = "quantity", nullable = false)
   private Integer quantity;
 
+  public StageMaterial() {}
+
+  public StageMaterial(Stage stage, Material material, Integer quantity) {
+    this.id = new StageMaterialId(stage.getId(), material.getId());
+    this.stage = stage;
+    this.material = material;
+    this.quantity = quantity;
+  }
 }

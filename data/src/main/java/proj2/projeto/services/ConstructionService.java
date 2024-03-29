@@ -1,14 +1,11 @@
 package proj2.projeto.services;
 
-import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import proj2.projeto.entities.Construction;
-import proj2.projeto.entities.Stage;
 import proj2.projeto.repositories.ConstructionRepository;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class ConstructionService {
@@ -23,18 +20,18 @@ public class ConstructionService {
     }
     constructionRepository.save(newConstruction);
   }
-  public void delete(Long ConstructionId){
-    boolean exists = constructionRepository.existsById(ConstructionId);
+  public void delete(Long id){
+    boolean exists = constructionRepository.existsById(id);
     if (!exists){
-      throw new IllegalStateException("Construction with id"+ConstructionId+"does not exist");
+      throw new IllegalStateException("Construction with id"+id+"does not exist");
     }else{
-      constructionRepository.deleteById(ConstructionId);
+      constructionRepository.deleteById(id);
     }
   }
 
 //  @Transactional
 //  public void update(Long id, Stage stage){
-//    Construction Construction = constructionRepository.findById(id).orElseThrow(()-> new IllegalStateException( "Construction with id "+ id + " does not exist! "));
+//    Construction construction = constructionRepository.findById(id).orElseThrow(()-> new IllegalStateException( "Construction with id "+ id + " does not exist! "));
 //
 //  }
 }

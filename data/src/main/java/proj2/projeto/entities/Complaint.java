@@ -11,6 +11,7 @@ import proj2.projeto.entities.users.Client;
 @Table(name = "complaint")
 public class Complaint {
   @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "id", nullable = false)
   private Integer id;
 
@@ -25,4 +26,11 @@ public class Complaint {
   @Column(name = "description", nullable = false, length = Integer.MAX_VALUE)
   private String description;
 
+  public Complaint() {}
+
+  public Complaint(Client client, Construction construction, String description) {
+    this.client = client;
+    this.construction = construction;
+    this.description = description;
+  }
 }

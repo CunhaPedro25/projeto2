@@ -1,11 +1,12 @@
 package proj2.projeto.entities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import proj2.projeto.entities.users.Client;
+
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -25,4 +26,14 @@ public class Zipcode {
   @Column(name = "locale", nullable = false, length = Integer.MAX_VALUE)
   private String locale;
 
+  @OneToMany(mappedBy = "zipcode")
+  private Set<Client> clients = new LinkedHashSet<>();
+
+  public Zipcode() {}
+  public Zipcode(String id, String district, String city, String locale) {
+    this.id = id;
+    this.district = district;
+    this.city = city;
+    this.locale = locale;
+  }
 }

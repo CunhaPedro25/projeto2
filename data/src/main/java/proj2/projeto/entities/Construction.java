@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -12,6 +14,7 @@ import java.time.LocalDate;
 @Table(name = "construction")
 public class Construction {
   @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "id", nullable = false)
   private Integer id;
 
@@ -28,7 +31,7 @@ public class Construction {
   private Stage stage;
 
   @Column(name = "finished")
-  private Boolean finished;
+  private Boolean finished = false;
 
   @Column(name = "last_update")
   private LocalDate lastUpdate;
@@ -36,4 +39,16 @@ public class Construction {
   @Column(name = "start_date")
   private LocalDate startDate;
 
+  @OneToMany(mappedBy = "construction")
+  private Set<Complaint> complaints = new LinkedHashSet<>();
+
+  public Construction() {}
+
+  public Construction(Team team, Budget budget, Stage stage, LocalDate startDate) {
+    this.team = team;
+    this.budget = budget;
+    this.stage = stage;
+    this.startDate = startDate;
+    this.lastUpdate = LocalDate.now();
+  }
 }

@@ -7,6 +7,8 @@ import proj2.projeto.entities.users.Client;
 import proj2.projeto.entities.users.Engineer;
 
 import java.time.LocalDate;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -30,7 +32,7 @@ public class Budget {
   private String filePath;
 
   @Column(name = "create_date")
-  private LocalDate createDate;
+  private LocalDate createDate = LocalDate.now();
 
   @Column(name = "accepted")
   private Boolean accepted;
@@ -39,4 +41,32 @@ public class Budget {
   @JoinColumn(name = "project", nullable = false)
   private Project project;
 
+  @OneToMany(mappedBy = "budget")
+  private Set<Construction> constructions = new LinkedHashSet<>();
+
+  @OneToMany(mappedBy = "budget")
+  private Set<Stage> stages = new LinkedHashSet<>();
+
+  public Budget() {}
+
+  public Budget(Client client, Engineer engineer, Project project) {
+    this.client = client;
+    this.engineer = engineer;
+    this.project = project;
+  }
+
+  public Budget(Client client, Engineer engineer, Project project, String filePath) {
+    this.client = client;
+    this.engineer = engineer;
+    this.project = project;
+    this.filePath = filePath;
+  }
+
+  public Budget(Client client, Engineer engineer, Project project, String filePath, LocalDate createDate) {
+    this.client = client;
+    this.engineer = engineer;
+    this.project = project;
+    this.filePath = filePath;
+    this.createDate = createDate;
+  }
 }

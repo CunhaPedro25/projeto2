@@ -5,32 +5,29 @@ import lombok.Getter;
 import lombok.Setter;
 import proj2.projeto.entities.Team;
 
+import java.util.LinkedHashSet;
+import java.util.Set;
+
 @Getter
 @Setter
 @Entity
 @Table(name = "worker")
-public class Worker {
-  @Id
-  @Column(name = "id", nullable = false)
-  private Integer id;
-
-  @Column(name = "name", length = 70)
-  private String name;
-
-  @Column(name = "email", nullable = false, length = 254)
-  private String email;
-
-  @Column(name = "password", nullable = false, length = Integer.MAX_VALUE)
-  private String password;
-
-  @Column(name = "phone", nullable = false)
-  private Integer phone;
-
+public class Worker extends User{
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "team")
   private Team team;
 
-  @Column(name = "active")
-  private Boolean active;
+  @OneToMany(mappedBy = "leader")
+  private Set<Team> teams = new LinkedHashSet<>();
 
+  public Worker() {}
+
+  public Worker(String name, String email, String password, String phone) {
+    super(name, email, password, phone);
+  }
+
+  public Worker(String name, String email, String password, String phone, Team team) {
+    super(name, email, password, phone);
+    this.team = team;
+  }
 }

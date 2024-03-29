@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.Hibernate;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -13,6 +14,7 @@ import java.util.Objects;
 @Setter
 @Embeddable
 public class StageMaterialId implements Serializable {
+  @Serial
   private static final long serialVersionUID = 2906110217833017574L;
   @Column(name = "stage", nullable = false)
   private Integer stage;
@@ -34,4 +36,10 @@ public class StageMaterialId implements Serializable {
     return Objects.hash(stage, material);
   }
 
+  public StageMaterialId() {}
+
+  public StageMaterialId(Integer stage, Integer material) {
+    this.stage = stage;
+    this.material = material;
+  }
 }

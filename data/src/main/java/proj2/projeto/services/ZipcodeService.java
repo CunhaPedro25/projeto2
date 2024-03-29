@@ -2,45 +2,48 @@ package proj2.projeto.services;
 
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
-import proj2.projeto.entities.CodPostal.CodPostal;
-import proj2.projeto.entities.CodPostal.CodPostalRepository;
+import org.springframework.stereotype.Service;
+import proj2.projeto.entities.Zipcode;
+import proj2.projeto.repositories.ZipcodeRepository;
 
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 
+@Service
 public class ZipcodeService {
-  private final proj2.projeto.entities.CodPostal.CodPostalRepository CodPostalRepository;
+  private final ZipcodeRepository zipcodeRepository;
   @Autowired
-  public CodPostalService(CodPostalRepository CodPostalRepository){ this.CodPostalRepository = CodPostalRepository;}
-  public List<CodPostal> getCodPostals(){ return CodPostalRepository.findAll();}
+  public ZipcodeService(ZipcodeRepository zipcodeRepository){ this.zipcodeRepository = zipcodeRepository;}
+  public List<Zipcode> getZipcodes(){ return zipcodeRepository.findAll();}
 
-  public void addNew(CodPostal newCodPostal){
-    Optional<CodPostal> CodPostalByDistrito = CodPostalRepository.findByDistrito(newCodPostal.getDistrito());
-    if (CodPostalByDistrito.isPresent()){
-      throw new IllegalStateException("distrito taken");
+  public void addNew(Zipcode newZipcode){
+    if (zipcodeRepository.existsById(newZipcode.getId())){
+      throw new IllegalStateException("Zipcode already exists");
     }
-    CodPostalRepository.save(newCodPostal);
+    zipcodeRepository.save(newZipcode);
   }
-  public void delete(Long CodPostalId){
-    boolean exists = CodPostalRepository.existsById(CodPostalId);
+  public void delete(Long id){
+    boolean exists = zipcodeRepository.existsById(id);
     if (!exists){
-      throw new IllegalStateException("CodPostal with id"+CodPostalId+"does not exist");
+      throw new IllegalStateException("CodPostal with id"+id+"does not exist");
     }else{
-      CodPostalRepository.deleteById(CodPostalId);
+      zipcodeRepository.deleteById(id);
     }
   }
   @Transactional
-  public void update(Long id,String distrito){
-    CodPostal CodPostal = CodPostalRepository.findById(id).orElseThrow(()-> new IllegalStateException( "CodPostal with id "+ id + " does not exist! "));
+  public void update(Long id,String district, String city, String locale){
+    Zipcode zipcode = zipcodeRepository.findById(id).orElseThrow(()-> new IllegalStateException( "CodPostal with id "+ id + " does not exist! "));
 
-    if (distrito != null && !distrito.isEmpty() && !Objects.equals(CodPostal.getDistrito(),distrito)) {
-      Optional<CodPostal> CodPostalOptional = CodPostalRepository.findByDistrito(distrito);
-      if (CodPostalOptional.isPresent()){
-        throw new IllegalStateException("distrito taken");
-      }else {
-        CodPostal.setDistrito(distrito);
-      }
+    if (district != null && !district.isEmpty() && !Objects.equals(zipcode.getDistrict(), district)) {
+        zipcode.setDistrict(district);
+    }
+
+    if (city != null && !city.isEmpty() && !Objects.equals(zipcode.getCity(), city)) {
+      zipcode.setCity(city);
+    }
+
+    if (locale != null && !locale.isEmpty() && !Objects.equals(zipcode.getLocale(), locale)) {
+      zipcode.setLocale(locale);
     }
   }
 }
