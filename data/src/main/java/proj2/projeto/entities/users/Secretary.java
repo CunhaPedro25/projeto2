@@ -8,11 +8,11 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name = "staff")
-public class Staff extends User{
-  public Staff() {}
+@Table(name = "secretary")
+public class Secretary extends User{
+  public Secretary() {}
 
-  public Staff(String name, String email, String password, String phone) {
+  public Secretary(String name, String email, String password, String phone) {
     super(name, email, password, phone);
   }
 }
