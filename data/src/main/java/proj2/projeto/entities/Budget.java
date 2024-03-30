@@ -62,6 +62,13 @@ public class Budget {
     this.filePath = filePath;
   }
 
+  public Budget(Client client, Engineer engineer, Project project, LocalDate createDate) {
+    this.client = client;
+    this.engineer = engineer;
+    this.project = project;
+    this.createDate = createDate;
+  }
+
   public Budget(Client client, Engineer engineer, Project project, String filePath, LocalDate createDate) {
     this.client = client;
     this.engineer = engineer;
