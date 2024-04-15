@@ -1,4 +1,4 @@
-module desktop {
+module org.projeto.desktop {
     requires javafx.controls;
     requires javafx.fxml;
     requires javafx.web;
@@ -8,9 +8,12 @@ module desktop {
     requires org.kordamp.ikonli.javafx;
     requires org.kordamp.bootstrapfx.core;
     requires eu.hansolo.tilesfx;
+    requires org.projeto.data;
+    requires spring.boot;
+    requires lombok;
 
-    opens proj2.projeto.desktop to javafx.fxml;
-    exports proj2.projeto.desktop;
-
-    requires data;
+    opens org.projeto.desktop to javafx.fxml;
+    exports org.projeto.desktop;
+    opens org.projeto.desktop.pages to javafx.fxml;
+    exports org.projeto.desktop.pages;
 }
