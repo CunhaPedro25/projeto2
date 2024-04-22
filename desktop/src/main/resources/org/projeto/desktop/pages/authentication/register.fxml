@@ -8,7 +8,7 @@
 
 <ScrollPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
-            fx:controller="org.projeto.desktop.pages.RegisterController">
+            fx:controller="org.projeto.desktop.pages.authentication.RegisterController">
 
     <FlowPane alignment="CENTER" styleClass="background">
         <VBox alignment="CENTER" styleClass="form-container">

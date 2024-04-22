@@ -7,7 +7,7 @@
 
 <ScrollPane fitToHeight="true" fitToWidth="true"
             xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="org.projeto.desktop.pages.LoginController">
+            fx:controller="org.projeto.desktop.pages.authentication.LoginController">
 
     <FlowPane alignment="CENTER" styleClass="background">
         <VBox alignment="CENTER" styleClass="form-container">

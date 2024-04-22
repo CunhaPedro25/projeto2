@@ -14,6 +14,6 @@ module org.projeto.desktop {
 
     opens org.projeto.desktop to javafx.fxml;
     exports org.projeto.desktop;
-    opens org.projeto.desktop.pages to javafx.fxml;
-    exports org.projeto.desktop.pages;
+    exports org.projeto.desktop.pages.authentication;
+    opens org.projeto.desktop.pages.authentication to javafx.fxml;
 }

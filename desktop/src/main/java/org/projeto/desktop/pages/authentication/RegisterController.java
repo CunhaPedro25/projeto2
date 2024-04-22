@@ -1,16 +1,15 @@
-package org.projeto.desktop.pages;
+package org.projeto.desktop.pages.authentication;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import org.projeto.data.entities.enums.ClientType;
 import org.projeto.data.entities.users.Client;
 import org.projeto.data.services.ClientTypeService;
 import org.projeto.data.services.users.UserService;
 import org.projeto.desktop.SceneManager;
 
-public class RegisterController {
+public class  RegisterController {
 
 
   //THIS IS JUST FOR TESTING LATER THERE WILL BE A REGISTER FORM COMPONENT OR SOMETHING
@@ -48,7 +47,7 @@ public class RegisterController {
     }
 
     Client client = new Client(
-            firstName.getText() + lastName.getText(),
+            firstName.getText() +  " " + lastName.getText(),
             email.getText(),
             password.getText(),
             phone.getText(),

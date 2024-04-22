@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<ScrollPane fitToHeight="true" fitToWidth="true" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.projeto.desktop.pages.authentication.LoginController">
+
+    <FlowPane alignment="CENTER" styleClass="background">
+      <HBox>
+          <fx:include source="../authentication/login.fxml" />
+          <VBox alignment="CENTER" styleClass="form-container">
+              <fx:include source="../authentication/register.fxml" />
+              <fx:include source="../authentication/login.fxml" />
+          </VBox>
+      </HBox>
+    </FlowPane>
+</ScrollPane>

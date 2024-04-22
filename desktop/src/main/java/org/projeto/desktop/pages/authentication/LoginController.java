@@ -1,11 +1,9 @@
-package org.projeto.desktop.pages;
+package org.projeto.desktop.pages.authentication;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
-import org.projeto.data.entities.users.Client;
 import org.projeto.data.entities.users.User;
 import org.projeto.data.services.users.UserService;
 import org.projeto.desktop.SceneManager;
@@ -37,7 +35,7 @@ public class LoginController {
     try {
       User client = UserService.login(email.getText(), password.getText());
       System.out.println(client.getName());
-      SceneManager.openErrorAlert("Hello", "How u doing" + client.getName());
+      SceneManager.openConfirmationAlert("Hello", "How u doing" + client.getName());
     } catch (Exception err) {
       System.out.println(err.getMessage());
       SceneManager.openErrorAlert("Erro a iniciar sessão", "Credenciais erradas");
