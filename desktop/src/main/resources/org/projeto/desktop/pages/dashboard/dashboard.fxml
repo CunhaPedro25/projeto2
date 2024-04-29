@@ -7,10 +7,9 @@
 
     <FlowPane alignment="CENTER" styleClass="background">
       <HBox>
-          <fx:include source="../authentication/login.fxml" />
+          <fx:include source="../../components/sidebar.fxml" />
           <VBox alignment="CENTER" styleClass="form-container">
               <fx:include source="../authentication/register.fxml" />
-              <fx:include source="../authentication/login.fxml" />
           </VBox>
       </HBox>
     </FlowPane>

@@ -14,7 +14,7 @@ import java.io.IOException;
 public class DesktopApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(DesktopApplication.class.getResource("pages/authentication/login.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(DesktopApplication.class.getResource("pages/dashboard/dashboard.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 320, 240);
         stage.setTitle("EcoBuild!");
         stage.setScene(scene);
