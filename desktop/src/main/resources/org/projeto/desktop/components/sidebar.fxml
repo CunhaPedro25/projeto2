@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
-<GridPane vgap="10.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.projeto.desktop.components.SideBarController">
+
+<GridPane vgap="10.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.projeto.desktop.components.SideBarController">
     <columnConstraints>
       <ColumnConstraints hgrow="SOMETIMES" />
     </columnConstraints>
@@ -15,18 +19,14 @@
       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
     </rowConstraints>
 
-    <FontIcon iconCode="di-java" />
+    <ImageView fitHeight="60.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+        <Image url="@../assets/icons/ecobuild.png" />
+    </ImageView>
    
     <FlowPane orientation="VERTICAL" GridPane.rowIndex="1">
-        <ImageView fitHeight="60.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
-           <Image url="@../assets/icons/ecobuild.png" />
-        </ImageView>
-        <ImageView fitHeight="60.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
-           <Image url="@../assets/icons/ecobuild.png" />
-        </ImageView>
-        <ImageView fitHeight="60.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
-           <Image url="@../assets/icons/ecobuild.png" />
-        </ImageView>
+        <FontIcon iconLiteral="fas-home" />
+        <FontIcon iconLiteral="far-heart" />
+        <FontIcon iconLiteral="far-heart" />
     </FlowPane>
 
     <ImageView fitHeight="60.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2">

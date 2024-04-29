@@ -1,16 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 
-<ScrollPane fitToHeight="true" fitToWidth="true" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.projeto.desktop.pages.authentication.LoginController">
+<ScrollPane fitToHeight="true" fitToWidth="true" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.projeto.desktop.pages.authentication.LoginController">
 
     <FlowPane alignment="CENTER" styleClass="background">
       <HBox>
           <fx:include source="../../components/sidebar.fxml" />
-          <VBox alignment="CENTER" styleClass="form-container">
-              <fx:include source="../authentication/register.fxml" />
+          <VBox alignment="CENTER" maxWidth="1.7976931348623157E308" styleClass=" form-container">
+              <fx:include source="client/home.fxml" />
           </VBox>
       </HBox>
     </FlowPane>
+
 </ScrollPane>

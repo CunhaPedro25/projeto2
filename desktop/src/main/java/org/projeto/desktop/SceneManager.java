@@ -19,8 +19,6 @@ public class SceneManager {
       FXMLLoader fxmlLoader = new FXMLLoader(DesktopApplication.class.getResource(sceneName));
       Scene scene = new Scene(fxmlLoader.load());
 
-
-
       Stage stage = new Stage();
       stage.setScene(scene);
       stage.setTitle("PetCare");
@@ -84,6 +82,28 @@ public class SceneManager {
       System.out.println("openNewModal (SceneManager): " + e.getCause());
     }
   }
+
+  public static void switchScene(Stage stage, Scene scene, Object controller, Consumer<Object> handler) {
+    if(stage == null) {
+      System.out.println("Stage is null. Unable to switch scenes.");
+      return;
+    }
+    try {
+      stage.setScene(scene);
+      stage.getIcons().clear();
+      stage.getIcons().add(getAppIcon());
+      stage.centerOnScreen();
+
+      if (handler != null) {
+        handler.accept(controller);
+      }
+
+      stage.show();
+    } catch (Exception e) {
+      System.out.println("switchScene (SceneManager): " + e.getCause());
+    }
+  }
+
 
   public static void switchScene(Stage stage, Scene scene) {
     if(stage == null) { System.out.println("Stage is null. Unable to switch scenes."); return;}

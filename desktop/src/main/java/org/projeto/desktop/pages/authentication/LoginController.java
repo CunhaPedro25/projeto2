@@ -33,9 +33,9 @@ public class LoginController {
     }
 
     try {
-      User client = UserService.login(email.getText(), password.getText());
-      System.out.println(client.getName());
-      SceneManager.openConfirmationAlert("Hello", "How u doing" + client.getName());
+      User user = UserService.login(email.getText(), password.getText());
+      System.out.println(user.getName());
+      SceneManager.openConfirmationAlert("Hello", "How u doing" + user.getName());
     } catch (Exception err) {
       System.out.println(err.getMessage());
       SceneManager.openErrorAlert("Erro a iniciar sessão", "Credenciais erradas");
