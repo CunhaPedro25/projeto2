@@ -83,28 +83,6 @@ public class SceneManager {
     }
   }
 
-  public static void switchScene(Stage stage, Scene scene, Object controller, Consumer<Object> handler) {
-    if(stage == null) {
-      System.out.println("Stage is null. Unable to switch scenes.");
-      return;
-    }
-    try {
-      stage.setScene(scene);
-      stage.getIcons().clear();
-      stage.getIcons().add(getAppIcon());
-      stage.centerOnScreen();
-
-      if (handler != null) {
-        handler.accept(controller);
-      }
-
-      stage.show();
-    } catch (Exception e) {
-      System.out.println("switchScene (SceneManager): " + e.getCause());
-    }
-  }
-
-
   public static void switchScene(Stage stage, Scene scene) {
     if(stage == null) { System.out.println("Stage is null. Unable to switch scenes."); return;}
     stage.setScene(scene);
@@ -123,6 +101,31 @@ public class SceneManager {
       stage.getIcons().clear();
       stage.getIcons().add(getAppIcon());
       stage.centerOnScreen();
+      stage.show();
+    } catch (Exception e) {
+      System.out.println("switchScene (SceneManager): " + e.getCause());
+    }
+  }
+
+  // TODO: fix switchScene getting null value
+  public static void switchScene(Node node, String sceneName, Consumer<Object> handler) {
+    try {
+      Stage stage = getStage(node);
+
+      FXMLLoader fxmlLoader = new FXMLLoader(DesktopApplication.class.getResource(sceneName));
+      Scene scene = new Scene(fxmlLoader.load());
+
+      stage.setScene(scene);
+      stage.getIcons().clear();
+      stage.getIcons().add(getAppIcon());
+      stage.centerOnScreen();
+
+      Object controller = fxmlLoader.getController();
+
+      if (handler != null) {
+        handler.accept(controller);
+      }
+
       stage.show();
     } catch (Exception e) {
       System.out.println("switchScene (SceneManager): " + e.getCause());

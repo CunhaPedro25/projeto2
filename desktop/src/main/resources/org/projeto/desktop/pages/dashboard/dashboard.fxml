@@ -1,19 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.layout.FlowPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 
-<ScrollPane fitToHeight="true" fitToWidth="true" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.projeto.desktop.pages.authentication.LoginController">
 
-    <FlowPane alignment="CENTER" styleClass="background">
+<VBox xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.projeto.desktop.pages.authentication.LoginController">
+   <children>
       <HBox>
-          <fx:include source="../../components/sidebar.fxml" />
-          <VBox alignment="CENTER" maxWidth="1.7976931348623157E308" styleClass=" form-container">
-              <fx:include source="client/home.fxml" />
-          </VBox>
+         <children>
+                <fx:include source="../../components/sidebar.fxml" />
+      
+                               <ScrollPane fitToHeight="true" fitToWidth="true">
+               <content>
+                       <VBox alignment="CENTER" styleClass=" form-container">
+                         <fx:include source="client/home.fxml" />
+                       </VBox>
+               </content>
+                </ScrollPane>
+         </children>
       </HBox>
-    </FlowPane>
-
-</ScrollPane>
+   </children>
+</VBox>
