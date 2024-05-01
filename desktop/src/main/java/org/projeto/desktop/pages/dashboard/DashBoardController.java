@@ -13,6 +13,7 @@ public class DashBoardController {
 
     public void setUser(User user) {
         this.user = user;
+        System.out.println(this.user);
         String userType = user.getClass().getSimpleName().toLowerCase();
 
         fxmlFileNames = new ArrayList<>();

@@ -4,20 +4,16 @@
 <?import javafx.scene.layout.*?>
 
 
-<VBox xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.projeto.desktop.pages.authentication.LoginController">
-   <children>
-      <HBox>
-         <children>
-                <fx:include source="../../components/sidebar.fxml" />
-      
-                               <ScrollPane fitToHeight="true" fitToWidth="true">
-               <content>
-                       <VBox alignment="CENTER" styleClass=" form-container">
-                         <fx:include source="client/home.fxml" />
-                       </VBox>
-               </content>
-                </ScrollPane>
-         </children>
-      </HBox>
-   </children>
-</VBox>
+<BorderPane prefHeight="200.0" prefWidth="200.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.projeto.desktop.pages.dashboard.DashBoardController">
+   <left>
+        <fx:include fx:id="sidebar" source="../../components/sidebar.fxml" HBox.hgrow="NEVER" />
+   </left>
+   <center>
+       <GridPane>
+           <fx:include source="../../components/header.fxml"/>
+           <ScrollPane fitToHeight="true" fitToWidth="true">
+               <fx:include source="client/home.fxml"/>
+           </ScrollPane>
+       </GridPane>
+   </center>
+</BorderPane>
