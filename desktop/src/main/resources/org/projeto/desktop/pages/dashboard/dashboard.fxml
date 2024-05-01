@@ -3,17 +3,24 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
 <BorderPane prefHeight="200.0" prefWidth="200.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.projeto.desktop.pages.dashboard.DashBoardController">
-   <left>
+    <left>
         <fx:include fx:id="sidebar" source="../../components/sidebar.fxml" HBox.hgrow="NEVER" />
-   </left>
-   <center>
-       <GridPane>
-           <fx:include source="../../components/header.fxml"/>
-           <ScrollPane fitToHeight="true" fitToWidth="true">
-               <fx:include source="client/home.fxml"/>
-           </ScrollPane>
-       </GridPane>
-   </center>
+    </left>
+    <center>
+        <GridPane>
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints fillHeight="false" vgrow="NEVER" />
+                <RowConstraints vgrow="SOMETIMES" />
+            </rowConstraints>
+
+            <fx:include source="../../components/header.fxml" />
+            <ScrollPane fitToHeight="true" fitToWidth="true" GridPane.rowIndex="1">
+                <fx:include source="client/home.fxml" />
+            </ScrollPane>
+        </GridPane>
+    </center>
 </BorderPane>
