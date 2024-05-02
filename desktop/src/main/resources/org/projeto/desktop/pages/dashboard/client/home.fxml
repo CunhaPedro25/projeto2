@@ -4,8 +4,6 @@
 <?import javafx.scene.layout.*?>
 
 
-<HBox xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
-   <children>
-         <Label text="Cocunut" />
-   </children>
-</HBox>
+<FlowPane alignment="CENTER" styleClass="background" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
+    <Label>Still Working on this</Label>
+</FlowPane>

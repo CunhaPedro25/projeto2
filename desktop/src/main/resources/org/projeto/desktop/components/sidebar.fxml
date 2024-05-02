@@ -1,37 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.FlowPane?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.RowConstraints?>
-<?import org.kordamp.ikonli.javafx.FontIcon?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import org.kordamp.ikonli.javafx.*?>
 
-<GridPane vgap="10.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.projeto.desktop.components.SideBarController">
+<GridPane styleClass="sidebar-background" stylesheets="@../assets/styles/sidebar.css" vgap="10.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.projeto.desktop.components.SideBarController">
     <columnConstraints>
-      <ColumnConstraints hgrow="SOMETIMES" />
+      <ColumnConstraints halignment="CENTER" hgrow="NEVER" minWidth="70.0" />
     </columnConstraints>
     <rowConstraints>
-      <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+      <RowConstraints fillHeight="false" vgrow="NEVER" />
       <RowConstraints vgrow="SOMETIMES" />
-      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+      <RowConstraints fillHeight="false" vgrow="NEVER" />
     </rowConstraints>
 
-    <ImageView fitHeight="60.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+    <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
         <Image url="@../assets/icons/ecobuild.png" />
     </ImageView>
-   
-    <FlowPane orientation="VERTICAL" GridPane.rowIndex="1">
-        <FontIcon iconLiteral="fas-home" />
-        <FontIcon iconLiteral="far-heart" />
-        <FontIcon iconLiteral="far-heart" />
-    </FlowPane>
 
-    <ImageView fitHeight="60.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2">
-        <Image url="@../assets/icons/ecobuild.png" />
-    </ImageView>
+    <ScrollPane fitToHeight="true" fitToWidth="true" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+        <VBox alignment="TOP_CENTER" spacing="10.0">
+            <Button contentDisplay="TOP" mnemonicParsing="false" styleClass="selected" text="Home">
+                <graphic>
+                    <FontIcon iconLiteral="fas-home" iconSize="20" />
+                </graphic>
+            </Button>
+            <Button contentDisplay="TOP" mnemonicParsing="false" text="Projects">
+                <graphic>
+                    <FontIcon iconLiteral="fas-archive" iconSize="20" />
+                </graphic>
+            </Button>
+        </VBox>
+      <padding>
+         <Insets bottom="10.0" top="10.0" />
+      </padding>
+    </ScrollPane>
+
+    <Button contentDisplay="TOP" mnemonicParsing="false" styleClass="logout" text="Logout" GridPane.rowIndex="2">
+        <graphic>
+            <FontIcon iconLiteral="fas-sign-out-alt" iconSize="20" />
+        </graphic>
+    </Button>
 
     <padding>
         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />

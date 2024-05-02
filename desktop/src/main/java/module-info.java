@@ -23,4 +23,6 @@ module org.projeto.desktop {
     exports org.projeto.desktop.pages.dashboard;
     opens org.projeto.desktop.components to javafx.fxml;
     exports org.projeto.desktop.components;
+    exports org.projeto.desktop.factory;
+    opens org.projeto.desktop.factory to javafx.fxml;
 }

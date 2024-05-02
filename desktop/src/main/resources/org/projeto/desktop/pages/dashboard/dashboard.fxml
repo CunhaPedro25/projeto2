@@ -3,14 +3,19 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane prefHeight="200.0" prefWidth="200.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.projeto.desktop.pages.dashboard.DashBoardController">
+<BorderPane
+        stylesheets="@../../assets/styles/global.css"
+        styleClass="background"
+        xmlns="http://javafx.com/javafx/17.0.2-ea"
+        xmlns:fx="http://javafx.com/fxml/1"
+        fx:controller="org.projeto.desktop.pages.dashboard.DashBoardController">
     <left>
         <fx:include fx:id="sidebar" source="../../components/sidebar.fxml" HBox.hgrow="NEVER" />
     </left>
     <center>
         <GridPane>
             <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" />
             </columnConstraints>
             <rowConstraints>
                 <RowConstraints fillHeight="false" vgrow="NEVER" />

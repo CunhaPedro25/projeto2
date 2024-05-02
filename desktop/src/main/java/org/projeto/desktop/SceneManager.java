@@ -18,10 +18,10 @@ public class SceneManager {
     try {
       FXMLLoader fxmlLoader = new FXMLLoader(DesktopApplication.class.getResource(sceneName));
       Scene scene = new Scene(fxmlLoader.load());
-
+      scene.getRoot().setUserData("dark");
       Stage stage = new Stage();
       stage.setScene(scene);
-      stage.setTitle("PetCare");
+      stage.setTitle("EcoBuild");
       stage.getIcons().clear();
       stage.getIcons().add(getAppIcon());
       stage.centerOnScreen();
@@ -36,7 +36,7 @@ public class SceneManager {
     try {
       FXMLLoader fxmlLoader = new FXMLLoader(DesktopApplication.class.getResource(sceneName));
       Scene scene = new Scene(fxmlLoader.load());
-
+      scene.getRoot().setUserData("dark");
       Stage stage = new Stage();
       stage.setScene(scene);
       stage.setTitle(title);
@@ -66,7 +66,7 @@ public class SceneManager {
     try {
       FXMLLoader fxmlLoader = new FXMLLoader(DesktopApplication.class.getResource(sceneName));
       Scene scene = new Scene(fxmlLoader.load());
-
+      scene.getRoot().setUserData("dark");
       Stage stage = new Stage();
       stage.setScene(scene);
       stage.setTitle(title);
@@ -97,6 +97,7 @@ public class SceneManager {
       if(stage == null) { throw new Exception("Stage is null. Unable to switch scenes.");}
       FXMLLoader fxmlLoader = new FXMLLoader(DesktopApplication.class.getResource(sceneName));
       Scene scene = new Scene(fxmlLoader.load());
+      scene.getRoot().setUserData("dark");
       stage.setScene(scene);
       stage.getIcons().clear();
       stage.getIcons().add(getAppIcon());
@@ -114,7 +115,7 @@ public class SceneManager {
 
       FXMLLoader fxmlLoader = new FXMLLoader(DesktopApplication.class.getResource(sceneName));
       Scene scene = new Scene(fxmlLoader.load());
-
+      scene.getRoot().setUserData("dark");
       stage.setScene(scene);
       stage.getIcons().clear();
       stage.getIcons().add(getAppIcon());

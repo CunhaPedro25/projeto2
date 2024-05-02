@@ -1,0 +1,31 @@
+@import "global.css";
+
+.title {
+    -fx-font-size: 2em;
+}
+
+.title .label {
+    -fx-text-fill: -accent-400;
+    -fx-font-weight: bold;
+}
+
+.title FontIcon{
+    -fx-icon-color: -accent-400;
+}
+
+.user {
+    -fx-padding: 0.5em;
+    -fx-background-radius: 0.5em;
+}
+
+.user:hover {
+    -fx-background-color: -background-800;
+}
+
+.user .label{
+    -fx-font-weight: bold;
+}
+
+.user FontIcon{
+    -fx-font-size: 1.5em;
+}
