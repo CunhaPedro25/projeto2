@@ -8,7 +8,8 @@
             style="-fx-background-color: -background-900"
             styleClass="modal"
             xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml">
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="org.projeto.desktop.pages.modals.AddUserModalController">
 
     <FlowPane alignment="CENTER" styleClass="background">
         <VBox alignment="CENTER" styleClass="form-container">
