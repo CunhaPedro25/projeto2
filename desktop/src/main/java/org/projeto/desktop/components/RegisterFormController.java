@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.VBox;
 
 public class RegisterFormController {
     @FXML
@@ -17,6 +18,12 @@ public class RegisterFormController {
     @FXML
     public PasswordField password;
     @FXML
+    public TextField phone;
+
+    @FXML
+    VBox addressContainer;
+
+    @FXML
     public TextField address;
     @FXML
     public TextField door;
@@ -28,8 +35,6 @@ public class RegisterFormController {
     public TextField city;
     @FXML
     public TextField locale;
-    @FXML
-    public TextField phone;
 
     boolean passwordHidden = false;
 
@@ -40,8 +45,6 @@ public class RegisterFormController {
                         && !firstName.getText().trim().isEmpty()
                         && !lastName.getText().trim().isEmpty()
                         && (passwordHidden || (!password.getText().trim().isEmpty()))
-                        && !address.getText().trim().isEmpty()
-                        && !city.getText().trim().isEmpty()
                 ;
     }
 
@@ -80,5 +83,15 @@ public class RegisterFormController {
         passwordLabel.setManaged(false);
         password.setVisible(false);
         password.setManaged(false);
+    }
+
+    public void enableAddress(){
+        addressContainer.setVisible(true);
+        addressContainer.setManaged(true);
+    }
+
+    public void disableAddress(){
+        addressContainer.setVisible(false);
+        addressContainer.setManaged(false);
     }
 }

@@ -45,7 +45,7 @@ Button.secondary {
 
 .radio-button {
     -fx-padding: 10;
-    -fx-background-color: -background-800;
+    -fx-background-color: -background-900;
     -fx-background-radius: 10;
 }
 

@@ -35,7 +35,7 @@
     </VBox>
 
 
-    <VBox spacing="5.0">
+    <VBox spacing="5.0" fx:id="addressContainer">
         <HBox fillHeight="false" spacing="10.0">
             <VBox HBox.hgrow="ALWAYS">
                 <Label contentDisplay="BOTTOM" styleClass="form-label" text="Address" />
