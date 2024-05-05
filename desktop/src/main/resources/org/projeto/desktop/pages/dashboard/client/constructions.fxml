@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox spacing="10.0" styleClass="background" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.projeto.desktop.pages.dashboard.client.ConstructionsController">
+    <padding>
+        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+    </padding>
+
+    <GridPane hgap="10.0">
+        <HBox alignment="CENTER_LEFT" spacing="10.0">
+            <Label>Search</Label>
+            <TextField />
+        </HBox>
+
+        <Button fx:id="newConstruction" text="New Construction" GridPane.columnIndex="1">
+            New project
+        </Button>
+        <columnConstraints>
+            <ColumnConstraints hgrow="ALWAYS" />
+            <ColumnConstraints fillWidth="false" halignment="RIGHT" />
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints />
+        </rowConstraints>
+    </GridPane>
+
+    <TableView fx:id="table">
+        <columns>
+            <TableColumn fx:id="teamColumn" prefWidth="75.0" text="Equipa" />
+            <TableColumn fx:id="finishedColumn" prefWidth="75.0" text="Terminada?" />
+            <TableColumn fx:id="stageColumn" prefWidth="75.0" text="Etapa" />
+            <TableColumn fx:id="lastUpdateColumn" prefWidth="75.0" text="Ultima atualização" />
+        </columns>
+        <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+        </columnResizePolicy>
+    </TableView>
+</VBox>
