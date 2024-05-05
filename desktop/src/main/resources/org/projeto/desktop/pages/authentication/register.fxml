@@ -18,7 +18,7 @@
                 <Image url="@../../assets/icons/ecobuild.png" />
             </ImageView>
 
-            <fx:include source="../../components/register-form.fxml" />
+            <fx:include fx:id="registerForm" source="../../components/register-form.fxml" />
 
             <HBox alignment="CENTER" prefHeight="0.0" prefWidth="0.0" spacing="8.0">
                 <Button mnemonicParsing="false" onAction="#returnToLogin" text="Return" styleClass="secondary"/>
