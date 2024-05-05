@@ -10,6 +10,7 @@ import org.projeto.data.entities.users.Client;
 import org.projeto.data.repositories.ZipcodeRepository;
 import org.projeto.data.repositories.users.ClientRepository;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -24,6 +25,10 @@ public class ClientService {
   public ClientService(ClientRepository clientRepository, ZipcodeRepository zipcodeRepository){
     ClientService.clientRepository = clientRepository;
     ClientService.zipcodeRepository = zipcodeRepository;
+  }
+
+  public static List<Client> findAll(){
+    return clientRepository.findAll();
   }
 
   public static void update(Long id, String name, String email, String phone, String address, Integer door, Zipcode zipcode, ClientType type) {
