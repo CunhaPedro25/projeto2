@@ -5,11 +5,20 @@
     -fx-background-color: -background-900;
 }
 
+.modal .background{
+    -fx-padding: 0;
+}
+
 .form-container{
     -fx-background-color: -background-800;
     -fx-background-radius: 20;
     -fx-padding: 4em;
     -fx-spacing: 1em;
+}
+
+.modal .form-container{
+    -fx-background-radius: 0;
+    -fx-padding: 2em;
 }
 
 .form-container .text-field {

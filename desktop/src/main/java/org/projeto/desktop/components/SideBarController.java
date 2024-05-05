@@ -9,10 +9,7 @@ import org.projeto.desktop.CurrentUser;
 import org.projeto.desktop.SceneManager;
 import org.projeto.desktop.events.EventBus;
 import org.projeto.desktop.events.SideBarButtonEvent;
-import org.projeto.desktop.factory.ClientPageFactory;
-import org.projeto.desktop.factory.Page;
-import org.projeto.desktop.factory.PageFactory;
-import org.projeto.desktop.factory.WorkerPageFactory;
+import org.projeto.desktop.factory.*;
 
 import java.util.List;
 
@@ -30,6 +27,9 @@ public class SideBarController {
                     break;
                 case "worker":
                     pageFactory = new WorkerPageFactory();
+                    break;
+                case "secretary":
+                    pageFactory = new SecretaryPageFactory();
                     break;
             }
 
@@ -51,9 +51,7 @@ public class SideBarController {
         Button button = new Button(page.pageName());
         button.setId(page.pageName());
         button.setOnAction(event -> handleButtonClick(page));
-
-        // Assuming you have a FontIcon class to create the icon, you can set it as graphic
-        FontIcon icon = new FontIcon(page.iconName()); // Assuming 20 is the size
+        FontIcon icon = new FontIcon(page.iconName());
         button.setGraphic(icon);
         return button;
     }

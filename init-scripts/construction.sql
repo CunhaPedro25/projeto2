@@ -257,3 +257,6 @@ create trigger trigger_create_invoice
     on stage
     for each row
 execute procedure create_invoice_on_stage_finish();
+
+insert into secretary (name, email, password, phone)
+values ('Admin', 'admin@email.com', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918', '+351123456789');
