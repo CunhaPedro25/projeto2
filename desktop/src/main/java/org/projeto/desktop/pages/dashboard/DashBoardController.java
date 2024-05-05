@@ -23,11 +23,12 @@ public class DashBoardController {
         if (event instanceof SideBarButtonEvent) {
             try {
                 String path = CurrentUser.type + File.separator + CurrentUser.currentPage.fileName();
-                FXMLLoader loader = new FXMLLoader(DashBoardController.class.getResource(path));
+                FXMLLoader loader = new FXMLLoader(DashBoardController.class.getResource("client/projects.fxml"));
                 Parent content = loader.load();
                 mainContent.setContent(content);
             }catch (Exception e){
-                System.out.println("DashBoardController SidebarButtonEvent: " + e.getMessage());
+               // System.out.println("DashBoardController SidebarButtonEvent: " + e.getCause());
+                e.printStackTrace();
             }
         }
     }
