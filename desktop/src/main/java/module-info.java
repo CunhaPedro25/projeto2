@@ -12,6 +12,7 @@ module org.projeto.desktop {
     requires org.projeto.data;
     requires spring.boot;
     requires lombok;
+    requires java.smartcardio;
 
     opens org.projeto.desktop to javafx.fxml;
     exports org.projeto.desktop;
