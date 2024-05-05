@@ -258,5 +258,65 @@ create trigger trigger_create_invoice
     for each row
 execute procedure create_invoice_on_stage_finish();
 
-insert into secretary (name, email, password, phone)
-values ('Admin', 'admin@email.com', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918', '+351123456789');
+INSERT INTO secretary (name, email, password, phone)
+VALUES ('Admin', 'admin@email.com', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918', '+351123456789');
+
+-- Insert into client_type table
+INSERT INTO client_type (type)
+VALUES ('Normal');
+
+-- Insert into client table
+INSERT INTO client (name, email, password, phone, client_type)
+VALUES ('client', 'client@email.com', '948fe603f61dc036b5c596dc09fe3ce3f3d30dc90f024c85f3c82db2ccab679d', '+351123456789', 1);
+
+-- Insert into worker table
+INSERT INTO worker (name, email, password, phone)
+VALUES ('worker', 'worker@email.com', '87eba76e7f3164534045ba922e7770fb58bbd14ad732bbf5ba6f11cc56989e6e', '+351123456789');
+
+-- Insert into team table
+INSERT INTO team (leader)
+VALUES (1);
+
+UPDATE worker
+SET team = 1
+WHERE id = 1;
+
+-- Insert into worker table (teixeira)
+INSERT INTO worker (name, email, password, phone, team)
+VALUES ('worker2', 'worker2@email.com', '5257586a4579fd12221c855b9cacf4c5bba169e31d5ebde2acaa8d502e57dcbe', '+351987654321', 1);
+
+-- Insert into material table
+INSERT INTO material (name, value_unit, quantity)
+VALUES ('Wood', 3.50, 100),
+       ('Concrete', 3.50, 100),
+       ('Bricks', 3.50, 100);
+
+-- Insert into engineer table
+INSERT INTO engineer (name, email, password, phone)
+VALUES ('engineer', 'engineer@email.com', '7826b958b79c70626801b880405eb5111557dadceb2fee2b1ed69a18eed0c6dc', '+351010192925');
+
+-- Insert into project table
+INSERT INTO project (client, engineer)
+VALUES (1, 1);
+
+-- Insert into budget table
+INSERT INTO budget (client, engineer, project)
+VALUES (1, 1, 1);
+
+-- Insert into state table
+INSERT INTO state (description)
+VALUES ('In progress'), ('Finished');
+
+-- Insert into stage table
+INSERT INTO stage (budget, state, description)
+VALUES (1, 1, 'Fix Walls');
+
+-- Insert into stage_material table
+INSERT INTO stage_material (stage, material, quantity)
+VALUES (1, 1, 20),
+       (1, 2, 20),
+       (1, 3, 20);
+
+-- Insert into construction table
+INSERT INTO construction (team, budget, stage, start_date)
+VALUES (1, 1, 1, NOW());
