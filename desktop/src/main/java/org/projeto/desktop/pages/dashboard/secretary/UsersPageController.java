@@ -4,7 +4,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
-import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -13,7 +12,7 @@ import org.projeto.data.entities.users.User;
 import org.projeto.data.services.users.UserService;
 import org.projeto.desktop.SceneManager;
 
-public class Users {
+public class UsersPageController {
     @FXML
     TableView<User> table;
     @FXML
