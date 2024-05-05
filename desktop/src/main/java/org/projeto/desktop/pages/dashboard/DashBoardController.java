@@ -17,19 +17,25 @@ public class DashBoardController {
 
     public void initialize() {
         EventBus.getInstance().subscribe(this::handleSidebarButtonEvent);
+        changePage();
     }
 
     private void handleSidebarButtonEvent(Event event) {
         if (event instanceof SideBarButtonEvent) {
-            try {
-                String path = CurrentUser.type + File.separator + CurrentUser.currentPage.fileName();
-                FXMLLoader loader = new FXMLLoader(DashBoardController.class.getResource("client/projects.fxml"));
-                Parent content = loader.load();
-                mainContent.setContent(content);
-            }catch (Exception e){
-               // System.out.println("DashBoardController SidebarButtonEvent: " + e.getCause());
-                e.printStackTrace();
-            }
+            changePage();
+        }
+    }
+
+    private void changePage(){
+        try {
+            String path = CurrentUser.type + File.separator + CurrentUser.currentPage.fileName();
+            System.out.println(path);
+            FXMLLoader loader = new FXMLLoader(DashBoardController.class.getResource(path));
+            Parent content = loader.load();
+            mainContent.setContent(content);
+        }catch (Exception e){
+//                System.out.println("DashBoardController SidebarButtonEvent: " + e.getCause());
+            e.printStackTrace();
         }
     }
 }

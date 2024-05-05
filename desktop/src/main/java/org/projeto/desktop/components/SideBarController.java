@@ -42,6 +42,7 @@ public class SideBarController {
             }
 
             changeSelectedButtonStyle(pages.get(0));
+            CurrentUser.currentPage = pages.get(0);
         } catch (Exception e) {
             System.out.println("SideBarController: " + e.getCause());
         }
