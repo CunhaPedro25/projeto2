@@ -104,11 +104,10 @@ public class SceneManager {
       stage.centerOnScreen();
       stage.show();
     } catch (Exception e) {
-      System.out.println("switchScene (SceneManager): " + e.getCause());
+      System.out.println("switchScene (SceneManager): " + e.getMessage());
     }
   }
 
-  // TODO: fix switchScene getting null value
   public static void switchScene(Node node, String sceneName, Consumer<Object> handler) {
     try {
       Stage stage = getStage(node);
@@ -148,15 +147,23 @@ public class SceneManager {
     return alert.showAndWait().filter(response -> response == ButtonType.OK).isPresent();
   }
 
-  public static void openErrorAlert(String errorHeader, String errorContent){
-    Alert alert = new Alert(Alert.AlertType.ERROR);
-    alert.setTitle("Erro");
-    alert.setHeaderText(errorHeader);
-    alert.setContentText(errorContent);
+  public static void openAlert(String alertHeader, String alertContent, Alert.AlertType alertType){
+    Alert alert = new Alert(alertType);
+    alert.setTitle(alertType.name());
+    alert.setHeaderText(alertHeader);
+    alert.setContentText(alertContent);
     Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
     stage.getIcons().add(getAppIcon());
     alert.showAndWait();
     stage.getIcons().clear();
+  }
+
+  public static void openErrorAlert(String errorHeader, String errorContent){
+    openAlert(errorHeader,errorContent, Alert.AlertType.ERROR);
+  }
+
+  public static void openWarningAlert(String warningHeader, String warningContent){
+    openAlert(warningHeader,warningContent, Alert.AlertType.WARNING);
   }
 
   private static Image getAppIcon() {

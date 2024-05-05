@@ -21,24 +21,14 @@
     </ImageView>
 
     <ScrollPane fitToHeight="true" fitToWidth="true" GridPane.rowIndex="1" GridPane.valignment="CENTER">
-        <VBox alignment="TOP_CENTER" spacing="10.0">
-            <Button contentDisplay="TOP" mnemonicParsing="false" styleClass="selected" text="Home">
-                <graphic>
-                    <FontIcon iconLiteral="fas-home" iconSize="20" />
-                </graphic>
-            </Button>
-            <Button contentDisplay="TOP" mnemonicParsing="false" text="Projects">
-                <graphic>
-                    <FontIcon iconLiteral="fas-archive" iconSize="20" />
-                </graphic>
-            </Button>
+        <VBox alignment="TOP_CENTER" spacing="10.0" fx:id="buttonContainer">
         </VBox>
       <padding>
          <Insets bottom="10.0" top="10.0" />
       </padding>
     </ScrollPane>
 
-    <Button contentDisplay="TOP" mnemonicParsing="false" styleClass="logout" text="Logout" GridPane.rowIndex="2">
+    <Button contentDisplay="TOP" mnemonicParsing="false" styleClass="logout" text="Logout" onAction="#logout" GridPane.rowIndex="2">
         <graphic>
             <FontIcon iconLiteral="fas-sign-out-alt" iconSize="20" />
         </graphic>

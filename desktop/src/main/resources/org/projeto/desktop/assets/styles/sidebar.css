@@ -5,13 +5,14 @@
 }
 
 Button {
-    -fx-min-width: 61px;
-    -fx-max-width: 61px;
+    -fx-min-width: 80px;
+    -fx-max-width: 80px;
     -fx-background-color: transparent;
     -fx-text-fill: -accent-400;
     -fx-font-weight: bold;
     -fx-cursor: pointer;
     -fx-transition: -fx-background-color 1s;
+    -fx-content-display: TOP;
 }
 
 Button:hover {
@@ -20,6 +21,7 @@ Button:hover {
 
 Button FontIcon{
     -fx-icon-color: -accent-400;
+    -fx-font-size: 1.8em;
 }
 
 Button.selected {

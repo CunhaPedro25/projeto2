@@ -15,11 +15,100 @@ Button {
     -fx-text-fill: -text-50;
     -fx-cursor: pointer;
     -fx-transition: -fx-background-color 1s;
+    -fx-background-radius: 0.5em;
+    -fx-padding: 0.5em 1em;
 }
 
 Button FontIcon{
     -fx-icon-color: -text-50;
 }
+
+Button.secondary {
+    -fx-background-color: -secondary-600;
+}
+
+
+/* FORM ELEMENTS */
+
+.form-label {
+    -fx-font-size: 18;
+}
+
+.text-field {
+    -fx-background-color: -background-800;
+    -fx-background-radius: 5;
+    -fx-padding: 10;
+    -fx-font-size: 1em;
+}
+
+.radio-button {
+    -fx-padding: 10;
+    -fx-background-color: -background-800;
+    -fx-background-radius: 10;
+}
+
+.radio-button:selected {
+    -fx-border-color: -primary-700;
+    -fx-border-radius: 10;
+    -fx-border-width: 2;
+    -fx-padding: 8;
+}
+
+.radio-button:selected .radio .dot {
+    -fx-background-color: -primary-700;
+    -fx-background-insets: 0;
+}
+
+.choice-box {
+    -fx-background-color: -background-800;
+    -fx-background-radius: 5;
+}
+
+.choice-box .context-menu {
+    -fx-background-color: -background-700;
+}
+
+.choice-box .menu-item:hover, .content .choice-box .menu-item:focused {
+    -fx-background-color: -background-600;
+}
+
+.combo-box {
+    -fx-background-color: -background-800;
+    -fx-background-radius: 5;
+    -fx-padding: 0;
+    -fx-border-width: 0;
+}
+
+.combo-box .list-cell:selected {
+    -fx-background-color: -background-800;
+    -fx-text-fill: -text-100;
+    -fx-background-radius: 5 0 0 5;
+}
+
+.combo-box:hover {
+    -fx-background-color: -background-700;
+}
+
+.combo-box-popup .list-view {
+    -fx-background-radius: 0;
+    -fx-padding: 0;
+}
+
+.combo-box-popup .list-view .list-cell:odd, .combo-box-popup .list-view .list-cell:even {
+    -fx-background-color: -background-800;
+}
+
+.combo-box-popup .list-view .list-cell:hover {
+    -fx-background-color: -background-700;
+}
+
+.combo-box-popup .list-view .list-cell:selected {
+    -fx-background-color: -primary-400;
+    -fx-text-fill: white;
+    -fx-background-radius: 0;
+}
+
+
 
 /* Scroll Pane and custom ScrollBar */
 

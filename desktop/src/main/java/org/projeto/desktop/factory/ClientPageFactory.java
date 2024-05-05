@@ -8,9 +8,9 @@ public class ClientPageFactory implements PageFactory {
     @Override
     public List<Page> createPages() {
         List<Page> pages = new ArrayList<>();
-        pages.add(new Page("Home", "HomePage.fxml", "HomeIcon.png"));
-        pages.add(new Page("Projects", "ProjectsPage.fxml", "ProjectsIcon.png"));
-        pages.add(new Page("Constructions", "ConstructionsPage.fxml", "ConstructionsIcon.png"));
+        pages.add(new Page("Home", "home.fxml", "fas-home"));
+        pages.add(new Page("Projects", "projects.fxml", "fas-archive"));
+        pages.add(new Page("Constructions", "construction.fxml", "fas-hard-hat"));
         return pages;
     }
 }

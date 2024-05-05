@@ -23,7 +23,7 @@
             </rowConstraints>
 
             <fx:include source="../../components/header.fxml" />
-            <ScrollPane fitToHeight="true" fitToWidth="true" GridPane.rowIndex="1">
+            <ScrollPane fx:id="mainContent" fitToHeight="true" fitToWidth="true" GridPane.rowIndex="1">
                 <fx:include source="client/home.fxml" />
             </ScrollPane>
         </GridPane>

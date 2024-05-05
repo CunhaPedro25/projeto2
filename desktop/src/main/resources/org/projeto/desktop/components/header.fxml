@@ -15,15 +15,15 @@
     </rowConstraints>
 
 
-    <HBox alignment="CENTER_LEFT" spacing="10.0" styleClass="title">
+    <HBox fx:id="title" alignment="CENTER_LEFT" spacing="10.0" styleClass="title">
         <FontIcon iconLiteral="fas-home" />
         <Label>Home</Label>
     </HBox>
 
     <HBox alignment="CENTER_RIGHT" spacing="10.0" GridPane.columnIndex="1">
         <FontIcon iconLiteral="fas-bell" />
-        <HBox fx:id="user" alignment="CENTER" spacing="10.0" styleClass="user">
-            <Label>Username</Label>
+        <HBox fx:id="userButton" alignment="CENTER" spacing="10.0" styleClass="userButton">
+            <Label fx:id="user" />
             <FontIcon iconLiteral="fas-user-circle" />
         </HBox>
     </HBox>

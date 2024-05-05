@@ -13,19 +13,21 @@
     -fx-icon-color: -accent-400;
 }
 
-.user {
+.userButton {
     -fx-padding: 0.5em;
     -fx-background-radius: 0.5em;
 }
 
-.user:hover {
+.userButton:hover {
     -fx-background-color: -background-800;
 }
 
-.user .label{
+.userButton .label{
     -fx-font-weight: bold;
+    -fx-min-width: 5em;
+    -fx-max-width: 8em;
 }
 
-.user FontIcon{
+.userButton FontIcon{
     -fx-font-size: 1.5em;
 }

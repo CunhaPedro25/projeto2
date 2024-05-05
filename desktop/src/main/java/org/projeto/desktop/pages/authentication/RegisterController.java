@@ -1,56 +1,33 @@
 package org.projeto.desktop.pages.authentication;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.Button;
 import org.projeto.data.entities.users.Client;
 import org.projeto.data.services.ClientTypeService;
 import org.projeto.data.services.users.UserService;
 import org.projeto.desktop.SceneManager;
+import org.projeto.desktop.components.RegisterFormController;
 
 public class  RegisterController {
+  @FXML
+  RegisterFormController registerFormController;
 
+  @FXML
+  Button register;
 
-  //THIS IS JUST FOR TESTING LATER THERE WILL BE A REGISTER FORM COMPONENT OR SOMETHING
-  @FXML
-  public TextField firstName;
-  @FXML
-  public TextField lastName;
-  @FXML
-  public TextField email;
-  @FXML
-  public Label passwordLabel;
-  @FXML
-  public PasswordField password;
-  @FXML
-  public TextField address;
-  @FXML
-  public TextField phone;
-
-  public boolean isFormCorrect() {
-    return
-            email.getText().matches("^[\\w-.]+@([\\w-]+\\.)+[\\w-]{2,4}$")
-                    && phone.getText().matches("\\d{9}")
-                    && !firstName.getText().trim().isEmpty()
-                    && !lastName.getText().trim().isEmpty()
-                    && (!password.getText().trim().isEmpty())
-                    && !address.getText().trim().isEmpty()
-            ;
-  }
 
   @FXML
   protected void onRegisterSubmit() {
-    if (!isFormCorrect()) {
-      SceneManager.openErrorAlert("Erro ao registar", "Por favor preencha todos os campos corretamente");
+    if (!registerFormController.isFormCorrect()) {
+      SceneManager.openErrorAlert("Error", "Please fill all the required fields correctly");
       return;
     }
 
     Client client = new Client(
-            firstName.getText() +  " " + lastName.getText(),
-            email.getText(),
-            password.getText(),
-            phone.getText(),
+            registerFormController.firstName.getText() +  " " + registerFormController.lastName.getText(),
+            registerFormController.email.getText(),
+            registerFormController.password.getText(),
+            registerFormController.phone.getText(),
             ClientTypeService.getAllClientTypes().get(0)
     );
 
@@ -59,14 +36,14 @@ public class  RegisterController {
 
       returnToLogin();
     } catch (Exception exc) {
-      SceneManager.openErrorAlert("Erro ao registar", "Não foi possível guardar o registo");
+      SceneManager.openErrorAlert("Error", "It was not possible to register. Please try again.");
     }
   }
 
   @FXML
   protected void returnToLogin() {
     try {
-      SceneManager.switchScene(firstName, "pages/login.fxml");
+      SceneManager.switchScene(register, "pages/authentication/login.fxml");
     } catch (Exception e) {
       System.out.println("SceneManager");
     }

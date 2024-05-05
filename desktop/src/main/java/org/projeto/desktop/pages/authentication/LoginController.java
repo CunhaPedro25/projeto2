@@ -1,14 +1,12 @@
 package org.projeto.desktop.pages.authentication;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.TextField;
-import org.projeto.data.entities.users.Client;
 import org.projeto.data.entities.users.User;
 import org.projeto.data.services.users.UserService;
+import org.projeto.desktop.CurrentUser;
 import org.projeto.desktop.SceneManager;
-import org.projeto.desktop.pages.dashboard.DashBoardController;
 
 public class LoginController {
   @FXML
@@ -27,29 +25,20 @@ public class LoginController {
   protected void onLoginClick() {
 
     if(email.getText().isEmpty() || password.getText().isEmpty()) {
-      Alert alert = new Alert(Alert.AlertType.WARNING);
-      alert.setTitle("Aviso");
-      alert.setHeaderText("Por favor preencha todos os campos");
-      alert.showAndWait();
+      SceneManager.openWarningAlert("Warning", "Please fill all of the fields");
       return;
     }
 
     try {
       User user = UserService.login(email.getText(), password.getText());
-      System.out.println(user.getClass().getSimpleName());
-
+      CurrentUser.setUser(user);
       SceneManager.switchScene(
               registerLink,
-              "pages/dashboard/dashboard.fxml",
-              controller -> {
-                DashBoardController _controller = (DashBoardController) controller;
-                _controller.setUser(user);
-              }
+              "pages/dashboard/dashboard.fxml"
       );
     } catch (Exception err) {
       System.out.println(err.getMessage());
-      System.out.println(err.getCause());
-      SceneManager.openErrorAlert("Erro a iniciar sessão", "Credenciais erradas");
+      SceneManager.openErrorAlert("Error", "Wrong credentials");
     }
   }
 }

@@ -1,51 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
-<ScrollPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
+<ScrollPane stylesheets="@../../assets/styles/forms.css"
+            style="-fx-background-color: -background-900"
+            fitToHeight="true" fitToWidth="true"
+            xmlns="http://javafx.com/javafx/17.0.2-ea"
+            xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="org.projeto.desktop.pages.authentication.RegisterController">
 
     <FlowPane alignment="CENTER" styleClass="background">
         <VBox alignment="CENTER" styleClass="form-container">
 
-            <!--            <ImageView fitHeight="123.0" fitWidth="87.0" pickOnBounds="true" preserveRatio="true">-->
-            <!--                <Image url="@../assets/icons/ecobuild.png" />-->
-            <!--            </ImageView>-->
-            <VBox spacing="10.0">
-                <Label contentDisplay="BOTTOM" styleClass="form-label" text="Nome"/>
-                <HBox fillHeight="false" spacing="10.0">
-                    <TextField fx:id="firstName" promptText="Primeiro" HBox.hgrow="ALWAYS"/>
-                    <TextField fx:id="lastName" layoutX="10.0" layoutY="10.0" promptText="Último" HBox.hgrow="ALWAYS"/>
-                </HBox>
+            <ImageView fitHeight="123.0" fitWidth="87.0" pickOnBounds="true" preserveRatio="true">
+                <Image url="@../../assets/icons/ecobuild.png" />
+            </ImageView>
 
-                <Label contentDisplay="BOTTOM" styleClass="form-label" text="Email"/>
-                <TextField fx:id="email"/>
-
-                <Label contentDisplay="BOTTOM" styleClass="form-label" text="Password" fx:id="passwordLabel"/>
-                <PasswordField fx:id="password"/>
-
-                <Label contentDisplay="BOTTOM" styleClass="form-label" text="Morada"/>
-                <HBox fillHeight="false" spacing="10.0">
-                    <TextField fx:id="address" promptText="Rua" HBox.hgrow="ALWAYS"/>
-                    <TextField fx:id="zipcode" promptText="Cod. Postal"/>
-                </HBox>
-
-                <Label contentDisplay="BOTTOM" styleClass="form-label" text="Telemóvel"/>
-                <TextField fx:id="phone"/>
-            </VBox>
-
+            <fx:include source="../../components/register-form.fxml" />
 
             <HBox alignment="CENTER" prefHeight="0.0" prefWidth="0.0" spacing="8.0">
-                <Button mnemonicParsing="false" onAction="#returnToLogin" text="Voltar"/>
-                <Button mnemonicParsing="false" onAction="#onRegisterSubmit" styleClass="primary" text="Registar"/>
+                <Button mnemonicParsing="false" onAction="#returnToLogin" text="Return" styleClass="secondary"/>
+                <Button mnemonicParsing="false" onAction="#onRegisterSubmit" text="Register" fx:id="register"/>
             </HBox>
-
-
         </VBox>
     </FlowPane>
 
