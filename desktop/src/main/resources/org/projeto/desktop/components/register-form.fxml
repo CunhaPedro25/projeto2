@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox spacing="30.0" stylesheets="@../assets/styles/global.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.projeto.desktop.components.RegisterFormController">
+
+    <VBox spacing="5.0">
+        <HBox fillHeight="false" spacing="10.0">
+            <VBox HBox.hgrow="ALWAYS">
+                <Label contentDisplay="BOTTOM" styleClass="form-label" text="First Name" />
+                <TextField fx:id="firstName" />
+            </VBox>
+            <VBox HBox.hgrow="ALWAYS">
+                <Label contentDisplay="BOTTOM" styleClass="form-label" text="Last Name" />
+                <TextField fx:id="lastName" layoutX="10.0" layoutY="10.0" />
+            </VBox>
+        </HBox>
+
+        <HBox fillHeight="false" spacing="10.0">
+            <VBox HBox.hgrow="ALWAYS">
+                <Label contentDisplay="BOTTOM" styleClass="form-label" text="Email" />
+                <TextField fx:id="email" />
+            </VBox>
+            <VBox HBox.hgrow="ALWAYS">
+                <Label fx:id="passwordLabel" contentDisplay="BOTTOM" styleClass="form-label" text="Password" />
+                <PasswordField fx:id="password" />
+            </VBox>
+        </HBox>
+
+        <VBox>
+            <Label contentDisplay="BOTTOM" styleClass="form-label" text="Phone" />
+            <TextField fx:id="phone" />
+        </VBox>
+    </VBox>
+
+
+    <VBox spacing="5.0" fx:id="addressContainer">
+        <HBox fillHeight="false" spacing="10.0">
+            <VBox HBox.hgrow="ALWAYS">
+                <Label contentDisplay="BOTTOM" styleClass="form-label" text="Address" />
+                <TextField fx:id="address" />
+            </VBox>
+            <VBox HBox.hgrow="ALWAYS">
+                <Label contentDisplay="BOTTOM" styleClass="form-label" text="Door" />
+                <TextField fx:id="door" />
+            </VBox>
+        </HBox>
+        <HBox fillHeight="false" spacing="10.0">
+            <VBox>
+                <Label contentDisplay="BOTTOM" styleClass="form-label" text="Cod. Postal" />
+                <TextField fx:id="zipcode" />
+            </VBox>
+            <VBox>
+                <Label contentDisplay="BOTTOM" styleClass="form-label" text="District" />
+                <TextField fx:id="district" />
+            </VBox>
+            <VBox>
+                <Label contentDisplay="BOTTOM" styleClass="form-label" text="City" />
+                <TextField fx:id="city" />
+            </VBox>
+            <VBox>
+                <Label contentDisplay="BOTTOM" styleClass="form-label" text="Locale" />
+                <TextField fx:id="locale" />
+            </VBox>
+        </HBox>
+    </VBox>
+</VBox>

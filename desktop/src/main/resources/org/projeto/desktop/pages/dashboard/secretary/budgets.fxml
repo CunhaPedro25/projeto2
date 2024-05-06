@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox spacing="10.0" stylesheets="@../../../assets/styles/global.css"
+      styleClass="background"
+      xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="org.projeto.desktop.pages.dashboard.secretary.BudgetPageController">
+
+    <GridPane hgap="10.0">
+        <HBox alignment="CENTER_LEFT" spacing="10.0">
+            <Label>Search</Label>
+            <TextField fx:id="searchField" />
+        </HBox>
+
+        <Button onAction="#openModal" GridPane.columnIndex="1">
+            New Budget
+        </Button>
+        <columnConstraints>
+            <ColumnConstraints hgrow="ALWAYS" />
+            <ColumnConstraints fillWidth="false" halignment="RIGHT" />
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints />
+        </rowConstraints>
+    </GridPane>
+
+    <TableView fx:id="table" minHeight="200.0">
+        <columns>
+            <TableColumn fx:id="clientColumn" prefWidth="75.0" text="Client" />
+            <TableColumn fx:id="engineerColumn" prefWidth="75.0" text="Engineer" />
+            <TableColumn fx:id="projectColumn" prefWidth="75.0" text="Project" />
+            <TableColumn fx:id="create_dateColumn" prefWidth="75.0" text="Create Date" />
+            <TableColumn fx:id="acceptedColumn" prefWidth="75.0" text="Accepted" />
+        </columns>
+        <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+        </columnResizePolicy>
+    </TableView>
+</VBox>

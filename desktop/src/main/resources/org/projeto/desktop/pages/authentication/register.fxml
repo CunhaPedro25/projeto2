@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+
+<ScrollPane stylesheets="@../../assets/styles/forms.css"
+            style="-fx-background-color: -background-900"
+            fitToHeight="true" fitToWidth="true"
+            xmlns="http://javafx.com/javafx/17.0.2-ea"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="org.projeto.desktop.pages.authentication.RegisterController">
+
+    <FlowPane alignment="CENTER" styleClass="background">
+        <VBox alignment="CENTER" styleClass="form-container">
+
+            <ImageView fitHeight="123.0" fitWidth="87.0" pickOnBounds="true" preserveRatio="true">
+                <Image url="@../../assets/icons/ecobuild.png" />
+            </ImageView>
+
+            <fx:include fx:id="registerForm" source="../../components/register-form.fxml" />
+
+            <HBox alignment="CENTER" prefHeight="0.0" prefWidth="0.0" spacing="8.0">
+                <Button mnemonicParsing="false" onAction="#returnToLogin" text="Return" styleClass="secondary"/>
+                <Button mnemonicParsing="false" onAction="#onRegisterSubmit" text="Register" fx:id="register"/>
+            </HBox>
+        </VBox>
+    </FlowPane>
+
+</ScrollPane>

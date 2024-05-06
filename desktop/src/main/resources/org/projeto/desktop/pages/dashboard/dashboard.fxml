@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane
+        stylesheets="@../../assets/styles/global.css"
+        styleClass="background"
+        xmlns="http://javafx.com/javafx/17.0.2-ea"
+        xmlns:fx="http://javafx.com/fxml/1"
+        fx:controller="org.projeto.desktop.pages.dashboard.DashBoardController">
+    <left>
+        <fx:include fx:id="sidebar" source="../../components/sidebar.fxml" HBox.hgrow="NEVER" />
+    </left>
+    <center>
+        <GridPane>
+            <columnConstraints>
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints fillHeight="false" vgrow="NEVER" />
+                <RowConstraints vgrow="SOMETIMES" />
+            </rowConstraints>
+
+            <fx:include source="../../components/header.fxml" />
+            <ScrollPane styleClass="mainContent" fx:id="mainContent" fitToHeight="true" fitToWidth="true" GridPane.rowIndex="1" />
+        </GridPane>
+    </center>
+</BorderPane>

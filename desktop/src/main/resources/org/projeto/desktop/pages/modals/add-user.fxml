@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ScrollPane?>
+
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.control.RadioButton?>
+<ScrollPane stylesheets="@../../assets/styles/forms.css"
+            style="-fx-background-color: -background-900"
+            fitToHeight="true" fitToWidth="true"
+            styleClass="modal"
+            xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="org.projeto.desktop.pages.modals.AddUserModalController">
+
+    <VBox styleClass="form-container">
+        <fx:define>
+            <ToggleGroup fx:id="userType"/>
+        </fx:define>
+
+
+        <HBox fx:id="userTypeSelection" alignment="CENTER" prefHeight="0.0" prefWidth="0.0" spacing="8.0">
+            <RadioButton mnemonicParsing="false" selected="true" text="Client" toggleGroup="$userType" onAction="#enableAddress"/>
+            <RadioButton mnemonicParsing="false" text="Secretary" toggleGroup="$userType" onAction="#disableAddress"/>
+            <RadioButton mnemonicParsing="false" text="Worker" toggleGroup="$userType" onAction="#disableAddress"/>
+            <RadioButton mnemonicParsing="false" text="Engineer" toggleGroup="$userType" onAction="#disableAddress"/>
+        </HBox>
+
+        <fx:include fx:id="registerForm" source="../../components/register-form.fxml" />
+
+        <HBox alignment="CENTER_RIGHT" prefHeight="0.0" prefWidth="0.0" spacing="8.0">
+            <Button mnemonicParsing="false" text="Cancel" styleClass="secondary"/>
+            <Button mnemonicParsing="false" onAction="#save" text="Save" fx:id="save"/>
+        </HBox>
+    </VBox>
+</ScrollPane>

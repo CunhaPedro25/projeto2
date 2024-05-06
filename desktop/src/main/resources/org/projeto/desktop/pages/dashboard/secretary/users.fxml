@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox spacing="10.0" styleClass="background" stylesheets="@../../../assets/styles/global.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.projeto.desktop.pages.dashboard.secretary.UsersPageController">
+
+    <GridPane hgap="10.0">
+        <HBox alignment="CENTER_LEFT" spacing="10.0">
+            <Label>Search</Label>
+            <TextField fx:id="searchField" />
+        </HBox>
+
+        <Button onAction="#openModal" GridPane.columnIndex="1">
+            New User
+        </Button>
+        <columnConstraints>
+            <ColumnConstraints hgrow="ALWAYS" />
+            <ColumnConstraints fillWidth="false" halignment="RIGHT" />
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints />
+        </rowConstraints>
+    </GridPane>
+
+    <TableView fx:id="table" minHeight="200.0">
+        <columns>
+            <TableColumn fx:id="name" prefWidth="75.0" text="Name" />
+            <TableColumn fx:id="email" prefWidth="75.0" text="Email" />
+            <TableColumn fx:id="phone" prefWidth="75.0" text="Phone" />
+            <TableColumn fx:id="status" prefWidth="75.0" text="Status" />
+        </columns>
+        <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+        </columnResizePolicy>
+    </TableView>
+</VBox>

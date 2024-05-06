@@ -22,11 +22,11 @@ public class Client extends User {
   @Column(name = "door")
   private Integer door;
 
-  @ManyToOne(fetch = FetchType.LAZY)
+  @ManyToOne(fetch = FetchType.EAGER)
   @JoinColumn(name = "zipcode")
   private Zipcode zipcode;
 
-  @ManyToOne(fetch = FetchType.LAZY, optional = false)
+  @ManyToOne(fetch = FetchType.EAGER, optional = false)
   @JoinColumn(name = "client_type", nullable = false)
   private ClientType clientType;
 

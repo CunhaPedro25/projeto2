@@ -1,0 +1,42 @@
+@import "global.css";
+
+.sidebar-background, ScrollPane, VBox {
+    -fx-background-color: -background-800;
+}
+
+Button {
+    -fx-min-width: 80px;
+    -fx-max-width: 80px;
+    -fx-background-color: transparent;
+    -fx-text-fill: -accent-400;
+    -fx-font-weight: bold;
+    -fx-cursor: pointer;
+    -fx-transition: -fx-background-color 1s;
+    -fx-content-display: TOP;
+}
+
+Button:hover {
+    -fx-background-color: -background-700;
+}
+
+Button FontIcon{
+    -fx-icon-color: -accent-400;
+    -fx-font-size: 1.8em;
+}
+
+Button.selected {
+    -fx-background-color: -primary-600;
+    -fx-text-fill: -text-50;
+}
+
+Button.selected FontIcon{
+    -fx-icon-color: -text-50;
+}
+
+Button.logout {
+    -fx-text-fill: -danger;
+}
+
+Button.logout FontIcon{
+    -fx-icon-color: -danger;
+}

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<ScrollPane stylesheets="@../../assets/styles/forms.css"
+            style="-fx-background-color: -background-900"
+            fitToHeight="true" fitToWidth="true"
+            xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="org.projeto.desktop.pages.authentication.LoginController">
+
+    <FlowPane alignment="CENTER" styleClass="background">
+        <VBox alignment="CENTER" styleClass="form-container">
+
+            <ImageView fitHeight="123.0" fitWidth="87.0" pickOnBounds="true" preserveRatio="true">
+                <Image url="@../../assets/icons/ecobuild.png" />
+            </ImageView>
+
+            <VBox spacing="10.0">
+                <Label styleClass="form-label" text="E-mail" />
+
+                <TextField fx:id="email" />
+                <Label styleClass="form-label" text="Password" />
+                <PasswordField fx:id="password" />
+            </VBox>
+            <Button mnemonicParsing="false" onAction="#onLoginClick" text="Login" />
+
+
+            <HBox alignment="CENTER">
+                <Label text="Dont have an account?" />
+                <Hyperlink fx:id="registerLink" onAction="#onRegisterClick" styleClass="link-button" text="Register" />
+            </HBox>
+        </VBox>
+    </FlowPane>
+</ScrollPane>

@@ -22,11 +22,11 @@ public class Budget {
   @Column(name = "id", nullable = false)
   private Integer id;
 
-  @ManyToOne(fetch = FetchType.LAZY, optional = false)
+  @ManyToOne(fetch = FetchType.EAGER, optional = false)
   @JoinColumn(name = "client", nullable = false)
   private Client client;
 
-  @ManyToOne(fetch = FetchType.LAZY, optional = false)
+  @ManyToOne(fetch = FetchType.EAGER, optional = false)
   @JoinColumn(name = "engineer", nullable = false)
   private Engineer engineer;
 
@@ -39,7 +39,7 @@ public class Budget {
   @Column(name = "accepted")
   private Boolean accepted;
 
-  @ManyToOne(fetch = FetchType.LAZY, optional = false)
+  @ManyToOne(fetch = FetchType.EAGER, optional = false)
   @JoinColumn(name = "project", nullable = false)
   private Project project;
 

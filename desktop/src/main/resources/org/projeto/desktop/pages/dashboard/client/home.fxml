@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox spacing="10.0" styleClass="background" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.projeto.desktop.pages.dashboard.client.HomeController">
+
+    <VBox>
+        <Label>Your Budgets</Label>
+        <!-- TODO: Create cards for various stuff that user should quickly see -->
+        <HBox fx:id="budgets">
+<!--            <GridPane prefHeight="74.0" prefWidth="129.0" vgap="10.0">-->
+<!--                <columnConstraints>-->
+<!--                    <ColumnConstraints hgrow="SOMETIMES" />-->
+<!--                </columnConstraints>-->
+<!--                <rowConstraints>-->
+<!--                    <RowConstraints fillHeight="false" vgrow="SOMETIMES" />-->
+<!--                    <RowConstraints valignment="BOTTOM" vgrow="ALWAYS" />-->
+<!--                </rowConstraints>-->
+
+<!--                <VBox>-->
+<!--                    <Label>Title</Label>-->
+<!--                    <Label>SubTitle</Label>-->
+<!--                </VBox>-->
+<!--                <GridPane GridPane.rowIndex="1">-->
+<!--                    <columnConstraints>-->
+<!--                        <ColumnConstraints hgrow="ALWAYS"/>-->
+<!--                        <ColumnConstraints fillWidth="false" hgrow="NEVER"/>-->
+<!--                    </columnConstraints>-->
+<!--                    <rowConstraints>-->
+<!--                        <RowConstraints valignment="BOTTOM" vgrow="SOMETIMES"/>-->
+<!--                    </rowConstraints>-->
+<!--                    <VBox>-->
+<!--                        <Label text="Info 1"/>-->
+<!--                        <Label text="Info 2"/>-->
+<!--                    </VBox>-->
+<!--                    <Label text="Chip" GridPane.columnIndex="1"/>-->
+<!--                </GridPane>-->
+<!--            </GridPane>-->
+        </HBox>
+    </VBox>
+
+    <VBox>
+        <Label>Your Constructions</Label>
+        <!-- TODO: Create cards for various stuff that user should quickly see -->
+        <HBox fx:id="constructions">
+            <!--            <GridPane prefHeight="74.0" prefWidth="129.0" vgap="10.0">-->
+            <!--                <columnConstraints>-->
+            <!--                    <ColumnConstraints hgrow="SOMETIMES" />-->
+            <!--                </columnConstraints>-->
+            <!--                <rowConstraints>-->
+            <!--                    <RowConstraints fillHeight="false" vgrow="SOMETIMES" />-->
+            <!--                    <RowConstraints valignment="BOTTOM" vgrow="ALWAYS" />-->
+            <!--                </rowConstraints>-->
+
+            <!--                <VBox>-->
+            <!--                    <Label>Title</Label>-->
+            <!--                    <Label>SubTitle</Label>-->
+            <!--                </VBox>-->
+            <!--                <GridPane GridPane.rowIndex="1">-->
+            <!--                    <columnConstraints>-->
+            <!--                        <ColumnConstraints hgrow="ALWAYS"/>-->
+            <!--                        <ColumnConstraints fillWidth="false" hgrow="NEVER"/>-->
+            <!--                    </columnConstraints>-->
+            <!--                    <rowConstraints>-->
+            <!--                        <RowConstraints valignment="BOTTOM" vgrow="SOMETIMES"/>-->
+            <!--                    </rowConstraints>-->
+            <!--                    <VBox>-->
+            <!--                        <Label text="Info 1"/>-->
+            <!--                        <Label text="Info 2"/>-->
+            <!--                    </VBox>-->
+            <!--                    <Label text="Chip" GridPane.columnIndex="1"/>-->
+            <!--                </GridPane>-->
+            <!--            </GridPane>-->
+        </HBox>
+    </VBox>
+</VBox>

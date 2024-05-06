@@ -9,7 +9,8 @@ import org.projeto.data.repositories.users.WorkerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class UserService{
@@ -58,7 +59,7 @@ public class UserService{
   private static User findUserByEmail(String email) throws Exception {
     User user = clientRepository.findByEmail(email);
     if (user == null) {
-      user = (User) engineerRepository.findByEmail(email);
+      user = engineerRepository.findByEmail(email);
     }
     if (user == null) {
       user = secretaryRepository.findByEmail(email);
@@ -70,5 +71,17 @@ public class UserService{
       throw new Exception("User with email " + email + " not found");
     }
     return user;
+  }
+
+
+  public static List<User> getAllUsers() {
+    List<User> users = new ArrayList<>();
+
+    users.addAll(clientRepository.findAll());
+    users.addAll(workerRepository.findAll());
+    users.addAll(secretaryRepository.findAll());
+    users.addAll(engineerRepository.findAll());
+
+    return users;
   }
 }

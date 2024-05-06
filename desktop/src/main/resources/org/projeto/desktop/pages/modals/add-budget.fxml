@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<ScrollPane fitToHeight="true" fitToWidth="true"
+            style="-fx-background-color: -background-900"
+            styleClass="modal"
+            stylesheets="@../../assets/styles/forms.css"
+            xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="org.projeto.desktop.pages.modals.AddUserModalController">
+
+    <VBox styleClass="form-container">
+        <fx:define>
+            <ToggleGroup fx:id="userType" />
+        </fx:define>
+
+        <VBox alignment="TOP_CENTER" spacing="10.0">
+            <HBox>
+                <ComboBox fx:id="clientComboBox" prefWidth="150.0" />
+                <ComboBox fx:id="projectComboBox" prefWidth="150.0" />
+            </HBox>
+
+            <Button fx:id="file" text="Input File" />
+
+            <DatePicker fx:id="date" />
+        </VBox>
+
+        <HBox alignment="CENTER_RIGHT" prefHeight="0.0" prefWidth="0.0" spacing="8.0">
+            <Button mnemonicParsing="false" styleClass="secondary" text="Cancel" />
+            <Button fx:id="save" mnemonicParsing="false" onAction="#save" text="Save" />
+        </HBox>
+    </VBox>
+</ScrollPane>
