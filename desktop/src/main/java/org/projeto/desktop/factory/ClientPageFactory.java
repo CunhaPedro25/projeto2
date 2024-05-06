@@ -11,7 +11,7 @@ public class ClientPageFactory implements PageFactory {
         pages.add(new Page("Home", "home.fxml", "fas-home"));
         pages.add(new Page("Projects", "projects.fxml", "fas-archive"));
         pages.add(new Page("Budgets", "budgets.fxml", "fas-file-contract"));
-        pages.add(new Page("Constructions", "construction.fxml", "fas-hard-hat"));
+        pages.add(new Page("Constructions", "constructions.fxml", "fas-hard-hat"));
         return pages;
     }
 }

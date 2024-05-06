@@ -9,8 +9,6 @@ import org.projeto.desktop.CurrentUser;
 import org.projeto.desktop.events.EventBus;
 import org.projeto.desktop.events.SideBarButtonEvent;
 
-import java.io.File;
-
 public class DashBoardController {
     @FXML
     private ScrollPane mainContent;
@@ -28,14 +26,13 @@ public class DashBoardController {
 
     private void changePage(){
         try {
-            String path = CurrentUser.type + File.separator + CurrentUser.currentPage.fileName();
+            String path = CurrentUser.type + "/" + CurrentUser.currentPage.fileName();
             System.out.println(path);
             FXMLLoader loader = new FXMLLoader(DashBoardController.class.getResource(path));
             Parent content = loader.load();
             mainContent.setContent(content);
         }catch (Exception e){
-//                System.out.println("DashBoardController SidebarButtonEvent: " + e.getCause());
-            e.printStackTrace();
+                System.out.println("DashBoardController SidebarButtonEvent: " + e.getCause());
         }
     }
 }
