@@ -11,8 +11,11 @@ module org.projeto.data {
   requires spring.data.commons;
   requires org.hibernate.orm.core;
   requires org.apache.commons.codec;
+  requires spring.web;
+    requires com.fasterxml.jackson.annotation;
+    requires spring.webmvc;
 
-  exports org.projeto.data;
+    exports org.projeto.data;
   exports org.projeto.data.entities;
   exports org.projeto.data.entities.users;
   exports org.projeto.data.entities.enums;
@@ -22,6 +25,7 @@ module org.projeto.data {
   exports org.projeto.data.repositories.documents;
   exports org.projeto.data.services;
   exports org.projeto.data.services.users;
+  exports org.projeto.data.controllers;
 
   opens org.projeto.data;
   opens org.projeto.data.entities;
@@ -33,4 +37,5 @@ module org.projeto.data {
   opens org.projeto.data.repositories.documents;
   opens org.projeto.data.services;
   opens org.projeto.data.services.users;
+  opens org.projeto.data.controllers;
 }

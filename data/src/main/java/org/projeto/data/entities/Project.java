@@ -1,5 +1,7 @@
 package org.projeto.data.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 
@@ -22,10 +24,12 @@ public class Project {
   @Column(name = "id", nullable = false)
   private Integer id;
 
+  @JsonManagedReference
   @ManyToOne(fetch = FetchType.EAGER, optional = false)
   @JoinColumn(name = "client", nullable = false)
   private Client client;
 
+  @JsonManagedReference
   @ManyToOne(fetch = FetchType.EAGER, optional = false)
   @JoinColumn(name = "engineer", nullable = false)
   private Engineer engineer;
@@ -39,6 +43,7 @@ public class Project {
   @Column(name = "accepted")
   private Boolean accepted;
 
+  @JsonBackReference
   @OneToMany(mappedBy = "project")
   private Set<Budget> budgets = new LinkedHashSet<>();
 

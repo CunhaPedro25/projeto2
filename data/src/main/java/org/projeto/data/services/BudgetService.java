@@ -10,20 +10,20 @@ import java.util.Optional;
 
 @Service
 public class BudgetService {
-  private static BudgetRepository budgetRepository;
+  public final BudgetRepository budgetRepository;
 
   @Autowired
   public BudgetService(BudgetRepository budgetRepository) {
-    BudgetService.budgetRepository = budgetRepository;
+    this.budgetRepository = budgetRepository;
   }
 
-  public static List<Budget> getBudget(){return budgetRepository.findAll();}
+  public List<Budget> getBudget(){return budgetRepository.findAll();}
 
-  public static List<Budget> getAllBudgets(){
+  public List<Budget> getAllBudgets(){
     return budgetRepository.findAll();
   }
 
-  public static void addNew(Budget newBudget){
+  public void addNew(Budget newBudget){
     Optional<Budget> existingBudget = budgetRepository.findByProject_IdAndCreateDate(newBudget.getProject().getId(), newBudget.getCreateDate());
     Optional<Budget> exisingFile = budgetRepository.findByFilePath(newBudget.getFilePath());
     if(existingBudget.isPresent() || exisingFile.isPresent()){
@@ -34,7 +34,7 @@ public class BudgetService {
   }
 
 
-  public static void delete(Long id){
+  public void delete(Long id){
     boolean exists = budgetRepository.existsById(id);
     if (!exists){
       throw new IllegalStateException("Budget with id"+id+"does not exist");

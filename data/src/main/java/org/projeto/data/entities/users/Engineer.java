@@ -1,5 +1,6 @@
 package org.projeto.data.entities.users;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 
@@ -16,9 +17,11 @@ import java.util.Set;
 @Entity
 @Table(name = "engineer")
 public class Engineer extends User{
+  @JsonBackReference
   @OneToMany(mappedBy = "engineer")
   private Set<Budget> budgets = new LinkedHashSet<>();
 
+  @JsonBackReference
   @OneToMany(mappedBy = "engineer")
   private Set<Project> projects = new LinkedHashSet<>();
 

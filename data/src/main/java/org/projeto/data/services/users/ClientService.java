@@ -17,22 +17,22 @@ import java.util.Optional;
 @Service
 public class ClientService {
 
-  private static ClientRepository clientRepository;
+  private final ClientRepository clientRepository;
 
-  private static ZipcodeRepository zipcodeRepository;
+  private final ZipcodeRepository zipcodeRepository;
 
   @Autowired
   public ClientService(ClientRepository clientRepository, ZipcodeRepository zipcodeRepository){
-    ClientService.clientRepository = clientRepository;
-    ClientService.zipcodeRepository = zipcodeRepository;
+    this.clientRepository = clientRepository;
+    this.zipcodeRepository = zipcodeRepository;
   }
 
-  public static List<Client> findAll(){
-    return clientRepository.findAll();
+  public List<Client> findAll(){
+    return this.clientRepository.findAll();
   }
 
-  public static void update(Long id, String name, String email, String phone, String address, Integer door, Zipcode zipcode, ClientType type) {
-    Client client = clientRepository.findById(id)
+  public void update(Long id, String name, String email, String phone, String address, Integer door, Zipcode zipcode, ClientType type) {
+    Client client = this.clientRepository.findById(id)
             .orElseThrow(() -> new IllegalStateException("User with id " + id + " does not exist"));
 
     if (name != null && !name.isEmpty() && !Objects.equals(client.getName(), name)) {
@@ -40,7 +40,7 @@ public class ClientService {
     }
 
     if (email != null && !email.isEmpty() && !Objects.equals(client.getEmail(), email)) {
-      if (clientRepository.existsByEmail(email)) {
+      if (this.clientRepository.existsByEmail(email)) {
         throw new IllegalStateException("Email already taken");
       } else {
         client.setEmail(email);

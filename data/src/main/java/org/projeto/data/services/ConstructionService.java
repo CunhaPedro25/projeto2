@@ -12,39 +12,40 @@ import java.util.List;
 
 @Service
 public class ConstructionService {
-  private static ConstructionRepository constructionRepository;
-  private static BudgetRepository budgetRepository;
+  private final ConstructionRepository constructionRepository;
+  private final BudgetRepository budgetRepository;
 
   @Autowired
   public ConstructionService(ConstructionRepository constructionRepository, BudgetRepository budgetRepository) {
-    ConstructionService.constructionRepository = constructionRepository;
-    ConstructionService.budgetRepository = budgetRepository;
+    this.constructionRepository = constructionRepository;
+    this.budgetRepository = budgetRepository;
   }
 
-  public static List<Construction> getConstructions(){ return constructionRepository.findAll();}
+  public List<Construction> getConstructions(){ return this.constructionRepository.findAll();}
 
-  public static List<Construction> getConstructionsByClientID(Integer clientID){
-    List<Budget> clientBudgets = budgetRepository.findBudgetByClient_id(clientID);
-    System.out.println(clientBudgets);
-    List<Construction> clientConstructions = new ArrayList<>();
+//  public List<Construction> getConstructionsByClientID(Integer clientID){
+//    List<Budget> clientBudgets = this.budgetRepository.findBudgetByClient_id(clientID);
+//    System.out.println(clientBudgets);
+//    List<Construction> clientConstructions = new ArrayList<>();
+//
+//    for (Budget budget : clientBudgets) {
+//      clientConstructions.add(this.constructionRepository.findByBudget_Id(budget.getId()));
+//    }
+//    return clientConstructions;
+//  }
 
-    for (Budget budget : clientBudgets) {
-      clientConstructions.add(constructionRepository.findByBudget_Id(budget.getId()));
-    }
-    return clientConstructions;
-  }
-  public static void addNew(Construction newConstruction){
+  public void addNew(Construction newConstruction){
     if (!newConstruction.getTeam().getBusy()){
       throw new IllegalStateException("The Equipa associated with this Construction has currently another Construction assigned");
     }
-    constructionRepository.save(newConstruction);
+    this.constructionRepository.save(newConstruction);
   }
-  public static void delete(Long id){
-    boolean exists = constructionRepository.existsById(id);
+  public void delete(Long id){
+    boolean exists = this.constructionRepository.existsById(id);
     if (!exists){
       throw new IllegalStateException("Construction with id"+id+"does not exist");
     }else{
-      constructionRepository.deleteById(id);
+      this.constructionRepository.deleteById(id);
     }
   }
 

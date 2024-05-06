@@ -12,11 +12,11 @@ import java.util.Optional;
 public interface DocumentRepository<T> extends JpaRepository<T, Long> {
   T findById(Integer id);
 
-  @Query("SELECT e FROM #{#entityName} e WHERE e.client = ?1")
-  List<T> findDocumentsByClient_Id(Integer id);
-
-  @Query("SELECT e FROM #{#entityName} e WHERE e.engineer = ?1")
-  List<T> findDocumentsByEngineer_Id(Integer id);
+//  @Query("SELECT e FROM #{#entityName} e WHERE e.client = ?1")
+//  List<T> findDocumentsByClient_Id(Integer id);
+//
+//  @Query("SELECT e FROM #{#entityName} e WHERE e.engineer = ?1")
+//  List<T> findDocumentsByEngineer_Id(Integer id);
 
   Optional<T> findByFilePath(String file_path);
 

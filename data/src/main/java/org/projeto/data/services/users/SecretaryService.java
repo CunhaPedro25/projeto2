@@ -8,7 +8,11 @@ import org.projeto.data.repositories.users.SecretaryRepository;
 @Service
 public class SecretaryService {
 
+  private final SecretaryRepository secretaryRepository;
+
   @Autowired
-  private static SecretaryRepository secretaryRepository;
+  public SecretaryService(SecretaryRepository secretaryRepository) {
+    this.secretaryRepository = secretaryRepository;
+  }
 
 }

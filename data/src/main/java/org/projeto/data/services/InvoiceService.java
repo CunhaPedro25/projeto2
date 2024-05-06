@@ -9,20 +9,25 @@ import java.util.List;
 
 @Service
 public class InvoiceService {
+  private final InvoiceRepository invoiceRepository;
+
   @Autowired
-  private static InvoiceRepository invoiceRepository;
-
-  public static List<Invoice> getInvoice(){ return invoiceRepository.findAll();}
-
-  public static void addNew(Invoice newInvoice){
-    invoiceRepository.save(newInvoice);
+  public InvoiceService(InvoiceRepository invoiceRepository) {
+    this.invoiceRepository = invoiceRepository;
   }
-  public static void delete(Long id){
-    boolean exists = invoiceRepository.existsById(id);
+
+  public List<Invoice> getInvoice(){ return this.invoiceRepository.findAll();}
+
+  public void addNew(Invoice newInvoice){
+    this.invoiceRepository.save(newInvoice);
+  }
+
+  public void delete(Long id){
+    boolean exists = this.invoiceRepository.existsById(id);
     if (!exists){
       throw new IllegalStateException("The Fatura with id"+id+"does not exist");
     }else{
-      invoiceRepository.deleteById(id);
+      this.invoiceRepository.deleteById(id);
     }
   }
 }

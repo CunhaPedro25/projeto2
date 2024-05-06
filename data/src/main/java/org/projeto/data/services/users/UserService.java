@@ -27,8 +27,8 @@ public class UserService{
     UserService.workerRepository = workerRepository;
   }
 
-  public static User login(String email, String password) throws Exception {
-    User user = findUserByEmail(email);
+  public User login(String email, String password) throws Exception {
+    User user = this.findUserByEmail(email);
 
     // If user is found and password matches, return the user
     if (user != null && user.getPassword().equals(DigestUtils.sha256Hex(password))) {
@@ -38,7 +38,7 @@ public class UserService{
     }
   }
 
-  public static void register(User user) throws Exception{
+  public void register(User user) throws Exception{
     user.setPassword(DigestUtils.sha256Hex(user.getPassword()));
 
     // Determine the type of user and save it to the appropriate repository
@@ -56,7 +56,7 @@ public class UserService{
     }
   }
 
-  private static User findUserByEmail(String email) throws Exception {
+  private User findUserByEmail(String email) throws Exception {
     User user = clientRepository.findByEmail(email);
     if (user == null) {
       user = engineerRepository.findByEmail(email);
@@ -74,7 +74,7 @@ public class UserService{
   }
 
 
-  public static List<User> getAllUsers() {
+  public List<User> getAllUsers() {
     List<User> users = new ArrayList<>();
 
     users.addAll(clientRepository.findAll());

@@ -1,5 +1,6 @@
 package org.projeto.data.entities.enums;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 
@@ -23,6 +24,7 @@ public class ClientType {
   @Column(name = "type", nullable = false, length = Integer.MAX_VALUE)
   private String type;
 
+  @JsonBackReference
   @OneToMany(mappedBy = "clientType")
   private Set<Client> clients = new LinkedHashSet<>();
 

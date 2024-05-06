@@ -13,31 +13,37 @@ import java.util.Optional;
 
 @Service
 public class TeamService {
-  @Autowired
-  private static TeamRepository teamRepository;
+  private final TeamRepository teamRepository;
 
-  public static List<Team> getTeams(){ return teamRepository.findAll();}
-  public static void addNew(Team newTeam){
-    Optional<Team> EquipaByChefe = teamRepository.findByLeader_Id(newTeam.getLeader().getId());
+  @Autowired
+  public TeamService(TeamRepository teamRepository) {
+    this.teamRepository = teamRepository;
+  }
+
+  public List<Team> getTeams(){ return this.teamRepository.findAll();}
+
+  public void addNew(Team newTeam){
+    Optional<Team> EquipaByChefe = this.teamRepository.findByLeader_Id(newTeam.getLeader().getId());
     if (EquipaByChefe.isEmpty()){
       throw new IllegalStateException("This Equipa has no Chefe!");
     }
-    teamRepository.save(newTeam);
+    this.teamRepository.save(newTeam);
   }
-  public static void delete(Long id){
-    boolean exists = teamRepository.existsById(id);
+
+  public void delete(Long id){
+    boolean exists = this.teamRepository.existsById(id);
     if (!exists){
       throw new IllegalStateException("Equipa with id"+id+"does not exist");
     }else{
-      teamRepository.deleteById(id);
+      this.teamRepository.deleteById(id);
     }
   }
 
-  public static void update(Long id, Worker leader){
-    Team team = teamRepository.findById(id).orElseThrow(()-> new IllegalStateException( "Equipa with id "+ id + " does not exist! "));
+  public void update(Long id, Worker leader){
+    Team team = this.teamRepository.findById(id).orElseThrow(()-> new IllegalStateException( "Equipa with id "+ id + " does not exist! "));
 
     if (leader != null && leader.getId() != null && !Objects.equals(team.getLeader(), leader)) {
-      Optional<Team> EquipaOptional = teamRepository.findByLeader_Id(leader.getId());
+      Optional<Team> EquipaOptional = this.teamRepository.findByLeader_Id(leader.getId());
       if (EquipaOptional.isPresent()){
         throw new IllegalStateException("This team already has that Chefe already exists!");
       }else {

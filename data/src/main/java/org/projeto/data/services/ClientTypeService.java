@@ -12,37 +12,37 @@ import java.util.Optional;
 
 @Service
 public class ClientTypeService {
-  private static ClientTypeRepository clientTypeRepository;
+  private final ClientTypeRepository clientTypeRepository;
 
   @Autowired
   public ClientTypeService(ClientTypeRepository clientTypeRepository){
-    ClientTypeService.clientTypeRepository = clientTypeRepository;
+    this.clientTypeRepository = clientTypeRepository;
   }
 
-  public static List<ClientType> getAllClientTypes(){ return clientTypeRepository.findAll();}
+  public List<ClientType> getAllClientTypes(){ return clientTypeRepository.findAll();}
 
-  public static void addNew(ClientType newClientType){
-    Optional<ClientType> TipoClienteByTipo = clientTypeRepository.findByType(newClientType.getType());
-    if (TipoClienteByTipo.isPresent()){
+  public void addNew(ClientType newClientType){
+    Optional<ClientType> ClientType = this.clientTypeRepository.findByType(newClientType.getType());
+    if (ClientType.isPresent()){
       throw new IllegalStateException("tipo de cliente already exists");
     }
-    clientTypeRepository.save(newClientType);
+    this.clientTypeRepository.save(newClientType);
   }
 
-  public static void delete(Long id){
-    boolean exists = clientTypeRepository.existsById(id);
+  public void delete(Long id){
+    boolean exists = this.clientTypeRepository.existsById(id);
     if (!exists){
       throw new IllegalStateException("TipoCliente with id"+id+"does not exist");
     }else{
-      clientTypeRepository.deleteById(id);
+      this.clientTypeRepository.deleteById(id);
     }
   }
 
-  public static void update(Long id, String type){
-    ClientType clientType = clientTypeRepository.findById(id).orElseThrow(()-> new IllegalStateException( "TipoCliente with id "+ id + " does not exist! "));
+  public void update(Long id, String type){
+    ClientType clientType = this.clientTypeRepository.findById(id).orElseThrow(()-> new IllegalStateException( "TipoCliente with id "+ id + " does not exist! "));
 
     if (type != null && !type.isEmpty() && !Objects.equals(clientType.getType(),type)) {
-      Optional<ClientType> TipoClienteOptional = clientTypeRepository.findByType(type);
+      Optional<ClientType> TipoClienteOptional = this.clientTypeRepository.findByType(type);
       if (TipoClienteOptional.isPresent()){
         throw new IllegalStateException("Customer type already exists!");
       }else {

@@ -7,6 +7,10 @@ import org.projeto.data.repositories.users.EngineerRepository;
 
 @Service
 public class EngineerService {
+  private final EngineerRepository engineerRepository;
+
   @Autowired
-  private static EngineerRepository engineerRepository;
+  public EngineerService(EngineerRepository engineerRepository) {
+    this.engineerRepository = engineerRepository;
+  }
 }

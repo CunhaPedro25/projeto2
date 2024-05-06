@@ -12,12 +12,15 @@ import java.util.Optional;
 
 @Service
 public class WorkerService {
+  private final WorkerRepository workerRepository;
+
   @Autowired
-  private static WorkerRepository workerRepository;
+  public WorkerService(WorkerRepository workerRepository) {
+    this.workerRepository = workerRepository;
+  }
 
-
-  public static void update(Long id, String name, String email, String phone, Team team) {
-    Worker worker = workerRepository.findById(id)
+  public void update(Long id, String name, String email, String phone, Team team) {
+    Worker worker = this.workerRepository.findById(id)
             .orElseThrow(() -> new IllegalStateException("User with id " + id + " does not exist"));
 
     if (name != null && !name.isEmpty() && !Objects.equals(worker.getName(), name)) {
@@ -25,7 +28,7 @@ public class WorkerService {
     }
 
     if (email != null && !email.isEmpty() && !Objects.equals(worker.getEmail(), email)) {
-      if (workerRepository.existsByEmail(email)) {
+      if (this.workerRepository.existsByEmail(email)) {
         throw new IllegalStateException("Email already taken");
       } else {
         worker.setEmail(email);
@@ -33,7 +36,7 @@ public class WorkerService {
     }
 
     if (phone != null && !phone.isEmpty() && !Objects.equals(worker.getPhone(), phone)) {
-      Optional<Worker> userRepositoryByPhone = workerRepository.findByPhone(phone);
+      Optional<Worker> userRepositoryByPhone = this.workerRepository.findByPhone(phone);
       if (userRepositoryByPhone.isPresent()) {
         throw new IllegalStateException("Email already taken");
       } else {

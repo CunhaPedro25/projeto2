@@ -1,5 +1,7 @@
 package org.projeto.data.entities.users;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 
@@ -22,23 +24,29 @@ public class Client extends User {
   @Column(name = "door")
   private Integer door;
 
+  @JsonManagedReference
   @ManyToOne(fetch = FetchType.EAGER)
   @JoinColumn(name = "zipcode")
   private Zipcode zipcode;
 
+  @JsonManagedReference
   @ManyToOne(fetch = FetchType.EAGER, optional = false)
   @JoinColumn(name = "client_type", nullable = false)
   private ClientType clientType;
 
+  @JsonBackReference
   @OneToMany(mappedBy = "client")
   private Set<Budget> budgets = new LinkedHashSet<>();
 
+  @JsonBackReference
   @OneToMany(mappedBy = "client")
   private Set<Complaint> complaints = new LinkedHashSet<>();
 
+  @JsonBackReference
   @OneToMany(mappedBy = "client")
   private Set<Invoice> invoices = new LinkedHashSet<>();
 
+  @JsonBackReference
   @OneToMany(mappedBy = "client")
   private Set<Project> projects = new LinkedHashSet<>();
 
