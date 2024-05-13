@@ -1,16 +1,15 @@
-package org.projeto.data.entities.users;
+package org.projeto.data.entities;
 
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-
 @Getter
 @Setter
-@MappedSuperclass
+@Entity
+@Table(name = "\"user\"")
 public class User {
   @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "id", nullable = false)
   private Integer id;
 
@@ -26,15 +25,25 @@ public class User {
   @Column(name = "phone", nullable = false, length = Integer.MAX_VALUE)
   private String phone;
 
+  @Column(name = "address", length = Integer.MAX_VALUE)
+  private String address;
+
+  @Column(name = "door")
+  private Integer door;
+
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "zipcode")
+  private Zipcode zipcode;
+
+  @ManyToOne(fetch = FetchType.LAZY, optional = false)
+  @JoinColumn(name = "user_type", nullable = false)
+  private UserType userType;
+
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "team")
+  private Team team;
+
   @Column(name = "active")
-  private Boolean active = true;
+  private Boolean active;
 
-  public User() {}
-
-  public User(String name, String email, String password, String phone) {
-    this.name = name;
-    this.email = email;
-    this.password = password;
-    this.phone = phone;
-  }
 }

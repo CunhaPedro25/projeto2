@@ -1,9 +1,8 @@
 package org.projeto.data.services;
 
-import org.springframework.transaction.annotation.Transactional;
+import org.projeto.data.entities.Zipcode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.projeto.data.entities.Zipcode;
 import org.projeto.data.repositories.ZipcodeRepository;
 
 import java.util.List;

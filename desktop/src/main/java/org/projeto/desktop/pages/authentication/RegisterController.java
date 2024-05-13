@@ -3,8 +3,8 @@ package org.projeto.desktop.pages.authentication;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import org.projeto.data.entities.users.Client;
-import org.projeto.data.services.ClientTypeService;
-import org.projeto.data.services.users.UserService;
+import org.projeto.data.services.UserTypeService;
+import org.projeto.data.services.UserService;
 import org.projeto.desktop.SceneManager;
 import org.projeto.desktop.components.RegisterFormController;
 
@@ -28,7 +28,7 @@ public class  RegisterController {
             registerFormController.email.getText(),
             registerFormController.password.getText(),
             registerFormController.phone.getText(),
-            ClientTypeService.getAllClientTypes().get(0)
+            UserTypeService.getAllClientTypes().get(0)
     );
 
     try {

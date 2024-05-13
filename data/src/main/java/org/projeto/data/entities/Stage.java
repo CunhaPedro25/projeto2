@@ -1,11 +1,8 @@
 package org.projeto.data.entities;
 
 import jakarta.persistence.*;
-
-
 import lombok.Getter;
 import lombok.Setter;
-import org.projeto.data.entities.enums.State;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -20,16 +17,15 @@ public class Stage {
   @Column(name = "id", nullable = false)
   private Integer id;
 
-  @ManyToOne(fetch = FetchType.LAZY, optional = false)
-  @JoinColumn(name = "budget", nullable = false)
-  private Budget budget;
+  @Column(name = "name", length = Integer.MAX_VALUE)
+  private String name;
+
+  @Column(name = "percentage")
+  private Double percentage;
 
   @ManyToOne(fetch = FetchType.LAZY, optional = false)
-  @JoinColumn(name = "state", nullable = false)
-  private State state;
-
-  @Column(name = "description", length = Integer.MAX_VALUE)
-  private String description;
+  @JoinColumn(name = "construction_type", nullable = false)
+  private ConstructionType constructionType;
 
   @OneToMany(mappedBy = "stage")
   private Set<Construction> constructions = new LinkedHashSet<>();
@@ -37,14 +33,4 @@ public class Stage {
   @OneToMany(mappedBy = "stage")
   private Set<Invoice> invoices = new LinkedHashSet<>();
 
-  @OneToMany(mappedBy = "stage")
-  private Set<StageMaterial> stageMaterials = new LinkedHashSet<>();
-
-  public Stage() {}
-
-  public Stage(Budget budget, State state, String description) {
-    this.budget = budget;
-    this.state = state;
-    this.description = description;
-  }
 }

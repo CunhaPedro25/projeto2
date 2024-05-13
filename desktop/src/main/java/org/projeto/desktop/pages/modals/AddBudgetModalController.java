@@ -8,7 +8,6 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.ListCell;
 import org.projeto.data.entities.users.Client;
 import org.projeto.data.services.users.ClientService;
-import org.projeto.data.services.users.UserService;
 
 import java.time.LocalDate;
 

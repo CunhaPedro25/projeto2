@@ -1,11 +1,8 @@
-package org.projeto.data.entities.enums;
+package org.projeto.data.entities;
 
 import jakarta.persistence.*;
-
-
 import lombok.Getter;
 import lombok.Setter;
-import org.projeto.data.entities.Stage;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -24,11 +21,6 @@ public class State {
   private String description;
 
   @OneToMany(mappedBy = "state")
-  private Set<Stage> stages = new LinkedHashSet<>();
+  private Set<Construction> constructions = new LinkedHashSet<>();
 
-  public State() {}
-
-  public State(String description) {
-    this.description = description;
-  }
 }

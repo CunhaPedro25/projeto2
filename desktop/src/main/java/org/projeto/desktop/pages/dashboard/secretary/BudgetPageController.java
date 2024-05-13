@@ -1,20 +1,13 @@
 package org.projeto.desktop.pages.dashboard.secretary;
 
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
 import org.projeto.data.entities.Budget;
-import org.projeto.data.services.BudgetService;
 import org.projeto.desktop.SceneManager;
 
 import java.time.LocalDate;
-import java.util.List;
 
 public class BudgetPageController {
     @FXML

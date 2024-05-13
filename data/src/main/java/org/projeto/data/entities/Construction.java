@@ -4,10 +4,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-
-import java.time.LocalDate;
-import java.util.LinkedHashSet;
-import java.util.Set;
+import java.math.BigDecimal;
 
 @Getter
 @Setter
@@ -19,37 +16,26 @@ public class Construction {
   @Column(name = "id", nullable = false)
   private Integer id;
 
-  @ManyToOne(fetch = FetchType.EAGER)
+  @ManyToOne(fetch = FetchType.LAZY, optional = false)
+  @JoinColumn(name = "project", nullable = false)
+  private Project project;
+
+  @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "team")
   private Team team;
 
-  @ManyToOne(fetch = FetchType.EAGER)
-  @JoinColumn(name = "budget")
-  private Budget budget;
-
-  @ManyToOne(fetch = FetchType.EAGER)
+  @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "stage")
   private Stage stage;
 
-  @Column(name = "finished")
-  private Boolean finished = false;
+  @Column(name = "stage_budget")
+  private BigDecimal stageBudget;
 
-  @Column(name = "last_update")
-  private LocalDate lastUpdate;
+  @Column(name = "total")
+  private BigDecimal total;
 
-  @Column(name = "start_date")
-  private LocalDate startDate;
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "state")
+  private State state;
 
-  @OneToMany(mappedBy = "construction")
-  private Set<Complaint> complaints = new LinkedHashSet<>();
-
-  public Construction() {}
-
-  public Construction(Team team, Budget budget, Stage stage, LocalDate startDate) {
-    this.team = team;
-    this.budget = budget;
-    this.stage = stage;
-    this.startDate = startDate;
-    this.lastUpdate = LocalDate.now();
-  }
 }

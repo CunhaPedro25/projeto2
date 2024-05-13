@@ -1,12 +1,10 @@
 package org.projeto.data.entities;
 
 import jakarta.persistence.*;
-
-
 import lombok.Getter;
 import lombok.Setter;
-import org.projeto.data.entities.users.Worker;
 
+import java.math.BigDecimal;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -21,20 +19,22 @@ public class Team {
   private Integer id;
 
   @Column(name = "busy")
-  private Boolean busy =false;
+  private Boolean busy;
 
-  @ManyToOne(fetch = FetchType.LAZY, optional = false)
-  @JoinColumn(name = "leader", nullable = false)
-  private Worker leader;
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "leader")
+  private User leader;
+
+  @Column(name = "daily_value", nullable = false)
+  private BigDecimal dailyValue;
 
   @OneToMany(mappedBy = "team")
   private Set<Construction> constructions = new LinkedHashSet<>();
 
   @OneToMany(mappedBy = "team")
-  private Set<Worker> workers = new LinkedHashSet<>();
+  private Set<ConstructionTeam> constructionTeams = new LinkedHashSet<>();
 
-  public Team() {}
-  public Team(Worker leader) {
-    this.leader = leader;
-  }
+  @OneToMany(mappedBy = "team")
+  private Set<User> users = new LinkedHashSet<>();
+
 }

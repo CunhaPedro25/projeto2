@@ -1,11 +1,8 @@
 package org.projeto.data.entities;
 
 import jakarta.persistence.*;
-
-
 import lombok.Getter;
 import lombok.Setter;
-import org.projeto.data.entities.users.Client;
 
 @Getter
 @Setter
@@ -19,7 +16,7 @@ public class Complaint {
 
   @ManyToOne(fetch = FetchType.LAZY, optional = false)
   @JoinColumn(name = "client", nullable = false)
-  private Client client;
+  private User client;
 
   @ManyToOne(fetch = FetchType.LAZY, optional = false)
   @JoinColumn(name = "construction", nullable = false)
@@ -28,11 +25,4 @@ public class Complaint {
   @Column(name = "description", nullable = false, length = Integer.MAX_VALUE)
   private String description;
 
-  public Complaint() {}
-
-  public Complaint(Client client, Construction construction, String description) {
-    this.client = client;
-    this.construction = construction;
-    this.description = description;
-  }
 }

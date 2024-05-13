@@ -1,11 +1,8 @@
 package org.projeto.data.entities;
 
 import jakarta.persistence.*;
-
-
 import lombok.Getter;
 import lombok.Setter;
-import org.projeto.data.entities.users.Client;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -29,13 +26,6 @@ public class Zipcode {
   private String locale;
 
   @OneToMany(mappedBy = "zipcode")
-  private Set<Client> clients = new LinkedHashSet<>();
+  private Set<User> users = new LinkedHashSet<>();
 
-  public Zipcode() {}
-  public Zipcode(String id, String district, String city, String locale) {
-    this.id = id;
-    this.district = district;
-    this.city = city;
-    this.locale = locale;
-  }
 }

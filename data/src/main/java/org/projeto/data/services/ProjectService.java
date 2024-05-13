@@ -1,7 +1,7 @@
 package org.projeto.data.services;
 
 import org.projeto.data.entities.Project;
-import org.projeto.data.repositories.documents.ProjectRepository;
+import org.projeto.data.repositories.ProjectRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,12 +26,12 @@ public class ProjectService {
   }
 
   public void addNew(Project newProject){
-    Optional<Project> existingProject = this.projectRepository.findProjectByClient_IdAndCreateDate(newProject.getClient().getId(), newProject.getCreateDate());
-    Optional<Project> exisingFile = this.projectRepository.findByFilePath(newProject.getFilePath());
-    if(existingProject.isPresent() || exisingFile.isPresent()){
-      throw new IllegalStateException("Project already exists");
-    }else {
-      this.projectRepository.save(newProject);
-    }
+//    Optional<Project> existingProject = this.projectRepository.findProjectByClient_IdAndCreateDate(newProject.getClient().getId(), newProject.getCreateDate());
+//    Optional<Project> exisingFile = this.projectRepository.findByFilePath(newProject.getFilePath());
+//    if(existingProject.isPresent() || exisingFile.isPresent()){
+//      throw new IllegalStateException("Project already exists");
+//    }else {
+//      this.projectRepository.save(newProject);
+//    }
   }
 }

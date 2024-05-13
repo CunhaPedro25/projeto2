@@ -1,15 +1,10 @@
 package org.projeto.data.entities;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
-
-
 import lombok.Getter;
 import lombok.Setter;
-import org.projeto.data.entities.users.Client;
-import org.projeto.data.entities.users.Engineer;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -24,52 +19,40 @@ public class Project {
   @Column(name = "id", nullable = false)
   private Integer id;
 
-  @JsonManagedReference
-  @ManyToOne(fetch = FetchType.EAGER, optional = false)
+  @ManyToOne(fetch = FetchType.LAZY, optional = false)
   @JoinColumn(name = "client", nullable = false)
-  private Client client;
+  private User client;
 
-  @JsonManagedReference
-  @ManyToOne(fetch = FetchType.EAGER, optional = false)
+  @ManyToOne(fetch = FetchType.LAZY, optional = false)
   @JoinColumn(name = "engineer", nullable = false)
-  private Engineer engineer;
+  private User engineer;
 
-  @Column(name = "file_path", length = Integer.MAX_VALUE)
-  private String filePath;
+  @ManyToOne(fetch = FetchType.LAZY, optional = false)
+  @JoinColumn(name = "construction_type", nullable = false)
+  private ConstructionType constructionType;
 
-  @Column(name = "create_date")
-  private LocalDate createDate = LocalDate.now();
+  @Column(name = "requirements_create_date")
+  private LocalDate requirementsCreateDate;
 
-  @Column(name = "accepted")
-  private Boolean accepted;
+  @Column(name = "budget_create_date")
+  private LocalDate budgetCreateDate;
 
-  @JsonBackReference
+  @Column(name = "requirements_document", length = Integer.MAX_VALUE)
+  private String requirementsDocument;
+
+  @Column(name = "budget_document", length = Integer.MAX_VALUE)
+  private String budgetDocument;
+
+  @Column(name = "budget")
+  private BigDecimal budget;
+
+  @Column(name = "requirements_state")
+  private Boolean requirementsState;
+
+  @Column(name = "budget_state")
+  private Boolean budgetState;
+
   @OneToMany(mappedBy = "project")
-  private Set<Budget> budgets = new LinkedHashSet<>();
+  private Set<Construction> constructions = new LinkedHashSet<>();
 
-  public Project() {}
-
-  public Project(Client client, Engineer engineer) {
-    this.client = client;
-    this.engineer = engineer;
-  }
-
-  public Project(Client client, Engineer engineer, String filePath) {
-    this.client = client;
-    this.engineer = engineer;
-    this.filePath = filePath;
-  }
-
-  public Project(Client client, Engineer engineer, LocalDate createDate) {
-    this.client = client;
-    this.engineer = engineer;
-    this.createDate = createDate;
-  }
-
-  public Project(Client client, Engineer engineer, String filePath, LocalDate createDate) {
-    this.client = client;
-    this.engineer = engineer;
-    this.filePath = filePath;
-    this.createDate = createDate;
-  }
 }

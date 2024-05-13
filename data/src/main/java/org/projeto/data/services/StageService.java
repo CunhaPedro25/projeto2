@@ -1,9 +1,8 @@
 package org.projeto.data.services;
 
-import org.springframework.transaction.annotation.Transactional;
+import org.projeto.data.entities.Stage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.projeto.data.entities.Stage;
 import org.projeto.data.repositories.StageRepository;
 
 import java.util.List;
@@ -19,24 +18,24 @@ public class StageService {
 
   }
 
-  public List<Stage> getEtapas(){ return this.stageRepository.findAll();}
+  public List<Stage> getStage(){ return this.stageRepository.findAll();}
 
-  public void addNew(Stage newEtapa){
-    this.stageRepository.save(newEtapa);
+  public void addNew(Stage newStage){
+    this.stageRepository.save(newStage);
   }
   public void delete(Long id){
     boolean exists = this.stageRepository.existsById(id);
     if (!exists){
-      throw new IllegalStateException("Etapa with id"+id+"does not exist");
+      throw new IllegalStateException("Stage with id"+id+"does not exist");
     }else{
       this.stageRepository.deleteById(id);
     }
   }
   public void update(Long id, String desc){
-    Stage stage = this.stageRepository.findById(id).orElseThrow(()-> new IllegalStateException( "Etapa with id "+ id + " does not exist! "));
+    Stage stage = this.stageRepository.findById(id).orElseThrow(()-> new IllegalStateException( "Stage with id "+ id + " does not exist! "));
 
-    if (desc != null && !desc.isEmpty() && !Objects.equals(stage.getDescription(), desc)){
-      stage.setDescription(desc);
+    if (desc != null && !desc.isEmpty() && !Objects.equals(stage.getName(), desc)){
+      stage.setName(desc);
     }
   }
 }

@@ -1,11 +1,10 @@
 package org.projeto.data.services;
 
+import org.projeto.data.entities.Team;
+import org.projeto.data.entities.User;
+import org.projeto.data.repositories.TeamRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-import org.projeto.data.entities.Team;
-import org.projeto.data.entities.users.Worker;
-import org.projeto.data.repositories.TeamRepository;
 
 import java.util.List;
 import java.util.Objects;
@@ -39,7 +38,7 @@ public class TeamService {
     }
   }
 
-  public void update(Long id, Worker leader){
+  public void update(Long id, User leader){
     Team team = this.teamRepository.findById(id).orElseThrow(()-> new IllegalStateException( "Equipa with id "+ id + " does not exist! "));
 
     if (leader != null && leader.getId() != null && !Objects.equals(team.getLeader(), leader)) {

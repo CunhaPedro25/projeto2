@@ -1,9 +1,8 @@
 package org.projeto.data.repositories;
 
-import org.projeto.data.entities.users.Client;
+import org.projeto.data.entities.Complaint;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import org.projeto.data.entities.Complaint;
 
 import java.util.List;
 

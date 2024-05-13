@@ -1,8 +1,8 @@
-package org.projeto.data.repositories.enums;
+package org.projeto.data.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import org.projeto.data.entities.enums.State;
+import org.projeto.data.entities.State;
 
 import java.util.Optional;
 
