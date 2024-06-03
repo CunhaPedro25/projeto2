@@ -10,5 +10,9 @@ import java.util.List;
 public interface ConstructionRepository  extends JpaRepository<Construction, Long> {
   Construction findById (Integer id);
 
+  List<Construction> findbyProjectID(Integer id);
+
+  List<Construction> findConstructionsByProjectAndAndState(Integer projectID, Integer stateID);
+
   List<Construction> findConstructionsByTeam_Id(Integer id);
 }

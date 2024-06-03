@@ -10,32 +10,34 @@ import java.util.Objects;
 
 @Service
 public class StageService {
-  private final StageRepository stageRepository;
+  private static StageRepository stageRepository;
 
   @Autowired
   public StageService(StageRepository stageRepository) {
-    this.stageRepository = stageRepository;
-
+    StageService.stageRepository = stageRepository;
   }
 
-  public List<Stage> getStage(){ return this.stageRepository.findAll();}
+  public List<Stage> getStage(){ return StageService.stageRepository.findAll();}
 
   public void addNew(Stage newStage){
-    this.stageRepository.save(newStage);
+    StageService.stageRepository.save(newStage);
   }
   public void delete(Long id){
-    boolean exists = this.stageRepository.existsById(id);
+    boolean exists = StageService.stageRepository.existsById(id);
     if (!exists){
       throw new IllegalStateException("Stage with id"+id+"does not exist");
     }else{
-      this.stageRepository.deleteById(id);
+      StageService.stageRepository.deleteById(id);
     }
   }
   public void update(Long id, String desc){
-    Stage stage = this.stageRepository.findById(id).orElseThrow(()-> new IllegalStateException( "Stage with id "+ id + " does not exist! "));
+    Stage stage = StageService.stageRepository.findById(id).orElseThrow(()-> new IllegalStateException( "Stage with id "+ id + " does not exist! "));
 
     if (desc != null && !desc.isEmpty() && !Objects.equals(stage.getName(), desc)){
       stage.setName(desc);
     }
+  }
+  public void findByConstructionType(Integer id){
+    StageService.stageRepository.findByConstructionType(id);
   }
 }

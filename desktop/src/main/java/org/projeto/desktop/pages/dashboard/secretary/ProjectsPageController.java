@@ -8,6 +8,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import org.projeto.data.entities.Project;
 import org.projeto.data.services.ProjectService;
 
 import java.time.LocalDate;

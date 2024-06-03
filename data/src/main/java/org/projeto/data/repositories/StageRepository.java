@@ -9,4 +9,5 @@ import java.util.List;
 @Repository
 public interface StageRepository  extends JpaRepository<Stage, Long> {
   Stage findById(Integer id);
+  List<Stage> findByConstructionType(Integer id);
 }

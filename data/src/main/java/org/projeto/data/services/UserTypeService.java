@@ -11,37 +11,37 @@ import java.util.Optional;
 
 @Service
 public class UserTypeService {
-  private final UserTypeRepository userTypeRepository;
+  private static UserTypeRepository userTypeRepository;
 
   @Autowired
   public UserTypeService(UserTypeRepository userTypeRepository){
-    this.userTypeRepository = userTypeRepository;
+    UserTypeService.userTypeRepository = userTypeRepository;
   }
 
   public List<UserType> getAllUserTypes(){ return userTypeRepository.findAll();}
 
   public void addNew(UserType newUserType){
-    Optional<UserType> UserType = this.userTypeRepository.findByType(newUserType.getType());
+    Optional<UserType> UserType = UserTypeService.userTypeRepository.findByType(newUserType.getType());
     if (UserType.isPresent()){
       throw new IllegalStateException("tipo de cliente already exists");
     }
-    this.userTypeRepository.save(newUserType);
+    UserTypeService.userTypeRepository.save(newUserType);
   }
 
   public void delete(Long id){
-    boolean exists = this.userTypeRepository.existsById(id);
+    boolean exists = UserTypeService.userTypeRepository.existsById(id);
     if (!exists){
       throw new IllegalStateException("TipoCliente with id"+id+"does not exist");
     }else{
-      this.userTypeRepository.deleteById(id);
+      UserTypeService.userTypeRepository.deleteById(id);
     }
   }
 
   public void update(Long id, String type){
-    UserType userType = this.userTypeRepository.findById(id).orElseThrow(()-> new IllegalStateException( "TipoCliente with id "+ id + " does not exist! "));
+    UserType userType = UserTypeService.userTypeRepository.findById(id).orElseThrow(()-> new IllegalStateException( "TipoCliente with id "+ id + " does not exist! "));
 
     if (type != null && !type.isEmpty() && !Objects.equals(userType.getType(),type)) {
-      Optional<UserType> TipoClienteOptional = this.userTypeRepository.findByType(type);
+      Optional<UserType> TipoClienteOptional = UserTypeService.userTypeRepository.findByType(type);
       if (TipoClienteOptional.isPresent()){
         throw new IllegalStateException("Customer type already exists!");
       }else {
