@@ -24,10 +24,10 @@ public class ProjectService {
   public List<Project> getProjectsByEngineerID(Integer engineerID){
     return ProjectService.projectRepository.findProjectsByEngineer_Id(engineerID);
   }
-  public static List<Project> getProjectsByConstructionType(Integer constructionTypeID){
+  public List<Project> getProjectsByConstructionType(Integer constructionTypeID){
     return ProjectService.projectRepository.findProjectsByConstructionType(constructionTypeID);
   }
-  public static List<Project> getAllProjects(){
+  public List<Project> getAllProjects(){
     return ProjectService.projectRepository.findAll();
   }
 
