@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import org.projeto.data.repositories.ConstructionRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ConstructionService {
@@ -24,5 +25,17 @@ public class ConstructionService {
 
     public List<Construction> findConstructionsByTeam_Id(Integer teamID){
         return ConstructionService.constructionRepository.findConstructionsByTeam_Id(teamID);
+    }
+
+    public void addNew(Construction newConstruction){
+        ConstructionService.constructionRepository.save(newConstruction);
+    }
+    public void delete(Long constructionID){
+        Optional<Construction> existingCosntruction = ConstructionService.constructionRepository.findById(constructionID);
+        if (existingCosntruction.isPresent()){
+            ConstructionService.constructionRepository.deleteById(constructionID);
+        }else {
+            throw new IllegalStateException("That construction does not exist")
+        }
     }
 }

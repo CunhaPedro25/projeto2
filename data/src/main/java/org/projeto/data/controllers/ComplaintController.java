@@ -43,7 +43,7 @@ public class ComplaintController {
     public ResponseEntity<String> deleteComplaint(@PathVariable Long id) {
         try {
             complaintService.delete(id);
-            return new ResponseEntity<>("Project deleted successfully", HttpStatus.OK);
+            return new ResponseEntity<>("Complaint deleted successfully", HttpStatus.OK);
         } catch (IllegalStateException e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
         }
