@@ -1,29 +1,34 @@
 package org.projeto.data.controllers;
 
 import org.projeto.data.entities.Complaint;
-import org.projeto.data.entities.Project;
 import org.projeto.data.services.ComplaintService;
-import org.projeto.data.services.ProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/complaint")
 public class ComplaintController {
-    public final ComplaintService complaintService;
+    private final ComplaintService complaintService;
+
     @Autowired
     public ComplaintController(ComplaintService complaintService) {
         this.complaintService = complaintService;
     }
-    @GetMapping("/complaintsByClient")
-    public ResponseEntity<List<Complaint>> getComplaintsByClientID(Integer clientID){
-        List<Complaint> complaints  = complaintService.findComplaintsByClientID(clientID);
-        return new ResponseEntity<>(complaints,HttpStatus.OK);
-    }
+//    @GetMapping ("/complaintsByID/{id}")
+//    public Optional<Complaint> getComplaintByID(@PathVariable Long id){
+//        return complaintService.findByID(id);
+//
+//    }
+//    @GetMapping("/complaintsByClient/{id}")
+//    public ResponseEntity<List<Complaint>> getComplaintsByClientID(@PathVariable Long id) {
+//        List<Complaint> complaints = complaintService.findComplaintsByClientID(id);
+//        return new ResponseEntity<>(complaints, HttpStatus.OK);
+//    }
     @GetMapping("/complaintsByConstruction")
     public ResponseEntity<List<Complaint>> getComplaintByConstructionID(Integer clientID){
         List<Complaint> complaints  = complaintService.findComplaintByConstructionID(clientID);
@@ -34,7 +39,7 @@ public class ComplaintController {
     public ResponseEntity<String> addNewComplaint(@RequestBody Complaint newComplaint) {
         try {
             complaintService.addNew(newComplaint);
-            return new ResponseEntity<>("Project added successfully", HttpStatus.CREATED);
+            return new ResponseEntity<>("Complaint added successfully", HttpStatus.CREATED);
         } catch (IllegalStateException e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
