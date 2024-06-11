@@ -1,5 +1,6 @@
 package org.projeto.data.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -20,6 +21,7 @@ public class UserType {
   @Column(name = "type", nullable = false, length = Integer.MAX_VALUE)
   private String type;
 
+  @JsonIgnore
   @OneToMany(mappedBy = "userType")
   private Set<User> users = new LinkedHashSet<>();
 

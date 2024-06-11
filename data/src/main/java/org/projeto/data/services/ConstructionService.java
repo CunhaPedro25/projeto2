@@ -16,11 +16,11 @@ public class ConstructionService {
     public ConstructionService(ConstructionRepository constructionRepository) {ConstructionService.constructionRepository = constructionRepository;}
 
     public List<Construction> findByProjectID(Integer id){
-        return ConstructionService.constructionRepository.findbyProjectID(id);
+        return ConstructionService.constructionRepository.findByProject_Id(id);
     }
 
     public List<Construction> findConstructionsByProjectAndAndState(Integer projectID, Integer stateID){
-        return ConstructionService.constructionRepository.findConstructionsByProjectAndAndState(projectID, stateID);
+        return ConstructionService.constructionRepository.findConstructionsByProject_IdAndState_Id(projectID, stateID);
     }
 
     public List<Construction> findConstructionsByTeam_Id(Integer teamID){
@@ -35,7 +35,7 @@ public class ConstructionService {
         if (existingCosntruction.isPresent()){
             ConstructionService.constructionRepository.deleteById(constructionID);
         }else {
-            throw new IllegalStateException("That construction does not exist")
+            throw new IllegalStateException("That construction does not exist");
         }
     }
 }

@@ -1,5 +1,6 @@
 package org.projeto.data.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -25,6 +26,7 @@ public class Zipcode {
   @Column(name = "locale", nullable = false, length = Integer.MAX_VALUE)
   private String locale;
 
+  @JsonIgnore
   @OneToMany(mappedBy = "zipcode")
   private Set<User> users = new LinkedHashSet<>();
 

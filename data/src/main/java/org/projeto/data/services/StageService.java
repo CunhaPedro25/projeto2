@@ -38,6 +38,6 @@
       }
     }
     public List<Stage> findByConstructionType(Integer id){
-      return StageService.stageRepository.findByConstructionType(id);
+      return StageService.stageRepository.findByConstructionType_Id(id);
     }
   }

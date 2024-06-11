@@ -1,5 +1,6 @@
 package org.projeto.data.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -28,12 +29,15 @@ public class Team {
   @Column(name = "daily_value", nullable = false)
   private BigDecimal dailyValue;
 
+  @JsonIgnore
   @OneToMany(mappedBy = "team")
   private Set<Construction> constructions = new LinkedHashSet<>();
 
+  @JsonIgnore
   @OneToMany(mappedBy = "team")
   private Set<ConstructionTeam> constructionTeams = new LinkedHashSet<>();
 
+  @JsonIgnore
   @OneToMany(mappedBy = "team")
   private Set<User> users = new LinkedHashSet<>();
 

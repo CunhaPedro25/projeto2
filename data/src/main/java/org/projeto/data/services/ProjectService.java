@@ -25,7 +25,7 @@ public class ProjectService {
     return ProjectService.projectRepository.findProjectsByEngineer_Id(engineerID);
   }
   public List<Project> getProjectsByConstructionType(Integer constructionTypeID){
-    return ProjectService.projectRepository.findProjectsByConstructionType(constructionTypeID);
+    return ProjectService.projectRepository.findProjectsByConstructionType_Id(constructionTypeID);
   }
   public List<Project> getAllProjects(){
     return ProjectService.projectRepository.findAll();

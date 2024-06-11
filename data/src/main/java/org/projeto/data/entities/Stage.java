@@ -1,5 +1,6 @@
 package org.projeto.data.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -23,13 +24,15 @@ public class Stage {
   @Column(name = "percentage")
   private Double percentage;
 
-  @ManyToOne(fetch = FetchType.LAZY, optional = false)
+  @ManyToOne(fetch = FetchType.EAGER, optional = false)
   @JoinColumn(name = "construction_type", nullable = false)
   private ConstructionType constructionType;
 
+  @JsonIgnore
   @OneToMany(mappedBy = "stage")
   private Set<Construction> constructions = new LinkedHashSet<>();
 
+  @JsonIgnore
   @OneToMany(mappedBy = "stage")
   private Set<Invoice> invoices = new LinkedHashSet<>();
 

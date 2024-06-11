@@ -15,6 +15,6 @@ public interface ProjectRepository extends JpaRepository<Project, Long> {
 
   List<Project> findProjectsByEngineer_Id(Integer id);
 
-  List<Project> findProjectsByConstructionType(Integer id);
+  List<Project> findProjectsByConstructionType_Id(Integer id);
   Optional<Project> findProjectByClient_IdAndRequirementsCreateDate(Integer client_id, LocalDate createDate);
 }

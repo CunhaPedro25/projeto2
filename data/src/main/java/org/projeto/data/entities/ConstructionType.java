@@ -1,5 +1,6 @@
 package org.projeto.data.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -20,9 +21,11 @@ public class ConstructionType {
   @Column(name = "type", length = Integer.MAX_VALUE)
   private String type;
 
+  @JsonIgnore
   @OneToMany(mappedBy = "constructionType")
   private Set<Project> projects = new LinkedHashSet<>();
 
+  @JsonIgnore
   @OneToMany(mappedBy = "constructionType")
   private Set<Stage> stages = new LinkedHashSet<>();
 
