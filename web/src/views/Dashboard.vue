@@ -16,4 +16,5 @@ import Sidebar from "@/components/Sidebar.vue";
 import {useUserStore} from "@/store/userStore";
 
 const user = useUserStore()
+console.log(user)
 </script>

@@ -1,20 +1,22 @@
 import {defineStore} from 'pinia';
 import auth from '@/services/auth';
-import Cookies from 'js-cookie'; // Assuming you have installed js-cookie
+import Cookies from 'js-cookie';
 
 export const useUserStore = defineStore('user', {
-    state: () => ({
-        id: 0,
-        name: '',
-        email: '',
-        phone: '',
-        address: '',
-        door: 0,
-        zipcode: '',
-        user_type: 0,
-        team: 0,
-        active: true,
-    }),
+    state: () => {
+        return {
+            id: 0,
+            name: '',
+            email: '',
+            phone: '',
+            address: '',
+            door: 0,
+            zipcode: '',
+            userType: 0,
+            team: 0,
+            active: true,
+        }
+    },
     actions: {
         setUser(user) {
             this.id = user.id;
@@ -24,7 +26,7 @@ export const useUserStore = defineStore('user', {
             this.address = user.address;
             this.door = user.door;
             this.zipcode = user.zipcode;
-            this.user_type = user.user_type;
+            this.userType = user.userType;
             this.team = user.team;
             this.active = user.active;
         },
