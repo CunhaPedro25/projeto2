@@ -1,13 +1,15 @@
 package org.projeto.data.entities;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Setter
 @Entity
+@Builder
 @Table(name = "complaint")
+@NoArgsConstructor
+@AllArgsConstructor
 public class Complaint {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,5 +26,6 @@ public class Complaint {
 
   @Column(name = "description", nullable = false, length = Integer.MAX_VALUE)
   private String description;
+
 
 }

@@ -2,8 +2,7 @@ package org.projeto.data.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -11,7 +10,10 @@ import java.util.Set;
 @Getter
 @Setter
 @Entity
+@Builder
 @Table(name = "\"user\"")
+@NoArgsConstructor
+@AllArgsConstructor
 public class User {
   @Id
   @Column(name = "id", nullable = false)

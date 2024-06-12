@@ -2,8 +2,7 @@ package org.projeto.data.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.math.BigDecimal;
 import java.util.LinkedHashSet;
@@ -12,7 +11,10 @@ import java.util.Set;
 @Getter
 @Setter
 @Entity
+@Builder
 @Table(name = "team")
+@NoArgsConstructor
+@AllArgsConstructor
 public class Team {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -2,8 +2,7 @@ package org.projeto.data.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -13,7 +12,10 @@ import java.util.Set;
 @Getter
 @Setter
 @Entity
+@Builder
 @Table(name = "project")
+@NoArgsConstructor
+@AllArgsConstructor
 public class Project {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)

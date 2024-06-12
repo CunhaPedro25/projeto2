@@ -1,13 +1,15 @@
 package org.projeto.data.entities;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Setter
 @Entity
+@Builder
 @Table(name = "construction_material")
+@NoArgsConstructor
+@AllArgsConstructor
 public class ConstructionMaterial {
   @EmbeddedId
   private ConstructionMaterialId id;

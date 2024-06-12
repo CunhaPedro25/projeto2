@@ -1,15 +1,17 @@
 package org.projeto.data.entities;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.math.BigDecimal;
 
 @Getter
 @Setter
 @Entity
+@Builder
 @Table(name = "construction")
+@NoArgsConstructor
+@AllArgsConstructor
 public class Construction {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -1,8 +1,7 @@
 package org.projeto.data.entities;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -10,7 +9,10 @@ import java.time.LocalDate;
 @Getter
 @Setter
 @Entity
+@Builder
 @Table(name = "invoice")
+@NoArgsConstructor
+@AllArgsConstructor
 public class Invoice {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)

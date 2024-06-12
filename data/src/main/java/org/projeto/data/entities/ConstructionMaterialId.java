@@ -2,8 +2,7 @@ package org.projeto.data.entities;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.Hibernate;
 
 import java.io.Serializable;
@@ -11,7 +10,10 @@ import java.util.Objects;
 
 @Getter
 @Setter
+@Builder
 @Embeddable
+@NoArgsConstructor
+@AllArgsConstructor
 public class ConstructionMaterialId implements Serializable {
   private static final long serialVersionUID = -4846752530165043571L;
   @Column(name = "construction", nullable = false)
