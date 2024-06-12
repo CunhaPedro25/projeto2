@@ -9,13 +9,20 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import org.projeto.data.entities.Construction;
+import org.projeto.data.entities.Project;
 import org.projeto.data.services.ConstructionService;
+import org.projeto.data.services.ProjectService;
 import org.projeto.desktop.CurrentUser;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
+@Component
 public class ConstructionsController {
+  private final ConstructionService constructionService;
+  private final ProjectService projectService;
   public Button newConstruction;
 
   @FXML
@@ -32,17 +39,27 @@ public class ConstructionsController {
 
   @FXML
   private TableColumn<Construction, Date> lastUpdateColumn;
+    @Autowired
+    public ConstructionsController(ConstructionService constructionService, ProjectService projectService) {
+        this.constructionService = constructionService;
+        this.projectService = projectService;
+    }
 
-  public void initialize() {
+    public void initialize() {
     newConstruction.setVisible(false);
     populateTableView();
-
 
   }
 
   private void populateTableView() {
-    // Get constructions for the current user
-    List<Construction> clientConstructions = ConstructionService.getConstructionsByClientID(CurrentUser.id);
+// Get constructions for the current user
+    List<Construction> clientConstructions = new ArrayList<>();
+    List<Project> clientProjects = projectService.getProjectsByClientID(CurrentUser.id);
+
+    for (Project project : clientProjects) {
+        clientConstructions.addAll(project.getConstructions());
+    }
+
     System.out.println(clientConstructions);
 
     // Convert List to ObservableList
