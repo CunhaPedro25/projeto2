@@ -5,7 +5,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.HBox;
-import org.projeto.data.entities.users.*;
+import org.projeto.data.entities.*;
 import org.projeto.data.services.UserTypeService;
 import org.projeto.data.services.UserService;
 import org.projeto.desktop.SceneManager;
@@ -43,13 +43,26 @@ public class AddUserModalController {
 
         User user = null;
         RadioButton selectedToggle = (RadioButton) userType.getSelectedToggle();
-        user = switch (selectedToggle.getText()) {
-            case "Client" -> new Client(
-                    registerFormController.firstName.getText() + " " + registerFormController.lastName.getText(),
-                    registerFormController.email.getText(),
-                    registerFormController.password.getText(),
-                    registerFormController.phone.getText(),
-                    UserTypeService.getAllClientTypes().get(0)
+        user = User.builder()
+                .name(registerFormController.firstName.getText()+ " "+ registerFormController.lastName.getText())
+                .email(registerFormController.email.getText())
+                .password(registerFormController.password.getText())
+                .phone(registerFormController.phone.getText())
+                .address(registerFormController.address.getText())
+                .door(Integer.valueOf(registerFormController.door.getText()))
+                .userType(registerFormController.userTypeComboBox.getValue())
+                .build();
+/*        user = switch (selectedToggle.getText()) {
+            case "Client" -> User.builder()
+                    .name(registerFormController.firstName.getText()+ " "+ registerFormController.lastName.getText())
+                    .email(registerFormController.email.getText())
+                    .password(registerFormController.password.getText())
+                    .phone(registerFormController.phone.getText())
+                    .address(registerFormController.address.getText())
+                    .door(Integer.valueOf(registerFormController.door.getText()))
+                    .userType()
+
+
             );
             case "Secretary" -> new Secretary(
                     registerFormController.firstName.getText() + " " + registerFormController.lastName.getText(),
@@ -70,7 +83,7 @@ public class AddUserModalController {
                     registerFormController.phone.getText()
             );
             default -> user;
-        };
+        };*/
 
         try {
             assert user != null;
