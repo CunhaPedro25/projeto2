@@ -13,9 +13,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class LoginController {
 
-  private final UserService userService;
-
-  @FXML
+    @FXML
   public TextField email;
   @FXML
   public TextField password;
@@ -24,7 +22,6 @@ public class LoginController {
 
   @Autowired
   public LoginController(UserService userService) {
-    this.userService = userService;
   }
 
   @FXML
@@ -41,7 +38,7 @@ public class LoginController {
     }
 
     try {
-      User user = userService.login(email.getText(), password.getText());
+      User user = UserService.login(email.getText(), password.getText());
       CurrentUser.setUser(user);
       SceneManager.switchScene(
               registerLink,

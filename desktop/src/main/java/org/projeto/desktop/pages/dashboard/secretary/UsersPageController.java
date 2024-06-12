@@ -8,11 +8,15 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import org.projeto.data.entities.users.User;
+import org.projeto.data.entities.User;
 import org.projeto.data.services.UserService;
 import org.projeto.desktop.SceneManager;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
 public class UsersPageController {
+    private final UserService userService;
     @FXML
     TableView<User> table;
     @FXML
@@ -26,9 +30,13 @@ public class UsersPageController {
 
     @FXML
     TextField searchField;
+    @Autowired
+    public UsersPageController(UserService userService) {
+        this.userService = userService;
+    }
 
     public void initialize(){
-        ObservableList<User> entities = FXCollections.observableArrayList(UserService.getAllUsers());
+        ObservableList<User> entities = FXCollections.observableArrayList(userService.getAllUsers());
         FilteredList<User> filteredData = new FilteredList<>(entities, p -> true);
 
         // Bind the search functionality to the text property of the search TextField

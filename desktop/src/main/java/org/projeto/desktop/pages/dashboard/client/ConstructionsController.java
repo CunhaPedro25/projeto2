@@ -19,6 +19,8 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
+
 @Component
 public class ConstructionsController {
   private final ConstructionService constructionService;
@@ -56,11 +58,18 @@ public class ConstructionsController {
     List<Construction> clientConstructions = new ArrayList<>();
     List<Project> clientProjects = projectService.getProjectsByClientID(CurrentUser.id);
 
-    for (Project project : clientProjects) {
-        clientConstructions.addAll(project.getConstructions());
+    if (clientProjects != null) {
+      for (Project project : clientProjects) {
+        Set<Construction> constructions = project.getConstructions();
+        if (constructions != null) {
+          clientConstructions.addAll(constructions);
+        } else {
+          System.err.println("Warning: Project ID " + project.getId() + " has no constructions.");
+        }
+      }
+    } else {
+      System.err.println("Error: No projects found for client ID " + CurrentUser.id);
     }
-
-    System.out.println(clientConstructions);
 
     // Convert List to ObservableList
     ObservableList<Construction> constructionObservableList = FXCollections.observableArrayList(clientConstructions);
