@@ -42,8 +42,11 @@ public class UserService{
     return user;
   }
 
+  public static User getById(Long id){
+    return userRepository.findById(id).orElse(null);
+  }
 
-  public List<User> getAllUsers() {
+  public static List<User> getAllUsers() {
     return userRepository.findAll();
   }
 }
