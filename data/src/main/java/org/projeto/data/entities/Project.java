@@ -1,5 +1,6 @@
 package org.projeto.data.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -19,15 +20,15 @@ public class Project {
   @Column(name = "id", nullable = false)
   private Integer id;
 
-  @ManyToOne(fetch = FetchType.LAZY, optional = false)
+  @ManyToOne(fetch = FetchType.EAGER, optional = false)
   @JoinColumn(name = "client", nullable = false)
   private User client;
 
-  @ManyToOne(fetch = FetchType.LAZY, optional = false)
+  @ManyToOne(fetch = FetchType.EAGER, optional = false)
   @JoinColumn(name = "engineer", nullable = false)
   private User engineer;
 
-  @ManyToOne(fetch = FetchType.LAZY, optional = false)
+  @ManyToOne(fetch = FetchType.EAGER, optional = false)
   @JoinColumn(name = "construction_type", nullable = false)
   private ConstructionType constructionType;
 
@@ -52,6 +53,7 @@ public class Project {
   @Column(name = "budget_state")
   private Boolean budgetState;
 
+  @JsonIgnore
   @OneToMany(mappedBy = "project")
   private Set<Construction> constructions = new LinkedHashSet<>();
 

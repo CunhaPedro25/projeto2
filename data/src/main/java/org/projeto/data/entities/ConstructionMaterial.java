@@ -13,12 +13,12 @@ public class ConstructionMaterial {
   private ConstructionMaterialId id;
 
   @MapsId("construction")
-  @ManyToOne(fetch = FetchType.LAZY, optional = false)
+  @ManyToOne(fetch = FetchType.EAGER, optional = false)
   @JoinColumn(name = "construction", nullable = false)
   private Construction construction;
 
   @MapsId("material")
-  @ManyToOne(fetch = FetchType.LAZY, optional = false)
+  @ManyToOne(fetch = FetchType.EAGER, optional = false)
   @JoinColumn(name = "material", nullable = false)
   private Material material;
 

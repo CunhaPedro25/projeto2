@@ -1,5 +1,6 @@
 package org.projeto.data.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -27,6 +28,7 @@ public class Material {
   @Column(name = "quantity", nullable = false)
   private Integer quantity;
 
+  @JsonIgnore
   @OneToMany(mappedBy = "material")
   private Set<ConstructionMaterial> constructionMaterials = new LinkedHashSet<>();
 

@@ -202,3 +202,138 @@ create table invoice
 	paid boolean default false
 );
 
+
+create function calculate_days() returns trigger
+    language plpgsql
+as
+$$
+declare team_record record;
+    declare construction_team_record record;
+begin
+    select * into team_record
+    from team
+    where id = new.team;
+
+    update construction_team
+    set days = new.end_date - new.start_date,
+        daily_value = team_record.daily_value
+    where id = new.id;
+
+    select * into construction_team_record
+    from construction_team
+    where id = new.id;
+
+    update construction
+    set total = total + team_record.daily_value * construction_team_record.days
+    where id = construction_team_record.construction;
+
+    return new;
+end;
+$$;
+
+alter function calculate_days() owner to postgres;
+
+create function create_invoices() returns trigger
+    language plpgsql
+as
+$$
+DECLARE
+    stage_row RECORD;
+BEGIN
+    FOR stage_row IN
+        SELECT id, percentage
+        FROM stage
+        WHERE construction_type = NEW.construction_type
+        LOOP
+            INSERT INTO invoice (stage, client, stage_total, budget_total, percentage, issue_date, paid)
+            VALUES (stage_row.id, NEW.client, NEW.budget * stage_row.percentage, NEW.budget, stage_row.percentage, CURRENT_DATE, FALSE);
+        END LOOP;
+
+    RETURN NEW;
+END;
+$$;
+
+alter function create_invoices() owner to postgres;
+
+
+-- Insert dummy data for state
+INSERT INTO state (description) VALUES
+                                    ('Planning'),
+                                    ('In Progress'),
+                                    ('Completed'),
+                                    ('On Hold');
+
+-- Insert dummy data for construction_type
+INSERT INTO construction_type (type) VALUES
+                                         ('Residential'),
+                                         ('Commercial'),
+                                         ('Industrial');
+
+-- Insert dummy data for material
+INSERT INTO material (name, value_unit, quantity) VALUES
+                                                      ('Concrete', 100.0, 500),
+                                                      ('Steel', 150.0, 300),
+                                                      ('Wood', 50.0, 1000);
+
+-- Insert dummy data for user_type
+INSERT INTO user_type (type) VALUES
+                                 ('Client'),
+                                 ('Engineer'),
+                                 ('Admin');
+
+-- Insert dummy data for zipcode
+INSERT INTO zipcode (id, district, city, locale) VALUES
+                                                     ('12345', 'District A', 'City A', 'Locale A'),
+                                                     ('67890', 'District B', 'City B', 'Locale B');
+
+-- Insert dummy data for team
+INSERT INTO team (busy, leader, daily_value) VALUES
+                                                 (FALSE, NULL, 500.0),
+                                                 (FALSE, NULL, 600.0);
+
+-- Insert dummy data for user
+INSERT INTO "user" (name, email, password, phone, address, door, zipcode, user_type, team, active) VALUES
+                                                                                                       ('John Doe', 'john.doe@example.com', 'password123', '123-456-7890', '123 Main St', 1, '12345', 1, NULL, TRUE),
+                                                                                                       ('Jane Smith', 'jane.smith@example.com', 'password123', '098-765-4321', '456 Elm St', 2, '67890', 2, NULL, TRUE),
+                                                                                                       ('Admin User', 'admin@example.com', 'adminpass', '111-222-3333', '789 Oak St', 3, '12345', 3, NULL, TRUE);
+
+-- Update team with leader ids
+UPDATE team SET leader = 2 WHERE id = 1;
+UPDATE team SET leader = 2 WHERE id = 2;
+
+-- Insert dummy data for project
+INSERT INTO project (client, engineer, construction_type, requirements_create_date, budget_create_date, requirements_document, budget_document, budget, requirements_state, budget_state) VALUES
+                                                                                                                                                                                              (1, 2, 1, '2023-01-01', '2023-02-01', 'req_doc_1.pdf', 'bud_doc_1.pdf', 10000.0, TRUE, TRUE),
+                                                                                                                                                                                              (1, 2, 2, '2023-03-01', '2023-04-01', 'req_doc_2.pdf', 'bud_doc_2.pdf', 20000.0, TRUE, FALSE);
+
+-- Insert dummy data for stage
+INSERT INTO stage (name, percentage, construction_type) VALUES
+                                                            ('Foundation', 20.0, 1),
+                                                            ('Framing', 30.0, 1),
+                                                            ('Plumbing', 50.0, 2);
+
+-- Insert dummy data for construction
+INSERT INTO construction (project, team, stage, stage_budget, total, state) VALUES
+                                                                                (1, 1, 1, 2000.0, 10000.0, 1),
+                                                                                (2, 2, 2, 3000.0, 20000.0, 2);
+
+-- Insert dummy data for construction_material
+INSERT INTO construction_material (construction, material, quantity) VALUES
+                                                                         (1, 1, 100),
+                                                                         (1, 2, 50),
+                                                                         (2, 3, 200);
+
+-- Insert dummy data for construction_team
+INSERT INTO construction_team (team, construction, start_date, end_date, days, daily_value) VALUES
+                                                                                                (1, 1, '2023-01-01', '2023-01-10', 10, 500.0),
+                                                                                                (2, 2, '2023-03-01', '2023-03-20', 20, 600.0);
+
+-- Insert dummy data for complaint
+INSERT INTO complaint (client, construction, description) VALUES
+                                                              (1, 1, 'Delay in construction.'),
+                                                              (1, 2, 'Quality issues.');
+
+-- Insert dummy data for invoice
+INSERT INTO invoice (stage, client, stage_total, budget_total, percentage, issue_date, paid) VALUES
+                                                                                                 (1, 1, 2000.0, 10000.0, 20.0, '2023-02-01', FALSE),
+                                                                                                 (2, 1, 3000.0, 20000.0, 30.0, '2023-04-01', TRUE);

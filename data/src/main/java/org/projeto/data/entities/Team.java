@@ -22,7 +22,7 @@ public class Team {
   @Column(name = "busy")
   private Boolean busy;
 
-  @ManyToOne(fetch = FetchType.LAZY)
+  @ManyToOne(fetch = FetchType.EAGER)
   @JoinColumn(name = "leader")
   private User leader;
 

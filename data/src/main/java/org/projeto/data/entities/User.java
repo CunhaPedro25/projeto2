@@ -1,8 +1,12 @@
 package org.projeto.data.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -31,19 +35,38 @@ public class User {
   @Column(name = "door")
   private Integer door;
 
-  @ManyToOne(fetch = FetchType.LAZY)
+  @ManyToOne(fetch = FetchType.EAGER)
   @JoinColumn(name = "zipcode")
   private Zipcode zipcode;
 
-  @ManyToOne(fetch = FetchType.LAZY, optional = false)
+  @ManyToOne(fetch = FetchType.EAGER, optional = false)
   @JoinColumn(name = "user_type", nullable = false)
   private UserType userType;
 
-  @ManyToOne(fetch = FetchType.LAZY)
+  @ManyToOne(fetch = FetchType.EAGER)
   @JoinColumn(name = "team")
   private Team team;
 
   @Column(name = "active")
   private Boolean active;
 
+  @JsonIgnore
+  @OneToMany(mappedBy = "client")
+  private Set<Complaint> complaints = new LinkedHashSet<>();
+
+  @JsonIgnore
+  @OneToMany(mappedBy = "client")
+  private Set<Invoice> invoices = new LinkedHashSet<>();
+
+  @JsonIgnore
+  @OneToMany(mappedBy = "client")
+  private Set<Project> projects_client = new LinkedHashSet<>();
+
+  @JsonIgnore
+  @OneToMany(mappedBy = "client")
+  private Set<Project> projects_engineer = new LinkedHashSet<>();
+
+  @JsonIgnore
+  @OneToMany(mappedBy = "leader")
+  private Set<Team> teams = new LinkedHashSet<>();
 }

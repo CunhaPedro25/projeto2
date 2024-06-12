@@ -19,16 +19,18 @@ public class ComplaintController {
     public ComplaintController(ComplaintService complaintService) {
         this.complaintService = complaintService;
     }
-//    @GetMapping ("/complaintsByID/{id}")
-//    public Optional<Complaint> getComplaintByID(@PathVariable Long id){
-//        return complaintService.findByID(id);
-//
-//    }
-//    @GetMapping("/complaintsByClient/{id}")
-//    public ResponseEntity<List<Complaint>> getComplaintsByClientID(@PathVariable Long id) {
-//        List<Complaint> complaints = complaintService.findComplaintsByClientID(id);
-//        return new ResponseEntity<>(complaints, HttpStatus.OK);
-//    }
+
+    @GetMapping ("/complaintsByID/{id}")
+    public Optional<Complaint> getComplaintByID(@PathVariable Long id){
+        return complaintService.findByID(id);
+
+    }
+    @GetMapping("/complaintsByClient/{id}")
+    public ResponseEntity<List<Complaint>> getComplaintsByClientID(@PathVariable Long id) {
+        List<Complaint> complaints = complaintService.findComplaintsByClientID(id);
+        return new ResponseEntity<>(complaints, HttpStatus.OK);
+    }
+
     @GetMapping("/complaintsByConstruction")
     public ResponseEntity<List<Complaint>> getComplaintByConstructionID(Integer clientID){
         List<Complaint> complaints  = complaintService.findComplaintByConstructionID(clientID);
