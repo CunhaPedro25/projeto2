@@ -16,7 +16,7 @@ public class CurrentUser {
     public static void setUser(User user){
         id = user.getId();
         name = user.getName();
-        type = user.getClass().getSimpleName().toLowerCase();
+        type = user.getUserType().getType().toLowerCase();
         currentPage = null;
     }
 
