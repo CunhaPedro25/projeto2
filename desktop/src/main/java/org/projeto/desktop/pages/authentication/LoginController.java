@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class LoginController {
 
-    @FXML
+  @FXML
   public TextField email;
   @FXML
   public TextField password;
