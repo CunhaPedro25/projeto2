@@ -6,8 +6,8 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.HBox;
 import org.projeto.data.entities.users.*;
-import org.projeto.data.services.ClientTypeService;
-import org.projeto.data.services.users.UserService;
+import org.projeto.data.services.UserTypeService;
+import org.projeto.data.services.UserService;
 import org.projeto.desktop.SceneManager;
 import org.projeto.desktop.components.RegisterFormController;
 
@@ -49,7 +49,7 @@ public class AddUserModalController {
                     registerFormController.email.getText(),
                     registerFormController.password.getText(),
                     registerFormController.phone.getText(),
-                    ClientTypeService.getAllClientTypes().get(0)
+                    UserTypeService.getAllClientTypes().get(0)
             );
             case "Secretary" -> new Secretary(
                     registerFormController.firstName.getText() + " " + registerFormController.lastName.getText(),

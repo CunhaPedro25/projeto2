@@ -9,7 +9,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import org.projeto.data.entities.users.User;
-import org.projeto.data.services.users.UserService;
+import org.projeto.data.services.UserService;
 import org.projeto.desktop.SceneManager;
 
 public class UsersPageController {

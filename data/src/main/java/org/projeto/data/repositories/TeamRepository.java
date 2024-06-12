@@ -1,8 +1,8 @@
 package org.projeto.data.repositories;
 
+import org.projeto.data.entities.Team;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import org.projeto.data.entities.Team;
 
 import java.util.Optional;
 

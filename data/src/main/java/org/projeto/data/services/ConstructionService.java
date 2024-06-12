@@ -1,56 +1,41 @@
 package org.projeto.data.services;
 
-import org.projeto.data.entities.Budget;
-import org.projeto.data.repositories.documents.BudgetRepository;
+import org.projeto.data.entities.Construction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.projeto.data.entities.Construction;
 import org.projeto.data.repositories.ConstructionRepository;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ConstructionService {
-  private static ConstructionRepository constructionRepository;
-  private static BudgetRepository budgetRepository;
+    private static ConstructionRepository constructionRepository;
 
-  @Autowired
-  public ConstructionService(ConstructionRepository constructionRepository, BudgetRepository budgetRepository) {
-    ConstructionService.constructionRepository = constructionRepository;
-    ConstructionService.budgetRepository = budgetRepository;
-  }
+    @Autowired
+    public ConstructionService(ConstructionRepository constructionRepository) {ConstructionService.constructionRepository = constructionRepository;}
 
-  public static List<Construction> getConstructions(){ return constructionRepository.findAll();}
-
-  public static List<Construction> getConstructionsByClientID(Integer clientID){
-    List<Budget> clientBudgets = budgetRepository.findBudgetByClient_id(clientID);
-    System.out.println(clientBudgets);
-    List<Construction> clientConstructions = new ArrayList<>();
-
-    for (Budget budget : clientBudgets) {
-      clientConstructions.add(constructionRepository.findByBudget_Id(budget.getId()));
+    public List<Construction> findByProjectID(Integer id){
+        return ConstructionService.constructionRepository.findByProject_Id(id);
     }
-    return clientConstructions;
-  }
-  public static void addNew(Construction newConstruction){
-    if (!newConstruction.getTeam().getBusy()){
-      throw new IllegalStateException("The Equipa associated with this Construction has currently another Construction assigned");
-    }
-    constructionRepository.save(newConstruction);
-  }
-  public static void delete(Long id){
-    boolean exists = constructionRepository.existsById(id);
-    if (!exists){
-      throw new IllegalStateException("Construction with id"+id+"does not exist");
-    }else{
-      constructionRepository.deleteById(id);
-    }
-  }
 
-//  @Transactional
-//  public void update(Long id, Stage stage){
-//    Construction construction = constructionRepository.findById(id).orElseThrow(()-> new IllegalStateException( "Construction with id "+ id + " does not exist! "));
-//
-//  }
+    public List<Construction> findConstructionsByProjectAndAndState(Integer projectID, Integer stateID){
+        return ConstructionService.constructionRepository.findConstructionsByProject_IdAndState_Id(projectID, stateID);
+    }
+
+    public List<Construction> findConstructionsByTeam_Id(Integer teamID){
+        return ConstructionService.constructionRepository.findConstructionsByTeam_Id(teamID);
+    }
+
+    public void addNew(Construction newConstruction){
+        ConstructionService.constructionRepository.save(newConstruction);
+    }
+    public void delete(Long constructionID){
+        Optional<Construction> existingCosntruction = ConstructionService.constructionRepository.findById(constructionID);
+        if (existingCosntruction.isPresent()){
+            ConstructionService.constructionRepository.deleteById(constructionID);
+        }else {
+            throw new IllegalStateException("That construction does not exist");
+        }
+    }
 }

@@ -1,7 +1,7 @@
 package org.projeto.data.services;
 
 import org.projeto.data.entities.Project;
-import org.projeto.data.repositories.documents.ProjectRepository;
+import org.projeto.data.repositories.ProjectRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,21 +17,35 @@ public class ProjectService {
     ProjectService.projectRepository = projectRepository;
   }
 
-  public static List<Project> getProjectsByClientID(Integer clientID){
-    return projectRepository.findProjectByClient_id(clientID);
+  public List<Project> getProjectsByClientID(Integer clientID){
+    return ProjectService.projectRepository.findProjectByClient_id(clientID);
   }
 
-  public static List<Project> getAllProjects(){
-    return projectRepository.findAll();
+  public List<Project> getProjectsByEngineerID(Integer engineerID){
+    return ProjectService.projectRepository.findProjectsByEngineer_Id(engineerID);
+  }
+  public List<Project> getProjectsByConstructionType(Integer constructionTypeID){
+    return ProjectService.projectRepository.findProjectsByConstructionType_Id(constructionTypeID);
+  }
+  public List<Project> getAllProjects(){
+    return ProjectService.projectRepository.findAll();
   }
 
-  public static void addNew(Project newProject){
-    Optional<Project> existingProject = projectRepository.findProjectByClient_IdAndCreateDate(newProject.getClient().getId(), newProject.getCreateDate());
-    Optional<Project> exisingFile = projectRepository.findByFilePath(newProject.getFilePath());
-    if(existingProject.isPresent() || exisingFile.isPresent()){
+  public void addNew(Project newProject){
+    Optional<Project> existingProject = ProjectService.projectRepository.findProjectByClient_IdAndRequirementsCreateDate(newProject.getClient().getId(), newProject.getRequirementsCreateDate());
+    if(existingProject.isPresent() ){
       throw new IllegalStateException("Project already exists");
     }else {
-      projectRepository.save(newProject);
+      ProjectService.projectRepository.save(newProject);
+    }
+  }
+  public void delete(Long projectID){
+    Optional<Project> existingProject = ProjectService.projectRepository.findById(projectID);
+    if(existingProject.isPresent()){
+      ProjectService.projectRepository.deleteById(projectID);
+    }else {
+      throw new IllegalStateException("That Project does not exist");
+
     }
   }
 }

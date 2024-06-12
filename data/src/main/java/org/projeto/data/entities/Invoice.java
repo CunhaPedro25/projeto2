@@ -1,11 +1,7 @@
 package org.projeto.data.entities;
 
 import jakarta.persistence.*;
-
-
-import lombok.Getter;
-import lombok.Setter;
-import org.projeto.data.entities.users.Client;
+import lombok.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -13,40 +9,37 @@ import java.time.LocalDate;
 @Getter
 @Setter
 @Entity
+@Builder
 @Table(name = "invoice")
+@NoArgsConstructor
+@AllArgsConstructor
 public class Invoice {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "id", nullable = false)
   private Integer id;
 
-  @ManyToOne(fetch = FetchType.LAZY, optional = false)
+  @ManyToOne(fetch = FetchType.EAGER, optional = false)
   @JoinColumn(name = "stage", nullable = false)
   private Stage stage;
 
-  @ManyToOne(fetch = FetchType.LAZY, optional = false)
+  @ManyToOne(fetch = FetchType.EAGER, optional = false)
   @JoinColumn(name = "client", nullable = false)
-  private Client client;
+  private User client;
 
-  @Column(name = "total")
-  private BigDecimal total;
+  @Column(name = "stage_total")
+  private BigDecimal stageTotal;
+
+  @Column(name = "budget_total")
+  private BigDecimal budgetTotal;
+
+  @Column(name = "percentage")
+  private Double percentage;
 
   @Column(name = "issue_date")
-  private LocalDate issueDate = LocalDate.now();
+  private LocalDate issueDate;
 
   @Column(name = "paid")
-  private Boolean paid = false;
+  private Boolean paid;
 
-  public Invoice() {}
-
-  public Invoice(Stage stage, Client client) {
-    this.stage = stage;
-    this.client = client;
-  }
-
-  public Invoice(Stage stage, Client client, LocalDate issueDate) {
-    this.stage = stage;
-    this.client = client;
-    this.issueDate = issueDate;
-  }
 }

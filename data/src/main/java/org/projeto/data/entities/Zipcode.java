@@ -1,11 +1,8 @@
 package org.projeto.data.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-
-
-import lombok.Getter;
-import lombok.Setter;
-import org.projeto.data.entities.users.Client;
+import lombok.*;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -13,7 +10,10 @@ import java.util.Set;
 @Getter
 @Setter
 @Entity
+@Builder
 @Table(name = "zipcode")
+@NoArgsConstructor
+@AllArgsConstructor
 public class Zipcode {
   @Id
   @Column(name = "id", nullable = false, length = Integer.MAX_VALUE)
@@ -28,14 +28,8 @@ public class Zipcode {
   @Column(name = "locale", nullable = false, length = Integer.MAX_VALUE)
   private String locale;
 
+  @JsonIgnore
   @OneToMany(mappedBy = "zipcode")
-  private Set<Client> clients = new LinkedHashSet<>();
+  private Set<User> users = new LinkedHashSet<>();
 
-  public Zipcode() {}
-  public Zipcode(String id, String district, String city, String locale) {
-    this.id = id;
-    this.district = district;
-    this.city = city;
-    this.locale = locale;
-  }
 }

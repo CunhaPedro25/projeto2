@@ -8,16 +8,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import org.projeto.data.entities.Construction;
-import org.projeto.data.entities.Project;
-import org.projeto.data.services.ConstructionService;
 import org.projeto.data.services.ProjectService;
 import org.projeto.desktop.CurrentUser;
 
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 public class ProjectsController {
   @FXML

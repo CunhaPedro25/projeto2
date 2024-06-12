@@ -1,19 +1,20 @@
 package org.projeto.data.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import lombok.*;
 
-
-import lombok.Getter;
-import lombok.Setter;
-import org.projeto.data.entities.users.Worker;
-
+import java.math.BigDecimal;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
 @Getter
 @Setter
 @Entity
+@Builder
 @Table(name = "team")
+@NoArgsConstructor
+@AllArgsConstructor
 public class Team {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,20 +22,25 @@ public class Team {
   private Integer id;
 
   @Column(name = "busy")
-  private Boolean busy =false;
+  private Boolean busy;
 
-  @ManyToOne(fetch = FetchType.LAZY, optional = false)
-  @JoinColumn(name = "leader", nullable = false)
-  private Worker leader;
+  @ManyToOne(fetch = FetchType.EAGER)
+  @JoinColumn(name = "leader")
+  private User leader;
 
+  @Column(name = "daily_value", nullable = false)
+  private BigDecimal dailyValue;
+
+  @JsonIgnore
   @OneToMany(mappedBy = "team")
   private Set<Construction> constructions = new LinkedHashSet<>();
 
+  @JsonIgnore
   @OneToMany(mappedBy = "team")
-  private Set<Worker> workers = new LinkedHashSet<>();
+  private Set<ConstructionTeam> constructionTeams = new LinkedHashSet<>();
 
-  public Team() {}
-  public Team(Worker leader) {
-    this.leader = leader;
-  }
+  @JsonIgnore
+  @OneToMany(mappedBy = "team")
+  private Set<User> users = new LinkedHashSet<>();
+
 }
