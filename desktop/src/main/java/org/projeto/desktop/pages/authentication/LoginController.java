@@ -7,7 +7,6 @@ import org.projeto.data.entities.User;
 import org.projeto.data.services.UserService;
 import org.projeto.desktop.CurrentUser;
 import org.projeto.desktop.SceneManager;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -19,10 +18,6 @@ public class LoginController {
   public TextField password;
   @FXML
   private Hyperlink registerLink;
-
-  @Autowired
-  public LoginController(UserService userService) {
-  }
 
   @FXML
   protected void onRegisterClick() {
