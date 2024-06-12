@@ -2,7 +2,7 @@ package org.projeto.desktop;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.projeto.data.entities.users.User;
+import org.projeto.data.entities.User;
 import org.projeto.desktop.factory.Page;
 
 @Getter
