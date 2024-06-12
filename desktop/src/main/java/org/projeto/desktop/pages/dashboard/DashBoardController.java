@@ -14,8 +14,14 @@ public class DashBoardController {
     private ScrollPane mainContent;
 
     public void initialize() {
-        EventBus.getInstance().subscribe(this::handleSidebarButtonEvent);
-        changePage();
+        try {
+            EventBus.getInstance().subscribe(this::handleSidebarButtonEvent);
+            changePage();
+        }catch (Exception e){
+            e.getCause();
+            e.printStackTrace();
+        }
+
     }
 
     private void handleSidebarButtonEvent(Event event) {

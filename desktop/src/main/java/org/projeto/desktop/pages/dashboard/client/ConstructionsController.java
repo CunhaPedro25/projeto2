@@ -23,8 +23,7 @@ import java.util.Set;
 
 @Component
 public class ConstructionsController {
-  private final ConstructionService constructionService;
-  private final ProjectService projectService;
+  private  ProjectService projectService;
   public Button newConstruction;
 
   @FXML
@@ -42,9 +41,11 @@ public class ConstructionsController {
   @FXML
   private TableColumn<Construction, Date> lastUpdateColumn;
     @Autowired
-    public ConstructionsController(ConstructionService constructionService, ProjectService projectService) {
-        this.constructionService = constructionService;
+    public ConstructionsController(ProjectService projectService) {
         this.projectService = projectService;
+    }
+    public ConstructionsController() {
+
     }
 
     public void initialize() {

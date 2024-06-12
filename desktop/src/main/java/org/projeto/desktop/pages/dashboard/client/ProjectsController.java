@@ -18,7 +18,7 @@ import java.time.LocalDate;
 import java.util.List;
 @Component
 public class ProjectsController {
-  private final ProjectService projectService;
+  private  ProjectService projectService;
   @FXML
   public Button newProject;
   @FXML
@@ -30,10 +30,13 @@ public class ProjectsController {
 
   @FXML
   private TableView<Project> table;
-    @Autowired
-    public ProjectsController(ProjectService projectService) {
-        this.projectService = projectService;
-    }
+  @Autowired
+  public ProjectsController(ProjectService projectService) {
+      this.projectService = projectService;
+  }
+  public ProjectsController() {
+
+  }
 
     public void initialize() {
     newProject.setVisible(false);
