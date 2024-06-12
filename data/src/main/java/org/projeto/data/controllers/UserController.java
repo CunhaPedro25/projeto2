@@ -23,13 +23,13 @@ public class UserController {
     }
 
     @GetMapping("/getClients")
-    public ResponseEntity<Optional<User>> getClients(){
-        Optional<User> clients = userService.getAllClients();
+    public ResponseEntity<List<User>> getClients(){
+        List<User> clients = userService.getAllClients();
         return new ResponseEntity<>(clients, HttpStatus.OK);
     }
     @GetMapping("/getUsersByUserTypeID/{id}")
-    public ResponseEntity<Optional<User>> getUsersByUserTypeID(@PathVariable Integer id){
-        Optional<User> clients = userService.getUserByTypeID(id);
+    public ResponseEntity<List<User>> getUsersByUserTypeID(@PathVariable Integer id){
+        List<User> clients = userService.getUserByTypeID(id);
         return new ResponseEntity<>(clients, HttpStatus.OK);
     }
 

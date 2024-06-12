@@ -35,7 +35,7 @@ public class UserService{
     userRepository.save(user);
   }
 
-  private static User findUserByEmail(String email) throws Exception {
+  public static User findUserByEmail(String email) throws Exception {
     User user = userRepository.findByEmail(email);
     if (user == null) {
       throw new Exception("User with email " + email + " not found");
@@ -46,7 +46,7 @@ public class UserService{
   public List<User> getAllUsers() {
     return userRepository.findAll();
   }
-  public Optional<User> getUserByTypeID(Integer id){return userRepository.findByUserTypeId(id);}
+  public List<User> getUserByTypeID(Integer id){return userRepository.findByUserTypeId(id);}
 
-  public Optional<User> getAllClients(){return userRepository.findByUserTypeId(1);}
+  public List<User> getAllClients(){return userRepository.findByUserTypeId(1);}
 }
