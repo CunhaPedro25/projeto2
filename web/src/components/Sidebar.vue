@@ -4,18 +4,19 @@
 
     </div>
     <div class="flex flex-col w-full h-full text-2xl overflow-y-auto overflow-x-hidden" style="scrollbar-width: thin;">
-      <SidebarItem v-for="item in sidebarItems" :icon="item.icon" :path="item.page">item.name</SidebarItem>
+      <SidebarItem v-for="item in sidebarItems" :icon="item.icon" :path="item.page">{{item.name}}</SidebarItem>
     </div>
     <div>
-      <SidebarItem class="border-t-2" icon="sign-out-alt" path="/">Sair</SidebarItem>
+      <SidebarItem class="border-t-2" icon="sign-out-alt" path="/">Log-out</SidebarItem>
     </div>
   </div>
 </template>
 
 <script setup>
 import SidebarItem from './SidebarItem.vue'
-import {useUserStore} from "../store/userStore.js";
 import { createItems } from '../utils/sidebarItemFactory';
+import {useUserStore} from "@/store/userStore";
 
-const sidebarItems = createItems(useUserStore().user_type);
+const userStore = useUserStore();
+const sidebarItems = createItems(userStore.userType.type.toLowerCase());
 </script>
