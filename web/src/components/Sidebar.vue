@@ -4,11 +4,7 @@
 
     </div>
     <div class="flex flex-col w-full h-full text-2xl overflow-y-auto overflow-x-hidden" style="scrollbar-width: thin;">
-      <SidebarItem icon="question" path="tabelaPerguntas">Perguntas</SidebarItem>
-      <SidebarItem icon="icons" path="adicionarCategoria">Categorias</SidebarItem>
-      <SidebarItem icon="people-group" path="adicionarEquipas">Equipas</SidebarItem>
-      <SidebarItem icon="clock-rotate-left" path="adicionarEquipas">Historico</SidebarItem>
-      <SidebarItem icon="gamepad" path="jogo">Jogo</SidebarItem>
+      <SidebarItem v-for="item in sidebarItems" :icon="item.icon" :path="item.page">item.name</SidebarItem>
     </div>
     <div>
       <SidebarItem class="border-t-2" icon="sign-out-alt" path="/">Sair</SidebarItem>
@@ -16,18 +12,10 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import SidebarItem from './SidebarItem.vue'
+import {useUserStore} from "../store/userStore.js";
+import { createItems } from '../utils/sidebarItemFactory';
 
-export default {
-  name: 'Sidebar',
-  components: {
-    SidebarItem
-  },
-  data(){
-    return{
-      SidebarOpen: true
-    }
-  }
-}
+const sidebarItems = createItems(useUserStore().user_type);
 </script>
