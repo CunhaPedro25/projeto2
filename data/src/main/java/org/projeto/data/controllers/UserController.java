@@ -9,6 +9,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.Optional;
+
 @RestController
 @RequestMapping("/api/users")
 public class UserController {
@@ -17,6 +20,17 @@ public class UserController {
     @Autowired
     public UserController(UserService userService) {
         this.userService = userService;
+    }
+
+    @GetMapping("/getClients")
+    public ResponseEntity<Optional<User>> getClients(){
+        Optional<User> clients = userService.getAllClients();
+        return new ResponseEntity<>(clients, HttpStatus.OK);
+    }
+    @GetMapping("/getUsersByUserTypeID/{id}")
+    public ResponseEntity<Optional<User>> getUsersByUserTypeID(@PathVariable Integer id){
+        Optional<User> clients = userService.getUserByTypeID(id);
+        return new ResponseEntity<>(clients, HttpStatus.OK);
     }
 
     @PostMapping("/login")
