@@ -1,12 +1,18 @@
 package org.projeto.desktop.components;
 
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
+import org.projeto.data.entities.User;
+import org.projeto.data.entities.UserType;
+import org.projeto.data.services.UserTypeService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
 public class RegisterFormController {
+    private final UserTypeService userTypeService;
     @FXML
     public TextField firstName;
     @FXML
@@ -28,6 +34,8 @@ public class RegisterFormController {
     @FXML
     public TextField door;
     @FXML
+    public ComboBox<UserType> userTypeComboBox;
+    @FXML
     public TextField zipcode;
     @FXML
     public TextField district;
@@ -37,6 +45,29 @@ public class RegisterFormController {
     public TextField locale;
 
     boolean passwordHidden = false;
+    @Autowired
+    public RegisterFormController(UserTypeService userTypeService) {
+        this.userTypeService = userTypeService;
+    }
+
+    public void initialize(){
+        userTypeComboBox.setItems(FXCollections.observableArrayList(userTypeService.getAllUserTypes()));
+        userTypeComboBox.setCellFactory(tc-> new UserTypeListCell());
+        userTypeComboBox.setButtonCell(new UserTypeListCell());
+        userTypeComboBox.setValue(userTypeService.getAllUserTypes().get(0));
+    }
+
+    private static class UserTypeListCell extends ListCell<UserType> {
+        @Override
+        public void updateItem(UserType item, boolean empty) {
+            super.updateItem(item, empty);
+            if (empty || item == null) {
+                setText(null);
+            } else {
+                setText(item.getType());
+            }
+        }
+    }
 
     public boolean isFormCorrect() {
         return

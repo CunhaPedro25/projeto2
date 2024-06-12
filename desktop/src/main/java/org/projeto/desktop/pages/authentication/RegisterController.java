@@ -2,8 +2,7 @@ package org.projeto.desktop.pages.authentication;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import org.projeto.data.entities.users.Client;
-import org.projeto.data.services.UserTypeService;
+import org.projeto.data.entities.User;
 import org.projeto.data.services.UserService;
 import org.projeto.desktop.SceneManager;
 import org.projeto.desktop.components.RegisterFormController;
@@ -23,16 +22,18 @@ public class  RegisterController {
       return;
     }
 
-    Client client = new Client(
-            registerFormController.firstName.getText() +  " " + registerFormController.lastName.getText(),
-            registerFormController.email.getText(),
-            registerFormController.password.getText(),
-            registerFormController.phone.getText(),
-            UserTypeService.getAllClientTypes().get(0)
-    );
+    User user = User.builder()
+            .name(registerFormController.firstName.getText()+ " "+ registerFormController.lastName.getText())
+            .email(registerFormController.email.getText())
+            .password(registerFormController.password.getText())
+            .phone(registerFormController.phone.getText())
+            .address(registerFormController.address.getText())
+            .door(Integer.valueOf(registerFormController.door.getText()))
+            .userType(registerFormController.userTypeComboBox.getValue())
+            .build();
 
     try {
-      UserService.register(client);
+      UserService.register(user);
 
       returnToLogin();
     } catch (Exception exc) {
