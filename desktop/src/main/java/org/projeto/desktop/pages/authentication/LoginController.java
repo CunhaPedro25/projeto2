@@ -3,7 +3,7 @@ package org.projeto.desktop.pages.authentication;
 import javafx.fxml.FXML;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.TextField;
-import org.projeto.data.entities.users.User;
+import org.projeto.data.entities.User;
 import org.projeto.data.services.UserService;
 import org.projeto.desktop.CurrentUser;
 import org.projeto.desktop.SceneManager;
