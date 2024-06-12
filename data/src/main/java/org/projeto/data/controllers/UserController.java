@@ -35,6 +35,7 @@ public class UserController {
 
     @PostMapping("/login")
     public ResponseEntity<User> loginUser(@RequestParam("email") String email, @RequestParam("password") String password) {
+        System.out.println(email);
         try {
             User user = UserService.login(email, password);
             return ResponseEntity.ok(user);
@@ -51,6 +52,16 @@ public class UserController {
             return ResponseEntity.ok("User registered successfully");
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error registering user: " + e.getMessage());
+        }
+    }
+
+    @GetMapping("/get/{id}")
+    public ResponseEntity<User> getUser(@PathVariable long id) {
+        try {
+            User user = UserService.getById(id);
+            return ResponseEntity.ok(user);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
 }
