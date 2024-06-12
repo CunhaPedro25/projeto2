@@ -22,13 +22,13 @@ public class SideBarController {
     public void initialize() {
         try {
             switch (CurrentUser.type) {
-                case "Client":
+                case "client":
                     pageFactory = new ClientPageFactory();
                     break;
                 case "worker":
                     pageFactory = new WorkerPageFactory();
                     break;
-                case "Secretary":
+                case "secretary":
                     pageFactory = new SecretaryPageFactory();
                     break;
             }
