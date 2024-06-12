@@ -10,11 +10,14 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import org.projeto.data.entities.Project;
 import org.projeto.data.services.ProjectService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 import java.util.List;
-
+@Component
 public class ProjectsPageController {
+    private final ProjectService projectService;
     @FXML
     public Button newProject;
     @FXML
@@ -28,6 +31,10 @@ public class ProjectsPageController {
 
     @FXML
     private TableView<Project> table;
+    @Autowired
+    public ProjectsPageController(ProjectService projectService) {
+        this.projectService = projectService;
+    }
 
     public void initialize() {
         populateTableView();
@@ -35,7 +42,7 @@ public class ProjectsPageController {
 
     private void populateTableView() {
         // Get projects for the current user
-        List<Project> projects = ProjectService.getAllProjects();
+        List<Project> projects = projectService.getAllProjects();
 
         // Convert List to ObservableList
         ObservableList<Project> projectObservableList = FXCollections.observableArrayList(projects);
@@ -54,11 +61,12 @@ public class ProjectsPageController {
 
         acceptedColumn.setCellValueFactory(cellData -> {
             Project project = cellData.getValue();
-            if(project.getAccepted() == null){
-                return new SimpleStringProperty("Pending");
-            }
-            return new SimpleStringProperty(project.getAccepted().toString());
+            return new SimpleStringProperty(
+                    project.getBudgetState() == null ? "Pending" :
+                            project.getBudgetState() ? "Accepted" : "Rejected"
+            );
         });
+
 
         // Populate the TableView
         table.setItems(projectObservableList);
