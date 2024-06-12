@@ -1,3 +1,4 @@
+/*
 package org.projeto.desktop.pages.dashboard.secretary;
 
 import javafx.fxml.FXML;
@@ -72,3 +73,4 @@ public class BudgetPageController {
         SceneManager.openNewModal("pages/modals/add-budget.fxml", "Add Budget", true);
     }
 }
+*/
