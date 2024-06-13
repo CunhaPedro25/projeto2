@@ -1,6 +1,8 @@
 package org.projeto.desktop.components;
 
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
@@ -12,7 +14,6 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class RegisterFormController {
-    private final UserTypeService userTypeService;
     @FXML
     public TextField firstName;
     @FXML
@@ -25,6 +26,8 @@ public class RegisterFormController {
     public PasswordField password;
     @FXML
     public TextField phone;
+    @FXML
+    public ComboBox<UserType> userTypeComboBox;
 
     @FXML
     VBox addressContainer;
@@ -33,8 +36,7 @@ public class RegisterFormController {
     public TextField address;
     @FXML
     public TextField door;
-    @FXML
-    public ComboBox<UserType> userTypeComboBox;
+
     @FXML
     public TextField zipcode;
     @FXML
@@ -45,17 +47,7 @@ public class RegisterFormController {
     public TextField locale;
 
     boolean passwordHidden = false;
-    @Autowired
-    public RegisterFormController(UserTypeService userTypeService) {
-        this.userTypeService = userTypeService;
-    }
 
-    public void initialize(){
-        userTypeComboBox.setItems(FXCollections.observableArrayList(userTypeService.getAllUserTypes()));
-        userTypeComboBox.setCellFactory(tc-> new UserTypeListCell());
-        userTypeComboBox.setButtonCell(new UserTypeListCell());
-        userTypeComboBox.setValue(userTypeService.getAllUserTypes().get(0));
-    }
 
     private static class UserTypeListCell extends ListCell<UserType> {
         @Override

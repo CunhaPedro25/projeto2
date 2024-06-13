@@ -19,6 +19,7 @@ public class UserTypeService {
   }
 
   public static List<UserType> getAllUserTypes(){ return userTypeRepository.findAll();}
+  public static Optional<UserType> getByType(String type){return userTypeRepository.findByType(type);}
 
   public static void addNew(UserType newUserType){
     Optional<UserType> UserType = UserTypeService.userTypeRepository.findByType(newUserType.getType());

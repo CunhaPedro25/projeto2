@@ -1,9 +1,14 @@
 package org.projeto.desktop.pages.authentication;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import org.projeto.data.entities.User;
+import org.projeto.data.entities.UserType;
 import org.projeto.data.services.UserService;
+import org.projeto.data.services.UserTypeService;
 import org.projeto.desktop.SceneManager;
 import org.projeto.desktop.components.RegisterFormController;
 
@@ -14,6 +19,10 @@ public class  RegisterController {
   @FXML
   Button register;
 
+  public void initialize(){
+    ObservableList<UserType> userTypes = FXCollections.observableArrayList(UserTypeService.getAllUserTypes());
+    FilteredList<UserType> filteredData = new FilteredList<>(userTypes, p -> true);
+  }
 
   @FXML
   protected void onRegisterSubmit() {
