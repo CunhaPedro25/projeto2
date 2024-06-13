@@ -26,8 +26,6 @@ public class RegisterFormController {
     public PasswordField password;
     @FXML
     public TextField phone;
-    @FXML
-    public ComboBox<UserType> userTypeComboBox;
 
     @FXML
     VBox addressContainer;
@@ -49,18 +47,6 @@ public class RegisterFormController {
     boolean passwordHidden = false;
 
 
-    private static class UserTypeListCell extends ListCell<UserType> {
-        @Override
-        public void updateItem(UserType item, boolean empty) {
-            super.updateItem(item, empty);
-            if (empty || item == null) {
-                setText(null);
-            } else {
-                setText(item.getType());
-            }
-        }
-    }
-
     public boolean isFormCorrect() {
         return
                 email.getText().matches("^[\\w-.]+@([\\w-]+\\.)+[\\w-]{2,4}$")
@@ -70,25 +56,24 @@ public class RegisterFormController {
                         && (passwordHidden || (!password.getText().trim().isEmpty()))
                 ;
     }
+    public boolean isFormCorrectEdit() {
+        return
+                email.getText().matches("^[\\w-.]+@([\\w-]+\\.)+[\\w-]{2,4}$")
+                        && phone.getText().matches("\\d{9}")
+                        && !firstName.getText().trim().isEmpty()
+                        && !lastName.getText().trim().isEmpty();
+    }
 
-    public void setValues(String firstName, String lastName, String email, String address, String city, String phone){
+    public void setValues(String firstName, String lastName, String email, String address,String door, String phone){
         this.firstName.setText(firstName);
         this.lastName.setText(lastName);
         this.email.setText(email);
         this.address.setText(address);
-        this.city.setText(city);
+        this.door.setText(door);
         this.phone.setText(phone);
     }
 
-    public void setValues(String firstName, String lastName, String email, String password, String address, String city, String phone){
-        this.firstName.setText(firstName);
-        this.lastName.setText(lastName);
-        this.email.setText(email);
-        this.password.setText(password);
-        this.address.setText(address);
-        this.city.setText(city);
-        this.phone.setText(phone);
-    }
+
 
     public void clearValues(){
         this.firstName.clear();

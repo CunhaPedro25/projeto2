@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class UserService{
@@ -34,7 +33,13 @@ public class UserService{
 
     userRepository.save(user);
   }
+  public static void update(User editUser) throws Exception {
 
+    userRepository.save(editUser);
+  }
+  public static User findUserByID(Integer ID){
+    return userRepository.findById(ID);
+  }
   public static User findUserByEmail(String email) throws Exception {
     User user = userRepository.findByEmail(email);
     if (user == null) {
@@ -42,7 +47,6 @@ public class UserService{
     }
     return user;
   }
-
   public static List<User> getAllUsers() {
     return userRepository.findAll();
   }

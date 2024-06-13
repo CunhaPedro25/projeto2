@@ -11,9 +11,12 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import org.projeto.data.entities.User;
 import org.projeto.data.services.UserService;
 import org.projeto.desktop.SceneManager;
+import org.projeto.desktop.components.RegisterFormController;
 import org.projeto.desktop.pages.modals.AddUserModalController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import javax.xml.transform.Source;
 
 @Component
 public class UsersPageController {
@@ -27,12 +30,15 @@ public class UsersPageController {
     TableColumn<User, String> phone;
     @FXML
     TableColumn<User, Boolean> status;
+    @FXML
+    RegisterFormController registerFormController;
 
     @FXML
     TextField searchField;
 
     public void initialize(){
         ObservableList<User> entities = FXCollections.observableArrayList(UserService.getAllUsers());
+        entities.removeIf(user -> user.getUserType().getType().equals("Admin"));
         FilteredList<User> filteredData = new FilteredList<>(entities, p -> true);
 
         // Bind the search functionality to the text property of the search TextField
@@ -56,6 +62,13 @@ public class UsersPageController {
         status.setCellValueFactory(new PropertyValueFactory<>("active"));
 
         table.setItems(entities);
+
+        // Add a mouse click listener to the table
+        table.setOnMouseClicked(event -> {
+            if (event.getClickCount() == 2 && table.getSelectionModel().getSelectedItem() != null) {
+                    editUser(table.getSelectionModel().getSelectedItem());
+            }
+        });
     }
 
     @FXML
@@ -63,14 +76,21 @@ public class UsersPageController {
         SceneManager.openNewModal("pages/modals/add-user.fxml", "Add User", true);
     }
     @FXML
-    public void editUser() {
-        SceneManager.openNewModal(
-                "pages/modals/add-user.fxml",
-                "Add User",
-                true,
-                controller ->{
-                    AddUserModalController addUser = (AddUserModalController) controller;
-                    addUser.enableEdit()
-                });
+    public void editUser(User user) {
+
+        try{
+            SceneManager.openNewModal(
+                    "pages/modals/add-user.fxml",
+                    "Edit User",
+                    true,
+                    controller ->{
+                        AddUserModalController editUser = (AddUserModalController) controller;
+                        editUser.enableEdit(user);
+
+                    });
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
     }
 }
