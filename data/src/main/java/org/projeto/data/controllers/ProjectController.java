@@ -25,20 +25,20 @@ public class ProjectController {
         return new ResponseEntity<>(projects, HttpStatus.OK);
     }
 
-    @GetMapping("/clientProjects")
-    public ResponseEntity<List<Project>> getClientProjects(Integer clientID) {
-        List<Project> projects = ProjectService.getProjectsByClientID(clientID);
+    @GetMapping("/clientProjects/{id}")
+    public ResponseEntity<List<Project>> getClientProjects(@PathVariable String id) {
+        List<Project> projects = ProjectService.getProjectsByClientID(Integer.valueOf(id));
         return new ResponseEntity<>(projects, HttpStatus.OK);
     }
-    @GetMapping("/engineerProjects")
-    public ResponseEntity<List<Project>> getEngineerProjects(Integer engineerID){
-        List<Project> projects  = ProjectService.getProjectsByEngineerID(engineerID);
+    @GetMapping("/engineerProjects/{id}")
+    public ResponseEntity<List<Project>> getEngineerProjects(@PathVariable String id){
+        List<Project> projects  = ProjectService.getProjectsByEngineerID(Integer.valueOf(id));
         return new ResponseEntity<>(projects,HttpStatus.OK);
     }
 
-    @GetMapping("/projectsByConstructionType")
-    public ResponseEntity<List<Project>> getprojectsByConstructionTypes(Integer constructionTypeID){
-        List<Project> projects  = ProjectService.getProjectsByConstructionType(constructionTypeID);
+    @GetMapping("/projectsByConstructionType/{id}")
+    public ResponseEntity<List<Project>> getprojectsByConstructionTypes(@PathVariable String id){
+        List<Project> projects  = ProjectService.getProjectsByConstructionType(Integer.valueOf(id));
         return new ResponseEntity<>(projects,HttpStatus.OK);
     }
     @PostMapping("/add")
