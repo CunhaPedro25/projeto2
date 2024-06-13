@@ -11,14 +11,12 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import org.projeto.data.entities.Project;
 import org.projeto.data.services.ProjectService;
 import org.projeto.desktop.CurrentUser;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 import java.util.List;
 @Component
 public class ProjectsController {
-  private  ProjectService projectService;
   @FXML
   public Button newProject;
   @FXML
@@ -30,22 +28,15 @@ public class ProjectsController {
 
   @FXML
   private TableView<Project> table;
-  @Autowired
-  public ProjectsController(ProjectService projectService) {
-      this.projectService = projectService;
-  }
-  public ProjectsController() {
 
-  }
-
-    public void initialize() {
+  public void initialize() {
     newProject.setVisible(false);
     populateTableView();
   }
 
   private void populateTableView() {
     // Get projects for the current user
-    List<Project> clientProjects = projectService.getProjectsByClientID(CurrentUser.id);
+    List<Project> clientProjects = ProjectService.getProjectsByClientID(CurrentUser.id);
 
     // Convert List to ObservableList
     ObservableList<Project> projectObservableList = FXCollections.observableArrayList(clientProjects);

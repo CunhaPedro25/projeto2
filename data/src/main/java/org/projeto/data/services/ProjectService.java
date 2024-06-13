@@ -17,7 +17,7 @@ public class ProjectService {
     ProjectService.projectRepository = projectRepository;
   }
 
-  public List<Project> getProjectsByClientID(Integer clientID){
+  public static List<Project> getProjectsByClientID(Integer clientID){
     return ProjectService.projectRepository.findProjectByClient_id(clientID);
   }
 
