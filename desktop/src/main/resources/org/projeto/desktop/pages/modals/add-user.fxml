@@ -21,10 +21,10 @@
 
 
         <HBox fx:id="userTypeSelection" alignment="CENTER" prefHeight="0.0" prefWidth="0.0" spacing="8.0">
-            <RadioButton mnemonicParsing="false" selected="true" text="Client" toggleGroup="$userType" onAction="#enableAddress"/>
-            <RadioButton mnemonicParsing="false" text="Secretary" toggleGroup="$userType" onAction="#disableAddress"/>
-            <RadioButton mnemonicParsing="false" text="Worker" toggleGroup="$userType" onAction="#disableAddress"/>
-            <RadioButton mnemonicParsing="false" text="Engineer" toggleGroup="$userType" onAction="#disableAddress"/>
+            <RadioButton mnemonicParsing="false" selected="true" text="Client" toggleGroup="$userType"/>
+            <RadioButton mnemonicParsing="false" text="Secretary" toggleGroup="$userType"/>
+            <RadioButton mnemonicParsing="false" text="Worker" toggleGroup="$userType"/>
+            <RadioButton mnemonicParsing="false" text="Engineer" toggleGroup="$userType"/>
         </HBox>
 
         <fx:include fx:id="registerForm" source="../../components/register-form.fxml" />

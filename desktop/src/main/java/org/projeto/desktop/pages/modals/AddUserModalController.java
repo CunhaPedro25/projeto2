@@ -11,6 +11,10 @@ import org.projeto.data.services.UserService;
 import org.projeto.desktop.SceneManager;
 import org.projeto.desktop.components.RegisterFormController;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
 public class AddUserModalController {
     @FXML
     RegisterFormController registerFormController;
@@ -23,9 +27,10 @@ public class AddUserModalController {
     @FXML
     HBox userTypeSelection;
 
+    List<UserType> userTypes;
 
-    @FXML
-    protected void enableAddress(){
+    public void initialize(){
+        this.userTypes = UserTypeService.getAllUserTypes();
         registerFormController.enableAddress();
     }
 
@@ -43,6 +48,12 @@ public class AddUserModalController {
 
         User user = null;
         RadioButton selectedToggle = (RadioButton) userType.getSelectedToggle();
+        String selectedUserTypeText = selectedToggle.getText();
+        Optional<UserType> userTypeOptional = UserTypeService.getByType(selectedUserTypeText);
+
+        UserType userTypeEntity = userTypeOptional.orElseThrow(() ->
+                new IllegalArgumentException("UserType not found for description: " + selectedUserTypeText));
+
         user = User.builder()
                 .name(registerFormController.firstName.getText()+ " "+ registerFormController.lastName.getText())
                 .email(registerFormController.email.getText())
@@ -50,40 +61,8 @@ public class AddUserModalController {
                 .phone(registerFormController.phone.getText())
                 .address(registerFormController.address.getText())
                 .door(Integer.valueOf(registerFormController.door.getText()))
-                .userType(registerFormController.userTypeComboBox.getValue())
+                .userType(userTypeEntity)
                 .build();
-/*        user = switch (selectedToggle.getText()) {
-            case "Client" -> User.builder()
-                    .name(registerFormController.firstName.getText()+ " "+ registerFormController.lastName.getText())
-                    .email(registerFormController.email.getText())
-                    .password(registerFormController.password.getText())
-                    .phone(registerFormController.phone.getText())
-                    .address(registerFormController.address.getText())
-                    .door(Integer.valueOf(registerFormController.door.getText()))
-                    .userType()
-
-
-            );
-            case "Secretary" -> new Secretary(
-                    registerFormController.firstName.getText() + " " + registerFormController.lastName.getText(),
-                    registerFormController.email.getText(),
-                    registerFormController.password.getText(),
-                    registerFormController.phone.getText()
-            );
-            case "Worker" -> new Worker(
-                    registerFormController.firstName.getText() + " " + registerFormController.lastName.getText(),
-                    registerFormController.email.getText(),
-                    registerFormController.password.getText(),
-                    registerFormController.phone.getText()
-            );
-            case "Engineer" -> new Engineer(
-                    registerFormController.firstName.getText() + " " + registerFormController.lastName.getText(),
-                    registerFormController.email.getText(),
-                    registerFormController.password.getText(),
-                    registerFormController.phone.getText()
-            );
-            default -> user;
-        };*/
 
         try {
             assert user != null;
@@ -91,6 +70,7 @@ public class AddUserModalController {
 
             SceneManager.closeWindow(save);
         } catch (Exception exc) {
+            exc.printStackTrace();
             SceneManager.openErrorAlert("Error", "It was not possible to register. Please try again.");
         }
     }
