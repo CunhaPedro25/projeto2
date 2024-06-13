@@ -33,10 +33,6 @@ public class Team {
 
   @JsonIgnore
   @OneToMany(mappedBy = "team")
-  private Set<Construction> constructions = new LinkedHashSet<>();
-
-  @JsonIgnore
-  @OneToMany(mappedBy = "team")
   private Set<ConstructionTeam> constructionTeams = new LinkedHashSet<>();
 
   @JsonIgnore
