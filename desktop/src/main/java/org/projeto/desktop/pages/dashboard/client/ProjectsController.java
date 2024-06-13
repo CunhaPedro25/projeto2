@@ -1,6 +1,7 @@
 package org.projeto.desktop.pages.dashboard.client;
 
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -14,6 +15,7 @@ import org.projeto.desktop.CurrentUser;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 @Component
 public class ProjectsController {
@@ -47,9 +49,18 @@ public class ProjectsController {
       return new SimpleIntegerProperty(engineerid).asObject();
     });
 
-    create_dateColumn.setCellValueFactory(new PropertyValueFactory<>("createDate"));
+    create_dateColumn.setCellValueFactory(cellData -> {
+      Project project = cellData.getValue();
+      LocalDate budgetCreateDate = project.getBudgetCreateDate();
+      return new SimpleObjectProperty<>(budgetCreateDate);
+    });
 
-    accpetedColumn.setCellValueFactory(new PropertyValueFactory<>("accepted"));
+
+    accpetedColumn.setCellValueFactory(cellData -> {
+      Project project = cellData.getValue();
+      Boolean budgetState = project.getBudgetState();
+      return new SimpleObjectProperty<>(budgetState);
+    });
 
     // Populate the TableView
     table.setItems(projectObservableList);
