@@ -3,12 +3,15 @@ package org.projeto.desktop.pages.dashboard.secretary;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import org.projeto.data.entities.User;
+import org.projeto.data.repositories.UserRepository;
 import org.projeto.data.services.UserService;
 import org.projeto.desktop.SceneManager;
 import org.projeto.desktop.components.RegisterFormController;
@@ -17,6 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.xml.transform.Source;
+
 
 @Component
 public class UsersPageController {
@@ -32,14 +36,24 @@ public class UsersPageController {
     TableColumn<User, Boolean> status;
     @FXML
     RegisterFormController registerFormController;
+    @FXML
+    Button delete;
+
+    @FXML
+    Button newUserButton;
 
     @FXML
     TextField searchField;
+
+
+    User selectedUser = null;
 
     public void initialize(){
         ObservableList<User> entities = FXCollections.observableArrayList(UserService.getAllUsers());
         entities.removeIf(user -> user.getUserType().getType().equals("Admin"));
         FilteredList<User> filteredData = new FilteredList<>(entities, p -> true);
+
+        delete.setDisable(true);
 
         // Bind the search functionality to the text property of the search TextField
         searchField.textProperty().addListener((observable, oldValue, newValue) -> {
@@ -63,16 +77,25 @@ public class UsersPageController {
 
         table.setItems(entities);
 
-        // Add a mouse click listener to the table
+
+        // Add a mouse 1x click listener to the table
+        table.setOnMouseClicked(event -> {
+            if (event.getClickCount() == 1 && table.getSelectionModel().getSelectedItem() != null) {
+                selectedUser = table.getSelectionModel().getSelectedItem();
+                delete.setDisable(false);
+
+            }
+        });
+        // Add a mouse 2x click listener to the table
         table.setOnMouseClicked(event -> {
             if (event.getClickCount() == 2 && table.getSelectionModel().getSelectedItem() != null) {
-                    editUser(table.getSelectionModel().getSelectedItem());
+                editUser(table.getSelectionModel().getSelectedItem());
             }
         });
     }
 
     @FXML
-    public void openModal() {
+    public void openNewUserModal() {
         SceneManager.openNewModal("pages/modals/add-user.fxml", "Add User", true);
     }
     @FXML
@@ -92,5 +115,9 @@ public class UsersPageController {
             e.printStackTrace();
         }
 
+    }
+
+     public void delete() {
+      UserService.delete(selectedUser);
     }
 }

@@ -28,14 +28,20 @@ public class UserService{
     }
   }
 
-  public static void register(User user){
-    user.setPassword(DigestUtils.sha256Hex(user.getPassword()));
+  public static void register(User user) {
+    if (user.getPassword() == null) {
+      throw new IllegalArgumentException("Password cannot be null");
+    }
 
+    user.setPassword(DigestUtils.sha256Hex(user.getPassword()));
     userRepository.save(user);
   }
   public static void update(User editUser) throws Exception {
 
     userRepository.save(editUser);
+  }
+  public static void delete(User user){
+    userRepository.delete(user);
   }
   public static User findUserByID(Integer ID){
     return userRepository.findById(ID);

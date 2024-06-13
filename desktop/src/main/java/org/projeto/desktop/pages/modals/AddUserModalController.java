@@ -56,7 +56,7 @@ public class AddUserModalController {
 
         try {
             if (edit) {
-
+                System.out.println("editing");
                 if (!registerFormController.isFormCorrectEdit()) {
                     SceneManager.openErrorAlert("Error edit", "Please fill all the required fields correctly");
                     return;
@@ -73,6 +73,7 @@ public class AddUserModalController {
                 registerFormController.password.setDisable(false);
                 SceneManager.closeWindow(save);
             } else {
+                System.out.println("adding");
                 if (!registerFormController.isFormCorrect()) {
                     SceneManager.openErrorAlert("Error register", "Please fill all the required fields correctly");
                     return;
@@ -81,6 +82,7 @@ public class AddUserModalController {
                 User user = User.builder()
                         .name(registerFormController.firstName.getText() + " " + registerFormController.lastName.getText())
                         .email(registerFormController.email.getText())
+                        .password(registerFormController.password.getText())
                         .phone(registerFormController.phone.getText())
                         .address(registerFormController.address.getText())
                         .door(Integer.valueOf(registerFormController.door.getText()))
