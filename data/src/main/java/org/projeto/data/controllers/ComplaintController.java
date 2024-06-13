@@ -23,15 +23,15 @@ public class ComplaintController {
         return ComplaintService.findByID(id);
 
     }
-    @GetMapping("/complaintsByClient/{id}")
+    @GetMapping("/complaintsByClientID/{id}")
     public ResponseEntity<List<Complaint>> getComplaintsByClientID(@PathVariable Long id) {
         List<Complaint> complaints = ComplaintService.findComplaintsByClientID(id);
         return new ResponseEntity<>(complaints, HttpStatus.OK);
     }
 
-    @GetMapping("/complaintsByConstruction")
-    public ResponseEntity<List<Complaint>> getComplaintByConstructionID(Integer clientID){
-        List<Complaint> complaints  = ComplaintService.findComplaintByConstructionID(clientID);
+    @GetMapping("/complaintsByConstructionID/{id}")
+    public ResponseEntity<List<Complaint>> getComplaintByConstructionID(@PathVariable String id){
+        List<Complaint> complaints  = ComplaintService.findComplaintByConstructionID(Integer.valueOf(id));
         return new ResponseEntity<>(complaints,HttpStatus.OK);
     }
 
