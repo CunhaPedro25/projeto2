@@ -1,5 +1,6 @@
 package org.projeto.desktop.pages.dashboard.secretary;
 
+import javafx.animation.PauseTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -10,6 +11,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.util.Duration;
 import org.projeto.data.entities.User;
 import org.projeto.data.repositories.UserRepository;
 import org.projeto.data.services.UserService;
@@ -78,18 +80,31 @@ public class UsersPageController {
         table.setItems(entities);
 
 
-        // Add a mouse 1x click listener to the table
-        table.setOnMouseClicked(event -> {
-            if (event.getClickCount() == 1 && table.getSelectionModel().getSelectedItem() != null) {
-                selectedUser = table.getSelectionModel().getSelectedItem();
-                delete.setDisable(false);
 
-            }
-        });
-        // Add a mouse 2x click listener to the table
+        // Add combined click listener with a timer
         table.setOnMouseClicked(event -> {
-            if (event.getClickCount() == 2 && table.getSelectionModel().getSelectedItem() != null) {
-                editUser(table.getSelectionModel().getSelectedItem());
+            User selected = table.getSelectionModel().getSelectedItem();
+            if (selected != null) {
+                selectedUser = selected;
+
+                // Create a PauseTransition for single click
+                PauseTransition singleClickPause = new PauseTransition(Duration.millis(300));
+                singleClickPause.setOnFinished(e -> {
+                    if (event.getClickCount() == 1) {
+                        System.out.println("Single click detected");
+                        delete.setDisable(false);
+                    }
+                });
+
+
+                // Handle double click immediately
+                if (event.getClickCount() == 2) {
+                    singleClickPause.stop();
+                    System.out.println("Double click detected");
+                    editUser(selectedUser);
+                } else {
+                    singleClickPause.playFromStart();
+                }
             }
         });
     }
