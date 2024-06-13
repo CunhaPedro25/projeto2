@@ -1,6 +1,7 @@
 package org.projeto.desktop.pages.dashboard.client;
 
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -10,10 +11,9 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import org.projeto.data.entities.Construction;
 import org.projeto.data.entities.Project;
-import org.projeto.data.services.ConstructionService;
+import org.projeto.data.entities.Stage;
 import org.projeto.data.services.ProjectService;
 import org.projeto.desktop.CurrentUser;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -23,7 +23,7 @@ import java.util.Set;
 
 @Component
 public class ConstructionsController {
-  private  ProjectService projectService;
+
   public Button newConstruction;
 
   @FXML
@@ -33,29 +33,21 @@ public class ConstructionsController {
   private TableColumn<Construction, Integer> teamColumn;
 
   @FXML
-  private TableColumn<Construction, Boolean> finishedColumn;
+  private TableColumn<Construction, String> stateColumn;
 
   @FXML
   private TableColumn<Construction, Integer> stageColumn;
 
   @FXML
   private TableColumn<Construction, Date> lastUpdateColumn;
-    @Autowired
-    public ConstructionsController(ProjectService projectService) {
-        this.projectService = projectService;
-    }
-    public ConstructionsController() {
 
-    }
-
-    public void initialize() {
+  public void initialize() {
     newConstruction.setVisible(false);
     populateTableView();
-
   }
 
   private void populateTableView() {
-// Get constructions for the current user
+    // Get constructions for the current user
     List<Construction> clientConstructions = new ArrayList<>();
     List<Project> clientProjects = ProjectService.getProjectsByClientID(CurrentUser.id);
 
@@ -74,22 +66,27 @@ public class ConstructionsController {
 
     // Convert List to ObservableList
     ObservableList<Construction> constructionObservableList = FXCollections.observableArrayList(clientConstructions);
-    teamColumn.setCellValueFactory(cellData -> {
-      Construction construction = cellData.getValue();
-      int teamId = construction.getTeam().getId(); // Assuming getId() returns the team's ID
-      return new SimpleIntegerProperty(teamId).asObject();
-    });
 
-    finishedColumn.setCellValueFactory(new PropertyValueFactory<>("finished"));
+    // Set up the columns
+//    teamColumn.setCellValueFactory(cellData -> {
+//      Construction construction = cellData.getValue();
+//      int teamId = construction.getTeam().getId(); // Assuming getId() returns the team's ID
+//      return new SimpleIntegerProperty(teamId).asObject();
+//    });
+
+    stateColumn.setCellValueFactory(cellData -> {
+      Construction construction = cellData.getValue();
+      String state = construction.getState().getDescription();
+      return new SimpleObjectProperty<>(state);
+    });
 
     stageColumn.setCellValueFactory(cellData -> {
       Construction construction = cellData.getValue();
-      int stageId = construction.getTeam().getId(); // Assuming getId() returns the team's ID
+      int stageId = construction.getStage().getId(); // Assuming getId() returns the stage's ID
       return new SimpleIntegerProperty(stageId).asObject();
     });
 
     lastUpdateColumn.setCellValueFactory(new PropertyValueFactory<>("lastUpdate"));
-
 
     // Populate the TableView
     table.setItems(constructionObservableList);

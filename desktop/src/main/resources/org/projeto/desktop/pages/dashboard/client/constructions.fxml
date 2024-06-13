@@ -30,8 +30,8 @@
     <TableView fx:id="table">
         <columns>
             <TableColumn fx:id="teamColumn" prefWidth="75.0" text="Equipa" />
-            <TableColumn fx:id="finishedColumn" prefWidth="75.0" text="Terminada?" />
             <TableColumn fx:id="stageColumn" prefWidth="75.0" text="Etapa" />
+            <TableColumn fx:id="stateColumn" prefWidth="75.0" text="Estado" />
             <TableColumn fx:id="lastUpdateColumn" prefWidth="75.0" text="Ultima atualização" />
         </columns>
         <columnResizePolicy>

@@ -126,9 +126,6 @@ create table if not exists construction
     project integer not null
         constraint project_id_fk
 			references project,
-    team integer
-        constraint team_id_fk
-			references team,
     stage integer
         constraint stage_id_fk
 			references stage,
@@ -136,7 +133,8 @@ create table if not exists construction
     total decimal,
     state integer
         constraint state_id_fk
-			references state
+			references state,
+    last_update timestamp
 );
 
 

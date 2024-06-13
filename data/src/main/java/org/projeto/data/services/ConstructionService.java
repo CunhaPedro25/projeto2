@@ -23,10 +23,6 @@ public class ConstructionService {
         return ConstructionService.constructionRepository.findConstructionsByProject_IdAndState_Id(projectID, stateID);
     }
 
-    public static List<Construction> findConstructionsByTeam_Id(Integer teamID){
-        return ConstructionService.constructionRepository.findConstructionsByTeam_Id(teamID);
-    }
-
     public static void addNew(Construction newConstruction){
         ConstructionService.constructionRepository.save(newConstruction);
     }
