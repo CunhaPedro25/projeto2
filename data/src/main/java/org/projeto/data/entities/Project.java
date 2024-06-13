@@ -56,7 +56,7 @@ public class Project {
   private Boolean budgetState;
 
   @JsonIgnore
-  @OneToMany(mappedBy = "project")
+  @OneToMany(mappedBy = "project", fetch = FetchType.EAGER)
   private Set<Construction> constructions = new LinkedHashSet<>();
 
 }

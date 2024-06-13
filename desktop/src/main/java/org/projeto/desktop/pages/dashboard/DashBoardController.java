@@ -38,7 +38,8 @@ public class DashBoardController {
             Parent content = loader.load();
             mainContent.setContent(content);
         }catch (Exception e){
-                System.out.println("DashBoardController SidebarButtonEvent: " + e.getCause());
+            System.out.println("DashBoardController SidebarButtonEvent: " + e.getCause());
+            e.printStackTrace();
         }
     }
 }
