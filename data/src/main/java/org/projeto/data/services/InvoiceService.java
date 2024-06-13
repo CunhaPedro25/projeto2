@@ -18,15 +18,15 @@ public class InvoiceService {
     InvoiceService.invoiceRepository = invoiceRepository;
   }
 
-  public List<Invoice> getInvoice() {
+  public static List<Invoice> getInvoice() {
     return InvoiceService.invoiceRepository.findAll();
   }
 
-  public void addNew(Invoice newInvoice) {
+  public static void addNew(Invoice newInvoice) {
     InvoiceService.invoiceRepository.save(newInvoice);
   }
 
-  public void delete(Long id) {
+  public static void delete(Long id) {
     boolean exists = InvoiceService.invoiceRepository.existsById(id);
     if (!exists) {
       throw new IllegalStateException("The Invoice with id " + id + " does not exist");
@@ -35,15 +35,15 @@ public class InvoiceService {
     }
   }
 
-  public Optional<Invoice> findByStageId(Integer id) {
+  public static Optional<Invoice> findByStageId(Integer id) {
     return InvoiceService.invoiceRepository.findByStage_Id(id);
   }
 
-  public List<Invoice> findInvoicesByIssueDate(LocalDate issueDate) {
+  public static List<Invoice> findInvoicesByIssueDate(LocalDate issueDate) {
     return InvoiceService.invoiceRepository.findInvoicesByIssueDate(issueDate);
   }
 
-  public List<Invoice> findInvoicesByClientId(Integer id) {
+  public static List<Invoice> findInvoicesByClientId(Integer id) {
     return InvoiceService.invoiceRepository.findInvoicesByClient_Id(id);
   }
 }

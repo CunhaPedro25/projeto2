@@ -24,12 +24,12 @@ public class UserController {
 
     @GetMapping("/getClients")
     public ResponseEntity<List<User>> getClients(){
-        List<User> clients = userService.getAllClients();
+        List<User> clients = UserService.getAllClients();
         return new ResponseEntity<>(clients, HttpStatus.OK);
     }
     @GetMapping("/getUsersByUserTypeID/{id}")
     public ResponseEntity<List<User>> getUsersByUserTypeID(@PathVariable Integer id){
-        List<User> clients = userService.getUserByTypeID(id);
+        List<User> clients = UserService.getUserByTypeID(id);
         return new ResponseEntity<>(clients, HttpStatus.OK);
     }
 

@@ -43,10 +43,10 @@ public class UserService{
     return user;
   }
 
-  public List<User> getAllUsers() {
+  public static List<User> getAllUsers() {
     return userRepository.findAll();
   }
-  public List<User> getUserByTypeID(Integer id){return userRepository.findByUserTypeId(id);}
+  public static List<User> getUserByTypeID(Integer id){return userRepository.findByUserTypeId(id);}
 
-  public List<User> getAllClients(){return userRepository.findByUserTypeId(1);}
+  public static List<User> getAllClients(){return userRepository.findByUserTypeId(1);}
 }

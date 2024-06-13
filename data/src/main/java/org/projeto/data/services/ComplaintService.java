@@ -17,19 +17,19 @@ public class ComplaintService {
         ComplaintService.complaintRepository = complaintRepository;
     }
 
-    public List<Complaint> findComplaintsByClientID (Long id){
+    public static List<Complaint> findComplaintsByClientID (Long id){
         return ComplaintService.complaintRepository.findComplaintsByClient_Id(id);
     }
-    public List<Complaint> findComplaintByConstructionID (Integer id){
+    public static List<Complaint> findComplaintByConstructionID (Integer id){
         return ComplaintService.complaintRepository.findComplaintByConstruction_Id(id);
     }
-    public Optional<Complaint> findByID(Long id){
+    public static Optional<Complaint> findByID(Long id){
         return ComplaintService.complaintRepository.findById(id);
     }
-    public void addNew(Complaint newComplaint){
+    public static void addNew(Complaint newComplaint){
         ComplaintService.complaintRepository.save(newComplaint);
     }
-    public void delete (Long id){
+    public static void delete (Long id){
         ComplaintService.complaintRepository.deleteById(id);
     }
 

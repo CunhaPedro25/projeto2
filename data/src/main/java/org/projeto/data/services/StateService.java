@@ -14,7 +14,7 @@ public class StateService {
     @Autowired
     public StateService(StateRepository stateRepository){ StateService.stateRepository = stateRepository;}
 
-    public void addNew(State newState){
+    public static void addNew(State newState){
         Optional<State> existingState = StateService.stateRepository.findByDescription(newState.getDescription());
         if(existingState.isPresent()) {
             throw new IllegalStateException("This state already exists");
@@ -22,7 +22,7 @@ public class StateService {
             StateService.stateRepository.save(newState);
         }
     }
-    public void delete(Long id){
+    public static void delete(Long id){
         Optional<State> existingState = StateService.stateRepository.findById(id);
         if (existingState.isPresent()){
             StateService.stateRepository.deleteById(id);

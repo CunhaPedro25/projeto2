@@ -57,7 +57,7 @@ public class ConstructionsController {
   private void populateTableView() {
 // Get constructions for the current user
     List<Construction> clientConstructions = new ArrayList<>();
-    List<Project> clientProjects = projectService.getProjectsByClientID(CurrentUser.id);
+    List<Project> clientProjects = ProjectService.getProjectsByClientID(CurrentUser.id);
 
     if (clientProjects != null) {
       for (Project project : clientProjects) {

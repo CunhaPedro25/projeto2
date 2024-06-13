@@ -36,7 +36,7 @@ public class UsersPageController {
     }
 
     public void initialize(){
-        ObservableList<User> entities = FXCollections.observableArrayList(userService.getAllUsers());
+        ObservableList<User> entities = FXCollections.observableArrayList(UserService.getAllUsers());
         FilteredList<User> filteredData = new FilteredList<>(entities, p -> true);
 
         // Bind the search functionality to the text property of the search TextField

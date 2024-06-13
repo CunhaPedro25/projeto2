@@ -42,7 +42,7 @@ public class ProjectsPageController {
 
     private void populateTableView() {
         // Get projects for the current user
-        List<Project> projects = projectService.getAllProjects();
+        List<Project> projects = ProjectService.getAllProjects();
 
         // Convert List to ObservableList
         ObservableList<Project> projectObservableList = FXCollections.observableArrayList(projects);
