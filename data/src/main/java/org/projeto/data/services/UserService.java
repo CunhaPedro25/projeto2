@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class UserService{
@@ -29,12 +28,24 @@ public class UserService{
     }
   }
 
-  public static void register(User user){
-    user.setPassword(DigestUtils.sha256Hex(user.getPassword()));
+  public static void register(User user) {
+    if (user.getPassword() == null) {
+      throw new IllegalArgumentException("Password cannot be null");
+    }
 
+    user.setPassword(DigestUtils.sha256Hex(user.getPassword()));
     userRepository.save(user);
   }
+  public static void update(User editUser) throws Exception {
 
+    userRepository.save(editUser);
+  }
+  public static void delete(User user){
+    userRepository.delete(user);
+  }
+  public static User findUserByID(Integer ID){
+    return userRepository.findById(ID);
+  }
   public static User findUserByEmail(String email) throws Exception {
     User user = userRepository.findByEmail(email);
     if (user == null) {
@@ -42,7 +53,6 @@ public class UserService{
     }
     return user;
   }
-
   public static List<User> getAllUsers() {
     return userRepository.findAll();
   }

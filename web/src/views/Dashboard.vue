@@ -2,7 +2,7 @@
   <div class="flex w-full h-full">
     <Sidebar></Sidebar>
     <div class="flex flex-1 h-full justify-center items-center">
-      <div>{{ user }}</div>
+      <RouterView />
     </div>
   </div>
 </template>

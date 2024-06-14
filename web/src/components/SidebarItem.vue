@@ -1,10 +1,12 @@
 <template>
   <RouterLink :to="path === '/' ? path : '/dashboard/' + path"
-               class="flex-col gap-4 items-center w-20 min-h-[4rem] border-b-2 border-gray-300 bg-gray-200 hover:bg-gray-300 px-8 py-4 transition-colors cursor-pointer flex justify-start">
-    <div class="w-4 h-4 flex items-center justify-center mb-1">
-      <span class="material-icons">face</span>
+               class="flex flex-col w-16 min-h-16 text-center rounded-xl p-2 text-primary-400 truncate">
+
+    <div class="flex items-center justify-center">
+      <span class="material-icons">{{ icon }}</span>
     </div>
-    <p class="whitespace-nowrap text-xs">
+
+    <p class="whitespace-nowrap text-xs truncate">
       <slot></slot>
     </p>
   </RouterLink>
@@ -17,8 +19,7 @@ export default {
   name: 'SidebarItem',
   props: [
     "icon",
-    "path",
-    "Sidebar"
+    "path"
   ],
   data(){
     return{
