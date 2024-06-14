@@ -37,7 +37,7 @@
         <columns>
             <TableColumn fx:id="clientColumn" prefWidth="75.0" text="Client" />
             <TableColumn fx:id="engineerColumn" prefWidth="75.0" text="Engineer" />
-            <TableColumn fx:id="create_dateColumn" prefWidth="75.0" text="Create Date" />
+            <TableColumn fx:id="budget_create_dateColumn" prefWidth="75.0" text="Create Date" />
             <TableColumn fx:id="acceptedColumn" prefWidth="75.0" text="Accepted" />
         </columns>
         <columnResizePolicy>

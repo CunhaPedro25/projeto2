@@ -27,7 +27,7 @@ public class ProjectsPageController {
     @FXML
     public TableColumn<Project, String> engineerColumn;
     @FXML
-    public TableColumn<Project, LocalDate> create_dateColumn;
+    public TableColumn<Project, LocalDate> budget_create_dateColumn;
     @FXML
     public TableColumn<Project, String> acceptedColumn;
     public TextField searchField;
@@ -57,7 +57,7 @@ public class ProjectsPageController {
             String engineer = project.getEngineer().getName();
             return new SimpleStringProperty(engineer);
         });
-        create_dateColumn.setCellValueFactory(new PropertyValueFactory<>("createDate"));
+        budget_create_dateColumn.setCellValueFactory(new PropertyValueFactory<>("budgetCreateDate"));
 
         acceptedColumn.setCellValueFactory(cellData -> {
             Project project = cellData.getValue();
@@ -77,5 +77,8 @@ public class ProjectsPageController {
     }
 
     public void delete(ActionEvent actionEvent) {
+        Project project = table.getSelectionModel().getSelectedItem();
+        ProjectService.delete(Long.valueOf(project.getId()));
+        populateTableView();
     }
 }

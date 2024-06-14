@@ -23,7 +23,7 @@
                 <TextField fx:id="budgetDocument" />
             </VBox>
             <VBox HBox.hgrow="ALWAYS">
-                <Label contentDisplay="BOTTOM" styleClass="form-label" text="Password" />
+                <Label contentDisplay="BOTTOM" styleClass="form-label" text="Requirements_document" />
                 <TextField fx:id="requirements_document" />
             </VBox>
         </HBox>

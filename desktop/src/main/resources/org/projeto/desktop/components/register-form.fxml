@@ -47,7 +47,7 @@
             </VBox>
         </HBox>
         <HBox fillHeight="false" spacing="10.0">
-            <VBox>>
+            <VBox>
                 <Label contentDisplay="BOTTOM" styleClass="form-label" text="Cod. Postal" />
                 <TextField fx:id="zipcode" />
             </VBox>

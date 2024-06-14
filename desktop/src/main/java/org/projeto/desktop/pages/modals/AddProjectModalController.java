@@ -3,54 +3,107 @@ package org.projeto.desktop.pages.modals;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.ListCell;
-import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import org.projeto.data.entities.ConstructionType;
+import org.projeto.data.entities.Project;
 import org.projeto.data.entities.User;
 import org.projeto.data.services.ConstructionTypeService;
+import org.projeto.data.services.ProjectService;
 import org.projeto.data.services.UserService;
+import org.projeto.desktop.SceneManager;
 import org.projeto.desktop.components.ProjectFormController;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.w3c.dom.ls.LSException;
 
 import java.time.LocalDate;
 import java.util.List;
 
-
-// TODO: Fix problems and make it possible to add new budgets
 @Component
 public class AddProjectModalController {
-    @FXML
-    ProjectFormController projectFormController;
 
     @FXML
-    Button save;
+    private RadioButton residentialRadioButton;
 
     @FXML
-    ToggleGroup constructionType;
+    private RadioButton commercialRadioButton;
 
     @FXML
-    HBox constructionTypeSelection;
+    private RadioButton industrialRadioButton;
 
-    List<ConstructionType> constructionTypes;
+    @FXML
+    private ProjectFormController projectFormController;
 
-/*    @FXML
-    private Button file;
-    idk wus dis*/
+    @FXML
+    private Button save;
 
-/*    @FXML
-    private DatePicker date;
-    could be a db trigger*/
+    @FXML
+    private HBox constructionTypeSelection;
 
-    public void initialize(){
+    private ToggleGroup constructionTypeGroup;
+
+    private List<ConstructionType> constructionTypes;
+    boolean edit = false;
+    Project editProject = null;
+
+    @FXML
+    public void initialize() {
         this.constructionTypes = ConstructionTypeService.getAllConstructionTypes();
+
+        constructionTypeGroup = new ToggleGroup();
+        residentialRadioButton.setToggleGroup(constructionTypeGroup);
+        commercialRadioButton.setToggleGroup(constructionTypeGroup);
+        industrialRadioButton.setToggleGroup(constructionTypeGroup);
+        List<String> clientEmails = UserService.getUserTypeAllEmails(1);
+        List<String> engineerEmails = UserService.getUserTypeAllEmails(2);
+
+        projectFormController.clientComboBox.setItems(FXCollections.observableArrayList(clientEmails));
+        projectFormController.engineerComboBox.setItems(FXCollections.observableArrayList(engineerEmails));
     }
 
+    @FXML
     public void cancel(ActionEvent actionEvent) {
+        SceneManager.closeWindow(save);
+    }
+
+    @FXML
+    protected void save() {
+        RadioButton selectedToggle = (RadioButton) constructionTypeGroup.getSelectedToggle();
+        String selectedConstructionTypeText = selectedToggle.getText();
+        ConstructionType constructionType = constructionTypes.stream()
+                .filter(type -> type.getType().equals(selectedConstructionTypeText))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("ConstructionType not found for description: " + selectedConstructionTypeText));
+        try {
+            if (edit) {
+                System.out.println("editing");
+                if (!projectFormController.isFormCorrect()) {
+                    SceneManager.openErrorAlert("Error edit", "Please fill all the required fields correctly");
+                    return;
+                } else {
+                    //update logic
+                }
+            } else {
+                System.out.println("adding");
+                if (!projectFormController.isFormCorrect()) {
+                    SceneManager.openErrorAlert("Error register", "Please fill all the required fields correctly");
+                    return;
+                }
+                Project project = Project.builder()
+                        .client(UserService.findUserByEmail(projectFormController.clientComboBox.getValue()))
+                        .engineer(UserService.findUserByEmail(projectFormController.engineerComboBox.getValue()))
+                        .requirementsDocument(projectFormController.requirements_document.getText())
+                        .requirementsCreateDate(LocalDate.now())
+                        .constructionType(constructionType)
+                        .budgetCreateDate(LocalDate.now())
+                        .budgetState(null)
+                        .build();
+                ProjectService.addNew(project);
+                SceneManager.closeWindow(save);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private static class ClientListCell extends ListCell<User> {
@@ -63,10 +116,5 @@ public class AddProjectModalController {
                 setText(item.getName());
             }
         }
-    }
-
-    @FXML
-    protected void save() {
-
     }
 }

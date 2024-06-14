@@ -14,13 +14,11 @@ import org.springframework.stereotype.Component;
 @Component
 public class ProjectFormController {
     @FXML
-    private ComboBox<String> clientComboBox;
+    public ComboBox<String> clientComboBox;
 
     @FXML
-    private ComboBox<String> engineerComboBox;
+    public ComboBox<String> engineerComboBox;
 
-    @FXML
-    public ComboBox<String> budgetState;
     @FXML
     public TextField budgetDocument;
     @FXML
@@ -33,8 +31,8 @@ public class ProjectFormController {
         return
                 !clientComboBox.getSelectionModel().isEmpty()
                     && !engineerComboBox.getSelectionModel().isEmpty()
-                    && !budgetState.getSelectionModel().isEmpty();
-
+                    && !budgetDocument.getText().trim().isEmpty()
+                    && !requirements_document.getText().trim().isEmpty();
     }
 /*    public boolean isFormCorrectEdit() {
         return
@@ -42,18 +40,23 @@ public class ProjectFormController {
                         && phone.getText().matches("\\d{9}")
                         && !firstName.getText().trim().isEmpty()
                         && !lastName.getText().trim().isEmpty();
-    }*/
+    }
+*/
 
-    public void setValues(String clientName, String engineerName, String constructionTypeName, String budgetState){
+    public void setValues(String clientName, String engineerName, String budgetDocument, String requirementsDocument, String budget){
         this.clientComboBox.setValue(clientName);
         this.engineerComboBox.setValue(engineerName);
-        this.budgetState.setValue(budgetState);
+        this.budgetDocument.setText(budgetDocument);
+        this.requirements_document.setText(requirementsDocument);
+        this.budget.setText(budget);
     }
 
     public void clearValues(){
         this.clientComboBox.setValue(null);
         this.engineerComboBox.setValue(null);
-        this.budgetState.setValue(null);
+        this.budgetDocument.setText("");
+        this.requirements_document.setText("");
+        this.budget.setText("");
     }
 }
 
