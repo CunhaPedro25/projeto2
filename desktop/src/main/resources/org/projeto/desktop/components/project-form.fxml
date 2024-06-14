@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox spacing="30.0" stylesheets="@../assets/styles/global.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.projeto.desktop.components.ProjectFormController">
+
+    <VBox spacing="5.0">
+        <HBox fillHeight="false" spacing="10.0">
+            <VBox HBox.hgrow="ALWAYS">
+                <Label contentDisplay="BOTTOM" styleClass="form-label" text="Client" />
+                <ComboBox fx:id="clientComboBox" />
+            </VBox>
+            <VBox HBox.hgrow="ALWAYS">
+                <Label contentDisplay="BOTTOM" styleClass="form-label" text="Engineer" />
+                <ComboBox fx:id="engineerComboBox" layoutX="10.0" layoutY="10.0" />
+            </VBox>
+        </HBox>
+
+        <HBox fillHeight="false" spacing="10.0">
+            <VBox HBox.hgrow="ALWAYS">
+                <Label contentDisplay="BOTTOM" styleClass="form-label" text="Budget Document" />
+                <TextField fx:id="budgetDocument" />
+            </VBox>
+            <VBox HBox.hgrow="ALWAYS">
+                <Label contentDisplay="BOTTOM" styleClass="form-label" text="Password" />
+                <TextField fx:id="requirements_document" />
+            </VBox>
+        </HBox>
+
+        <VBox>
+            <Label contentDisplay="BOTTOM" styleClass="form-label" text="Budget" />
+            <TextField fx:id="budget" />
+        </VBox>
+    </VBox>
+
+</VBox>

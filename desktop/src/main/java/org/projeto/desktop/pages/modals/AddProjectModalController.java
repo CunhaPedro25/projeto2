@@ -1,49 +1,56 @@
 package org.projeto.desktop.pages.modals;
 
 import javafx.collections.FXCollections;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.ListCell;
+import javafx.scene.control.ToggleGroup;
+import javafx.scene.layout.HBox;
+import org.projeto.data.entities.ConstructionType;
 import org.projeto.data.entities.User;
+import org.projeto.data.services.ConstructionTypeService;
 import org.projeto.data.services.UserService;
+import org.projeto.desktop.components.ProjectFormController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.w3c.dom.ls.LSException;
 
 import java.time.LocalDate;
+import java.util.List;
 
 
 // TODO: Fix problems and make it possible to add new budgets
 @Component
-public class AddBudgetModalController {
-    private final UserService userService;
+public class AddProjectModalController {
+    @FXML
+    ProjectFormController projectFormController;
+
     @FXML
     Button save;
 
     @FXML
-    private ComboBox<User> clientComboBox;
+    ToggleGroup constructionType;
 
     @FXML
-    private ComboBox<String> projectComboBox;
+    HBox constructionTypeSelection;
 
-    @FXML
+    List<ConstructionType> constructionTypes;
+
+/*    @FXML
     private Button file;
+    idk wus dis*/
 
-    @FXML
+/*    @FXML
     private DatePicker date;
-    @Autowired
-    public AddBudgetModalController(UserService userService) {
-        this.userService = userService;
-    }
+    could be a db trigger*/
 
     public void initialize(){
+        this.constructionTypes = ConstructionTypeService.getAllConstructionTypes();
+    }
 
-        clientComboBox.setItems(FXCollections.observableArrayList(userService.getAllClients()));
-        clientComboBox.setCellFactory(tc -> new ClientListCell());
-        clientComboBox.setButtonCell(new ClientListCell());
-        clientComboBox.setValue(userService.getAllClients().get(0));
-        date.setValue(LocalDate.now());
+    public void cancel(ActionEvent actionEvent) {
     }
 
     private static class ClientListCell extends ListCell<User> {

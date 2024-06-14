@@ -54,8 +54,7 @@ public class UsersPageController {
         ObservableList<User> entities = FXCollections.observableArrayList(UserService.getAllUsers());
         entities.removeIf(user -> user.getUserType().getType().equals("Admin"));
         FilteredList<User> filteredData = new FilteredList<>(entities, p -> true);
-
-        delete.setDisable(true);
+        table.setItems(filteredData);
 
         // Bind the search functionality to the text property of the search TextField
         searchField.textProperty().addListener((observable, oldValue, newValue) -> {
@@ -71,6 +70,8 @@ public class UsersPageController {
                 return user.getName().toLowerCase().contains(lowerCaseFilter);
             });
         });
+
+        delete.setDisable(true);
 
         name.setCellValueFactory(new PropertyValueFactory<>("name"));
         email.setCellValueFactory(new PropertyValueFactory<>("email"));

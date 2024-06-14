@@ -3,13 +3,16 @@ package org.projeto.desktop.pages.dashboard.secretary;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import org.projeto.data.entities.Project;
 import org.projeto.data.services.ProjectService;
+import org.projeto.desktop.SceneManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -27,6 +30,8 @@ public class ProjectsPageController {
     public TableColumn<Project, LocalDate> create_dateColumn;
     @FXML
     public TableColumn<Project, String> acceptedColumn;
+    public TextField searchField;
+    public Button delete;
 
     @FXML
     private TableView<Project> table;
@@ -65,5 +70,12 @@ public class ProjectsPageController {
 
         // Populate the TableView
         table.setItems(projectObservableList);
+    }
+    @FXML
+    public void openNewProjectModal() {
+        SceneManager.openNewModal("pages/modals/add-project.fxml", "Add Project", true);
+    }
+
+    public void delete(ActionEvent actionEvent) {
     }
 }
