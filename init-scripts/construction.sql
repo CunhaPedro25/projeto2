@@ -291,9 +291,9 @@ INSERT INTO team (busy, leader, daily_value) VALUES
 
 -- Insert dummy data for user
 INSERT INTO "user" (name, email, password, phone, address, door, zipcode, user_type, team, active) VALUES
-                                                                                                       ('John Doe', 'john.doe@example.com', 'password123', '123-456-7890', '123 Main St', 1, '12345', 1, NULL, TRUE),
-                                                                                                       ('Jane Smith', 'jane.smith@example.com', 'password123', '098-765-4321', '456 Elm St', 2, '67890', 2, NULL, TRUE),
-                                                                                                       ('Admin User', 'admin@example.com', 'adminpass', '111-222-3333', '789 Oak St', 3, '12345', 3, NULL, TRUE);
+                                                                                                       ('John Doe', 'client@email.com', '948fe603f61dc036b5c596dc09fe3ce3f3d30dc90f024c85f3c82db2ccab679d', '123-456-7890', '123 Main St', 1, '12345', 1, NULL, TRUE),
+                                                                                                       ('Jane Smith', 'engineer@email.com', '7826b958b79c70626801b880405eb5111557dadceb2fee2b1ed69a18eed0c6dc', '098-765-4321', '456 Elm St', 2, '67890', 2, NULL, TRUE),
+                                                                                                       ('Admin User', 'admin@example.com', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918', '111-222-3333', '789 Oak St', 3, '12345', 3, NULL, TRUE);
 
 -- Update team with leader ids
 UPDATE team SET leader = 2 WHERE id = 1;
@@ -311,9 +311,9 @@ INSERT INTO stage (name, percentage, construction_type) VALUES
                                                             ('Plumbing', 50.0, 2);
 
 -- Insert dummy data for construction
-INSERT INTO construction (project, team, stage, stage_budget, total, state) VALUES
-                                                                                (1, 1, 1, 2000.0, 10000.0, 1),
-                                                                                (2, 2, 2, 3000.0, 20000.0, 2);
+INSERT INTO construction (project, stage, stage_budget, total, state) VALUES
+                                                                                (1, 1, 2000.0, 10000.0, 1),
+                                                                                (2, 2, 3000.0, 20000.0, 2);
 
 -- Insert dummy data for construction_material
 INSERT INTO construction_material (construction, material, quantity) VALUES

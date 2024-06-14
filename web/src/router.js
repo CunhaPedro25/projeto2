@@ -5,7 +5,39 @@ import Login from '@/views/Login.vue';
 import Cookies from "js-cookie";
 
 const routes = [
-    { path: '/', component: Dashboard, meta: { requiresAuth: true } },
+    {
+        path: '/',
+        redirect: () => {
+            const userIdFromCookie = Cookies.get('user_id');
+            return userIdFromCookie ? '/dashboard/home' : '/login';
+        }},
+    {
+        path: '/dashboard',
+        component: Dashboard,
+        meta: { requiresAuth: true },
+        children: [
+            {
+                path: 'home',
+                component: () => import(/* webpackChunkName: "about" */ './views/dashboards/Home.vue'),
+                meta: { requiresAuth: true }
+            },
+            {
+                path: 'project',
+                component: () => import(/* webpackChunkName: "about" */ './views/dashboards/Home.vue'),
+                meta: { requiresAuth: true }
+            },
+            {
+                path: 'budget',
+                component: () => import(/* webpackChunkName: "about" */ './views/dashboards/Home.vue'),
+                meta: { requiresAuth: true }
+            },
+            {
+                path: 'construction',
+                component: () => import(/* webpackChunkName: "about" */ './views/dashboards/Home.vue'),
+                meta: { requiresAuth: true }
+            },
+        ]
+    },
     { path: '/login', component: Login },
 ];
 
@@ -19,7 +51,7 @@ router.beforeEach(async (to, from, next) => {
     let userStore = null;
 
     if (userIdFromCookie) {
-        userStore = useUserStore()
+        userStore = useUserStore();
         await userStore.loadUserFromCookie();
     }
 

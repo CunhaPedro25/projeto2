@@ -18,5 +18,5 @@
 
 
 input {
-  @apply rounded-xl bg-background-900 py-2 px-2 ring-0 outline-0 border-0
+  @apply rounded-xl bg-background-900 text-white py-2 px-2 ring-0 outline-0 border-0
 }

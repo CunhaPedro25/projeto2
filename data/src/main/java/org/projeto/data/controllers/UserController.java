@@ -10,23 +10,20 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/users")
 public class UserController {
-    private final UserService userService;
 
     @Autowired
-    public UserController(UserService userService) {
-        this.userService = userService;
-    }
+    public UserController(UserService userService) {}
 
     @GetMapping("/getClients")
     public ResponseEntity<List<User>> getClients(){
         List<User> clients = UserService.getAllClients();
         return new ResponseEntity<>(clients, HttpStatus.OK);
     }
+
     @GetMapping("/getUsersByUserTypeID/{id}")
     public ResponseEntity<List<User>> getUsersByUserTypeID(@PathVariable Integer id){
         List<User> clients = UserService.getUserByTypeID(id);
@@ -35,7 +32,6 @@ public class UserController {
 
     @PostMapping("/login")
     public ResponseEntity<User> loginUser(@RequestParam("email") String email, @RequestParam("password") String password) {
-        System.out.println(email);
         try {
             User user = UserService.login(email, password);
             return ResponseEntity.ok(user);
@@ -56,9 +52,9 @@ public class UserController {
     }
 
     @GetMapping("/get/{id}")
-    public ResponseEntity<User> getUser(@PathVariable long id) {
+    public ResponseEntity<User> getUser(@PathVariable int id) {
         try {
-            User user = UserService.getById(id);
+            User user = UserService.findUserByID(id);
             return ResponseEntity.ok(user);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
