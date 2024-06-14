@@ -46,8 +46,6 @@ public class UsersPageController {
 
     @FXML
     TextField searchField;
-
-
     User selectedUser = null;
 
     public void initialize(){

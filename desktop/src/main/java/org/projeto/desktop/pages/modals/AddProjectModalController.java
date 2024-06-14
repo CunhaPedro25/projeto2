@@ -80,7 +80,11 @@ public class AddProjectModalController {
                     SceneManager.openErrorAlert("Error edit", "Please fill all the required fields correctly");
                     return;
                 } else {
-                    //update logic
+                    editProject.setRequirementsCreateDate(LocalDate.now());
+                    editProject.setClient(UserService.findUserByEmail(projectFormController.clientComboBox.getValue()));
+                    editProject.setEngineer(UserService.findUserByEmail(projectFormController.engineerComboBox.getValue()));
+
+                    ProjectService.update(editProject);
                 }
             } else {
                 System.out.println("adding");
@@ -104,6 +108,14 @@ public class AddProjectModalController {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public void enableEdit(Project selectedProject) {
+        edit = true;
+        editProject = selectedProject;
+        projectFormController.clientComboBox.setValue(selectedProject.getClient().getEmail());
+        projectFormController.engineerComboBox.setValue(selectedProject.getEngineer().getEmail());
+        projectFormController.requirements_document.setText(selectedProject.getRequirementsDocument());
     }
 
     private static class ClientListCell extends ListCell<User> {

@@ -1,5 +1,6 @@
 package org.projeto.desktop.pages.dashboard.secretary;
 
+import javafx.animation.PauseTransition;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -11,9 +12,12 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.util.Duration;
 import org.projeto.data.entities.Project;
+import org.projeto.data.entities.User;
 import org.projeto.data.services.ProjectService;
 import org.projeto.desktop.SceneManager;
+import org.projeto.desktop.pages.modals.AddProjectModalController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -37,9 +41,10 @@ public class ProjectsPageController {
     public TextField searchField;
     public Button delete;
 
-
     @FXML
     private TableView<Project> table;
+
+    Project selectedProject;
 
     public void initialize() {
         populateTableView();
@@ -74,10 +79,57 @@ public class ProjectsPageController {
             );
         });
 
+        delete.setDisable(true);
+
+        // Add combined click listener with a timer
+        table.setOnMouseClicked(event -> {
+            Project selected = table.getSelectionModel().getSelectedItem();
+            if (selected != null) {
+                selectedProject = selected;
+
+                // Create a PauseTransition for single click
+                PauseTransition singleClickPause = new PauseTransition(Duration.millis(300));
+                singleClickPause.setOnFinished(e -> {
+                    if (event.getClickCount() == 1) {
+                        System.out.println("Single click detected");
+                        delete.setDisable(false);
+                    }
+                });
+
+
+                // Handle double click immediately
+                if (event.getClickCount() == 2) {
+                    singleClickPause.stop();
+                    System.out.println("Double click detected");
+                    editProject(selectedProject);
+                } else {
+                    singleClickPause.playFromStart();
+                }
+            }
+        });
+
 
         // Populate the TableView
         table.setItems(projectObservableList);
     }
+    @FXML
+    private void editProject(Project selectedProject) {
+        try{
+            SceneManager.openNewModal(
+                "pages/modals/add-project.fxml",
+                "Edit Project",
+                true,
+                controller -> {
+                    AddProjectModalController editProject = (AddProjectModalController) controller;
+                    editProject.enableEdit(selectedProject);
+            });
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            SceneManager.openErrorAlert("Error", "It was not possible to edit the project. Please try again.");
+        }
+    }
+
     @FXML
     public void openNewProjectModal() {
         SceneManager.openNewModal("pages/modals/add-project.fxml", "Add Project", true);

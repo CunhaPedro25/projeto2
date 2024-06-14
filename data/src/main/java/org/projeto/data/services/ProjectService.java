@@ -48,4 +48,8 @@ public class ProjectService {
 
     }
   }
+
+  public static void update(Project editProject) {
+    ProjectService.projectRepository.save(editProject);
+  }
 }
