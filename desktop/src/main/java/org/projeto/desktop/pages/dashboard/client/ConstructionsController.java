@@ -1,6 +1,7 @@
 package org.projeto.desktop.pages.dashboard.client;
 
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -9,13 +10,20 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import org.projeto.data.entities.Construction;
-import org.projeto.data.services.ConstructionService;
+import org.projeto.data.entities.Project;
+import org.projeto.data.entities.Stage;
+import org.projeto.data.services.ProjectService;
 import org.projeto.desktop.CurrentUser;
+import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
+@Component
 public class ConstructionsController {
+
   public Button newConstruction;
 
   @FXML
@@ -25,7 +33,7 @@ public class ConstructionsController {
   private TableColumn<Construction, Integer> teamColumn;
 
   @FXML
-  private TableColumn<Construction, Boolean> finishedColumn;
+  private TableColumn<Construction, String> stateColumn;
 
   @FXML
   private TableColumn<Construction, Integer> stageColumn;
@@ -36,33 +44,49 @@ public class ConstructionsController {
   public void initialize() {
     newConstruction.setVisible(false);
     populateTableView();
-
-
   }
 
   private void populateTableView() {
     // Get constructions for the current user
-    List<Construction> clientConstructions = ConstructionService.getConstructionsByClientID(CurrentUser.id);
-    System.out.println(clientConstructions);
+    List<Construction> clientConstructions = new ArrayList<>();
+    List<Project> clientProjects = ProjectService.getProjectsByClientID(CurrentUser.id);
+
+    if (clientProjects != null) {
+      for (Project project : clientProjects) {
+        Set<Construction> constructions = project.getConstructions();
+        if (constructions != null) {
+          clientConstructions.addAll(constructions);
+        } else {
+          System.err.println("Warning: Project ID " + project.getId() + " has no constructions.");
+        }
+      }
+    } else {
+      System.err.println("Error: No projects found for client ID " + CurrentUser.id);
+    }
 
     // Convert List to ObservableList
     ObservableList<Construction> constructionObservableList = FXCollections.observableArrayList(clientConstructions);
-    teamColumn.setCellValueFactory(cellData -> {
-      Construction construction = cellData.getValue();
-      int teamId = construction.getTeam().getId(); // Assuming getId() returns the team's ID
-      return new SimpleIntegerProperty(teamId).asObject();
-    });
 
-    finishedColumn.setCellValueFactory(new PropertyValueFactory<>("finished"));
+    // Set up the columns
+//    teamColumn.setCellValueFactory(cellData -> {
+//      Construction construction = cellData.getValue();
+//      int teamId = construction.getTeam().getId(); // Assuming getId() returns the team's ID
+//      return new SimpleIntegerProperty(teamId).asObject();
+//    });
+
+    stateColumn.setCellValueFactory(cellData -> {
+      Construction construction = cellData.getValue();
+      String state = construction.getState().getDescription();
+      return new SimpleObjectProperty<>(state);
+    });
 
     stageColumn.setCellValueFactory(cellData -> {
       Construction construction = cellData.getValue();
-      int stageId = construction.getTeam().getId(); // Assuming getId() returns the team's ID
+      int stageId = construction.getStage().getId(); // Assuming getId() returns the stage's ID
       return new SimpleIntegerProperty(stageId).asObject();
     });
 
     lastUpdateColumn.setCellValueFactory(new PropertyValueFactory<>("lastUpdate"));
-
 
     // Populate the TableView
     table.setItems(constructionObservableList);

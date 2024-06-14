@@ -13,23 +13,21 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/team")
 public class TeamController {
-    private final TeamService teamService;
 
     @Autowired
     public TeamController(TeamService teamService) {
-        this.teamService = teamService;
     }
 
     @GetMapping("/teams")
     public ResponseEntity<List<Team>> getAllTeams() {
-        List<Team> teams = teamService.getTeams();
+        List<Team> teams = TeamService.getTeams();
         return new ResponseEntity<>(teams, HttpStatus.OK);
     }
 
     @PostMapping("/add")
     public ResponseEntity<String> addNewTeam(@RequestBody Team newTeam) {
         try {
-            teamService.addNew(newTeam);
+            TeamService.addNew(newTeam);
             return new ResponseEntity<>("Team added successfully", HttpStatus.CREATED);
         } catch (IllegalStateException e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
@@ -39,7 +37,7 @@ public class TeamController {
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> deleteTeam(@PathVariable Long id) {
         try {
-            teamService.delete(id);
+            TeamService.delete(id);
             return new ResponseEntity<>("Team deleted successfully", HttpStatus.OK);
         } catch (IllegalStateException e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
@@ -49,7 +47,7 @@ public class TeamController {
     @PutMapping("/update/{id}")
     public ResponseEntity<String> updateTeam(@PathVariable Long id, @RequestBody User leader) {
         try {
-            teamService.update(id, leader);
+            TeamService.update(id, leader);
             return new ResponseEntity<>("Team updated successfully", HttpStatus.OK);
         } catch (IllegalStateException e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);

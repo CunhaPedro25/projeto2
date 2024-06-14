@@ -21,7 +21,7 @@ public class ConstructionController {
     @PostMapping("/add")
     public ResponseEntity<String> addNewConstruction(@RequestBody Construction newConstruction) {
         try {
-            constructionService.addNew(newConstruction);
+            ConstructionService.addNew(newConstruction);
             return new ResponseEntity<>("Construction added successfully", HttpStatus.CREATED);
         } catch (IllegalStateException e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
@@ -30,7 +30,7 @@ public class ConstructionController {
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> deleteConstruction(@PathVariable Long id) {
         try {
-            constructionService.delete(id);
+            ConstructionService.delete(id);
             return new ResponseEntity<>("Construction deleted successfully", HttpStatus.OK);
         } catch (IllegalStateException e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);

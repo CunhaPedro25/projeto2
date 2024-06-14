@@ -17,21 +17,21 @@ public class ProjectService {
     ProjectService.projectRepository = projectRepository;
   }
 
-  public List<Project> getProjectsByClientID(Integer clientID){
+  public static List<Project> getProjectsByClientID(Integer clientID){
     return ProjectService.projectRepository.findProjectByClient_id(clientID);
   }
 
-  public List<Project> getProjectsByEngineerID(Integer engineerID){
+  public static List<Project> getProjectsByEngineerID(Integer engineerID){
     return ProjectService.projectRepository.findProjectsByEngineer_Id(engineerID);
   }
-  public List<Project> getProjectsByConstructionType(Integer constructionTypeID){
+  public static List<Project> getProjectsByConstructionType(Integer constructionTypeID){
     return ProjectService.projectRepository.findProjectsByConstructionType_Id(constructionTypeID);
   }
-  public List<Project> getAllProjects(){
+  public static List<Project> getAllProjects(){
     return ProjectService.projectRepository.findAll();
   }
 
-  public void addNew(Project newProject){
+  public static void addNew(Project newProject){
     Optional<Project> existingProject = ProjectService.projectRepository.findProjectByClient_IdAndRequirementsCreateDate(newProject.getClient().getId(), newProject.getRequirementsCreateDate());
     if(existingProject.isPresent() ){
       throw new IllegalStateException("Project already exists");
@@ -39,7 +39,7 @@ public class ProjectService {
       ProjectService.projectRepository.save(newProject);
     }
   }
-  public void delete(Long projectID){
+  public static void delete(Long projectID){
     Optional<Project> existingProject = ProjectService.projectRepository.findById(projectID);
     if(existingProject.isPresent()){
       ProjectService.projectRepository.deleteById(projectID);

@@ -1,11 +1,18 @@
 package org.projeto.desktop.components;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
+import org.projeto.data.entities.User;
+import org.projeto.data.entities.UserType;
+import org.projeto.data.services.UserTypeService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
 public class RegisterFormController {
     @FXML
     public TextField firstName;
@@ -27,6 +34,7 @@ public class RegisterFormController {
     public TextField address;
     @FXML
     public TextField door;
+
     @FXML
     public TextField zipcode;
     @FXML
@@ -38,6 +46,7 @@ public class RegisterFormController {
 
     boolean passwordHidden = false;
 
+
     public boolean isFormCorrect() {
         return
                 email.getText().matches("^[\\w-.]+@([\\w-]+\\.)+[\\w-]{2,4}$")
@@ -47,25 +56,24 @@ public class RegisterFormController {
                         && (passwordHidden || (!password.getText().trim().isEmpty()))
                 ;
     }
+    public boolean isFormCorrectEdit() {
+        return
+                email.getText().matches("^[\\w-.]+@([\\w-]+\\.)+[\\w-]{2,4}$")
+                        && phone.getText().matches("\\d{9}")
+                        && !firstName.getText().trim().isEmpty()
+                        && !lastName.getText().trim().isEmpty();
+    }
 
-    public void setValues(String firstName, String lastName, String email, String address, String city, String phone){
+    public void setValues(String firstName, String lastName, String email, String address,String door, String phone){
         this.firstName.setText(firstName);
         this.lastName.setText(lastName);
         this.email.setText(email);
         this.address.setText(address);
-        this.city.setText(city);
+        this.door.setText(door);
         this.phone.setText(phone);
     }
 
-    public void setValues(String firstName, String lastName, String email, String password, String address, String city, String phone){
-        this.firstName.setText(firstName);
-        this.lastName.setText(lastName);
-        this.email.setText(email);
-        this.password.setText(password);
-        this.address.setText(address);
-        this.city.setText(city);
-        this.phone.setText(phone);
-    }
+
 
     public void clearValues(){
         this.firstName.clear();

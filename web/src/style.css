@@ -13,5 +13,10 @@
 }
 
 #app {
-  @apply flex flex-col w-screen h-screen;
+  @apply flex flex-col w-screen h-screen bg-background-900;
+}
+
+
+input {
+  @apply rounded-xl bg-background-900 py-2 px-2 ring-0 outline-0 border-0
 }

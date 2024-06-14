@@ -14,7 +14,7 @@ public class ConstructionTypeService {
     @Autowired
     public ConstructionTypeService(ConstructionTypeRepository constructionTypeRepository) { ConstructionTypeService.constructionTypeRepository = constructionTypeRepository;}
 
-    public void addNew(ConstructionType newType){
+    public static void addNew(ConstructionType newType){
         Optional<ConstructionType> existingConstructionType = ConstructionTypeService.constructionTypeRepository.findByType(newType.getType());
         if (existingConstructionType.isPresent()){
             throw new IllegalStateException("Construction type already exists");
@@ -22,7 +22,7 @@ public class ConstructionTypeService {
             ConstructionTypeService.constructionTypeRepository.save(newType);
         }
     }
-    public void delete (Long constructionTypeID){
+    public static void delete (Long constructionTypeID){
         Optional<ConstructionType> existingConstructionType = ConstructionTypeService.constructionTypeRepository.findById(constructionTypeID);
         if (existingConstructionType.isPresent()){
             ConstructionTypeService.constructionTypeRepository.deleteById(constructionTypeID);

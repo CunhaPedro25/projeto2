@@ -6,19 +6,24 @@
 <VBox spacing="10.0" styleClass="background" stylesheets="@../../../assets/styles/global.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.projeto.desktop.pages.dashboard.secretary.UsersPageController">
 
     <GridPane hgap="10.0">
-        <HBox alignment="CENTER_LEFT" spacing="10.0">
+        <HBox alignment="CENTER_LEFT" spacing="10.0" GridPane.columnIndex="0" GridPane.rowIndex="0">
             <Label>Search</Label>
             <TextField fx:id="searchField" />
         </HBox>
 
-        <Button onAction="#openModal" GridPane.columnIndex="1">
+        <Button fx:id="newUserButton" onAction="#openNewUserModal" GridPane.columnIndex="1" GridPane.rowIndex="0">
             New User
         </Button>
+        <Button fx:id="delete" onAction="#delete" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            Delete
+        </Button>
+
         <columnConstraints>
             <ColumnConstraints hgrow="ALWAYS" />
             <ColumnConstraints fillWidth="false" halignment="RIGHT" />
         </columnConstraints>
         <rowConstraints>
+            <RowConstraints />
             <RowConstraints />
         </rowConstraints>
     </GridPane>

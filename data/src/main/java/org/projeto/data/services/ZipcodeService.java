@@ -17,15 +17,15 @@ public class ZipcodeService{
     ZipcodeService.zipcodeRepository = zipcodeRepository;
   }
 
-  public List<Zipcode> getZipcodes(){ return ZipcodeService.zipcodeRepository.findAll();}
+  public static List<Zipcode> getZipcodes(){ return ZipcodeService.zipcodeRepository.findAll();}
 
-  public void addNew(Zipcode newZipcode){
+  public static void addNew(Zipcode newZipcode){
     if (ZipcodeService.zipcodeRepository.existsById(newZipcode.getId())){
       throw new IllegalStateException("Zipcode already exists");
     }
     ZipcodeService.zipcodeRepository.save(newZipcode);
   }
-  public void delete(Long id){
+  public static void delete(Long id){
     boolean exists = ZipcodeService.zipcodeRepository.existsById(id);
     if (!exists){
       throw new IllegalStateException("CodPostal with id"+id+"does not exist");
@@ -34,7 +34,7 @@ public class ZipcodeService{
     }
   }
 
-  public void update(Long id,String district, String city, String locale){
+  public static void update(Long id,String district, String city, String locale){
     Zipcode zipcode = ZipcodeService.zipcodeRepository.findById(id).orElseThrow(()-> new IllegalStateException( "CodPostal with id "+ id + " does not exist! "));
 
     if (district != null && !district.isEmpty() && !Objects.equals(zipcode.getDistrict(), district)) {

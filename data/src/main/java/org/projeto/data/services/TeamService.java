@@ -19,9 +19,9 @@ public class TeamService {
     TeamService.teamRepository = teamRepository;
   }
 
-  public List<Team> getTeams(){ return TeamService.teamRepository.findAll();}
+  public static List<Team> getTeams(){ return TeamService.teamRepository.findAll();}
 
-  public void addNew(Team newTeam){
+  public static void addNew(Team newTeam){
     Optional<Team> EquipaByChefe = TeamService.teamRepository.findByLeader_Id(newTeam.getLeader().getId());
     if (EquipaByChefe.isEmpty()){
       throw new IllegalStateException("This Equipa has no Chefe!");
@@ -29,7 +29,7 @@ public class TeamService {
     TeamService.teamRepository.save(newTeam);
   }
 
-  public void delete(Long id){
+  public static void delete(Long id){
     boolean exists = TeamService.teamRepository.existsById(id);
     if (!exists){
       throw new IllegalStateException("Equipa with id"+id+"does not exist");
@@ -38,7 +38,7 @@ public class TeamService {
     }
   }
 
-  public void update(Long id, User leader){
+  public static void update(Long id, User leader){
     Team team = TeamService.teamRepository.findById(id).orElseThrow(()-> new IllegalStateException( "Equipa with id "+ id + " does not exist! "));
 
     if (leader != null && leader.getId() != null && !Objects.equals(team.getLeader(), leader)) {

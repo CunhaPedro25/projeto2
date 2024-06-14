@@ -14,8 +14,14 @@ public class DashBoardController {
     private ScrollPane mainContent;
 
     public void initialize() {
-        EventBus.getInstance().subscribe(this::handleSidebarButtonEvent);
-        changePage();
+        try {
+            EventBus.getInstance().subscribe(this::handleSidebarButtonEvent);
+            changePage();
+        }catch (Exception e){
+            e.getCause();
+            e.printStackTrace();
+        }
+
     }
 
     private void handleSidebarButtonEvent(Event event) {
@@ -32,7 +38,8 @@ public class DashBoardController {
             Parent content = loader.load();
             mainContent.setContent(content);
         }catch (Exception e){
-                System.out.println("DashBoardController SidebarButtonEvent: " + e.getCause());
+            System.out.println("DashBoardController SidebarButtonEvent: " + e.getCause());
+            e.printStackTrace();
         }
     }
 }

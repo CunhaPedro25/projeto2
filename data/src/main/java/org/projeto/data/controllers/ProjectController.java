@@ -21,30 +21,30 @@ public class ProjectController {
 
     @GetMapping("/projects")
     public ResponseEntity<List<Project>> getAllProjects() {
-        List<Project> projects = projectService.getAllProjects();
+        List<Project> projects = ProjectService.getAllProjects();
         return new ResponseEntity<>(projects, HttpStatus.OK);
     }
 
-    @GetMapping("/clientProjects")
-    public ResponseEntity<List<Project>> getClientProjects(Integer clientID) {
-        List<Project> projects = projectService.getProjectsByClientID(clientID);
+    @GetMapping("/clientProjects/{id}")
+    public ResponseEntity<List<Project>> getClientProjects(@PathVariable String id) {
+        List<Project> projects = ProjectService.getProjectsByClientID(Integer.valueOf(id));
         return new ResponseEntity<>(projects, HttpStatus.OK);
     }
-    @GetMapping("/engineerProjects")
-    public ResponseEntity<List<Project>> getEngineerProjects(Integer engineerID){
-        List<Project> projects  = projectService.getProjectsByEngineerID(engineerID);
+    @GetMapping("/engineerProjects/{id}")
+    public ResponseEntity<List<Project>> getEngineerProjects(@PathVariable String id){
+        List<Project> projects  = ProjectService.getProjectsByEngineerID(Integer.valueOf(id));
         return new ResponseEntity<>(projects,HttpStatus.OK);
     }
 
-    @GetMapping("/projectsByConstructionType")
-    public ResponseEntity<List<Project>> getprojectsByConstructionTypes(Integer constructionTypeID){
-        List<Project> projects  = projectService.getProjectsByConstructionType(constructionTypeID);
+    @GetMapping("/projectsByConstructionType/{id}")
+    public ResponseEntity<List<Project>> getprojectsByConstructionTypes(@PathVariable String id){
+        List<Project> projects  = ProjectService.getProjectsByConstructionType(Integer.valueOf(id));
         return new ResponseEntity<>(projects,HttpStatus.OK);
     }
     @PostMapping("/add")
     public ResponseEntity<String> addNewProject(@RequestBody Project newProject) {
         try {
-            projectService.addNew(newProject);
+            ProjectService.addNew(newProject);
             return new ResponseEntity<>("Project added successfully", HttpStatus.CREATED);
         } catch (IllegalStateException e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
@@ -54,7 +54,7 @@ public class ProjectController {
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> deleteProject(@PathVariable Long id) {
         try {
-            projectService.delete(id);
+            ProjectService.delete(id);
             return new ResponseEntity<>("Project deleted successfully", HttpStatus.OK);
         } catch (IllegalStateException e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);

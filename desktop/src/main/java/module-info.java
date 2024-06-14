@@ -15,6 +15,7 @@ module org.projeto.desktop {
     requires java.smartcardio;
     requires spring.context;
     requires spring.beans;
+    requires org.apache.commons.codec;
 
     opens org.projeto.desktop to javafx.fxml;
     exports org.projeto.desktop;

@@ -21,16 +21,16 @@
 
 
         <HBox fx:id="userTypeSelection" alignment="CENTER" prefHeight="0.0" prefWidth="0.0" spacing="8.0">
-            <RadioButton mnemonicParsing="false" selected="true" text="Client" toggleGroup="$userType" onAction="#enableAddress"/>
-            <RadioButton mnemonicParsing="false" text="Secretary" toggleGroup="$userType" onAction="#disableAddress"/>
-            <RadioButton mnemonicParsing="false" text="Worker" toggleGroup="$userType" onAction="#disableAddress"/>
-            <RadioButton mnemonicParsing="false" text="Engineer" toggleGroup="$userType" onAction="#disableAddress"/>
+            <RadioButton mnemonicParsing="false" selected="true" text="Client" toggleGroup="$userType"/>
+            <RadioButton mnemonicParsing="false" text="Secretary" toggleGroup="$userType"/>
+            <RadioButton mnemonicParsing="false" text="Worker" toggleGroup="$userType"/>
+            <RadioButton mnemonicParsing="false" text="Engineer" toggleGroup="$userType"/>
         </HBox>
 
         <fx:include fx:id="registerForm" source="../../components/register-form.fxml" />
 
         <HBox alignment="CENTER_RIGHT" prefHeight="0.0" prefWidth="0.0" spacing="8.0">
-            <Button mnemonicParsing="false" text="Cancel" styleClass="secondary"/>
+            <Button mnemonicParsing="false" onAction="#cancel" text="Cancel" styleClass="secondary"/>
             <Button mnemonicParsing="false" onAction="#save" text="Save" fx:id="save"/>
         </HBox>
     </VBox>

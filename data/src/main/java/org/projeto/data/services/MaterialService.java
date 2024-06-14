@@ -15,11 +15,11 @@ public class MaterialService {
     @Autowired
     public MaterialService(MaterialRepository materialRepository ){ MaterialService.materialRepository = materialRepository;}
 
-    public Material getMaterialByID (Integer ID){
+    public static Material getMaterialByID (Integer ID){
         return MaterialService.materialRepository.findById(ID);
     }
 
-    public void addNew(Material newMaterial ){
+    public static void addNew(Material newMaterial ){
         Optional<Material> existingMaterial = MaterialService.materialRepository.findMaterialByName(newMaterial.getName());
         if (existingMaterial.isPresent()){
             throw new IllegalStateException("O material ja existe");
@@ -27,7 +27,7 @@ public class MaterialService {
             MaterialService.materialRepository.save(newMaterial);
         }
     }
-    public void delete(Long id){
+    public static void delete(Long id){
         MaterialService.materialRepository.deleteById(id);
     }
 }

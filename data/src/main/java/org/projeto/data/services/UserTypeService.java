@@ -18,9 +18,10 @@ public class UserTypeService {
     UserTypeService.userTypeRepository = userTypeRepository;
   }
 
-  public List<UserType> getAllUserTypes(){ return userTypeRepository.findAll();}
+  public static List<UserType> getAllUserTypes(){ return userTypeRepository.findAll();}
+  public static Optional<UserType> getByType(String type){return userTypeRepository.findByType(type);}
 
-  public void addNew(UserType newUserType){
+  public static void addNew(UserType newUserType){
     Optional<UserType> UserType = UserTypeService.userTypeRepository.findByType(newUserType.getType());
     if (UserType.isPresent()){
       throw new IllegalStateException("tipo de cliente already exists");
@@ -28,7 +29,7 @@ public class UserTypeService {
     UserTypeService.userTypeRepository.save(newUserType);
   }
 
-  public void delete(Long id){
+  public static void delete(Long id){
     boolean exists = UserTypeService.userTypeRepository.existsById(id);
     if (!exists){
       throw new IllegalStateException("TipoCliente with id"+id+"does not exist");
@@ -37,7 +38,7 @@ public class UserTypeService {
     }
   }
 
-  public void update(Long id, String type){
+  public static void update(Long id, String type){
     UserType userType = UserTypeService.userTypeRepository.findById(id).orElseThrow(()-> new IllegalStateException( "TipoCliente with id "+ id + " does not exist! "));
 
     if (type != null && !type.isEmpty() && !Objects.equals(userType.getType(),type)) {
