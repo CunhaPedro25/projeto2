@@ -1,5 +1,6 @@
 package org.projeto.desktop.pages.dashboard.secretary;
 
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -17,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 @Component
 public class ProjectsPageController {
@@ -27,11 +29,14 @@ public class ProjectsPageController {
     @FXML
     public TableColumn<Project, String> engineerColumn;
     @FXML
+    public TableColumn<Project,String> requirements_create_dateColumn;
+    @FXML
     public TableColumn<Project, LocalDate> budget_create_dateColumn;
     @FXML
     public TableColumn<Project, String> acceptedColumn;
     public TextField searchField;
     public Button delete;
+
 
     @FXML
     private TableView<Project> table;
@@ -57,7 +62,9 @@ public class ProjectsPageController {
             String engineer = project.getEngineer().getName();
             return new SimpleStringProperty(engineer);
         });
-        budget_create_dateColumn.setCellValueFactory(new PropertyValueFactory<>("budgetCreateDate"));
+        requirements_create_dateColumn.setCellValueFactory(new PropertyValueFactory<>("requirementsCreateDate"));
+        budget_create_dateColumn.setCellValueFactory(new PropertyValueFactory<>("requirementsCreateDate"));
+
 
         acceptedColumn.setCellValueFactory(cellData -> {
             Project project = cellData.getValue();

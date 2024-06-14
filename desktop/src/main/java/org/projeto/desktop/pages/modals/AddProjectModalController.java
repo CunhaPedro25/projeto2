@@ -94,7 +94,7 @@ public class AddProjectModalController {
                         .requirementsDocument(projectFormController.requirements_document.getText())
                         .requirementsCreateDate(LocalDate.now())
                         .constructionType(constructionType)
-                        .budgetCreateDate(LocalDate.now())
+                        .budgetCreateDate(null)
                         .budgetState(null)
                         .build();
                 ProjectService.addNew(project);

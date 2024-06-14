@@ -19,19 +19,10 @@
 
         <HBox fillHeight="false" spacing="10.0">
             <VBox HBox.hgrow="ALWAYS">
-                <Label contentDisplay="BOTTOM" styleClass="form-label" text="Budget Document" />
-                <TextField fx:id="budgetDocument" />
-            </VBox>
-            <VBox HBox.hgrow="ALWAYS">
                 <Label contentDisplay="BOTTOM" styleClass="form-label" text="Requirements_document" />
                 <TextField fx:id="requirements_document" />
             </VBox>
         </HBox>
-
-        <VBox>
-            <Label contentDisplay="BOTTOM" styleClass="form-label" text="Budget" />
-            <TextField fx:id="budget" />
-        </VBox>
     </VBox>
 
 </VBox>
