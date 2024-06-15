@@ -30,4 +30,12 @@ public class MaterialService {
     public static void delete(Long id){
         MaterialService.materialRepository.deleteById(id);
     }
+
+    public static void update(Material editMaterial) {
+        MaterialService.materialRepository.save(editMaterial);
+    }
+
+    public static List<Material> getAllMaterials() {
+        return MaterialService.materialRepository.findAll();
+    }
 }

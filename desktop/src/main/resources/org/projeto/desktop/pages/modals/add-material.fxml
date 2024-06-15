@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ScrollPane?>
+
+<ScrollPane stylesheets="@../../assets/styles/forms.css"
+            style="-fx-background-color: -background-900"
+            fitToHeight="true" fitToWidth="true"
+            styleClass="modal"
+            xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="org.projeto.desktop.pages.modals.AddMaterialModalController">
+
+    <VBox styleClass="form-container">
+
+        <fx:include fx:id="materialForm" source="../../components/material-form.fxml" />
+
+        <HBox alignment="CENTER_RIGHT" prefHeight="0.0" prefWidth="0.0" spacing="8.0">
+            <Button mnemonicParsing="false" onAction="#cancel" text="Cancel" styleClass="secondary"/>
+            <Button mnemonicParsing="false" onAction="#save" text="Save" fx:id="save"/>
+        </HBox>
+    </VBox>
+</ScrollPane>
