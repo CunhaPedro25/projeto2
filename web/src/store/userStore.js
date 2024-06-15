@@ -7,6 +7,7 @@ export const useUserStore = defineStore('user', {
         id: 0,
         name: '',
         email: '',
+        password: '',
         phone: '',
         address: '',
         door: 0,
@@ -20,6 +21,7 @@ export const useUserStore = defineStore('user', {
             this.id = user.id;
             this.name = user.name;
             this.email = user.email;
+            this.password = user.password;
             this.phone = user.phone;
             this.address = user.address;
             this.door = user.door;

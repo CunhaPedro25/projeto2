@@ -134,7 +134,7 @@ create table if not exists construction
     state integer
         constraint state_id_fk
 			references state,
-    last_update timestamp
+    last_update timestamp default CURRENT_TIMESTAMP
 );
 
 

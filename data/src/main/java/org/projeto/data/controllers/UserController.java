@@ -51,6 +51,16 @@ public class UserController {
         }
     }
 
+    @PostMapping("/update")
+    public ResponseEntity<String> updateUser(@RequestBody User user) {
+        try {
+            UserService.update(user);
+            return ResponseEntity.ok("User updated successfully");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error updating user: " + e.getMessage());
+        }
+    }
+
     @GetMapping("/get/{id}")
     public ResponseEntity<User> getUser(@PathVariable int id) {
         try {

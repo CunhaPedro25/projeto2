@@ -19,7 +19,7 @@ export default {
     },
     async updateUser(user) {
         try {
-            const response = await axios.put(`${API_URL}/update`, user);
+            const response = await axios.post(`${API_URL}/update`, user);
             if (response.data) {
                 return response.data;
             }

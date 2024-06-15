@@ -3,7 +3,7 @@
     <Sidebar></Sidebar>
     <div class="flex flex-col h-full w-full text-white">
       <Header />
-      <div class="flex flex-1 h-full">
+      <div class="flex flex-col flex-1 h-full">
         <router-view/>
       </div>
     </div>

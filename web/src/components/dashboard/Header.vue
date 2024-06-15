@@ -93,10 +93,9 @@ const fetchZipcodeDetails = async () => {
 
 const updateUser = async () => {
   editUser.value.close();
-  console.log("lol")
-  const updatedUser = await auth.updateUser(user);
-  if (updatedUser) {
-    user.setUser(updatedUser);
+  const ok = await auth.updateUser(user);
+  if (ok) {
+    user.setUser(user);
   }
 };
 </script>
