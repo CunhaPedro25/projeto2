@@ -40,9 +40,9 @@ export const useUserStore = defineStore('user', {
                 throw error;
             }
         },
-        logout() {
+        async logout() {
             this.$reset();
-            Cookies.remove("user_id"); // Remove user ID from cookie
+            Cookies.remove("user_id");
         },
         setCookie(){
             Cookies.set("user_id", this.id);

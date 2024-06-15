@@ -17,6 +17,17 @@ export default {
             throw error; // Throw error to handle it in caller function
         }
     },
+    async updateUser(user) {
+        try {
+            const response = await axios.put(`${API_URL}/update`, user);
+            if (response.data) {
+                return response.data;
+            }
+        } catch (error) {
+            console.error('Failed to update user:', error);
+            return null;
+        }
+    },
     async getUserById(userId) {
         const response = await axios.get(`${API_URL}/get/${userId}`);
         return response.data;

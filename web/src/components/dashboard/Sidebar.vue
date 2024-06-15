@@ -14,7 +14,7 @@
 
 <script setup>
 import SidebarItem from './SidebarItem.vue'
-import { createItems } from '../utils/sidebarItemFactory';
+import { createItems } from '../../utils/sidebarItemFactory.js';
 import {useUserStore} from "@/store/userStore";
 
 const userStore = useUserStore();

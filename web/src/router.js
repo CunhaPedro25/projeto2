@@ -13,27 +13,32 @@ const routes = [
         }},
     {
         path: '/dashboard',
+        name: 'Dashboard',
         component: Dashboard,
         meta: { requiresAuth: true },
         children: [
             {
                 path: 'home',
+                name: 'Home',
                 component: () => import(/* webpackChunkName: "about" */ './views/dashboards/Home.vue'),
                 meta: { requiresAuth: true }
             },
             {
                 path: 'project',
+                name: 'Project',
                 component: () => import(/* webpackChunkName: "about" */ './views/dashboards/Home.vue'),
                 meta: { requiresAuth: true }
             },
             {
                 path: 'budget',
+                name: 'Budget',
                 component: () => import(/* webpackChunkName: "about" */ './views/dashboards/Home.vue'),
                 meta: { requiresAuth: true }
             },
             {
                 path: 'construction',
-                component: () => import(/* webpackChunkName: "about" */ './views/dashboards/Home.vue'),
+                name: 'Construction',
+                component: () => import(/* webpackChunkName: "about" */ './views/dashboards/Construction.vue'),
                 meta: { requiresAuth: true }
             },
         ]

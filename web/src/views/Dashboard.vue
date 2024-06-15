@@ -1,8 +1,11 @@
 <template>
   <div class="flex w-full h-full">
     <Sidebar></Sidebar>
-    <div class="flex flex-1 h-full justify-center items-center">
-      <RouterView />
+    <div class="flex flex-col h-full w-full text-white">
+      <Header />
+      <div class="flex flex-1 h-full">
+        <router-view/>
+      </div>
     </div>
   </div>
 </template>
@@ -12,8 +15,9 @@
 </style>
 
 <script setup>
-import Sidebar from "@/components/Sidebar.vue";
+import Sidebar from "@/components/dashboard/Sidebar.vue";
 import {useUserStore} from "@/store/userStore";
+import Header from "../components/dashboard/Header.vue";
 
 const user = useUserStore()
 console.log(user)

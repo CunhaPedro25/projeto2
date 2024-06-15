@@ -14,7 +14,7 @@
         <input type="password" id="password" v-model="login.password" required/><br/>
       </div>
 
-      <button type="submit" class="rounded-xl bg-primary-600 w-fit px-4 py-1">Login</button>
+      <button type="submit" class="primary">Login</button>
       <p v-if="errorMessage" class="text-red-600">{{ errorMessage }}</p>
 
       <div class="mt-2 text-sm flex gap-1">
@@ -44,7 +44,7 @@ const loginUser = async () => {
   try {
     await userStore.login(login.value);
     errorMessage.value = '';
-    await router.push('/'); // Navigate to dashboard after successful login
+    await router.push('/dashboard/home'); // Navigate to dashboard after successful login
   } catch (error) {
     errorMessage.value = 'Invalid email or password';
   }
