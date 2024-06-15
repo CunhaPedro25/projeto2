@@ -11,7 +11,7 @@ export const useUserStore = defineStore('user', {
         address: '',
         door: 0,
         zipcode: '',
-        user_type: 0,
+        userType: 0,
         team: 0,
         active: true,
     }),
@@ -24,7 +24,7 @@ export const useUserStore = defineStore('user', {
             this.address = user.address;
             this.door = user.door;
             this.zipcode = user.zipcode;
-            this.user_type = user.user_type;
+            this.userType = user.userType;
             this.team = user.team;
             this.active = user.active;
         },
