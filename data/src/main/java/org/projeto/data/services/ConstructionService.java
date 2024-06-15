@@ -22,6 +22,9 @@ public class ConstructionService {
     public static List<Construction> findConstructionsByProjectAndAndState(Integer projectID, Integer stateID){
         return ConstructionService.constructionRepository.findConstructionsByProject_IdAndState_Id(projectID, stateID);
     }
+    public static List<Construction> getAllConstructions(){
+        return ConstructionService.constructionRepository.findAll();
+    }
 
     public static void addNew(Construction newConstruction){
         ConstructionService.constructionRepository.save(newConstruction);

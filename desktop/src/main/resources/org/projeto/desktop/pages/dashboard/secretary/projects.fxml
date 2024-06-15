@@ -18,8 +18,11 @@
             <TextField fx:id="searchField" />
         </HBox>
 
-        <Button fx:id="newProject" GridPane.columnIndex="1">
-            New Project
+        <Button fx:id="newProject" onAction="#openNewProjectModal" GridPane.columnIndex="1" GridPane.rowIndex="0">
+            New User
+        </Button>
+        <Button fx:id="delete" onAction="#delete" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            Delete
         </Button>
         <columnConstraints>
             <ColumnConstraints hgrow="ALWAYS" />
@@ -34,7 +37,8 @@
         <columns>
             <TableColumn fx:id="clientColumn" prefWidth="75.0" text="Client" />
             <TableColumn fx:id="engineerColumn" prefWidth="75.0" text="Engineer" />
-            <TableColumn fx:id="create_dateColumn" prefWidth="75.0" text="Create Date" />
+            <TableColumn fx:id="requirements_create_dateColumn" prefWidth="75.0" text="Requirements Date" />
+            <TableColumn fx:id="budget_create_dateColumn" prefWidth="75.0" text="Budget Date" />
             <TableColumn fx:id="acceptedColumn" prefWidth="75.0" text="Accepted" />
         </columns>
         <columnResizePolicy>

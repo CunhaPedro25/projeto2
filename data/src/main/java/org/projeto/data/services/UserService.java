@@ -6,6 +6,7 @@ import org.projeto.data.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -55,6 +56,14 @@ public class UserService{
   }
   public static List<User> getAllUsers() {
     return userRepository.findAll();
+  }
+  public static List<String> getUserTypeAllEmails(Integer userTypeID){
+    ArrayList<String> emails = new ArrayList<>();
+    for (User client : UserService.getUserByTypeID(userTypeID)){
+        assert false;
+        emails.add(client.getEmail());
+    }
+    return emails;
   }
   public static List<User> getUserByTypeID(Integer id){return userRepository.findByUserTypeId(id);}
 
