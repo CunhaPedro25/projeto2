@@ -1,4 +1,4 @@
-import { createRouter, createMemoryHistory } from 'vue-router';
+import {createRouter, createWebHistory} from 'vue-router';
 import { useUserStore } from '@/store/userStore';
 import Dashboard from '@/views/Dashboard.vue';
 import Login from '@/views/Login.vue';
@@ -47,12 +47,16 @@ const routes = [
 ];
 
 const router = createRouter({
-    history: createMemoryHistory(),
+    history: createWebHistory(import.meta.env.BASE_URL),
     routes,
 });
 
 router.beforeEach(async (to, from, next) => {
     const userIdFromCookie = Cookies.get('user_id');
+    if(!userIdFromCookie && to.name !== 'login') {
+        next('/login');
+        return;
+    }
     let userStore = null;
 
     if (userIdFromCookie) {

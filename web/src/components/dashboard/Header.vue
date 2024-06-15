@@ -31,7 +31,7 @@
           <label for="address">Address</label>
           <input type="text" id="address" v-model="user.address" />
 
-          <div class="flex gap-2">
+          <div class="grid grid-cols-2 grid-flow-row lg:flex gap-2">
             <div class="flex flex-col gap-1">
               <label for="postalCode">Postal Code</label>
               <input type="text" id="postalCode" v-model="user.zipcode.id" @blur="fetchZipcodeDetails"/>
