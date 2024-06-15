@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface ConstructionRepository  extends JpaRepository<Construction, Long> {
+public interface ConstructionRepository extends JpaRepository<Construction, Long> {
   Construction findById (Integer id);
 
   List<Construction> findByProject_Id(Integer id);

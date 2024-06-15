@@ -37,4 +37,12 @@ public class ConstructionService {
             throw new IllegalStateException("That construction does not exist");
         }
     }
+
+    public static Construction findById(Integer id) {
+        return ConstructionService.constructionRepository.findById(id);
+    }
+
+    public static void update(Construction editConstruction) {
+        ConstructionService.constructionRepository.save(editConstruction);
+    }
 }

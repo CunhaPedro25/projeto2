@@ -7,9 +7,9 @@ import org.projeto.data.entities.Construction;
 
 public class ConstructionTeamFormController {
     @FXML
-    public ComboBox<String> constructionsComboBox;
+    public ComboBox<Integer> constructionsComboBox;
     @FXML
-    public ComboBox<String> teamComboBox;
+    public ComboBox<Integer> teamComboBox;
     @FXML
     public TextField daily_value;
     @FXML
@@ -25,9 +25,9 @@ public class ConstructionTeamFormController {
                     && !start_date.getText().trim().isEmpty()
                     && !end_date.getText().trim().isEmpty();
     }
-    public void setValues(String constructionName, String teamName, String dailyValue, String startDate, String endDate){
-        this.constructionsComboBox.setValue(constructionName);
-        this.teamComboBox.setValue(teamName);
+    public void setValues(Integer constructionID, Integer teamID, String dailyValue, String startDate, String endDate){
+        this.constructionsComboBox.setValue(constructionID);
+        this.teamComboBox.setValue(teamID);
         this.daily_value.setText(dailyValue);
         this.start_date.setText(startDate);
         this.end_date.setText(endDate);

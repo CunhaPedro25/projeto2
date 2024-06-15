@@ -6,6 +6,7 @@ import org.projeto.data.repositories.TeamRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -20,6 +21,14 @@ public class TeamService {
   }
 
   public static List<Team> getTeams(){ return TeamService.teamRepository.findAll();}
+  public static Team getTeamById(Long id) {
+    Optional<Team> teamOptional = TeamService.teamRepository.findById(id);
+    if (teamOptional.isPresent()) {
+      return teamOptional.get();
+    } else {
+      throw new IllegalStateException("Team with id " + id + " does not exist");
+    }
+  }
 
   public static void addNew(Team newTeam){
     Optional<Team> EquipaByChefe = TeamService.teamRepository.findByLeader_Id(newTeam.getLeader().getId());
@@ -50,4 +59,13 @@ public class TeamService {
       }
     }
   }
+
+    public static List<Integer> getAllTeamsIds() {
+        List<Team> team_entities = teamRepository.findAll();
+        List<Integer> team_ids = new ArrayList<>();
+        for (Team team : team_entities) {
+            team_ids.add(team.getId());
+        }
+        return team_ids;
+    }
 }

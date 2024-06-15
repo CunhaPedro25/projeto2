@@ -19,13 +19,13 @@
         </HBox>
 
         <Button fx:id="newConstruction" onAction="#openNewConstructionModal" GridPane.columnIndex="1" GridPane.rowIndex="0">
-            New User
+            New Construction
         </Button>
         <Button fx:id="delete" onAction="#delete" GridPane.columnIndex="1" GridPane.rowIndex="1">
             Delete
         </Button>
-        <Button fx:id="manageTeam" onAction="#manageTeam" GridPane.columnIndex="2" GridPane.rowIndex="1">
-            Delete
+        <Button fx:id="addTeam" onAction="#addTeam" GridPane.columnIndex="2" GridPane.rowIndex="1">
+            Add Team
         </Button>
 <!--    <Button fx:id="manageMaterial" onAction="#openConstruction" GridPane.columnIndex="1" GridPane.rowIndex="1">
         Delete

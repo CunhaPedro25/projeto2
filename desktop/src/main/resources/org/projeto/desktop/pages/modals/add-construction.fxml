@@ -12,42 +12,16 @@
             styleClass="modal"
             xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
-            fx:controller="org.projeto.desktop.pages.modals.AddUserModalController">
+            fx:controller="org.projeto.desktop.pages.modals.AddConstructionModalController">
 
     <FlowPane alignment="CENTER" styleClass="background">
         <VBox alignment="CENTER" styleClass="form-container">
 
-            <VBox spacing="5.0">
-                <HBox fillHeight="false" spacing="10.0">
-                    <VBox HBox.hgrow="ALWAYS">
-                        <Label contentDisplay="BOTTOM" styleClass="form-label" text="Team" />
-                        <TextField fx:id="team" />
-                    </VBox>
-                    <VBox HBox.hgrow="ALWAYS">
-                        <Label contentDisplay="BOTTOM" styleClass="form-label" text="Budget" />
-                        <TextField fx:id="lastName" layoutX="10.0" layoutY="10.0" />
-                    </VBox>
-                </HBox>
+            <fx:include fx:id="constructionForm" source="../../components/construction-form.fxml" />
 
-                <HBox fillHeight="false" spacing="10.0">
-                    <VBox HBox.hgrow="ALWAYS">
-                        <Label contentDisplay="BOTTOM" styleClass="form-label" text="Email" />
-                        <TextField fx:id="email" />
-                    </VBox>
-                    <VBox HBox.hgrow="ALWAYS">
-                        <Label fx:id="passwordLabel" contentDisplay="BOTTOM" styleClass="form-label" text="Password" />
-                        <PasswordField fx:id="password" />
-                    </VBox>
-                </HBox>
-
-                <VBox>
-                    <Label contentDisplay="BOTTOM" styleClass="form-label" text="Phone" />
-                    <TextField fx:id="phone" />
-                </VBox>
-            </VBox>
             <HBox alignment="CENTER_RIGHT" prefHeight="0.0" prefWidth="0.0" spacing="8.0">
-                <Button mnemonicParsing="false" text="Cancel" styleClass="secondary"/>
-                <Button mnemonicParsing="false" text="Save" fx:id="save"/>
+                <Button mnemonicParsing="false" onAction="#cancel" text="Cancel" styleClass="secondary"/>
+                <Button mnemonicParsing="false" onAction="#save" text="Save" fx:id="save"/>
             </HBox>
         </VBox>
     </FlowPane>
