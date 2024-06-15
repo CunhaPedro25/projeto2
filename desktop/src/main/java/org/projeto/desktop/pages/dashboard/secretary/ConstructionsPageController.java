@@ -121,6 +121,7 @@ public class ConstructionsPageController {
             e.printStackTrace();
             SceneManager.openErrorAlert("Error", "It was not possible to edit the project. Please try again.");
         }
+        populateTableView();
     }
 
     @FXML
@@ -133,11 +134,19 @@ public class ConstructionsPageController {
             e.printStackTrace();
             SceneManager.openErrorAlert("Error", "It was not possible to edit the project. Please try again.");
         }
+        populateTableView();
     }
     @FXML
     public void addTeam(ActionEvent actionEvent) {
     }
     public void delete(ActionEvent actionEvent) {
+        try {
+            ConstructionService.delete(Long.valueOf(selectedConstruction.getId()));
+            populateTableView();
+        } catch (Exception e) {
+            e.printStackTrace();
+            SceneManager.openErrorAlert("Error", "It was not possible to delete the construction. Please try again.");
+        }
     }
 
 }

@@ -5,6 +5,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.projeto.data.repositories.ConstructionRepository;
 
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.List;
 import java.util.Optional;
 
@@ -43,6 +47,10 @@ public class ConstructionService {
     }
 
     public static void update(Construction editConstruction) {
+        LocalDateTime localDateTime = LocalDate.now().atStartOfDay();
+        ZoneId zoneId = ZoneId.systemDefault();
+        Instant instant = localDateTime.atZone(zoneId).toInstant();
+        editConstruction.setLastUpdate(instant);
         ConstructionService.constructionRepository.save(editConstruction);
     }
 }
