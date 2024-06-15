@@ -6,6 +6,8 @@ import org.projeto.data.repositories.TeamRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -68,4 +70,22 @@ public class TeamService {
         }
         return team_ids;
     }
+
+  public static void update(Team editTeam) {
+    teamRepository.save(editTeam);
+
+  }
+
+  public static List<String> getLeaderNames() {
+    List<Team> teams = teamRepository.findAll();
+    List<String> leaderNames = new ArrayList<>();
+    for (Team team : teams) {
+      leaderNames.add(team.getLeader().getName());
+    }
+    return leaderNames;
+  }
+
+  public static void updateTeam(Team editTeam) {
+    teamRepository.save(editTeam);
+  }
 }

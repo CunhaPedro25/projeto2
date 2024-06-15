@@ -9,8 +9,10 @@ import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class ConstructionService {
@@ -52,5 +54,12 @@ public class ConstructionService {
         Instant instant = localDateTime.atZone(zoneId).toInstant();
         editConstruction.setLastUpdate(instant);
         ConstructionService.constructionRepository.save(editConstruction);
+    }
+
+    public static List<Integer> getAllConstructionIds() {
+        return ConstructionService.constructionRepository.findAll()
+                .stream()
+                .map(Construction::getId)
+                .collect(Collectors.toList());
     }
 }

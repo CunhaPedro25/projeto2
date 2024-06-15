@@ -13,13 +13,13 @@
             styleClass="modal"
             xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
-            fx:controller="org.projeto.desktop.pages.modals.AddConstructionTeamModalController">
+            fx:controller="org.projeto.desktop.pages.modals.AddTeamModalController">
 
     <FlowPane alignment="CENTER" styleClass="background">
         <VBox alignment="CENTER" styleClass="form-container">
 
 
-            <fx:include fx:id="constructionTeamForm" source="../../components/constructionTeam-form.fxml" />
+            <fx:include fx:id="constructionTeamForm" source="../../components/team-form.fxml" />
 
             <HBox alignment="CENTER_RIGHT" prefHeight="0.0" prefWidth="0.0" spacing="8.0">
                 <Button mnemonicParsing="false" onAction="#cancel"  text="Cancel" styleClass="secondary"/>
