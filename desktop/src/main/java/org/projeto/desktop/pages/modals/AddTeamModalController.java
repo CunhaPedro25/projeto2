@@ -1,5 +1,6 @@
 package org.projeto.desktop.pages.modals;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -14,7 +15,6 @@ import org.projeto.desktop.SceneManager;
 import org.projeto.desktop.components.TeamFormController;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.util.List;
 
 public class AddTeamModalController {
@@ -24,14 +24,16 @@ public class AddTeamModalController {
     public Button save;
     private boolean edit = false;
     private boolean addConstruction = false;
-    Team editTeam = null;
+    Team selectedTeam = null;
 
 
     public void initialize() {
-        List<String> leaderNames = TeamService.getLeaderNames();
-        teamFormController.leaderComboBox.setItems((ObservableList<String>) leaderNames);
+        List<String> names = TeamService.getLeaderNames();
+        ObservableList<String> leaderNames = FXCollections.observableArrayList(names);
+        teamFormController.leaderComboBox.setItems(leaderNames);
         List<Integer> constructionIds = ConstructionService.getAllConstructionIds();
-        teamFormController.constructionComboBox.setItems((ObservableList<Integer>) constructionIds);
+        ObservableList<Integer> constructionIdsList = FXCollections.observableArrayList(constructionIds);
+        teamFormController.constructionComboBox.setItems(constructionIdsList);
 
     }
     @FXML
@@ -46,33 +48,83 @@ public class AddTeamModalController {
                     SceneManager.openErrorAlert("Error edit", "Please fill all the required fields correctly");
                     return;
                 } else {
-                    editTeam.setDailyValue(new BigDecimal(teamFormController.daily_value.getText()));
-                    editTeam.setLeader(UserService.findUserByName(teamFormController.leaderComboBox.getValue()));
-                    TeamService.updateTeam(editTeam);
+                    selectedTeam.setDailyValue(new BigDecimal(teamFormController.daily_value.getText()));
+                    selectedTeam.setLeader(UserService.findUserByName(teamFormController.leaderComboBox.getValue()));
+                    TeamService.updateTeam(selectedTeam);
                     SceneManager.closeWindow(save);
+                }
+            }else if (addConstruction){
+                if (!teamFormController.isFormCorrectAddingToConstruction()){
+                    SceneManager.openErrorAlert("Error add", "Please fill all the required fields correctly");
+                    return;
+                } else {
+                    ConstructionTeamService.addNew(ConstructionTeam.builder()
+                            .construction(ConstructionService.findById(teamFormController.constructionComboBox.getValue()))
+                            .team(TeamService.getTeamById(Long.valueOf(selectedTeam.getId())))
+                            .startDate(teamFormController.start_date.getValue())
+                            .endDate(teamFormController.end_date.getValue())
+                            .dailyValue(new BigDecimal(teamFormController.daily_value.getText()))
+                            .build());
+                    SceneManager.closeWindow(save);
+
                 }
             }else {
                 if (!teamFormController.isFormCorrect()){
                     SceneManager.openErrorAlert("Error add", "Please fill all the required fields correctly");
                     return;
                 } else {
-                    Team team = new Team();
-                    team.setDailyValue(new BigDecimal(teamFormController.daily_value.getText()));
-                    team.setLeader(UserService.findUserByName(teamFormController.leaderComboBox.getValue()));
-                    TeamService.addNew(team);
+                    TeamService.addNew(Team.builder()
+                            .dailyValue(new BigDecimal(teamFormController.daily_value.getText()))
+                            .leader(UserService.findUserByName(teamFormController.leaderComboBox.getValue()))
+                            .build());
                     SceneManager.closeWindow(save);
-
                 }
-
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+    public void enableAddTeam(){
+        addConstruction = false;
+        edit = false;
+        System.out.println("add team is true CARALHO");
+        teamFormController.leaderComboBox.setDisable(false);
+        teamFormController.start_date.setDisable(true);
+        teamFormController.end_date.setDisable(true);
+        teamFormController.constructionComboBox.setVisible(false);
+        teamFormController.constructionLabel.setVisible(false);
+    }
+    public void enableAddToConstruction(Team Team) {
+        addConstruction = true;
+        edit = false;
+        selectedTeam = Team;
+        System.out.println("add construction is true CARALHO");
 
-    public void enableEdit(Team selectedTeam) {
+        teamFormController.leaderComboBox.setDisable(true);
+        teamFormController.leaderComboBox.setValue(selectedTeam.getLeader().getName());
+
+        teamFormController.start_date.setDisable(false);
+        teamFormController.start_date.setVisible(true);
+
+        teamFormController.end_date.setDisable(false);
+        teamFormController.end_date.setVisible(true);
+
+        teamFormController.constructionComboBox.setVisible(true);
+        teamFormController.constructionLabel.setVisible(true);
+    }
+
+    public void enableEdit(Team Team) {
         edit = true;
-        editTeam = selectedTeam;
+        addConstruction = false;
+
+        System.out.println("edit team is true CARALHO");
+
+        selectedTeam = Team;
+        teamFormController.start_date.setDisable(true);
+        teamFormController.end_date.setDisable(true);
+        teamFormController.constructionComboBox.setVisible(false);
+        teamFormController.constructionLabel.setVisible(false);
+
 
     }
 }

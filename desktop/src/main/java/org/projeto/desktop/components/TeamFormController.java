@@ -3,6 +3,7 @@ package org.projeto.desktop.components;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 import java.time.LocalDate;
@@ -19,6 +20,8 @@ public class TeamFormController {
     public ComboBox<String> leaderComboBox;
     @FXML
     public ComboBox<Integer> constructionComboBox;
+    @FXML
+    public Label constructionLabel;
 
     public boolean isFormCorrect() {
         return

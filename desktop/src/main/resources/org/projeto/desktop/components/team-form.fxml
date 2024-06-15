@@ -30,7 +30,7 @@
         </HBox>
         <HBox fillHeight="false" spacing="10.0">
             <VBox HBox.hgrow="ALWAYS">
-                <Label contentDisplay="BOTTOM" styleClass="form-label" text="Add team to Constructions" />
+                <Label fx:id="constructionLabel" contentDisplay="BOTTOM" styleClass="form-label" text="Add team to Constructions" />
                 <ComboBox fx:id="constructionComboBox" />
             </VBox>
         </HBox>

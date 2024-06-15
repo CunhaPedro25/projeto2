@@ -69,6 +69,7 @@ public class TeamsPageController {
             );
         });
         delete.setDisable(true);
+        addJob.setDisable(true);
 
         // Add combined click listener with a timer
         table.setOnMouseClicked(event -> {
@@ -82,6 +83,7 @@ public class TeamsPageController {
                     if (event.getClickCount() == 1) {
                         System.out.println("Single click detected");
                         delete.setDisable(false);
+                        addJob.setDisable(false);
                     }
                 });
 
@@ -105,8 +107,8 @@ public class TeamsPageController {
     private void editTeam(Team selectedProject) {
         try{
             SceneManager.openNewModal(
-                    "pages/modals/add-project.fxml",
-                    "Edit Project",
+                    "pages/modals/add-team.fxml",
+                    "Edit Team",
                     true,
                     controller -> {
                         AddTeamModalController editTeam = (AddTeamModalController) controller;
@@ -117,15 +119,35 @@ public class TeamsPageController {
             e.printStackTrace();
             SceneManager.openErrorAlert("Error", "It was not possible to edit the project. Please try again.");
         }
+        populateTableView();
     }
     @FXML
     public void openNewTeamModal(ActionEvent actionEvent) {
-        SceneManager.openNewModal("pages/modals/add-team.fxml", "Add Team", true);
+        SceneManager.openNewModal(
+                "pages/modals/add-team.fxml",
+                "Add Team",
+                true,
+                controller -> {
+                    AddTeamModalController addTeam = (AddTeamModalController) controller;
+                    addTeam.enableAddTeam();
+                });
+        populateTableView();
     }
     @FXML
     public void openNewTeamJobModal(ActionEvent actionEvent) {
+        SceneManager.openNewModal(
+                "pages/modals/add-team.fxml",
+                "Add New Job",
+                true,
+                controller -> {
+                    AddTeamModalController addJob = (AddTeamModalController) controller;
+                    addJob.enableAddToConstruction(selectedTeam);
+                });
+        populateTableView();
     }
     @FXML
     public void delete(ActionEvent actionEvent) {
+        TeamService.delete(Long.valueOf(selectedTeam.getId()));
+        populateTableView();
     }
 }

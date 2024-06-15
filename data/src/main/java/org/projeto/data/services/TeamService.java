@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class TeamService {
@@ -33,10 +34,7 @@ public class TeamService {
   }
 
   public static void addNew(Team newTeam){
-    Optional<Team> EquipaByChefe = TeamService.teamRepository.findByLeader_Id(newTeam.getLeader().getId());
-    if (EquipaByChefe.isEmpty()){
-      throw new IllegalStateException("This Equipa has no Chefe!");
-    }
+
     TeamService.teamRepository.save(newTeam);
   }
 
@@ -76,13 +74,12 @@ public class TeamService {
 
   }
 
+
   public static List<String> getLeaderNames() {
-    List<Team> teams = teamRepository.findAll();
-    List<String> leaderNames = new ArrayList<>();
-    for (Team team : teams) {
-      leaderNames.add(team.getLeader().getName());
-    }
-    return leaderNames;
+    return teamRepository.findAll().stream()
+            .map(team -> team.getLeader().getName())
+            .distinct()
+            .collect(Collectors.toList());
   }
 
   public static void updateTeam(Team editTeam) {
