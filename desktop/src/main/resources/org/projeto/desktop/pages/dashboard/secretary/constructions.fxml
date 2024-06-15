@@ -25,6 +25,9 @@
             <Button fx:id="addTeam" onAction="#addTeam">
                 Add Team
             </Button>
+            <Button fx:id="addMaterial" onAction="#addMaterial">
+                Add Material
+            </Button>
         </HBox>
 <!--    <Button fx:id="manageMaterial" onAction="#openConstruction" GridPane.columnIndex="1" GridPane.rowIndex="1">
         Delete

@@ -20,8 +20,10 @@ import org.projeto.data.entities.Stage;
 import org.projeto.data.services.ConstructionService;
 import org.projeto.desktop.SceneManager;
 import org.projeto.desktop.pages.modals.AddConstructionModalController;
+import org.projeto.desktop.pages.modals.AddMaterialConstructionModalController;
 import org.projeto.desktop.pages.modals.AddProjectModalController;
 
+import java.lang.reflect.InvocationTargetException;
 import java.time.LocalDate;
 
 public class ConstructionsPageController {
@@ -45,6 +47,8 @@ public class ConstructionsPageController {
     public TableColumn<Construction,String> constructionTypeColumn;
     @FXML
     public Button addTeam;
+    @FXML
+    public Button addMaterial;
     Construction selectedConstruction;
     public void initialize() {
         populateTableView();
@@ -75,6 +79,7 @@ public class ConstructionsPageController {
         });
         delete.setDisable(true);
         addTeam.setDisable(true);
+        addMaterial.setDisable(true);
 
         // Add combined click listener with a timer
         table.setOnMouseClicked(event -> {
@@ -89,6 +94,7 @@ public class ConstructionsPageController {
                         System.out.println("Single click detected");
                         delete.setDisable(false);
                         addTeam.setDisable(false);
+                        addMaterial.setDisable(false);
                     }
                 });
 
@@ -115,6 +121,7 @@ public class ConstructionsPageController {
                     controller -> {
                         AddConstructionModalController editConstruction = (AddConstructionModalController) controller;
                         editConstruction.enableEdit(selectedConstruction);
+                        System.out.println("we are trying VERY HARD" + selectedConstruction.getId());
                     });
 
         } catch (Exception e) {
@@ -122,6 +129,26 @@ public class ConstructionsPageController {
             SceneManager.openErrorAlert("Error", "It was not possible to edit the project. Please try again.");
         }
         populateTableView();
+    }
+    @FXML
+    public void addMaterial(ActionEvent actionEvent) {
+        try {
+            System.out.println("we are trying");
+            SceneManager.openNewModal(
+                    "pages/modals/add-materialConstruction.fxml",
+                    "Add Material to Construction",
+                    true,
+                    controller -> {
+                        AddMaterialConstructionModalController addMaterial = (AddMaterialConstructionModalController) controller;
+                        addMaterial.setConstruction(selectedConstruction);
+                        System.out.println("we are trying VERY HARD" + selectedConstruction.getId());
+
+                    });
+        }catch (Exception e){
+            Throwable cause = e.getCause();
+            cause.printStackTrace();
+            SceneManager.openErrorAlert("Error", "It was not possible to add the material. Please try again.");
+        }
     }
 
     @FXML
