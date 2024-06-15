@@ -1,16 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox spacing="10.0" stylesheets="@../../../assets/styles/global.css"
-      styleClass="background"
-      xmlns="http://javafx.com/javafx"
-      xmlns:fx="http://javafx.com/fxml"
-      fx:controller="org.projeto.desktop.pages.dashboard.secretary.TeamsPageController">
+<VBox spacing="10.0" styleClass="background" stylesheets="@../../../assets/styles/global.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.projeto.desktop.pages.dashboard.secretary.TeamsPageController">
 
     <GridPane hgap="10.0">
         <HBox alignment="CENTER_LEFT" spacing="10.0">
@@ -18,19 +11,22 @@
             <TextField fx:id="searchField" />
         </HBox>
 
-        <Button fx:id="newTeam" onAction="#openNewTeamModal" GridPane.columnIndex="1" GridPane.rowIndex="0">
-            New Team
-        </Button>
-        <Button fx:id="delete" onAction="#delete" GridPane.columnIndex="1" GridPane.rowIndex="1">
-            Delete
-        </Button>
-        <Button fx:id="addJob" onAction="#openNewTeamJobModal" GridPane.columnIndex="1" GridPane.rowIndex="2">
-            New Job
-        </Button>
+        <HBox GridPane.columnIndex="1" alignment="CENTER_RIGHT">
+            <Button fx:id="newTeam" onAction="#openNewTeamModal">
+                New Team
+            </Button>
+            <Button fx:id="delete" onAction="#delete">
+                Delete
+            </Button>
+            <Button fx:id="addJob" onAction="#openNewTeamJobModal">
+                New Job
+            </Button>
+        </HBox>
 
         <columnConstraints>
             <ColumnConstraints hgrow="ALWAYS" />
-            <ColumnConstraints fillWidth="false" halignment="RIGHT" />
+         <ColumnConstraints hgrow="ALWAYS" />
+         <ColumnConstraints fillWidth="false" halignment="RIGHT" />
         </columnConstraints>
         <rowConstraints>
             <RowConstraints />

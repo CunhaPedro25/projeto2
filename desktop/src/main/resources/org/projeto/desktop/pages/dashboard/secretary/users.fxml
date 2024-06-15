@@ -11,12 +11,14 @@
             <TextField fx:id="searchField" />
         </HBox>
 
-        <Button fx:id="newUserButton" onAction="#openNewUserModal" GridPane.columnIndex="1" GridPane.rowIndex="0">
-            New User
-        </Button>
-        <Button fx:id="delete" onAction="#delete" GridPane.columnIndex="1" GridPane.rowIndex="1">
-            Delete
-        </Button>
+        <HBox GridPane.columnIndex="1" alignment="CENTER_RIGHT">
+            <Button fx:id="newUserButton" onAction="#openNewUserModal">
+                New User
+            </Button>
+            <Button fx:id="delete" onAction="#delete">
+                Delete
+            </Button>
+        </HBox>
 
         <columnConstraints>
             <ColumnConstraints hgrow="ALWAYS" />

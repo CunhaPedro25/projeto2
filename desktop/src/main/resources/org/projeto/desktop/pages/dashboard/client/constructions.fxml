@@ -15,9 +15,11 @@
             <TextField />
         </HBox>
 
-        <Button fx:id="newConstruction" text="New Construction" GridPane.columnIndex="1">
-            New project
-        </Button>
+        <HBox GridPane.columnIndex="1" alignment="CENTER_RIGHT">
+            <Button fx:id="newConstruction" text="New Construction">
+                New project
+            </Button>
+        </HBox>
         <columnConstraints>
             <ColumnConstraints hgrow="ALWAYS" />
             <ColumnConstraints fillWidth="false" halignment="RIGHT" />

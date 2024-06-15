@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
@@ -18,12 +15,16 @@
             <TextField fx:id="searchField" />
         </HBox>
 
-        <Button fx:id="newProject" onAction="#openNewProjectModal" GridPane.columnIndex="1" GridPane.rowIndex="0">
-            New User
-        </Button>
-        <Button fx:id="delete" onAction="#delete" GridPane.columnIndex="1" GridPane.rowIndex="1">
-            Delete
-        </Button>
+        <HBox GridPane.columnIndex="1" alignment="CENTER_RIGHT">
+            <Button fx:id="newProject" onAction="#openNewProjectModal">
+                New User
+            </Button>
+            <Button fx:id="delete" onAction="#delete">
+                Delete
+            </Button>
+        </HBox>
+
+
         <columnConstraints>
             <ColumnConstraints hgrow="ALWAYS" />
             <ColumnConstraints fillWidth="false" halignment="RIGHT" />

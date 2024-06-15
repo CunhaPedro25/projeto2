@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
@@ -11,9 +10,13 @@
             <TextField />
         </HBox>
 
-        <Button fx:id="newProject" text="New project" GridPane.columnIndex="1">
-            New project
-        </Button>
+        <HBox GridPane.columnIndex="1" alignment="CENTER_RIGHT">
+            <Button fx:id="newProject" text="New project">
+                New project
+            </Button>
+        </HBox>
+
+
         <columnConstraints>
             <ColumnConstraints hgrow="ALWAYS" />
             <ColumnConstraints fillWidth="false" halignment="RIGHT" />
