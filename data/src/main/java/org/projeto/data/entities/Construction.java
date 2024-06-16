@@ -51,4 +51,7 @@ public class Construction {
     @OneToMany(mappedBy = "construction")
     private Set<ConstructionTeam> constructionTeams = new LinkedHashSet<>();
 
+  @Column(name = "name", length = Integer.MAX_VALUE)
+  private String name;
+
 }
