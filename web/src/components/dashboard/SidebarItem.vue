@@ -1,6 +1,6 @@
 <template>
   <router-link :to="path"
-               class="flex flex-col w-16 min-h-16 text-center rounded-xl p-2 text-primary-400 truncate"
+               class="flex flex-col w-16 min-h-16 text-center rounded-xl p-2 text-primary-400 truncate gap-1 hover:bg-primary-400 hover:text-white transition-colors duration-200"
                :class="{ 'bg-primary-500 text-white': isActive }"
                @click="path === '/' ? logout() : ''">
 
