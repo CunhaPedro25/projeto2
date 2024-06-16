@@ -7,7 +7,6 @@ export default {
         try {
             const response = await axios.get(API_URL + `/${zipcode}`);
             if (response.data) {
-                console.log('Zipcode details:', response.data);
                 return response.data;
             }
         } catch (error) {

@@ -1,6 +1,7 @@
 import {defineStore} from 'pinia';
 import auth from '@/services/auth';
 import Cookies from 'js-cookie';
+import data from "../services/data.js";
 
 export const useUserStore = defineStore('user', {
     state: () => ({
@@ -43,9 +44,18 @@ export const useUserStore = defineStore('user', {
         async logout() {
             this.$reset();
             Cookies.remove("user_id");
+            Cookies.remove('user_type');
+            Cookies.remove('team_id');
+            Cookies.remove('team_leader');
         },
-        setCookie(){
+        async setCookie(){
             Cookies.set("user_id", this.id);
+            Cookies.set('user_type', this.userType.type.toLowerCase());
+            if(this.userType.type.toLowerCase() === 'worker') {
+                Cookies.set('team_id', this.team.id);
+                let leader = await data.getTeamLeader(this.team.id);
+                Cookies.set('team_leader', leader.id === this.id);
+            }
         },
         async loadUserFromCookie() {
             const userId = Cookies.get("user_id");

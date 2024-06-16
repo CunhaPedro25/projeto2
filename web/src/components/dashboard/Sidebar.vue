@@ -14,9 +14,15 @@
 
 <script setup>
 import SidebarItem from './SidebarItem.vue'
-import { createItems } from '../../utils/sidebarItemFactory.js';
+import {createItems} from '../../utils/sidebarItemFactory.js';
 import {useUserStore} from "@/store/userStore";
+import Cookies from "js-cookie";
 
 const userStore = useUserStore();
-const sidebarItems = createItems(userStore.userType.type.toLowerCase());
+let sidebarItems = createItems(userStore.userType.type.toLowerCase());
+const type = Cookies.get("user_type")
+const leader = Cookies.get("team_leader")
+if (type === "worker" && leader !== "true") {
+  sidebarItems.pop()
+}
 </script>

@@ -2,14 +2,19 @@ import {createRouter, createWebHistory} from 'vue-router';
 import { useUserStore } from '@/store/userStore';
 import Dashboard from '@/views/Dashboard.vue';
 import Login from '@/views/Login.vue';
+import Register from '@/views/Register.vue';
 import Cookies from "js-cookie";
+import {createItems} from "./utils/sidebarItemFactory.js";
+import path from 'path-browserify';
+
 
 const routes = [
     {
         path: '/',
         redirect: () => {
             const userIdFromCookie = Cookies.get('user_id');
-            return userIdFromCookie ? '/dashboard/home' : '/login';
+            const userType = Cookies.get('user_type');
+            return userIdFromCookie ? path.join('/dashboard/', createItems(userType)[0].page) : '/login';
         }},
     {
         path: '/dashboard',
@@ -24,14 +29,14 @@ const routes = [
                 meta: { requiresAuth: true }
             },
             {
-                path: 'project',
-                name: 'Project',
+                path: 'projects',
+                name: 'Projects',
                 component: () => import(/* webpackChunkName: "about" */ './views/dashboards/Projects.vue'),
                 meta: { requiresAuth: true }
             },
             {
-                path: 'budget',
-                name: 'Budget',
+                path: 'budgets',
+                name: 'Budgets',
                 component: () => import(/* webpackChunkName: "about" */ './views/dashboards/Budgets.vue'),
                 meta: { requiresAuth: true }
             },
@@ -42,14 +47,35 @@ const routes = [
                 meta: { requiresAuth: true }
             },
             {
-                path: 'construction/:id',
-                name: 'Construction',
+                path: 'construction',
+                name: 'Current Construction',
                 component: () => import(/* webpackChunkName: "about" */ './views/dashboards/Construction.vue'),
+                meta: { requiresAuth: true },
+                children: [
+                    {
+                        path: ':id',
+                        name: 'Construction',
+                        component: () => import(/* webpackChunkName: "about" */ './views/dashboards/Construction.vue'),
+                        meta: { requiresAuth: true }
+                    },
+                ]
+            },
+            {
+                path: 'invoices',
+                name: 'Invoices',
+                component: () => import(/* webpackChunkName: "about" */ './views/dashboards/Home.vue'),
                 meta: { requiresAuth: true }
             },
         ]
     },
     { path: '/login', component: Login },
+    { path: '/register', component: Register },
+    { path: '/logout',
+        redirect: () => {
+            Cookies.remove('user_id');
+            return '/login';
+        }
+    },
 ];
 
 const router = createRouter({
@@ -58,11 +84,9 @@ const router = createRouter({
 });
 
 router.beforeEach(async (to, from, next) => {
+    if(to.fullPath === '/logout') return;
     const userIdFromCookie = Cookies.get('user_id');
-    if(!userIdFromCookie && to.name !== 'login') {
-        next('/login');
-        return;
-    }
+
     let userStore = null;
 
     if (userIdFromCookie) {
@@ -70,11 +94,11 @@ router.beforeEach(async (to, from, next) => {
         await userStore.loadUserFromCookie();
     }
 
-    if (to.matched.some((record) => record.meta.requiresAuth) && !userIdFromCookie) {
+    if (to.matched.some(record => record.meta.requiresAuth) && !userIdFromCookie) {
         next('/login');
+    } else {
+        next();
     }
-
-    next();
 });
 
 export default router;

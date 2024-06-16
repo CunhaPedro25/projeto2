@@ -17,6 +17,15 @@ export default {
             throw error; // Throw error to handle it in caller function
         }
     },
+    async register(user) {
+        try {
+            const response = await axios.post(`${API_URL}/register`,  user);
+            return response.data;
+        } catch (error) {
+            console.error('Error during registration:', error);
+            throw error;
+        }
+    },
     async updateUser(user) {
         try {
             const response = await axios.post(`${API_URL}/update`, user);

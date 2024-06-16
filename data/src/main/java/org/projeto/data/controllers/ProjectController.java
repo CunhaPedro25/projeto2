@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Date;
 import java.util.List;
 
 @RestController
@@ -64,6 +65,16 @@ public class ProjectController {
         try {
             ProjectService.delete(id);
             return new ResponseEntity<>("Project deleted successfully", HttpStatus.OK);
+        } catch (IllegalStateException e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @PutMapping("/update/requirementsState/{id}/{state}")
+    public ResponseEntity<String> updateRequirementsState(@PathVariable Integer id, @PathVariable Boolean state) {
+        try {
+            ProjectService.updateProjectRequirementsState(id, state);
+            return new ResponseEntity<>("Budget state updated successfully", HttpStatus.OK);
         } catch (IllegalStateException e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
         }

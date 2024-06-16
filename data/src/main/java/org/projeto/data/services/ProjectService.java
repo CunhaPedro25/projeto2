@@ -58,6 +58,12 @@ public class ProjectService {
     ProjectService.projectRepository.save(editProject);
   }
 
+  public static void updateProjectRequirementsState(Integer projectID, Boolean status) {
+    Project project = ProjectService.projectRepository.findById(projectID);
+    project.setRequirementsState(status);
+    ProjectService.projectRepository.save(project);
+  }
+
   public static void updateProjectBudgetState(Integer projectID, Boolean status) {
     Project project = ProjectService.projectRepository.findById(projectID);
     project.setBudgetState(status);

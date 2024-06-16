@@ -3,7 +3,9 @@ package org.projeto.data.controllers;
 import org.projeto.data.entities.User;
 
 import org.apache.commons.codec.digest.DigestUtils;
+import org.projeto.data.entities.Zipcode;
 import org.projeto.data.services.UserService;
+import org.projeto.data.services.ZipcodeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -43,7 +45,17 @@ public class UserController {
     @PostMapping("/register")
     public ResponseEntity<String> registerUser(@RequestBody User user) {
         try {
-            user.setPassword(DigestUtils.sha256Hex(user.getPassword()));
+            // Check if zipcode exists
+            if (!ZipcodeService.existsById(user.getZipcode().getId())) {
+                // If not, create new zipcode
+                Zipcode newZipcode = new Zipcode();
+                newZipcode.setId(user.getZipcode().getId());
+                newZipcode.setDistrict(user.getZipcode().getDistrict());
+                newZipcode.setCity(user.getZipcode().getCity());
+                newZipcode.setLocale(user.getZipcode().getLocale());
+                ZipcodeService.addNew(newZipcode);
+            }
+
             UserService.register(user);
             return ResponseEntity.ok("User registered successfully");
         } catch (Exception e) {
@@ -54,6 +66,16 @@ public class UserController {
     @PostMapping("/update")
     public ResponseEntity<String> updateUser(@RequestBody User user) {
         try {
+            if (!ZipcodeService.existsById(user.getZipcode().getId())) {
+                // If not, create new zipcode
+                Zipcode newZipcode = new Zipcode();
+                newZipcode.setId(user.getZipcode().getId());
+                newZipcode.setDistrict(user.getZipcode().getDistrict());
+                newZipcode.setCity(user.getZipcode().getCity());
+                newZipcode.setLocale(user.getZipcode().getLocale());
+                ZipcodeService.addNew(newZipcode);
+            }
+
             UserService.update(user);
             return ResponseEntity.ok("User updated successfully");
         } catch (Exception e) {

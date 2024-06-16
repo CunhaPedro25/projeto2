@@ -1,5 +1,5 @@
 <template>
-  <router-link :to="path"
+  <router-link :to="path === '/' ? path : '/dashboard/' + path"
                class="flex flex-col w-16 min-h-16 text-center rounded-xl p-2 text-primary-400 truncate gap-1 hover:bg-primary-400 hover:text-white transition-colors duration-200"
                :class="{ 'bg-primary-500 text-white': isActive }"
                @click="path === '/' ? logout() : ''">
@@ -24,7 +24,7 @@ const props = defineProps(['icon', 'path'])
 const route = useRoute();
 const router = useRouter();
 
-const isActive = computed(() => props.path !== '/' && route.path.includes(props.path));
+const isActive = computed(() => props.path !== '/' && route.path === '/dashboard/' + props.path);
 
 const logout = async () => {
   await useUserStore().logout();

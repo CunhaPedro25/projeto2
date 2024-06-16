@@ -34,6 +34,10 @@ public class ZipcodeService{
     }
   }
 
+  public static boolean existsById(String id){
+    return ZipcodeService.zipcodeRepository.existsById(id);
+  }
+
   public static void update(Long id,String district, String city, String locale){
     Zipcode zipcode = ZipcodeService.zipcodeRepository.findById(id).orElseThrow(()-> new IllegalStateException( "CodPostal with id "+ id + " does not exist! "));
 

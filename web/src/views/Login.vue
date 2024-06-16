@@ -2,7 +2,9 @@
   <div class="w-full h-full flex justify-center items-center">
     <form @submit.prevent="loginUser"
           class="w-fit h-fit p-6 px-12 flex flex-col justify-center items-center gap-2 bg-background-800 rounded-2xl text-white">
-      <h2>Eco Build</h2>
+      <div class="w-32">
+        <img src="@/assets/icons/ecobuild.svg" alt="Logo" />
+      </div>
 
       <div class="flex flex-col gap-2">
         <label for="email">Email:</label>
@@ -19,7 +21,7 @@
 
       <div class="mt-2 text-sm flex gap-1">
         <p>Dont have an account?</p>
-        <RouterLink to="#" class="underline text-primary-500">Register</RouterLink>
+        <RouterLink to="/register" class="underline text-primary-500">Register</RouterLink>
       </div>
     </form>
   </div>
@@ -44,7 +46,7 @@ const loginUser = async () => {
   try {
     await userStore.login(login.value);
     errorMessage.value = '';
-    await router.push('/dashboard/home'); // Navigate to dashboard after successful login
+    await router.push('/'); // Navigate to dashboard after successful login
   } catch (error) {
     errorMessage.value = 'Invalid email or password';
   }

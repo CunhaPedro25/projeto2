@@ -20,5 +20,4 @@ import {useUserStore} from "@/store/userStore";
 import Header from "../components/dashboard/Header.vue";
 
 const user = useUserStore()
-console.log(user)
 </script>

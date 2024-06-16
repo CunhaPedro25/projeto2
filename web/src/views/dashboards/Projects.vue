@@ -5,18 +5,19 @@
       <input type="text" class="bg-background-800"/>
     </div>
 
-    <div class="flex gap-2 items-end" v-if="user.userType.type.toLowerCase() === 'client'">
+    <div class="flex gap-2 items-end" v-if="type === 'client'">
       <button class="primary" @click="$refs.addProject.show()">Add Project</button>
     </div>
   </div>
   <div class="flex h-fit w-full p-4 mb-6 overflow-x-auto">
-    <table class="w-full">
+    <table class="w-full" v-if="projects.length > 0">
       <thead>
       <tr>
         <th>Engineer</th>
         <th>Type</th>
         <th>Create Date</th>
         <th>State</th>
+        <th>Action</th>
       </tr>
       </thead>
       <tbody>
@@ -25,9 +26,26 @@
         <td>{{ project.constructionType.type }}</td>
         <td>{{ date.formatDate(project.requirementsCreateDate) }}</td>
         <td>{{ project.requirementsState === null ? "Pending" : project.requirementsState ? "Approved" : "Rejected" }}</td>
+
+        <td>
+          <div class="flex gap-2" v-if="project.requirementsState === null && type === 'engineer'">
+            <button class="primary" @click="updateBudgetState(project.id, true)">
+              <span class="material-icons">check</span>
+            </button>
+            <button class="primary !bg-red-600" @click="updateBudgetState(project.id, false)">
+              <span class="material-icons">close</span>
+            </button>
+          </div>
+
+          <button class="primary" v-else>
+            <span class="material-icons">file_open</span>
+          </button>
+        </td>
       </tr>
       </tbody>
     </table>
+
+    <p class="text-center text-text-300" v-else>No projects found...</p>
   </div>
 
 
@@ -58,22 +76,35 @@ import {onMounted, ref} from "vue";
 import data from "../../services/data.js"
 import date from "@/utils/date";
 import Modal from "../../components/Modal.vue";
+import Cookies from "js-cookie";
 
 const user = useUserStore();
+const type = Cookies.get("user_type");
 let projects = ref([]);
 let types = ref([]);
 
-onMounted(async () => {
-  if (user.userType.type.toLowerCase() === "client"){
+const fetchProjects = async () => {
+  if (type === "client"){
     projects.value = await data.getClientProjects(user.id);
     types.value = await data.getAllConstructionTypes();
+  }else if (type === "engineer"){
+    projects.value = await data.getEngineerProjects(user.id);
   }
+};
+
+onMounted(async () => {
+  await fetchProjects();
 });
 
 const addProject = ref(null);
 const isModalOpen = ref(false);
 let constructionType = ref(null);
 let document = ref(null);
+
+const updateBudgetState = async (id, state) => {
+  await data.updateRequirementsState(id, state);
+  await fetchProjects();
+};
 
 
 const handleModalOpen = () => {
@@ -84,12 +115,13 @@ const handleModalClose = () => {
   isModalOpen.value = false;
 };
 
-const saveProject = () => {
-  data.saveProject({
+const saveProject = async () => {
+  await data.saveProject({
     client: user,
-    constructionType: constructionType.value,
+    constructionType: constructionType.value
   })
   addProject.value.close();
+  await fetchProjects();
 };
 </script>
 

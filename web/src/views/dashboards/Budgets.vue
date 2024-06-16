@@ -6,7 +6,7 @@
     </div>
   </div>
   <div class="flex h-fit w-full p-4 mb-6 overflow-x-auto">
-    <table class="w-full">
+    <table class="w-full" v-if="budgets.length > 0">
       <thead>
       <tr>
         <th>Engineer</th>
@@ -24,10 +24,10 @@
         <td>{{ budget.budgetState === null ? "Pending" : budget.budgetState ? "Approved" : "Rejected" }}</td>
         <td>
           <div class="flex gap-2" v-if="budget.budgetState === null">
-            <button class="primary" @click="data.updateBudgetState(budget.id, true)">
+            <button class="primary" @click="updateBudgetState(budget.id, true)">
               <span class="material-icons">check</span>
             </button>
-            <button class="primary !bg-red-600" @click="data.updateBudgetState(budget.id, false)">
+            <button class="primary !bg-red-600" @click="updateBudgetState(budget.id, false)">
               <span class="material-icons">close</span>
             </button>
           </div>
@@ -39,25 +39,38 @@
       </tr>
       </tbody>
     </table>
+
+    <p class="text-center text-text-300" v-else>No budgets found...</p>
   </div>
 </template>
 
 <script setup>
-import {useUserStore} from "../../store/userStore.js";
-import {onMounted, ref} from "vue";
-import data from "../../services/data.js"
+import { useUserStore } from "../../store/userStore.js";
+import { onMounted, ref } from "vue";
+import data from "../../services/data.js";
 import date from "@/utils/date";
 import '@material-design-icons/font';
+import Cookies from "js-cookie";
 
 const user = useUserStore();
+const type = Cookies.get("user_type");
 let budgets = ref([]);
 
-onMounted(async () => {
-  if (user.userType.type.toLowerCase() === "client"){
+const fetchBudgets = async () => {
+  if (type === "client") {
     budgets.value = await data.getClientProjects(user.id);
     budgets.value = budgets.value.filter(budget => budget.budget !== null);
   }
+};
+
+onMounted(async () => {
+  await fetchBudgets();
 });
+
+const updateBudgetState = async (id, state) => {
+  await data.updateBudgetState(id, state);
+  await fetchBudgets();
+};
 </script>
 
 <style scoped>

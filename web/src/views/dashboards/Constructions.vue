@@ -5,14 +5,9 @@
       <input type="text" class="bg-background-800"/>
     </div>
 
-    <div class="flex gap-2 items-end" v-if="user.userType.type.toLowerCase() === 'engineer'">
-      <button class="primary !bg-red-600">Delete Construction</button>
-      <button class="primary">Edit Construction</button>
-      <button class="primary">Add Construction</button>
-    </div>
   </div>
   <div class="flex h-fit w-full p-4 mb-6 overflow-x-auto">
-    <table class="w-full">
+    <table class="w-full" v-if="constructions.length > 0">
       <thead>
         <tr>
           <th>Name</th>
@@ -21,10 +16,11 @@
           <th>State</th>
           <th>Total</th>
           <th>last update</th>
+          <th>Action</th>
         </tr>
       </thead>
       <tbody>
-        <tr v-for="construction in constructions" :key="construction.id">
+        <tr v-for="construction in constructions">
           <td>{{ construction.name }}</td>
           <td>{{ construction.project.engineer.name }}</td>
           <td>{{ construction.stage.name }}</td>
@@ -42,9 +38,14 @@
             </div>
           </td>
           <td>{{ formatDate(construction.lastUpdate) }}</td>
+          <td>
+            <RouterLink :to="`/dashboard/construction/${construction.id}`" class="button primary">View</RouterLink>
+          </td>
         </tr>
       </tbody>
     </table>
+
+    <p class="text-center text-text-300" v-else>No constructions found...</p>
   </div>
 </template>
 
@@ -53,15 +54,24 @@ import {useUserStore} from "../../store/userStore.js";
 import {onMounted, ref} from "vue";
 import data from "../../services/data.js"
 import { format } from 'date-fns';
+import Cookies from "js-cookie";
 
-const user = useUserStore();
+const id = Cookies.get("user_id");
+const type = Cookies.get("user_type");
 let constructions = ref([]);
 
 onMounted(async () => {
-  if (user.userType.type.toLowerCase() === "client"){
-    constructions.value = await data.getClientConstructions(user.id);
-  }else if (user.userType.type.toLowerCase() === "worker") {
-    constructions.value = await data.getTeamConstructions(user.team.id);
+  if (type === "client"){
+    constructions.value = await data.getClientConstructions(id);
+  }else if (type === "worker") {
+    const constructionsTeams = await data.getTeamConstructions(Cookies.get("team_id"))
+    constructionsTeams.forEach(constructionTeam => {
+      if (!constructions.value.some(construction => construction.id === constructionTeam.construction.id)) {
+        constructions.value.push(constructionTeam.construction);
+      }
+    });
+  }else if (type === "engineer"){
+    constructions.value = await data.getEngineerConstructions(id);
   }
 });
 

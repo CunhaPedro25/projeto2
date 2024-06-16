@@ -1,6 +1,7 @@
 package org.projeto.data.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -48,6 +49,7 @@ public class User {
 
   @ManyToOne(fetch = FetchType.EAGER)
   @JoinColumn(name = "team")
+  @JsonManagedReference
   private Team team;
 
   @Column(name = "active")

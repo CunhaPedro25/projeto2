@@ -39,9 +39,9 @@ export default {
             throw error;
         }
     },
-    async getTeamConstructions(teamId) {
+    async getEngineerConstructions(projectId) {
         try {
-            const response = await axios.get(`${API_URL}/construction/get/team/${teamId}`);
+            const response = await axios.get(`${API_URL}/construction/get/engineer/${projectId}`);
             return response.data;
         } catch (error) {
             console.error('Error getting constructions:', error);
@@ -49,7 +49,16 @@ export default {
         }
     },
 
-    async getConstructionTeamConstruction(constructionId) {
+    async getTeamConstructions(teamId) {
+        try {
+            const response = await axios.get(`${API_URL}/constructionTeam/get/team/${teamId}`);
+            return response.data;
+        } catch (error) {
+            console.error('Error getting constructions:', error);
+            throw error;
+        }
+    },
+    async getConstructionTeams(constructionId) {
         try {
             const response = await axios.get(`${API_URL}/constructionTeam/get/construction/${constructionId}`);
             return response.data;
@@ -58,13 +67,41 @@ export default {
             throw error;
         }
     },
-
-    async getConstructionTeamTeam(constructionId, teamId) {
+    async getConstructionTeamByBoth(constructionId, teamId) {
         try {
-            const response = await axios.get(`${API_URL}/constructionTeam/get/${constructionId}/team/${teamId}`);
+            const response = await axios.get(`${API_URL}/constructionTeam/get/construction/${constructionId}/${teamId}`);
             return response.data;
         } catch (error) {
             console.error('Error getting construction team:', error);
+            throw error;
+        }
+    },
+    async getTeamCurrentConstruction(teamId) {
+        try {
+            const response = await axios.get(`${API_URL}/constructionTeam/get/working/team/${teamId}`);
+            return response.data;
+        } catch (error) {
+            console.error('Error getting constructions:', error);
+            throw error;
+        }
+    },
+    async getWorkingConstructionTeams(constructionId) {
+        try {
+            let teams = await this.getConstructionTeams(constructionId);
+            return teams.filter(team => team.endDate === null);
+        } catch (error) {
+            console.error('Error getting construction team:', error);
+            throw error;
+        }
+    },
+
+
+    async getTeamLeader(teamId) {
+        try {
+            const response = await axios.get(`${API_URL}/team/get/leader/${teamId}`);
+            return response.data;
+        } catch (error) {
+            console.error('Error getting team leader:', error);
             throw error;
         }
     },
@@ -211,10 +248,18 @@ export default {
             throw error;
         }
     },
+    async updateRequirementsState(projectId, state) {
+        try {
+            const response = await axios.put(`${API_URL}/project/update/requirementsState/${projectId}/${state}`);
+            return response.data;
+        } catch (error) {
+            console.error('Error updating budget state:', error);
+            throw error;
+        }
+    },
     async updateBudgetState(projectId, state) {
         try {
             const response = await axios.put(`${API_URL}/project/update/budgetState/${projectId}/${state}`);
-            location.reload();
             return response.data;
         } catch (error) {
             console.error('Error updating budget state:', error);
@@ -228,6 +273,74 @@ export default {
             return response.data;
         } catch (error) {
             console.error('Error getting construction types:', error);
+            throw error;
+        }
+    },
+
+    async getAllTeams() {
+        try {
+            const response = await axios.get(`${API_URL}/team/get/all`);
+            return response.data;
+        } catch (error) {
+            console.error('Error getting teams:', error);
+            throw error;
+        }
+    },
+
+    async getFreeTeams() {
+        try {
+            const response = await axios.get(`${API_URL}/team/get/free`);
+            return response.data;
+        } catch (error) {
+            console.error('Error getting teams:', error);
+            throw error;
+        }
+    },
+
+    async addTeamToConstruction(param) {
+        try {
+            const response = await axios.post(`${API_URL}/constructionTeam/add`, param);
+            return response.data;
+        } catch (error) {
+            console.error('Error adding team to construction:', error);
+            throw error;
+        }
+    },
+
+    async finishConstruction(id) {
+        try {
+            const response = await axios.put(`${API_URL}/constructionTeam/finish/${id}`);
+            return response.data;
+        } catch (error) {
+            console.error('Error finishing construction:', error);
+            throw error;
+        }
+    },
+
+    async getMaterial() {
+        try {
+            const response = await axios.get(`${API_URL}/material/get/all`);
+            return response.data;
+        } catch (error) {
+            console.error('Error getting materials:', error);
+            throw error;
+        }
+    },
+    async requestStock(param) {
+        try {
+            const response = await axios.post(`${API_URL}/stockRequest/add`, param);
+            return response.data;
+        } catch (error) {
+            console.error('Error requesting stock:', error);
+            throw error;
+        }
+    },
+    async getStockRequests(constructionId) {
+        try {
+            const response = await axios.get(`${API_URL}/stockRequest/get/construction/${constructionId}`);
+            return response.data;
+        } catch (error) {
+            console.error('Error getting stock requests:', error);
             throw error;
         }
     },

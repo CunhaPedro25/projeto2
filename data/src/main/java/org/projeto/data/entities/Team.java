@@ -1,5 +1,6 @@
 package org.projeto.data.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
@@ -26,6 +27,7 @@ public class Team {
 
   @ManyToOne(fetch = FetchType.EAGER)
   @JoinColumn(name = "leader")
+  @JsonBackReference
   private User leader;
 
   @Column(name = "daily_value", nullable = false)

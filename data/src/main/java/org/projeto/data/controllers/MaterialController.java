@@ -17,6 +17,11 @@ public class MaterialController {
     public MaterialController(MaterialService materialService) {
     }
 
+    @GetMapping("/get/all")
+    public ResponseEntity<List<Material>> getAllMaterials() {
+        return new ResponseEntity<>(MaterialService.getAllMaterials(), HttpStatus.OK);
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<Material> getMaterialById(@PathVariable Integer id) {
         Material material = MaterialService.getMaterialByID(id);
