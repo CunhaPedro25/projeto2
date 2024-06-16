@@ -86,8 +86,9 @@ public class AddMaterialConstructionModalController {
     public void setConstruction(Construction construction) {
         constructionID = construction.getId();
         System.out.printf("Construction ID: %d\n", constructionID);
-        materialConstructionFormController.constructionID.setText(String.valueOf(construction.getId()));
-        materialConstructionFormController.constructionID.setDisable(true);
+        materialConstructionFormController.constructionName.setText(String.valueOf(construction.getName()));
+        materialConstructionFormController.constructionName.setDisable(true);
+        constructionID = construction.getId();
 
     }
 }

@@ -67,6 +67,7 @@ public class AddUserModalController {
                 editUser.setAddress(registerFormController.address.getText());
                 editUser.setDoor(Integer.valueOf(registerFormController.door.getText()));
                 editUser.setUserType(userTypeEntity);
+                editUser.setActive(true);
 
                 UserService.update(editUser);
                 registerFormController.passwordLabel.setDisable(false);
@@ -87,6 +88,7 @@ public class AddUserModalController {
                         .address(registerFormController.address.getText())
                         .door(Integer.valueOf(registerFormController.door.getText()))
                         .userType(userTypeEntity)
+                        .active(true)
                         .build();
 
                 UserService.register(user);

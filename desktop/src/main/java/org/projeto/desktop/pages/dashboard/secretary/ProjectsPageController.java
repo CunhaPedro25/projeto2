@@ -136,8 +136,11 @@ public class ProjectsPageController {
     }
 
     public void delete(ActionEvent actionEvent) {
-        Project project = table.getSelectionModel().getSelectedItem();
-        ProjectService.delete(Long.valueOf(project.getId()));
-        populateTableView();
+        if(SceneManager.openConfirmationAlert("Delete Project", "Are you sure you want to delete this project?")){
+            Project project = table.getSelectionModel().getSelectedItem();
+            ProjectService.delete(Long.valueOf(project.getId()));
+            populateTableView();
+        }
+
     }
 }

@@ -10,6 +10,10 @@
             <ComboBox fx:id="projectComboBox" layoutX="10.0" layoutY="10.0" />
         </VBox>
         <VBox HBox.hgrow="ALWAYS">
+            <Label contentDisplay="BOTTOM" styleClass="form-label" text="Name" />
+            <TextField fx:id="name" layoutX="10.0" layoutY="10.0" />
+        </VBox>
+        <VBox HBox.hgrow="ALWAYS">
             <Label contentDisplay="BOTTOM" styleClass="form-label" text="Stage" />
             <ComboBox fx:id="stageComboBox" />
         </VBox>

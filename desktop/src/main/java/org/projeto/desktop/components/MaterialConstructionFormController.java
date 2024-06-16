@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class MaterialConstructionFormController {
     @FXML
-    public TextField constructionID;
+    public TextField constructionName;
     @FXML
     public TextField quantity;
     @FXML
@@ -16,17 +16,17 @@ public class MaterialConstructionFormController {
 
     public boolean isFormCorrect() {
         return
-                !constructionID.getText().trim().isEmpty()
+                !constructionName.getText().trim().isEmpty()
                 && !quantity.getText().trim().isEmpty()
                 && !materialComboBox.getValue().trim().isEmpty();
     }
     public void setValues(String constructionID, String quantity, String materialComboBox){
-        this.constructionID.setText(constructionID);
+        this.constructionName.setText(constructionID);
         this.quantity.setText(quantity);
         this.materialComboBox.setValue(materialComboBox);
     }
     public void clearValues(){
-        this.constructionID.setText("");
+        this.constructionName.setText("");
         this.quantity.setText("");
         this.materialComboBox.setValue("");
     }

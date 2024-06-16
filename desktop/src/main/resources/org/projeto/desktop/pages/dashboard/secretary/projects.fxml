@@ -14,7 +14,7 @@
 
         <HBox GridPane.columnIndex="1" alignment="CENTER_RIGHT">
             <Button fx:id="newProject" onAction="#openNewProjectModal">
-                New User
+                New Project
             </Button>
             <Button fx:id="delete" onAction="#delete">
                 Delete

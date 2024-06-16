@@ -16,11 +16,16 @@ public class ConstructionFormController {
     public ComboBox<String> stateComboBox;
     @FXML
     public TextField stageBudget;
+    @FXML
+    public TextField name;
+
     public  boolean isFormCorrect() {
         return
                     !stageComboBox.getSelectionModel().isEmpty()
                     && !stateComboBox.getSelectionModel().isEmpty()
-                    && !stageBudget.getText().trim().isEmpty();
+                    && !stageBudget.getText().trim().isEmpty()
+                    && !projectComboBox.getSelectionModel().isEmpty()
+                    && !name.getText().trim().isEmpty();
     }
     public void setValues(Integer team, String stage, String state, String budget){
         this.projectComboBox.setValue(team);

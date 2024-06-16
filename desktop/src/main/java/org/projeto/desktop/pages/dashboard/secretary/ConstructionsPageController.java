@@ -31,8 +31,6 @@ public class ConstructionsPageController {
     @FXML
     public TableView<Construction> table;
     @FXML
-    public TextField searchField;
-    @FXML
     public TableColumn<Construction, String> projectColumn;
     @FXML
     public TableColumn<Construction,String> stageColumn;
@@ -42,8 +40,7 @@ public class ConstructionsPageController {
     public TableColumn<Construction, LocalDate> lastUpdateColumn;
     @FXML
     public TableColumn<Construction,String> constructionTypeColumn;
-    @FXML
-    public Button addTeam;
+
     @FXML
     public Button addMaterial;
     @FXML
@@ -79,7 +76,6 @@ public class ConstructionsPageController {
             return new SimpleStringProperty(constructionType.getType());
         });
         delete.setDisable(true);
-        addTeam.setDisable(true);
         addMaterial.setDisable(true);
 
         // Add combined click listener with a timer
@@ -94,7 +90,6 @@ public class ConstructionsPageController {
                     if (event.getClickCount() == 1) {
                         System.out.println("Single click detected");
                         delete.setDisable(false);
-                        addTeam.setDisable(false);
                         addMaterial.setDisable(false);
                     }
                 });
@@ -162,18 +157,18 @@ public class ConstructionsPageController {
         populateTableView();
     }
 
-    @FXML
-    public void addTeam() {
-    }
 
     public void delete() {
-        try {
-            ConstructionService.delete(Long.valueOf(selectedConstruction.getId()));
-            populateTableView();
-        } catch (Exception e) {
-            e.printStackTrace();
-            SceneManager.openErrorAlert("Error", "It was not possible to delete the construction. Please try again.");
+        if (SceneManager.openConfirmationAlert("Delete Construction", "Are you sure you want to delete the construction?")){
+            try {
+                ConstructionService.delete(Long.valueOf(selectedConstruction.getId()));
+                populateTableView();
+            } catch (Exception e) {
+                e.printStackTrace();
+                SceneManager.openErrorAlert("Error", "It was not possible to delete the construction. Please try again.");
+            }
         }
+
     }
 
 }

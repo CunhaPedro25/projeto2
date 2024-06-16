@@ -62,4 +62,15 @@ public class ConstructionService {
                 .map(Construction::getId)
                 .collect(Collectors.toList());
     }
+
+    public static List<String> getAllConstructionNames() {
+        return ConstructionService.constructionRepository.findAll()
+                .stream()
+                .map(Construction::getName)
+                .collect(Collectors.toList());
+    }
+
+    public static Construction findByName(String value) {
+        return ConstructionService.constructionRepository.findByName(value);
+    }
 }

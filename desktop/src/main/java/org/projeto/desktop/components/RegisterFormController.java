@@ -38,7 +38,7 @@ public class RegisterFormController {
     @FXML
     public TextField zipcode;
     @FXML
-    public TextField district;
+    public TextField district;      
     @FXML
     public TextField city;
     @FXML

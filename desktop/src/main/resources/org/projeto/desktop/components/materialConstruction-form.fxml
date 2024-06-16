@@ -9,7 +9,7 @@
         <HBox fillHeight="false" spacing="10.0">
             <VBox HBox.hgrow="ALWAYS">
                 <Label contentDisplay="BOTTOM" styleClass="form-label" text="Construction:" />
-                <TextField fx:id="constructionID" />
+                <TextField fx:id="constructionName" />
             </VBox>
             <VBox HBox.hgrow="ALWAYS">
                 <Label contentDisplay="BOTTOM" styleClass="form-label" text="Material" />

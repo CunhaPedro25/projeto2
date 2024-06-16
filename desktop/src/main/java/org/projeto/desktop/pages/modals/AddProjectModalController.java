@@ -56,6 +56,14 @@ public class AddProjectModalController {
         List<String> clientEmails = UserService.getUserTypeAllEmails(1);
         List<String> engineerEmails = UserService.getUserTypeAllEmails(2);
 
+        for (String email : clientEmails) {
+            System.out.println("hi" + email);
+        }
+
+        for (String email : engineerEmails) {
+            System.out.println("hi" + email);
+        }
+
         projectFormController.clientComboBox.setItems(FXCollections.observableArrayList(clientEmails));
         projectFormController.engineerComboBox.setItems(FXCollections.observableArrayList(engineerEmails));
     }
@@ -85,6 +93,8 @@ public class AddProjectModalController {
                     editProject.setEngineer(UserService.findUserByEmail(projectFormController.engineerComboBox.getValue()));
 
                     ProjectService.update(editProject);
+                    SceneManager.closeWindow(save);
+
                 }
             } else {
                 System.out.println("adding");
