@@ -36,8 +36,7 @@ public class UsersPageController {
     TableColumn<User, String> phone;
     @FXML
     TableColumn<User, Boolean> status;
-    @FXML
-    RegisterFormController registerFormController;
+
     @FXML
     Button delete;
 
@@ -134,4 +133,5 @@ public class UsersPageController {
      public void delete() {
       UserService.delete(selectedUser);
     }
+
 }
