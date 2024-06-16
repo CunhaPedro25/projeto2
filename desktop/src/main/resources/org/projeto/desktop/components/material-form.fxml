@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox spacing="30.0" stylesheets="@../assets/styles/global.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.projeto.desktop.components.MaterialFormController">
+
+    <VBox spacing="5.0">
+        <HBox fillHeight="false" spacing="10.0">
+            <VBox HBox.hgrow="ALWAYS">
+                <Label contentDisplay="BOTTOM" styleClass="form-label" text="Name" />
+                <TextField fx:id="materialNameInput" />
+            </VBox>
+            <VBox HBox.hgrow="ALWAYS">
+                <Label contentDisplay="BOTTOM" styleClass="form-label" text="Quantity" />
+                <TextField fx:id="quantityInput" layoutX="10.0" layoutY="10.0" />
+            </VBox>
+        </HBox>
+
+        <HBox fillHeight="false" spacing="10.0">
+            <VBox HBox.hgrow="ALWAYS">
+                <Label contentDisplay="BOTTOM" styleClass="form-label" text="Price per unit" />
+                <TextField fx:id="valueUnitInput" />
+            </VBox>
+        </HBox>
+    </VBox>
+
+</VBox>

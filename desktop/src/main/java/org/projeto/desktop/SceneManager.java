@@ -57,6 +57,7 @@ public class SceneManager {
       stage.showAndWait();
     } catch (Exception e) {
       System.out.println("openNewModal (SceneManager): " + e.getCause());
+      e.printStackTrace();
     }
   }
 

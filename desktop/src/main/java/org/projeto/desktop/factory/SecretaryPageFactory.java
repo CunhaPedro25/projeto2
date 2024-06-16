@@ -12,7 +12,8 @@ public class SecretaryPageFactory implements PageFactory {
         pages.add(new Page("Users", "users.fxml", "fas-users"));
         pages.add(new Page("Projects", "projects.fxml", "fas-archive"));
         pages.add(new Page("Constructions", "constructions.fxml", "fas-hard-hat"));
-        pages.add(new Page("Stock", "stock.fxml", "fas-warehouse"));
+        pages.add(new Page("Teams", "teams.fxml", "fas-people-carry"));
+        pages.add(new Page("Stock", "materials.fxml", "fas-warehouse"));
         return pages;
     }
 }

@@ -1,12 +1,10 @@
 package org.projeto.desktop.pages.dashboard.secretary;
 
 import javafx.animation.PauseTransition;
-import javafx.beans.Observable;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
@@ -19,9 +17,11 @@ import org.projeto.data.entities.ConstructionType;
 import org.projeto.data.entities.Project;
 import org.projeto.data.entities.Stage;
 import org.projeto.data.services.ConstructionService;
+import org.projeto.desktop.SceneManager;
+import org.projeto.desktop.pages.modals.AddConstructionModalController;
+import org.projeto.desktop.pages.modals.AddMaterialConstructionModalController;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 public class ConstructionsPageController {
     @FXML
@@ -43,7 +43,9 @@ public class ConstructionsPageController {
     @FXML
     public TableColumn<Construction,String> constructionTypeColumn;
     @FXML
-    public Button manageTeam;
+    public Button addTeam;
+    @FXML
+    public Button addMaterial;
     Construction selectedConstruction;
     public void initialize() {
         populateTableView();
@@ -73,6 +75,8 @@ public class ConstructionsPageController {
             return new SimpleStringProperty(constructionType.getType());
         });
         delete.setDisable(true);
+        addTeam.setDisable(true);
+        addMaterial.setDisable(true);
 
         // Add combined click listener with a timer
         table.setOnMouseClicked(event -> {
@@ -86,6 +90,8 @@ public class ConstructionsPageController {
                     if (event.getClickCount() == 1) {
                         System.out.println("Single click detected");
                         delete.setDisable(false);
+                        addTeam.setDisable(false);
+                        addMaterial.setDisable(false);
                     }
                 });
 
@@ -104,14 +110,66 @@ public class ConstructionsPageController {
     }
     @FXML
     private void editConstruction(Construction selectedConstruction) {
+        try{
+            SceneManager.openNewModal(
+                    "pages/modals/add-construction.fxml",
+                    "Edit Construction",
+                    true,
+                    controller -> {
+                        AddConstructionModalController editConstruction = (AddConstructionModalController) controller;
+                        editConstruction.enableEdit(selectedConstruction);
+                        System.out.println("we are trying VERY HARD" + selectedConstruction.getId());
+                    });
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            SceneManager.openErrorAlert("Error", "It was not possible to edit the project. Please try again.");
+        }
+        populateTableView();
+    }
+    @FXML
+    public void addMaterial() {
+        try {
+            SceneManager.openNewModal(
+                    "pages/modals/add-materialConstruction.fxml",
+                    "Add Material to Construction",
+                    true,
+                    controller -> {
+                        AddMaterialConstructionModalController addMaterial = (AddMaterialConstructionModalController) controller;
+                        addMaterial.setConstruction(selectedConstruction);
+                    });
+        }catch (Exception e){
+            Throwable cause = e.getCause();
+            cause.printStackTrace();
+            SceneManager.openErrorAlert("Error", "It was not possible to add the material. Please try again.");
+        }
     }
 
     @FXML
-    public void openNewConstructionModal(ActionEvent actionEvent) {
+    public void openNewConstructionModal() {
+        try{
+            SceneManager.openNewModal(
+                    "pages/modals/add-construction.fxml","Add Construction",true);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            SceneManager.openErrorAlert("Error", "It was not possible to edit the project. Please try again.");
+        }
+        populateTableView();
     }
+
     @FXML
-    public void manageTeam(ActionEvent actionEvent) {
+    public void addTeam() {
     }
-    public void delete(ActionEvent actionEvent) {
+
+    public void delete() {
+        try {
+            ConstructionService.delete(Long.valueOf(selectedConstruction.getId()));
+            populateTableView();
+        } catch (Exception e) {
+            e.printStackTrace();
+            SceneManager.openErrorAlert("Error", "It was not possible to delete the construction. Please try again.");
+        }
     }
+
 }

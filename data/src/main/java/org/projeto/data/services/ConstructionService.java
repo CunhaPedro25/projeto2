@@ -5,8 +5,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.projeto.data.repositories.ConstructionRepository;
 
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class ConstructionService {
@@ -36,5 +42,24 @@ public class ConstructionService {
         }else {
             throw new IllegalStateException("That construction does not exist");
         }
+    }
+
+    public static Construction findById(Integer id) {
+        return ConstructionService.constructionRepository.findById(id);
+    }
+
+    public static void update(Construction editConstruction) {
+        LocalDateTime localDateTime = LocalDate.now().atStartOfDay();
+        ZoneId zoneId = ZoneId.systemDefault();
+        Instant instant = localDateTime.atZone(zoneId).toInstant();
+        editConstruction.setLastUpdate(instant);
+        ConstructionService.constructionRepository.save(editConstruction);
+    }
+
+    public static List<Integer> getAllConstructionIds() {
+        return ConstructionService.constructionRepository.findAll()
+                .stream()
+                .map(Construction::getId)
+                .collect(Collectors.toList());
     }
 }

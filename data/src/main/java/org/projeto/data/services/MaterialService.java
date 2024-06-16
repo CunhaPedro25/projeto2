@@ -5,6 +5,7 @@ import org.projeto.data.repositories.MaterialRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,8 +21,8 @@ public class MaterialService {
     }
 
     public static void addNew(Material newMaterial ){
-        Optional<Material> existingMaterial = MaterialService.materialRepository.findMaterialByName(newMaterial.getName());
-        if (existingMaterial.isPresent()){
+        Material existingMaterial = MaterialService.materialRepository.findMaterialByName(newMaterial.getName());
+        if (existingMaterial != null){
             throw new IllegalStateException("O material ja existe");
         }else {
             MaterialService.materialRepository.save(newMaterial);
@@ -29,5 +30,23 @@ public class MaterialService {
     }
     public static void delete(Long id){
         MaterialService.materialRepository.deleteById(id);
+    }
+
+    public static void update(Material editMaterial) {
+        MaterialService.materialRepository.save(editMaterial);
+    }
+
+    public static List<Material> getAllMaterials() {
+        return MaterialService.materialRepository.findAll();
+    }
+    public static List<String> getAllMaterialsNames(){
+        List<String> names = new ArrayList<>();
+        for (Material material : MaterialService.materialRepository.findAll()){
+            names.add(material.getName());
+        }
+        return names;
+    }
+    public static Material getMaterialByName(String name){
+        return MaterialService.materialRepository.findMaterialByName(name);
     }
 }

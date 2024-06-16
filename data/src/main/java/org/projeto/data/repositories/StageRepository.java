@@ -10,4 +10,6 @@ import java.util.List;
 public interface StageRepository  extends JpaRepository<Stage, Long> {
   Stage findById(Integer id);
   List<Stage> findByConstructionType_Id(Integer id);
+
+    Stage findByName(String name);
 }

@@ -68,4 +68,8 @@ public class UserService{
   public static List<User> getUserByTypeID(Integer id){return userRepository.findByUserTypeId(id);}
 
   public static List<User> getAllClients(){return userRepository.findByUserTypeId(1);}
+
+    public static User findUserByName(String name) {
+        return userRepository.findByName(name);
+    }
 }

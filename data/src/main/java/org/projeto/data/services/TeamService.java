@@ -6,9 +6,13 @@ import org.projeto.data.repositories.TeamRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class TeamService {
@@ -20,12 +24,17 @@ public class TeamService {
   }
 
   public static List<Team> getTeams(){ return TeamService.teamRepository.findAll();}
+  public static Team getTeamById(Long id) {
+    Optional<Team> teamOptional = TeamService.teamRepository.findById(id);
+    if (teamOptional.isPresent()) {
+      return teamOptional.get();
+    } else {
+      throw new IllegalStateException("Team with id " + id + " does not exist");
+    }
+  }
 
   public static void addNew(Team newTeam){
-    Optional<Team> EquipaByChefe = TeamService.teamRepository.findByLeader_Id(newTeam.getLeader().getId());
-    if (EquipaByChefe.isEmpty()){
-      throw new IllegalStateException("This Equipa has no Chefe!");
-    }
+
     TeamService.teamRepository.save(newTeam);
   }
 
@@ -49,5 +58,31 @@ public class TeamService {
         team.setLeader(leader);
       }
     }
+  }
+
+    public static List<Integer> getAllTeamsIds() {
+        List<Team> team_entities = teamRepository.findAll();
+        List<Integer> team_ids = new ArrayList<>();
+        for (Team team : team_entities) {
+            team_ids.add(team.getId());
+        }
+        return team_ids;
+    }
+
+  public static void update(Team editTeam) {
+    teamRepository.save(editTeam);
+
+  }
+
+
+  public static List<String> getLeaderNames() {
+    return teamRepository.findAll().stream()
+            .map(team -> team.getLeader().getName())
+            .distinct()
+            .collect(Collectors.toList());
+  }
+
+  public static void updateTeam(Team editTeam) {
+    teamRepository.save(editTeam);
   }
 }

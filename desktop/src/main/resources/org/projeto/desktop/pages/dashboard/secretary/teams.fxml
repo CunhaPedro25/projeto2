@@ -3,11 +3,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox spacing="10.0" stylesheets="@../../../assets/styles/global.css"
-      styleClass="background"
-      xmlns="http://javafx.com/javafx"
-      xmlns:fx="http://javafx.com/fxml"
-      fx:controller="org.projeto.desktop.pages.dashboard.secretary.ProjectsPageController">
+<VBox spacing="10.0" styleClass="background" stylesheets="@../../../assets/styles/global.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.projeto.desktop.pages.dashboard.secretary.TeamsPageController">
 
     <GridPane hgap="10.0">
         <HBox alignment="CENTER_LEFT" spacing="10.0">
@@ -16,18 +12,21 @@
         </HBox>
 
         <HBox GridPane.columnIndex="1" alignment="CENTER_RIGHT">
-            <Button fx:id="newProject" onAction="#openNewProjectModal">
-                New User
+            <Button fx:id="newTeam" onAction="#openNewTeamModal">
+                New Team
             </Button>
             <Button fx:id="delete" onAction="#delete">
                 Delete
             </Button>
+            <Button fx:id="addJob" onAction="#openNewTeamJobModal">
+                New Job
+            </Button>
         </HBox>
-
 
         <columnConstraints>
             <ColumnConstraints hgrow="ALWAYS" />
-            <ColumnConstraints fillWidth="false" halignment="RIGHT" />
+         <ColumnConstraints hgrow="ALWAYS" />
+         <ColumnConstraints fillWidth="false" halignment="RIGHT" />
         </columnConstraints>
         <rowConstraints>
             <RowConstraints />
@@ -36,11 +35,10 @@
 
     <TableView fx:id="table" minHeight="200.0">
         <columns>
-            <TableColumn fx:id="clientColumn" prefWidth="75.0" text="Client" />
-            <TableColumn fx:id="engineerColumn" prefWidth="75.0" text="Engineer" />
-            <TableColumn fx:id="requirements_create_dateColumn" prefWidth="75.0" text="Requirements Date" />
-            <TableColumn fx:id="budget_create_dateColumn" prefWidth="75.0" text="Budget Date" />
-            <TableColumn fx:id="acceptedColumn" prefWidth="75.0" text="Accepted" />
+            <TableColumn fx:id="teamColumn" prefWidth="75.0" text="Team" />
+            <TableColumn fx:id="busyColumn" prefWidth="75.0" text="Busy?" />
+            <TableColumn fx:id="dailyValueColumn" prefWidth="75.0" text="Daily Value" />
+            <TableColumn fx:id="leaderColumn" prefWidth="75.0" text="leader" />
         </columns>
         <columnResizePolicy>
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />

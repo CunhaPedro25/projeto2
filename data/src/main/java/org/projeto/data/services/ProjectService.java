@@ -5,6 +5,7 @@ import org.projeto.data.repositories.ProjectRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,6 +20,10 @@ public class ProjectService {
 
   public static List<Project> getProjectsByClientID(Integer clientID){
     return ProjectService.projectRepository.findProjectByClient_id(clientID);
+  }
+
+  public static Project getProjectById(Integer projectID){
+    return ProjectService.projectRepository.findById(projectID);
   }
 
   public static List<Project> getProjectsByEngineerID(Integer engineerID){
@@ -52,4 +57,13 @@ public class ProjectService {
   public static void update(Project editProject) {
     ProjectService.projectRepository.save(editProject);
   }
+
+    public static List<Integer> getAllProjectsIds() {
+        List<Project> projects = ProjectService.projectRepository.findAll();
+        List<Integer> projectIds = new ArrayList<>();
+        for (Project project : projects){
+            projectIds.add(project.getId());
+        }
+        return projectIds;
+    }
 }

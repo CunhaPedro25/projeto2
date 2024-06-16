@@ -3,7 +3,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox spacing="10.0" styleClass="background" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.projeto.desktop.pages.dashboard.client.HomeController">
+<VBox prefHeight="190.0" prefWidth="520.0" spacing="10.0" styleClass="background" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.projeto.desktop.pages.dashboard.client.HomeController">
 
     <VBox>
         <Label>Your Budgets</Label>
@@ -24,17 +24,17 @@
                             </VBox>
                             <GridPane GridPane.rowIndex="1">
                                 <columnConstraints>
-                                    <ColumnConstraints hgrow="ALWAYS"/>
-                                    <ColumnConstraints fillWidth="false" hgrow="NEVER"/>
+                                    <ColumnConstraints hgrow="ALWAYS" />
+                                    <ColumnConstraints fillWidth="false" hgrow="NEVER" />
                                 </columnConstraints>
                                 <rowConstraints>
-                                    <RowConstraints valignment="BOTTOM" vgrow="SOMETIMES"/>
+                                    <RowConstraints valignment="BOTTOM" vgrow="SOMETIMES" />
                                 </rowConstraints>
                                 <VBox>
-                                    <Label text="Info 1"/>
-                                    <Label text="Info 2"/>
+                                    <Label text="Info 1" />
+                                    <Label text="Info 2" />
                                 </VBox>
-                                <Label text="Chip" GridPane.columnIndex="1"/>
+                                <Label text="Chip" GridPane.columnIndex="1" />
                             </GridPane>
                         </GridPane>
         </HBox>
@@ -59,17 +59,17 @@
                             </VBox>
                             <GridPane GridPane.rowIndex="1">
                                 <columnConstraints>
-                                    <ColumnConstraints hgrow="ALWAYS"/>
-                                    <ColumnConstraints fillWidth="false" hgrow="NEVER"/>
+                                    <ColumnConstraints hgrow="ALWAYS" />
+                                    <ColumnConstraints fillWidth="false" hgrow="NEVER" />
                                 </columnConstraints>
                                 <rowConstraints>
-                                    <RowConstraints valignment="BOTTOM" vgrow="SOMETIMES"/>
+                                    <RowConstraints valignment="BOTTOM" vgrow="SOMETIMES" />
                                 </rowConstraints>
                                 <VBox>
-                                    <Label text="Info 1"/>
-                                    <Label text="Info 2"/>
+                                    <Label text="Info 1" />
+                                    <Label text="Info 2" />
                                 </VBox>
-                                <Label text="Chip" GridPane.columnIndex="1"/>
+                                <Label text="Chip" GridPane.columnIndex="1" />
                             </GridPane>
                         </GridPane>
         </HBox>
