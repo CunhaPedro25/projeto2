@@ -46,12 +46,16 @@ public class ConstructionsPageController {
     public Button addTeam;
     @FXML
     public Button addMaterial;
+    @FXML
+    public TableColumn<Construction,String> nameColumn;
     Construction selectedConstruction;
     public void initialize() {
         populateTableView();
     }
     public void populateTableView() {
         ObservableList<Construction> entities = FXCollections.observableArrayList(ConstructionService.getAllConstructions());
+
+        nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
 
         projectColumn.setCellValueFactory(cellData ->{
             Construction construction = cellData.getValue();
