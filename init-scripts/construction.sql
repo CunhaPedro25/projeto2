@@ -314,9 +314,9 @@ INSERT INTO stage (name, percentage, construction_type) VALUES
                                                             ('Plumbing', 50.0, 2);
 
 -- Insert dummy data for construction
-INSERT INTO construction (project, stage, stage_budget, total, state) VALUES
-                                                                          (1, 1, 2000.0, 10000.0, 1),
-                                                                          (2, 2, 3000.0, 20000.0, 2);
+INSERT INTO construction (project, stage, name, stage_budget, total, state) VALUES
+                                                                          (1, 1, 'Coral', 2000.0, 10000.0, 1),
+                                                                          (2, 2, 'Vizinho', 3000.0, 20000.0, 2);
 
 -- Insert dummy data for construction_material
 INSERT INTO construction_material (construction, material, quantity) VALUES
