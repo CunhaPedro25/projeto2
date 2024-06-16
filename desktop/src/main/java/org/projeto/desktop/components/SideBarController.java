@@ -32,6 +32,9 @@ public class SideBarController {
                 case "secretary":
                     pageFactory = new SecretaryPageFactory();
                     break;
+                case "admin":
+                    pageFactory = new AdminPageFactory();
+                    break;
             }
 
             List<Page> pages = pageFactory.createPages();

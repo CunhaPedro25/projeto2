@@ -53,20 +53,7 @@ public class UsersPageController {
         FilteredList<User> filteredData = new FilteredList<>(entities, p -> true);
         table.setItems(filteredData);
 
-        // Bind the search functionality to the text property of the search TextField
-        searchField.textProperty().addListener((observable, oldValue, newValue) -> {
-            filteredData.setPredicate(user -> {
-                if (newValue == null || newValue.isEmpty()) {
-                    return true; // Show all users if the search field is empty
-                }
 
-                // Convert search query to lowercase for case-insensitive search
-                String lowerCaseFilter = newValue.toLowerCase();
-
-                // Check if user's name contains the search query
-                return user.getName().toLowerCase().contains(lowerCaseFilter);
-            });
-        });
 
         delete.setDisable(true);
 

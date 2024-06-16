@@ -3,17 +3,13 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox spacing="10.0" styleClass="background" stylesheets="@../../../assets/styles/global.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.projeto.desktop.pages.dashboard.secretary.UsersPageController">
+<VBox spacing="10.0" styleClass="background" stylesheets="@../../../assets/styles/global.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.projeto.desktop.pages.dashboard.secretary.WorkersPageController">
 
     <GridPane hgap="10.0">
 
-
         <HBox GridPane.columnIndex="1" alignment="CENTER_RIGHT">
-            <Button fx:id="newUserButton" onAction="#openNewUserModal">
-                New User
-            </Button>
-            <Button fx:id="delete" onAction="#delete">
-                Delete
+            <Button fx:id="assignTeam" onAction="#openAssignTeamModal">
+                Assign/Edit Team
             </Button>
         </HBox>
 
@@ -30,9 +26,8 @@
     <TableView fx:id="table" minHeight="200.0">
         <columns>
             <TableColumn fx:id="name" prefWidth="75.0" text="Name" />
-            <TableColumn fx:id="email" prefWidth="75.0" text="Email" />
+            <TableColumn fx:id="currentTeam" prefWidth="75.0" text="Current Team" />
             <TableColumn fx:id="phone" prefWidth="75.0" text="Phone" />
-            <TableColumn fx:id="status" prefWidth="75.0" text="Status" />
         </columns>
         <columnResizePolicy>
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
