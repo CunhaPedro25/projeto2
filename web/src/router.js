@@ -26,17 +26,23 @@ const routes = [
             {
                 path: 'project',
                 name: 'Project',
-                component: () => import(/* webpackChunkName: "about" */ './views/dashboards/Home.vue'),
+                component: () => import(/* webpackChunkName: "about" */ './views/dashboards/Projects.vue'),
                 meta: { requiresAuth: true }
             },
             {
                 path: 'budget',
                 name: 'Budget',
-                component: () => import(/* webpackChunkName: "about" */ './views/dashboards/Home.vue'),
+                component: () => import(/* webpackChunkName: "about" */ './views/dashboards/Budgets.vue'),
                 meta: { requiresAuth: true }
             },
             {
-                path: 'construction',
+                path: 'constructions',
+                name: 'Constructions',
+                component: () => import(/* webpackChunkName: "about" */ './views/dashboards/Constructions.vue'),
+                meta: { requiresAuth: true }
+            },
+            {
+                path: 'construction/:id',
                 name: 'Construction',
                 component: () => import(/* webpackChunkName: "about" */ './views/dashboards/Construction.vue'),
                 meta: { requiresAuth: true }

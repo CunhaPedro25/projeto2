@@ -1,7 +1,7 @@
 <template>
-  <div class="flex w-full h-full">
+  <div class="flex max-w-full w-full h-full">
     <Sidebar></Sidebar>
-    <div class="flex flex-col h-full w-full text-white">
+    <div class="flex flex-col h-full w-full text-white truncate">
       <Header />
       <div class="flex flex-col flex-1 h-full">
         <router-view/>

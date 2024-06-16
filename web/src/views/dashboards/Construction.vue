@@ -1,59 +1,78 @@
 <template>
-  <div class="flex justify-between w-full h-fit px-4 py-2">
-    <input type="text" class="bg-background-800"/>
+  <div v-if="construction !== null" class="flex flex-col gap-2 px-6">
+    <div class="flex justify-between w-full">
+      <div class="flex items-end gap-2 text-text-300">
+        <p class="text-white text-4xl">{{ construction.name }}</p>
+        <p>{{ construction.stage.constructionType.type }}</p>
+        <p>{{ date.formatDate(construction.lastUpdate) }}</p>
+        <p>{{ construction.state.description }}</p>
+      </div>
 
-    <div class="flex gap-2" v-if="user.userType.type.toLowerCase() === 'engineer'">
-      <button class="primary bg-red-600">Delete Construction</button>
-      <button class="primary">Edit Construction</button>
-      <button class="primary">Add Construction</button>
+      <button class="primary">
+        Write complaint
+      </button>
     </div>
-  </div>
-  <div class="flex h-fit w-full p-4 mb-6 overflow-x-auto">
-    <table class="w-full">
-      <thead>
+
+    <div class="flex items-center gap-2 text-xl">
+      <p>{{ (construction.total / construction.stageBudget) * 100  }}%</p>
+      <div class="flex rounded-xl overflow-hidden h-8 flex-1">
+        <div class="bg-primary-600 relative"
+             :style="{ width: (construction.total / construction.stageBudget) * 100  + '%' }">
+        </div>
+        <div class="flex-1 bg-accent-800"></div>
+      </div>
+
+      <p>{{ construction.stageBudget }}€</p>
+    </div>
+
+
+    <div class="flex h-fit w-full p-4 mb-6 overflow-x-auto">
+      <table class="w-full">
+        <thead>
         <tr>
-          <th>Engineer</th>
-          <th>Stage</th>
-          <th>State</th>
-          <th>Budget</th>
+          <th>Equipa</th>
+          <th>Start Date</th>
+          <th>End Date</th>
+          <th>Days</th>
+          <th>Daily Value</th>
           <th>Total</th>
-          <th>last update</th>
         </tr>
-      </thead>
-      <tbody>
-        <tr v-for="construction in constructions" :key="construction.id">
-          <td>{{ construction.project.engineer.name }}</td>
-          <td>{{ construction.stage.name }}</td>
-          <td>{{ construction.state.description }}</td>
-          <td>{{ construction.stageBudget }}</td>
-          <td>{{ construction.total }}</td>
-          <td>{{ formatDate(construction.lastUpdate) }}</td>
+        </thead>
+        <tbody>
+        <tr v-for="constructionTeam in constructionTeams" :key="construction.id">
+          <td>{{ constructionTeam.team.id }}</td>
+<!--          <td>{{ date.formatDate(constructionTeam.startDate) }}</td>-->
+<!--          <td>{{ date.formatDate(constructionTeam.endDate) }}</td>-->
+          <td>{{ constructionTeam.days }}</td>
+          <td>{{ constructionTeam.dailyValue }}</td>
+          <td>{{ constructionTeam.days * constructionTeam.dailyValue }}</td>
         </tr>
-      </tbody>
-    </table>
+        </tbody>
+      </table>
+    </div>
   </div>
 </template>
 
 <script setup>
-import {useUserStore} from "../../store/userStore.js";
-import {onMounted, ref} from "vue";
+import { ref, onMounted } from 'vue';
+import { useRoute } from 'vue-router';
 import data from "../../services/data.js"
-import { format } from 'date-fns';
+import date from "../../utils/date.js";
 
-const user = useUserStore();
-let constructions = ref([]);
+let construction = ref(null);
+let constructionTeams = ref([]);
+const route = useRoute();
 
 onMounted(async () => {
-  if (user.userType.type.toLowerCase() === "client"){
-    constructions.value = await data.getClientConstructions(user.id);
-    console.log(constructions.value);
+  const id = route.params.id;
+  if (user.userType.type.toLowerCase() === "client") {
+    construction.value = await data.getConstruction(id);
+    constructionTeams.value = await data.getConstructionTeamConstruction(id);
+  } else if (user.userType.type.toLowerCase() === "worker") {
+    construction.value = await data.getConstruction(id);
+    constructionTeams.value = await data.getConstructionTeamTeam(id, user.team.id);
   }
 });
-
-const formatDate = (dateString) => {
-  const date = new Date(dateString);
-  return format(date, 'dd/MM/yyyy HH:mm');
-};
 </script>
 
 <style scoped>

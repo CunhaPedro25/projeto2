@@ -91,13 +91,13 @@ create table project
     client integer not null
         constraint client_id_fk
             references "user",
-    engineer integer not null
+    engineer integer
         constraint engineer_id_fk
             references "user",
     construction_type integer not null
         constraint construction_type_fk
             references construction_type,
-    requirements_create_date date null,
+    requirements_create_date date default current_date,
     budget_create_date date null,
     requirements_document varchar null,
     budget_document varchar null,
@@ -201,6 +201,22 @@ create table invoice
     paid boolean default false
 );
 
+CREATE OR REPLACE FUNCTION set_budget_create_date() RETURNS TRIGGER AS $$
+BEGIN
+    -- Check if the budget is being updated from NULL to a non-NULL value
+    IF NEW.budget IS NOT NULL AND OLD.budget IS NULL THEN
+        -- Set the budget_create_date to the current date
+        NEW.budget_create_date := CURRENT_DATE;
+    END IF;
+
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER project_budget_update
+    BEFORE UPDATE ON project
+    FOR EACH ROW
+EXECUTE FUNCTION set_budget_create_date();
 
 CREATE OR REPLACE FUNCTION calculate_days() RETURNS TRIGGER AS $$
 DECLARE
@@ -405,18 +421,35 @@ UPDATE "user" SET team = 3 WHERE id = 7;
 UPDATE "user" SET team = 3 WHERE id = 8;
 
 -- Insert dummy data for project
-INSERT INTO project (client, engineer, construction_type, requirements_create_date, budget_create_date, requirements_document, budget_document, budget, requirements_state) VALUES
-                                                                                                                                                                                              (1, 2, 2, '2023-01-01', '2023-02-01', 'req_doc_1.pdf', 'bud_doc_1.pdf', 10000.0, TRUE),
-                                                                                                                                                                                              (1, 2, 2, '2023-03-01', '2023-04-01', 'req_doc_2.pdf', 'bud_doc_2.pdf', 20000.0, TRUE),
-                                                                                                                                                                                              (1, 2, 1, '2023-03-01', '2023-04-01', 'req_doc_3.pdf', 'bud_doc_3.pdf', 20000.0, TRUE);
+INSERT INTO project (client, engineer, construction_type, requirements_document, requirements_state) VALUES
+                                                                                          (1, 2, 2, 'req_doc_1.pdf', FALSE),
+                                                                                          (1, 2, 2, 'req_doc_2.pdf', TRUE),
+                                                                                          (1, 2, 1, 'req_doc_3.pdf', TRUE),
+                                                                                          (1, 2, 1, 'req_doc_4.pdf', TRUE),
+                                                                                          (1, 2, 1, 'req_doc_5.pdf', TRUE);
 
 UPDATE project
-SET budget_state = TRUE
-WHERE id = 1;
-
-UPDATE project
-SET budget_state = TRUE
+SET budget_state = TRUE,
+    budget = 10000.0,
+    budget_document = 'bud_doc_1.pdf'
 WHERE id = 2;
+
+UPDATE project
+SET budget_state = TRUE,
+    budget = 20000.0,
+    budget_document = 'bud_doc_2.pdf'
+WHERE id = 3;
+
+UPDATE project
+SET budget_state = FALSE,
+    budget = 20000.0,
+    budget_document = 'bud_doc_3.pdf'
+WHERE id = 4;
+
+UPDATE project
+SET budget = 20000.0,
+    budget_document = 'bud_doc_4.pdf'
+WHERE id = 5;
 
 -- Insert dummy data for stage
 INSERT INTO stage (name, percentage, construction_type) VALUES
@@ -429,8 +462,8 @@ INSERT INTO stage (name, percentage, construction_type) VALUES
 
 -- Insert dummy data for construction
 INSERT INTO construction (project, stage, name, state) VALUES
-                                                              (1, 1, 'Coral', 1),
-                                                              (2, 2, 'Vizinho', 2);
+                                                              (2, 1, 'Coral', 1),
+                                                              (3, 2, 'Vizinho', 2);
 
 -- Insert dummy data for construction_material
 INSERT INTO construction_material (construction, material, quantity) VALUES

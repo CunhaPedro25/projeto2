@@ -2,9 +2,11 @@ package org.projeto.data.controllers;
 
 import org.projeto.data.entities.Complaint;
 import org.projeto.data.entities.Construction;
+import org.projeto.data.entities.ConstructionTeam;
 import org.projeto.data.entities.Project;
 import org.projeto.data.services.ComplaintService;
 import org.projeto.data.services.ConstructionService;
+import org.projeto.data.services.ConstructionTeamService;
 import org.projeto.data.services.ProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -42,9 +44,15 @@ public class ConstructionController {
         }
     }
 
+
     @GetMapping("/get/all")
     public ResponseEntity<List<Construction>> getAllConstructions() {
         return new ResponseEntity<>(ConstructionService.getAllConstructions(), HttpStatus.OK);
+    }
+
+    @GetMapping("/get/{id}")
+    public ResponseEntity<Construction> getAllConstructions(@PathVariable Integer id) {
+        return new ResponseEntity<>(ConstructionService.findById(id), HttpStatus.OK);
     }
 
     @GetMapping("/get/client/{id}")
@@ -66,5 +74,24 @@ public class ConstructionController {
     @GetMapping("/get/project/{id}")
     public ResponseEntity<List<Construction>> getConstructionsByProjectID(@PathVariable Integer id) {
         return new ResponseEntity<>(ConstructionService.findByProjectID(id), HttpStatus.OK);
+    }
+
+    @GetMapping("/get/teamConstructions/{teamId}")
+    public ResponseEntity<List<Construction>> getConstructionsByTeamID(@PathVariable Integer teamId) {
+        List<ConstructionTeam> constructionTeams = ConstructionTeamService.findByTeamID(teamId);
+        if (constructionTeams.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
+        List<Construction> teamConstructions = new ArrayList<>();
+
+        constructionTeams.forEach(constructionTeam -> {
+            Construction construction = ConstructionService.findById(constructionTeam.getConstruction().getId());
+            if (construction != null) {
+                teamConstructions.add(construction);
+            }
+        });
+
+        return new ResponseEntity<>(teamConstructions, HttpStatus.OK);
     }
 }

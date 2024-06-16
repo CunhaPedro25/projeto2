@@ -6,6 +6,8 @@ import org.projeto.data.repositories.ConstructionTeamRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ConstructionTeamService {
     private static ConstructionTeamRepository constructionTeamRepository;
@@ -22,13 +24,13 @@ public class ConstructionTeamService {
     public static void findByID(Long id){
         ConstructionTeamService.constructionTeamRepository.findById(id);
     }
-    public static void findByConstructionID(Integer id){
-        ConstructionTeamService.constructionTeamRepository.findByConstruction_Id(id);
+    public static List<ConstructionTeam> findByConstructionID(Integer id){
+        return ConstructionTeamService.constructionTeamRepository.findByConstruction_Id(id);
     }
-    public static void findByTeamID(Integer id){
-        ConstructionTeamService.constructionTeamRepository.findByTeam_Id(id);
+    public static List<ConstructionTeam> findByTeamID(Integer id){
+        return ConstructionTeamService.constructionTeamRepository.findByTeam_Id(id);
     }
-    public static void findByConstructionIDAndTeamID(Integer constructionID, Integer teamID){
-        ConstructionTeamService.constructionTeamRepository.findByConstruction_IdAndTeam_Id(constructionID, teamID);
+    public static List<ConstructionTeam> findByConstructionIDAndTeamID(Integer constructionID, Integer teamID){
+        return ConstructionTeamService.constructionTeamRepository.findByConstruction_IdAndTeam_Id(constructionID, teamID);
     }
 }

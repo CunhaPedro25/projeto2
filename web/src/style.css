@@ -16,22 +16,45 @@
   @apply flex flex-col w-screen h-screen bg-background-900;
 }
 
-button.primary{
-  @apply rounded-xl bg-primary-600 w-fit px-4 py-1;
+button{
+  @apply rounded-xl w-fit px-4 py-1 transition-colors duration-150;
+
+  &:hover{
+    @apply bg-background-900/80;
+  }
+
+  &.primary{
+    @apply bg-primary-600;
+
+    &:hover{
+      @apply bg-primary-600/50;
+    }
+  }
 }
 
-input {
+input, select, textarea{
   @apply rounded-xl bg-background-900 text-white py-2 px-2 ring-0 outline-0 border-0;
-}
 
-input:disabled {
-  @apply text-gray-500;
+  &:disabled {
+    @apply text-gray-500;
+  }
 }
-
 
 
 table {
   @apply rounded-lg overflow-hidden text-left rtl:text-right text-xl table-auto w-full select-text;
+
+  thead {
+    @apply bg-background-800;
+
+    tr{
+      @apply bg-background-800;
+    }
+  }
+
+  th, td{
+    @apply px-4 py-2;
+  }
 
   tbody{
     @apply divide-y divide-background-800 truncate;
@@ -49,20 +72,4 @@ table {
 
     }
   }
-}
-
-table thead {
-  @apply bg-background-800;
-}
-
-table th, table td{
-  @apply px-4 py-2;
-}
-
-table thead tr{
-  @apply bg-background-800;
-}
-
-table tbody tr:last-child{
-  @apply border-b-0;
 }

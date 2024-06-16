@@ -6,7 +6,15 @@ export default {
     async getAllConstructions() {
         try {
             const response = await axios.get(`${API_URL}/construction/get/all`);
-            console.log(response.data)
+            return response.data;
+        } catch (error) {
+            console.error('Error getting constructions:', error);
+            throw error;
+        }
+    },
+    async getConstruction(id) {
+        try {
+            const response = await axios.get(`${API_URL}/construction/get/${id}`);
             return response.data;
         } catch (error) {
             console.error('Error getting constructions:', error);
@@ -15,9 +23,7 @@ export default {
     },
     async getClientConstructions(clientId) {
         try {
-            console.log(`${API_URL}/construction/get/client/${clientId}`)
             const response = await axios.get(`${API_URL}/construction/get/client/${clientId}`);
-            console.log(response.data)
             return response.data;
         } catch (error) {
             console.error('Error getting constructions:', error);
@@ -30,6 +36,198 @@ export default {
             return response.data;
         } catch (error) {
             console.error('Error getting constructions:', error);
+            throw error;
+        }
+    },
+    async getTeamConstructions(teamId) {
+        try {
+            const response = await axios.get(`${API_URL}/construction/get/team/${teamId}`);
+            return response.data;
+        } catch (error) {
+            console.error('Error getting constructions:', error);
+            throw error;
+        }
+    },
+
+    async getConstructionTeamConstruction(constructionId) {
+        try {
+            const response = await axios.get(`${API_URL}/constructionTeam/get/construction/${constructionId}`);
+            return response.data;
+        } catch (error) {
+            console.error('Error getting construction team:', error);
+            throw error;
+        }
+    },
+
+    async getConstructionTeamTeam(constructionId, teamId) {
+        try {
+            const response = await axios.get(`${API_URL}/constructionTeam/get/${constructionId}/team/${teamId}`);
+            return response.data;
+        } catch (error) {
+            console.error('Error getting construction team:', error);
+            throw error;
+        }
+    },
+
+    async getProject(projectId) {
+        try {
+            const response = await axios.get(`${API_URL}/project/get/${projectId}`);
+            return response.data;
+        } catch (error) {
+            console.error('Error getting project:', error);
+            throw error;
+        }
+    },
+    async getAllProjects() {
+        try {
+            const response = await axios.get(`${API_URL}/project/get/all`);
+            response.data.sort((a, b) => {
+                // Sort by requirementsState
+                if (a.requirementsState === null && b.requirementsState !== null) {
+                    return -1;
+                }
+                if (a.requirementsState !== null && b.requirementsState === null) {
+                    return 1;
+                }
+                if (a.requirementsState === true && b.requirementsState === false) {
+                    return -1;
+                }
+                if (a.requirementsState === false && b.requirementsState === true) {
+                    return 1;
+                }
+
+                // If requirementsState is the same, sort by budgetState
+                if (a.budgetState === null && b.budgetState !== null) {
+                    return -1;
+                }
+                if (a.budgetState !== null && b.budgetState === null) {
+                    return 1;
+                }
+                if (a.budgetState === true && b.budgetState === false) {
+                    return -1;
+                }
+                if (a.budgetState === false && b.budgetState === true) {
+                    return 1;
+                }
+
+                // If both states are the same, return 0 (no sorting)
+                return 0;
+            });
+            return response.data;
+        } catch (error) {
+            console.error('Error getting projects:', error);
+            throw error;
+        }
+    },
+    async getClientProjects(id) {
+        try {
+            const response = await axios.get(`${API_URL}/project/get/client/${id}`);
+            response.data.sort((a, b) => {
+                // Sort by requirementsState
+                if (a.requirementsState === null && b.requirementsState !== null) {
+                    return -1;
+                }
+                if (a.requirementsState !== null && b.requirementsState === null) {
+                    return 1;
+                }
+                if (a.requirementsState === true && b.requirementsState === false) {
+                    return -1;
+                }
+                if (a.requirementsState === false && b.requirementsState === true) {
+                    return 1;
+                }
+
+                // If requirementsState is the same, sort by budgetState
+                if (a.budgetState === null && b.budgetState !== null) {
+                    return -1;
+                }
+                if (a.budgetState !== null && b.budgetState === null) {
+                    return 1;
+                }
+                if (a.budgetState === true && b.budgetState === false) {
+                    return -1;
+                }
+                if (a.budgetState === false && b.budgetState === true) {
+                    return 1;
+                }
+
+                // If both states are the same, return 0 (no sorting)
+                return 0;
+            });
+            return response.data;
+        } catch (error) {
+            console.error('Error getting projects:', error);
+            throw error;
+        }
+    },
+    async getEngineerProjects(id) {
+        try {
+            const response = await axios.get(`${API_URL}/project/get/engineer/${id}`);
+            response.data.sort((a, b) => {
+                // Sort by requirementsState
+                if (a.requirementsState === null && b.requirementsState !== null) {
+                    return -1;
+                }
+                if (a.requirementsState !== null && b.requirementsState === null) {
+                    return 1;
+                }
+                if (a.requirementsState === true && b.requirementsState === false) {
+                    return -1;
+                }
+                if (a.requirementsState === false && b.requirementsState === true) {
+                    return 1;
+                }
+
+                // If requirementsState is the same, sort by budgetState
+                if (a.budgetState === null && b.budgetState !== null) {
+                    return -1;
+                }
+                if (a.budgetState !== null && b.budgetState === null) {
+                    return 1;
+                }
+                if (a.budgetState === true && b.budgetState === false) {
+                    return -1;
+                }
+                if (a.budgetState === false && b.budgetState === true) {
+                    return 1;
+                }
+
+                // If both states are the same, return 0 (no sorting)
+                return 0;
+            });
+            return response.data;
+        } catch (error) {
+            console.error('Error getting projects:', error);
+            throw error;
+        }
+    },
+
+    async saveProject(project) {
+        try {
+            const response = await axios.post(`${API_URL}/project/add`, project);
+            return response.data;
+        } catch (error) {
+            console.error('Error saving project:', error);
+            throw error;
+        }
+    },
+    async updateBudgetState(projectId, state) {
+        try {
+            const response = await axios.put(`${API_URL}/project/update/budgetState/${projectId}/${state}`);
+            location.reload();
+            return response.data;
+        } catch (error) {
+            console.error('Error updating budget state:', error);
+            throw error;
+        }
+    },
+
+    async getAllConstructionTypes() {
+        try {
+            const response = await axios.get(`${API_URL}/constructionType/get/all`);
+            return response.data;
+        } catch (error) {
+            console.error('Error getting construction types:', error);
             throw error;
         }
     },
