@@ -5,7 +5,6 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
@@ -21,9 +20,7 @@ import org.projeto.data.services.ConstructionService;
 import org.projeto.desktop.SceneManager;
 import org.projeto.desktop.pages.modals.AddConstructionModalController;
 import org.projeto.desktop.pages.modals.AddMaterialConstructionModalController;
-import org.projeto.desktop.pages.modals.AddProjectModalController;
 
-import java.lang.reflect.InvocationTargetException;
 import java.time.LocalDate;
 
 public class ConstructionsPageController {
@@ -131,9 +128,8 @@ public class ConstructionsPageController {
         populateTableView();
     }
     @FXML
-    public void addMaterial(ActionEvent actionEvent) {
+    public void addMaterial() {
         try {
-            System.out.println("we are trying");
             SceneManager.openNewModal(
                     "pages/modals/add-materialConstruction.fxml",
                     "Add Material to Construction",
@@ -141,8 +137,6 @@ public class ConstructionsPageController {
                     controller -> {
                         AddMaterialConstructionModalController addMaterial = (AddMaterialConstructionModalController) controller;
                         addMaterial.setConstruction(selectedConstruction);
-                        System.out.println("we are trying VERY HARD" + selectedConstruction.getId());
-
                     });
         }catch (Exception e){
             Throwable cause = e.getCause();
@@ -152,7 +146,7 @@ public class ConstructionsPageController {
     }
 
     @FXML
-    public void openNewConstructionModal(ActionEvent actionEvent) {
+    public void openNewConstructionModal() {
         try{
             SceneManager.openNewModal(
                     "pages/modals/add-construction.fxml","Add Construction",true);
@@ -163,10 +157,12 @@ public class ConstructionsPageController {
         }
         populateTableView();
     }
+
     @FXML
-    public void addTeam(ActionEvent actionEvent) {
+    public void addTeam() {
     }
-    public void delete(ActionEvent actionEvent) {
+
+    public void delete() {
         try {
             ConstructionService.delete(Long.valueOf(selectedConstruction.getId()));
             populateTableView();
