@@ -117,8 +117,10 @@ public class UsersPageController {
 
     }
 
-     public void delete() {
-      UserService.delete(selectedUser);
+     public void delete() throws Exception {
+      selectedUser.setActive(false);
+      UserService.update(selectedUser);
+      table.getItems().remove(selectedUser);
     }
 
 }
