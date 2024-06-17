@@ -5,7 +5,7 @@
 
 <ScrollPane style="-fx-background-color: -background-900" styleClass="modal" stylesheets="@../../assets/styles/forms.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.projeto.desktop.pages.modals.AddConstructionModalController">
 
-    <VBox prefWidth="287.0" styleClass="form-container">
+    <VBox styleClass="form-container">
 
         <fx:include fx:id="constructionForm" source="../../components/construction-form.fxml" />
 

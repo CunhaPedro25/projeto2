@@ -76,8 +76,10 @@ import data from "../../services/data.js"
 import date from "@/utils/date";
 import Modal from "../../components/Modal.vue";
 import Cookies from "js-cookie";
+import {useUserStore} from "../../store/userStore.js";
 
 const id = Cookies.get("user_id");
+const user = useUserStore()
 const type = Cookies.get("user_type");
 let projects = ref([]);
 let types = ref([]);

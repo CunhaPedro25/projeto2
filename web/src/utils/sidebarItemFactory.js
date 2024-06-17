@@ -9,7 +9,6 @@ const userTypeConfig = {
     worker: [
         {name: "Home", page: "construction", icon: "home"},
         {name: "Constructions", page: "constructions", icon: "house_siding"},
-        {name: "Stock Requests", page: "requests", icon: "inventory"},
     ],
     engineer: [
         {name: "Home", page: "home", icon: "home"},

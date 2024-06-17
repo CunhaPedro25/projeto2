@@ -1,4 +1,4 @@
-package org.projeto.desktop.pages.dashboard.secretary;
+package org.projeto.desktop.pages.dashboard.admin;
 
 import javafx.animation.PauseTransition;
 import javafx.beans.property.SimpleStringProperty;
@@ -66,7 +66,7 @@ public class WorkersPageController {
 
     private void populateTableView() {
         ObservableList<User> entities = FXCollections.observableArrayList(UserService.getAllUsers());
-        FilteredList<User> filteredData = new FilteredList<>(entities, user -> user.getUserType().getId() == 3);
+        FilteredList<User> filteredData = new FilteredList<>(entities, user -> user.getUserType().getType().equals("Worker"));
         table.setItems(filteredData);
 
 

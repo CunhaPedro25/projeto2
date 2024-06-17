@@ -24,3 +24,11 @@
 .form-container .text-field {
     -fx-background-color: -background-900;
 }
+
+.fileButton {
+    -fx-background-color: -background-900;
+    -fx-text-fill: -text-100;
+    -fx-font-size: 14px;
+    -fx-padding: 10px 20px;
+    -fx-background-radius: 5;
+}

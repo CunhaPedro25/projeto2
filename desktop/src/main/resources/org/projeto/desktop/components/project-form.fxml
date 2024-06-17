@@ -3,6 +3,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
+<?import org.kordamp.ikonli.javafx.FontIcon?>
 <VBox spacing="30.0" stylesheets="@../assets/styles/global.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.projeto.desktop.components.ProjectFormController">
 
     <VBox spacing="5.0">
@@ -19,8 +20,16 @@
 
         <HBox fillHeight="false" spacing="10.0">
             <VBox HBox.hgrow="ALWAYS">
-                <Label contentDisplay="BOTTOM" styleClass="form-label" text="Requirements_document" />
-                <TextField fx:id="requirements_document" />
+                <Label contentDisplay="BOTTOM" styleClass="form-label" text="Requirements Document" />
+                <Button fx:id="requirements_document" onAction="#openFileChooser" styleClass="fileButton" text="Choose File..." >
+                    <graphic>
+                        <FontIcon iconLiteral="fas-file" />
+                    </graphic>
+                </Button>
+            </VBox>
+            <VBox HBox.hgrow="ALWAYS">
+                <Label contentDisplay="BOTTOM" styleClass="form-label" text="Budget" />
+                <TextField fx:id="budget" />
             </VBox>
         </HBox>
     </VBox>

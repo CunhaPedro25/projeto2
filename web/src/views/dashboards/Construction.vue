@@ -118,10 +118,11 @@
   <Modal title="Request Material" ref="request" @open="handleModalOpen" @close="handleModalClose">
     <div class="flex flex-col gap-4 items-center">
       <div class="flex flex-col gap-2 w-full">
-        <label for="team">Construction Teams</label>
-        <select id="team" v-model="selectConstructionTeam">
+        <label for="team">Construction Team</label>
+        <select id="team" v-model="selectConstructionTeam" v-if="type === 'engineer'">
           <option v-for="constructionTeam in workingTeams" :value="constructionTeam">{{ constructionTeam.team.id }}</option>
         </select>
+        <input v-model="selectConstructionTeam" v-if="type === 'worker'" disabled>
 
         <label for="material">Material</label>
         <select id="material" v-model="selectMaterial">
@@ -193,6 +194,7 @@ const fetchData = async () => {
         return;
       }
       id = constructionTeam.construction.id;
+      selectConstructionTeam.value = constructionTeam.id
     }
 
     construction.value = await data.getConstruction(id);

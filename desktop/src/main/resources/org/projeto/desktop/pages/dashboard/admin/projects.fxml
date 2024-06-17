@@ -7,7 +7,7 @@
       styleClass="background"
       xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
-      fx:controller="org.projeto.desktop.pages.dashboard.secretary.ProjectsPageController">
+      fx:controller="org.projeto.desktop.pages.dashboard.admin.ProjectsPageController">
 
     <GridPane hgap="10.0">
 

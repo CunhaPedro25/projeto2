@@ -1,4 +1,4 @@
-package org.projeto.desktop.pages.dashboard.secretary;
+package org.projeto.desktop.pages.dashboard.admin;
 
 import javafx.animation.PauseTransition;
 import javafx.beans.property.SimpleStringProperty;
@@ -30,8 +30,6 @@ public class ProjectsPageController {
     public TableColumn<Project, String> engineerColumn;
     @FXML
     public TableColumn<Project,String> requirements_create_dateColumn;
-    @FXML
-    public TableColumn<Project, String> requirementsAcceptedColumn;
     @FXML
     public TableColumn<Project, LocalDate> budget_create_dateColumn;
     @FXML
@@ -67,21 +65,13 @@ public class ProjectsPageController {
             return new SimpleStringProperty(engineer);
         });
         requirements_create_dateColumn.setCellValueFactory(new PropertyValueFactory<>("requirementsCreateDate"));
-        requirementsAcceptedColumn.setCellValueFactory(cellData -> {
-            Project project = cellData.getValue();
-            return new SimpleStringProperty(
-                    project.getRequirementsState() == null ? "Pending" :
-                            project.getRequirementsState() ? "Accepted" : "Rejected"
-            );
-        });
+        budget_create_dateColumn.setCellValueFactory(new PropertyValueFactory<>("requirementsCreateDate"));
 
-        budget_create_dateColumn.setCellValueFactory(new PropertyValueFactory<>("budgetCreateDate"));
 
         acceptedColumn.setCellValueFactory(cellData -> {
             Project project = cellData.getValue();
             return new SimpleStringProperty(
-                    project.getBudgetState() == null && project.getBudget() == null ? "" :
-                            project.getBudgetState() == null ? "Pending" :
+                    project.getBudgetState() == null ? "Pending" :
                             project.getBudgetState() ? "Accepted" : "Rejected"
             );
         });
