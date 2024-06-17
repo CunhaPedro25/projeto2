@@ -475,8 +475,8 @@ UPDATE "user" SET team = 3 WHERE id = 8;
 
 -- Insert dummy data for stage
 INSERT INTO stage (name, percentage, construction_type) VALUES
-                                                            ('Foundation', 0.2, 1),
-                                                            ('Framing', 0.3, 1),
+                                                            ('Roofing', 0.2, 1),
+                                                            ('Insulation', 0.3, 1),
                                                             ('Painting', 0.5, 1),
                                                             ('Foundation', 0.2, 2),
                                                             ('Framing', 0.2, 2),
