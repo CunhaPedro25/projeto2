@@ -135,11 +135,13 @@ public class ProjectsPageController {
             e.printStackTrace();
             SceneManager.openErrorAlert("Error", "It was not possible to edit the project. Please try again.");
         }
+        populateTableView();
     }
 
     @FXML
     public void openNewProjectModal() {
         SceneManager.openNewModal("pages/modals/add-project.fxml", "Add Project", true);
+        populateTableView();
     }
 
     public void delete(ActionEvent actionEvent) {
