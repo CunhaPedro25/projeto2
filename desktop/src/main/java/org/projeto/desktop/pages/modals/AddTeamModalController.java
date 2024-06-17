@@ -31,9 +31,9 @@ public class AddTeamModalController {
         List<String> names = TeamService.getLeaderNames();
         ObservableList<String> leaderNames = FXCollections.observableArrayList(names);
         teamFormController.leaderComboBox.setItems(leaderNames);
-        List<Integer> constructionIds = ConstructionService.getAllConstructionIds();
-        ObservableList<Integer> constructionIdsList = FXCollections.observableArrayList(constructionIds);
-        teamFormController.constructionComboBox.setItems(constructionIdsList);
+        List<String> constructionNames = ConstructionService.getAllConstructionNames();
+        ObservableList<String> constructionNamesList = FXCollections.observableArrayList(constructionNames);
+        teamFormController.constructionComboBox.setItems(constructionNamesList);
 
     }
     @FXML
@@ -59,7 +59,7 @@ public class AddTeamModalController {
                     return;
                 } else {
                     ConstructionTeamService.addNew(ConstructionTeam.builder()
-                            .construction(ConstructionService.findById(teamFormController.constructionComboBox.getValue()))
+                            .construction(ConstructionService.findByName(teamFormController.constructionComboBox.getValue()))
                             .team(TeamService.getTeamById(Long.valueOf(selectedTeam.getId())))
                             .startDate(teamFormController.start_date.getValue())
                             .endDate(teamFormController.end_date.getValue())

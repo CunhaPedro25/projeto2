@@ -113,8 +113,10 @@ public class MaterialsPageController {
     }
 
     public void delete(ActionEvent actionEvent) {
-        Material material = table.getSelectionModel().getSelectedItem();
-        MaterialService.delete(Long.valueOf(material.getId()));
-        populateTableView();
+        if (SceneManager.openConfirmationAlert("Delete Material", "Are you sure you want to delete this material?")){
+            Material material = table.getSelectionModel().getSelectedItem();
+            MaterialService.delete(Long.valueOf(material.getId()));
+            populateTableView();
+        }
     }
 }

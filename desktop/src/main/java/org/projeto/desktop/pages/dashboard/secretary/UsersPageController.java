@@ -117,8 +117,13 @@ public class UsersPageController {
 
     }
 
-     public void delete() {
-      UserService.delete(selectedUser);
+     public void delete() throws Exception {
+        if (SceneManager.openConfirmationAlert("Delete User","Are you sure you want to delete this user?")) {
+            selectedUser.setActive(false);
+            UserService.update(selectedUser);
+            table.getItems().remove(selectedUser);
+        }
+
     }
 
 }

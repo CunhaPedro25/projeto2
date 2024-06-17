@@ -13,4 +13,6 @@ public interface ConstructionRepository extends JpaRepository<Construction, Long
   List<Construction> findByProject_Id(Integer id);
 
   List<Construction> findConstructionsByProject_IdAndState_Id(Integer project_id, Integer state_id);
+
+    Construction findByName(String value);
 }

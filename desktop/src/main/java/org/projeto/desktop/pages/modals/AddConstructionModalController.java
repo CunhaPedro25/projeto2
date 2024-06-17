@@ -50,6 +50,8 @@ public class AddConstructionModalController {
                     System.out.println("form is correct");
                     editConstruction.setState(StateService.getStateByDescription(constructionFormController.stateComboBox.getValue()));
                     editConstruction.setStage(StageService.getStageByName(constructionFormController.stageComboBox.getValue()));
+                    editConstruction.setStageBudget(BigDecimal.valueOf(Double.parseDouble(constructionFormController.stageBudget.getText())));
+                    editConstruction.setName(constructionFormController.name.getText());
                     ConstructionService.update(editConstruction);
                     SceneManager.openConfirmationAlert("Success", "Construction updated successfully");
                     edit = false;
@@ -68,12 +70,15 @@ public class AddConstructionModalController {
                  ZoneId zoneId = ZoneId.systemDefault();
                  Instant instant = localDateTime.atZone(zoneId).toInstant();
                  ConstructionService.addNew(Construction.builder()
+                         .name(constructionFormController.name.getText())
                          .project(ProjectService.getProjectById(constructionFormController.projectComboBox.getValue()))
                          .state(StateService.getStateByDescription(constructionFormController.stateComboBox.getValue()))
                          .stage(StageService.getStageByName(constructionFormController.stageComboBox.getValue()))
                          .stageBudget(BigDecimal.valueOf(Double.parseDouble(constructionFormController.stageBudget.getText())))
                          .lastUpdate(instant)
                          .build());
+                 SceneManager.closeWindow(save);
+                 SceneManager.openConfirmationAlert("Success", "Construction added successfully");
              }
          }
         }catch (Exception e){
@@ -91,6 +96,8 @@ public class AddConstructionModalController {
         constructionFormController.stageComboBox.setValue(selectedConstruction.getStage().getName());
         constructionFormController.projectComboBox.setValue(selectedConstruction.getProject().getId());
         constructionFormController.projectComboBox.setDisable(true);
+        constructionFormController.name.setText(selectedConstruction.getName());
+        constructionFormController.stageBudget.setText(selectedConstruction.getStageBudget().toString());
         System.out.println("editing is true ");
         editConstruction = selectedConstruction;
 

@@ -18,9 +18,6 @@
             <Button fx:id="delete" onAction="#delete">
                 Delete
             </Button>
-            <Button fx:id="addTeam" onAction="#addTeam">
-                Add Team
-            </Button>
             <Button fx:id="addMaterial" onAction="#addMaterial">
                 Add Material
             </Button>

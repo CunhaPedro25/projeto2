@@ -147,7 +147,10 @@ public class TeamsPageController {
     }
     @FXML
     public void delete(ActionEvent actionEvent) {
-        TeamService.delete(Long.valueOf(selectedTeam.getId()));
-        populateTableView();
+        if (SceneManager.openConfirmationAlert("Delete Team", "Are you sure you want to delete this team?")) {
+            TeamService.delete(Long.valueOf(selectedTeam.getId()));
+            populateTableView();
+        }
+
     }
 }

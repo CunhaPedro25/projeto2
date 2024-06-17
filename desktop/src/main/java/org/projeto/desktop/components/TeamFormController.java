@@ -19,7 +19,7 @@ public class TeamFormController {
     @FXML
     public ComboBox<String> leaderComboBox;
     @FXML
-    public ComboBox<Integer> constructionComboBox;
+    public ComboBox<String> constructionComboBox;
     @FXML
     public Label constructionLabel;
 
@@ -29,11 +29,16 @@ public class TeamFormController {
                     && !leaderComboBox.getSelectionModel().isEmpty();
     }
     public boolean isFormCorrectAddingToConstruction() {
-        return
-                !daily_value.getText().trim().isEmpty()
-                        && !start_date.getValue().toString().trim().isEmpty()
-                        && !end_date.getValue().toString().trim().isEmpty()
-                        && !constructionComboBox.getSelectionModel().isEmpty();
+        LocalDate startDate = start_date.getValue();
+        LocalDate endDate = end_date.getValue();
+
+        return !daily_value.getText().trim().isEmpty()
+                && startDate != null
+                && endDate != null
+                && !startDate.toString().trim().isEmpty()
+                && !endDate.toString().trim().isEmpty()
+                && endDate.isAfter(startDate)
+                && !constructionComboBox.getSelectionModel().isEmpty();
     }
     public void setValues( String dailyValue, LocalDate startDate, LocalDate endDate, String leaderName){
         this.daily_value.setText(dailyValue);
