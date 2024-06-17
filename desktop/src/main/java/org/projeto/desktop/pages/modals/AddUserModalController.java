@@ -1,6 +1,5 @@
 package org.projeto.desktop.pages.modals;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
@@ -9,8 +8,7 @@ import javafx.scene.layout.HBox;
 import org.projeto.data.entities.*;
 import org.projeto.data.services.UserTypeService;
 import org.projeto.data.services.UserService;
-import org.projeto.desktop.CurrentUser;
-import org.apache.commons.codec.digest.DigestUtils;
+import org.projeto.data.services.ZipcodeService;
 import org.projeto.desktop.SceneManager;
 import org.projeto.desktop.components.RegisterFormController;
 
@@ -88,6 +86,7 @@ public class AddUserModalController {
                         .address(registerFormController.address.getText())
                         .door(Integer.valueOf(registerFormController.door.getText()))
                         .userType(userTypeEntity)
+                        .zipcode(ZipcodeService.findById(registerFormController.zipcode.getText()))
                         .active(true)
                         .build();
 

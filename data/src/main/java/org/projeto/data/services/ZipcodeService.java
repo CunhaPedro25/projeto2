@@ -34,6 +34,10 @@ public class ZipcodeService{
     }
   }
 
+  public static Zipcode findById(String id) {
+    return ZipcodeService.zipcodeRepository.findById(id);
+  }
+
   public static boolean existsById(String id){
     return ZipcodeService.zipcodeRepository.existsById(id);
   }

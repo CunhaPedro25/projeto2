@@ -52,16 +52,16 @@
                 <TextField fx:id="zipcode" />
             </VBox>
             <VBox>
-                <Label contentDisplay="BOTTOM" styleClass="form-label" text="District" />
-                <TextField fx:id="district" />
+                <Label contentDisplay="BOTTOM" styleClass="form-label" text="District" disable="true"/>
+                <TextField fx:id="district" disable="true"/>
             </VBox>
             <VBox>
-                <Label contentDisplay="BOTTOM" styleClass="form-label" text="City" />
-                <TextField fx:id="city" />
+                <Label contentDisplay="BOTTOM" styleClass="form-label" text="City" disable="true"/>
+                <TextField fx:id="city" disable="true"/>
             </VBox>
             <VBox>
-                <Label contentDisplay="BOTTOM" styleClass="form-label" text="Locale" />
-                <TextField fx:id="locale" />
+                <Label contentDisplay="BOTTOM" styleClass="form-label" text="Locale" disable="true"/>
+                <TextField fx:id="locale" disable="true"/>
             </VBox>
         </HBox>
     </VBox>
