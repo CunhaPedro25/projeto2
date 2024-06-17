@@ -48,23 +48,8 @@ public class UsersPageController {
     User selectedUser = null;
 
     public void initialize(){
-        ObservableList<User> entities = FXCollections.observableArrayList(UserService.getAllUsers());
-        entities.removeIf(user -> user.getUserType().getType().equals("Admin"));
-        FilteredList<User> filteredData = new FilteredList<>(entities, p -> true);
-        table.setItems(filteredData);
 
-
-
-        delete.setDisable(true);
-
-        name.setCellValueFactory(new PropertyValueFactory<>("name"));
-        email.setCellValueFactory(new PropertyValueFactory<>("email"));
-        phone.setCellValueFactory(new PropertyValueFactory<>("phone"));
-        status.setCellValueFactory(new PropertyValueFactory<>("active"));
-
-        table.setItems(entities);
-
-
+        populateTableView();
 
         // Add combined click listener with a timer
         table.setOnMouseClicked(event -> {
@@ -94,9 +79,29 @@ public class UsersPageController {
         });
     }
 
+    private void populateTableView() {
+        ObservableList<User> entities = FXCollections.observableArrayList(UserService.getAllUsers());
+        entities.removeIf(user -> user.getUserType().getType().equals("Admin"));
+        FilteredList<User> filteredData = new FilteredList<>(entities, p -> true);
+        table.setItems(filteredData);
+
+
+
+        delete.setDisable(true);
+
+        name.setCellValueFactory(new PropertyValueFactory<>("name"));
+        email.setCellValueFactory(new PropertyValueFactory<>("email"));
+        phone.setCellValueFactory(new PropertyValueFactory<>("phone"));
+        status.setCellValueFactory(new PropertyValueFactory<>("active"));
+
+        table.setItems(entities);
+
+    }
+
     @FXML
     public void openNewUserModal() {
         SceneManager.openNewModal("pages/modals/add-user.fxml", "Add User", true);
+        populateTableView();
     }
     @FXML
     public void editUser(User user) {
@@ -114,7 +119,7 @@ public class UsersPageController {
         }catch (Exception e){
             e.printStackTrace();
         }
-
+        populateTableView();
     }
 
      public void delete() throws Exception {

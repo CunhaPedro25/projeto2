@@ -104,5 +104,6 @@ public class WorkersPageController {
                     AssignTeamModalController assignTeamModalController = (AssignTeamModalController) controller;
                     assignTeamModalController.setSelectedUser(selectedUser);
                 });
+        populateTableView();
     }
 }
