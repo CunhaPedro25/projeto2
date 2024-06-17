@@ -42,7 +42,7 @@
       <table class="w-full">
         <thead>
         <tr>
-          <th>Equipa</th>
+          <th>Team</th>
           <th>Start Date</th>
           <th>End Date</th>
           <th>Days</th>
@@ -59,7 +59,7 @@
           <td>{{ constructionTeam.days }}</td>
           <td>{{ constructionTeam.dailyValue }}</td>
           <td>{{ constructionTeam.days * constructionTeam.dailyValue }}</td>
-          <td>
+          <td v-if="type === 'engineer'">
             <button class="button primary"
                     v-if="type === 'engineer' && constructionTeam.endDate == null"
                     @click="finishWork(constructionTeam.id)">Finish</button>

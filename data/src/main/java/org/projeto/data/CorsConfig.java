@@ -9,8 +9,8 @@ public class CorsConfig implements WebMvcConfigurer {
 
     @Override
     public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/api/**") // Adjust the mapping to match your API endpoints
-                .allowedOrigins("http://localhost:5173") // Adjust the origin to match your Vue application URL
+        registry.addMapping("/api/**")
+                .allowedOrigins("http://localhost:5173")
                 .allowedMethods("GET", "POST", "PUT", "DELETE")
                 .allowedHeaders("*");
     }
