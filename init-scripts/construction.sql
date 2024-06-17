@@ -438,8 +438,8 @@ INSERT INTO user_type (type) VALUES
 
 -- Insert dummy data for zipcode
 INSERT INTO zipcode (id, district, city, locale) VALUES
-                                                     ('12345', 'District A', 'City A', 'Locale A'),
-                                                     ('67890', 'District B', 'City B', 'Locale B');
+                                                     ('4925-595', 'Viana do Castelo', 'Viana do Castelo', 'Serreleis'),
+                                                     ('4925-582', 'Viana do Castelo', 'Viana do Castelo', 'Perre');
 
 -- Insert dummy data for team
 INSERT INTO team (busy, leader, daily_value) VALUES
@@ -449,16 +449,16 @@ INSERT INTO team (busy, leader, daily_value) VALUES
 
 -- Insert dummy data for user
 INSERT INTO "user" (name, email, password, phone, address, door, zipcode, user_type, team, active) VALUES
-                                                                                                       ('John Doe', 'client@email.com', '948fe603f61dc036b5c596dc09fe3ce3f3d30dc90f024c85f3c82db2ccab679d', '123-456-7890', '123 Main St', 1, '12345', 1, NULL, TRUE),
-                                                                                                       ('Jane Smith', 'engineer@email.com', '7826b958b79c70626801b880405eb5111557dadceb2fee2b1ed69a18eed0c6dc', '098-765-4321', '456 Elm St', 2, '67890', 2, NULL, TRUE),
-                                                                                                       ('Michael First', 'worker@email.com', '87eba76e7f3164534045ba922e7770fb58bbd14ad732bbf5ba6f11cc56989e6e', '098-765-4322', '456 Elm St', 3, '67890', 3, NULL, TRUE),
-                                                                                                       ('Michael Second', 'worker2@email.com', '87eba76e7f3164534045ba922e7770fb58bbd14ad732bbf5ba6f11cc56989e6e', '098-765-4323', '456 Elm St', 3, '67890', 3, NULL, TRUE),
-                                                                                                       ('Michael Third', 'worker3@email.com', '87eba76e7f3164534045ba922e7770fb58bbd14ad732bbf5ba6f11cc56989e6e', '098-765-4324', '456 Elm St', 3, '67890', 3, NULL, TRUE),
-                                                                                                       ('Michael Fourth', 'worker4@email.com', '87eba76e7f3164534045ba922e7770fb58bbd14ad732bbf5ba6f11cc56989e6e', '098-765-4325', '456 Elm St', 3, '67890', 3, NULL, TRUE),
-                                                                                                       ('Michael Fifth', 'worker5@email.com', '87eba76e7f3164534045ba922e7770fb58bbd14ad732bbf5ba6f11cc56989e6e', '098-765-4326', '456 Elm St', 3, '67890', 3, NULL, TRUE),
-                                                                                                       ('Michael Seventh', 'worker7@email.com', '87eba76e7f3164534045ba922e7770fb58bbd14ad732bbf5ba6f11cc56989e6e', '098-765-4327', '456 Elm St', 3, '67890', 3, NULL, TRUE),
-                                                                                                       ('Maurice james', 'secretary@email.com', 'a8148532caf684760a38c6e5100fe4742cbe0c0030df36ad74a71abbad4d8369', '111-222-3332', '789 Oak St', 4, '12345', 4, NULL, TRUE),
-                                                                                                       ('Admin User', 'admin@email.com', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918', '111-222-3333', '789 Oak St', 5, '12345', 5, NULL, TRUE);
+                                                                                                       ('John Doe', 'client@email.com', '948fe603f61dc036b5c596dc09fe3ce3f3d30dc90f024c85f3c82db2ccab679d', '123-456-7890', '123 Main St', 10, '4925-595', 1, NULL, TRUE),
+                                                                                                       ('Jane Smith', 'engineer@email.com', '7826b958b79c70626801b880405eb5111557dadceb2fee2b1ed69a18eed0c6dc', '098-765-4321', '456 Elm St', 7, '4925-595', 2, NULL, TRUE),
+                                                                                                       ('Michael First', 'worker@email.com', '87eba76e7f3164534045ba922e7770fb58bbd14ad732bbf5ba6f11cc56989e6e', '098-765-4322', '456 Elm St', 3, '4925-582', 3, NULL, TRUE),
+                                                                                                       ('Michael Second', 'worker2@email.com', '87eba76e7f3164534045ba922e7770fb58bbd14ad732bbf5ba6f11cc56989e6e', '098-765-4323', '456 Elm St', 3, '4925-582', 3, NULL, TRUE),
+                                                                                                       ('Michael Third', 'worker3@email.com', '87eba76e7f3164534045ba922e7770fb58bbd14ad732bbf5ba6f11cc56989e6e', '098-765-4324', '456 Elm St', 3, '4925-582', 3, NULL, TRUE),
+                                                                                                       ('Michael Fourth', 'worker4@email.com', '87eba76e7f3164534045ba922e7770fb58bbd14ad732bbf5ba6f11cc56989e6e', '098-765-4325', '456 Elm St', 3, '4925-582', 3, NULL, TRUE),
+                                                                                                       ('Michael Fifth', 'worker5@email.com', '87eba76e7f3164534045ba922e7770fb58bbd14ad732bbf5ba6f11cc56989e6e', '098-765-4326', '456 Elm St', 3, '4925-582', 3, NULL, TRUE),
+                                                                                                       ('Michael Seventh', 'worker7@email.com', '87eba76e7f3164534045ba922e7770fb58bbd14ad732bbf5ba6f11cc56989e6e', '098-765-4327', '456 Elm St', 3, '4925-582', 3, NULL, TRUE),
+                                                                                                       ('Maurice james', 'secretary@email.com', 'a8148532caf684760a38c6e5100fe4742cbe0c0030df36ad74a71abbad4d8369', '111-222-3332', '789 Oak St', 12, '4925-595', 4, NULL, TRUE),
+                                                                                                       ('Admin User', 'admin@email.com', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918', '111-222-3333', '789 Oak St', 12, '4925-595', 5, NULL, TRUE);
 
 -- Update team with leader ids
 UPDATE team SET leader = 3 WHERE id = 1;
