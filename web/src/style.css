@@ -17,7 +17,7 @@
 }
 
 button, .button{
-  @apply rounded-xl w-fit px-4 py-1 transition-colors duration-150;
+  @apply flex gap-2 items-center rounded-xl w-fit px-4 py-1 transition-colors duration-150 cursor-pointer select-none;
 
   &:hover{
     @apply bg-background-900/80;
@@ -64,10 +64,6 @@ table {
 
       &:nth-child(odd){
         @apply bg-background-600;
-      }
-
-      &:hover{
-        @apply bg-background-500;
       }
 
     }

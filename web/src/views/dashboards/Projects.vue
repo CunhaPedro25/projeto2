@@ -71,24 +71,23 @@
 </template>
 
 <script setup>
-import {useUserStore} from "../../store/userStore.js";
 import {onMounted, ref} from "vue";
 import data from "../../services/data.js"
 import date from "@/utils/date";
 import Modal from "../../components/Modal.vue";
 import Cookies from "js-cookie";
 
-const user = useUserStore();
+const id = Cookies.get("user_id");
 const type = Cookies.get("user_type");
 let projects = ref([]);
 let types = ref([]);
 
 const fetchProjects = async () => {
   if (type === "client"){
-    projects.value = await data.getClientProjects(user.id);
+    projects.value = await data.getClientProjects(id);
     types.value = await data.getAllConstructionTypes();
   }else if (type === "engineer"){
-    projects.value = await data.getEngineerProjects(user.id);
+    projects.value = await data.getEngineerProjects(id);
   }
 };
 

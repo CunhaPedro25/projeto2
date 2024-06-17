@@ -63,7 +63,7 @@ const routes = [
             {
                 path: 'invoices',
                 name: 'Invoices',
-                component: () => import(/* webpackChunkName: "about" */ './views/dashboards/Home.vue'),
+                component: () => import(/* webpackChunkName: "about" */ './views/dashboards/Invoices.vue'),
                 meta: { requiresAuth: true }
             },
         ]

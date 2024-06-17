@@ -33,7 +33,7 @@
       <p class="text-center text-text-300" v-else>No projects found...</p>
     </div>
 
-    <div class="flex flex-col w-full max-w-full gap-1" v-if="type !== 'engineer'">
+    <div class="flex flex-col w-full max-w-full gap-1" v-if="type === 'client'">
       <p class="text-2xl">Budgets</p>
       <div class="flex gap-2 max-w-full overflow-x-auto px-2" v-if="budgets.length > 0">
         <router-link to="/dashboard/budgets"  v-for="budget in budgets" class="flex flex-col gap-6 rounded-xl bg-background-800 min-w-56 p-2">
@@ -92,32 +92,73 @@
       <p class="text-center text-text-300" v-else>No constructions found...</p>
     </div>
 
+    <div class="flex flex-col w-full max-w-full gap-1" v-if="type === 'client'">
+      <p class="text-2xl">Invoices</p>
+      <div class="flex gap-2 max-w-full overflow-x-auto px-2" v-if="invoices.length > 0">
+        <div v-for="invoice in invoices" class="flex flex-col gap-6 rounded-xl bg-background-800 min-w-56 p-2">
+          <div class="flex flex-col gap-1">
+            <p>Project {{ invoice.project.id }} - {{ invoice.stage.name }}</p>
+            <p class="text-sm text-text-300">{{ date.formatDate(invoice.issueDate) }}</p>
+          </div>
+
+          <div class="flex w-full justify-between items-end gap-2">
+            <div>
+              <p class="text-text-300">Total:</p>
+              <p class="text-text-300">{{ invoice.stageTotal }}€</p>
+            </div>
+
+
+            <div class="button primary" @click="payInvoice(invoice.id)">
+              <span class="material-icons">check</span>
+              <p>Pay</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <p class="text-center text-text-300" v-else>No Invoices found...</p>
+    </div>
+
   </div>
 </template>
 
 <script setup>
 import {onMounted, ref} from "vue";
 import data from "../../services/data.js";
-import {useUserStore} from "../../store/userStore.js";
 import date from "@/utils/date";
 import Cookies from "js-cookie";
+import '@material-design-icons/font';
 
-const user = useUserStore();
+const id = Cookies.get("user_id");
 const type = Cookies.get("user_type")
 let projects = ref([]);
 let budgets = ref([]);
 let constructions = ref([]);
+let invoices = ref([]);
+
+const fetchInvoices = async () => {
+  if (type === "client") {
+    invoices.value = await data.getUnpaidInvoices(id);
+  }
+};
 
 onMounted(async () => {
   if (type === "client"){
-    projects.value = await data.getClientProjects(user.id);
+    projects.value = await data.getClientProjects(id);
     budgets.value = projects.value.filter(project => project.budget !== null);
-    constructions.value = await data.getClientConstructions(user.id);
+    constructions.value = await data.getClientConstructions(id);
+    await fetchInvoices();
   }else if (type === "engineer"){
-    projects.value = await data.getEngineerProjects(user.id);
-    constructions.value = await data.getEngineerConstructions(user.id);
+    projects.value = await data.getEngineerProjects(id);
+    constructions.value = await data.getEngineerConstructions(id);
   }
 });
+
+const payInvoice = async (id) => {
+  await data.payInvoice(id);
+  await fetchInvoices();
+};
 </script>
 
 <style scoped>

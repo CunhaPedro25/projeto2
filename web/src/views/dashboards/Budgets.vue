@@ -45,20 +45,19 @@
 </template>
 
 <script setup>
-import { useUserStore } from "../../store/userStore.js";
 import { onMounted, ref } from "vue";
 import data from "../../services/data.js";
 import date from "@/utils/date";
 import '@material-design-icons/font';
 import Cookies from "js-cookie";
 
-const user = useUserStore();
+const id = Cookies.get("user_id");
 const type = Cookies.get("user_type");
 let budgets = ref([]);
 
 const fetchBudgets = async () => {
   if (type === "client") {
-    budgets.value = await data.getClientProjects(user.id);
+    budgets.value = await data.getClientProjects(id);
     budgets.value = budgets.value.filter(budget => budget.budget !== null);
   }
 };

@@ -95,7 +95,6 @@ export default {
         }
     },
 
-
     async getTeamLeader(teamId) {
         try {
             const response = await axios.get(`${API_URL}/team/get/leader/${teamId}`);
@@ -344,4 +343,32 @@ export default {
             throw error;
         }
     },
+
+    async getClientInvoices(id) {
+        try {
+            const response = await axios.get(`${API_URL}/invoices/get/client/${id}`);
+            return response.data;
+        } catch (error) {
+            console.error('Error getting invoices:', error);
+            throw error;
+        }
+    },
+    async getUnpaidInvoices(id){
+        try {
+            const response = await this.getClientInvoices(id);
+            return response.filter(invoice => invoice.paid === false);
+        } catch (error) {
+            console.error('Error getting invoices:', error);
+            throw error;
+        }
+    },
+    async payInvoice(id) {
+        try {
+            const response = await axios.put(`${API_URL}/invoices/pay/${id}`);
+            return response.data;
+        } catch (error) {
+            console.error('Error paying invoice:', error);
+            throw error;
+        }
+    }
 };

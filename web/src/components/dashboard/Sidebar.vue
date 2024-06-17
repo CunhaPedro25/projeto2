@@ -7,7 +7,7 @@
       <SidebarItem v-for="item in sidebarItems" :icon="item.icon" :path="item.page">{{item.name}}</SidebarItem>
     </div>
     <div class="flex w-full justify-center p-2">
-      <SidebarItem class="!text-red-600 hover:bg-red-600 hover:!text-white" icon="logout" path="/">Log-out</SidebarItem>
+      <SidebarItem class="!text-red-500 hover:bg-red-600 hover:!text-white font-bold" icon="logout" path="/">Log-out</SidebarItem>
     </div>
   </div>
 </template>
