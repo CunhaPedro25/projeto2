@@ -39,7 +39,7 @@
     </div>
     <div class="flex flex-col gap-2 h-fit w-full p-4 mb-2 overflow-x-auto">
       <p class="text-2xl">Teams</p>
-      <table class="w-full">
+      <table class="w-full" v-if="constructionTeams.length > 0">
         <thead>
         <tr>
           <th>Team</th>
@@ -67,10 +67,12 @@
         </tr>
         </tbody>
       </table>
+
+      <p v-else>No teams</p>
     </div>
-    <div class="flex flex-col gap-2 h-fit w-full p-4 mb-2 overflow-x-auto">
+    <div class="flex flex-col gap-2 h-fit w-full p-4 mb-2 overflow-x-auto" v-if="type !== 'client'">
       <p class="text-2xl">Stock Requests</p>
-      <table class="w-full">
+      <table class="w-full" v-if="requests.length > 0">
         <thead>
         <tr>
           <th>Material</th>
@@ -86,6 +88,8 @@
           </tr>
         </tbody>
       </table>
+
+      <p v-else>No requests</p>
     </div>
   </div>
 
