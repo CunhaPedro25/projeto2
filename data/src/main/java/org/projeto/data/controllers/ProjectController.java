@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Date;
 import java.util.List;
 
 @RestController
@@ -19,28 +20,36 @@ public class ProjectController {
         this.projectService = projectService;
     }
 
-    @GetMapping("/projects")
+    @GetMapping("/get/{id}")
+    public ResponseEntity<Project> getProject(@PathVariable Integer id) {
+        Project project = ProjectService.getProjectById(id);
+        return new ResponseEntity<>(project, HttpStatus.OK);
+    }
+
+    @GetMapping("/get/all")
     public ResponseEntity<List<Project>> getAllProjects() {
         List<Project> projects = ProjectService.getAllProjects();
         return new ResponseEntity<>(projects, HttpStatus.OK);
     }
 
-    @GetMapping("/clientProjects/{id}")
+    @GetMapping("/get/client/{id}")
     public ResponseEntity<List<Project>> getClientProjects(@PathVariable String id) {
         List<Project> projects = ProjectService.getProjectsByClientID(Integer.valueOf(id));
         return new ResponseEntity<>(projects, HttpStatus.OK);
     }
-    @GetMapping("/engineerProjects/{id}")
+
+    @GetMapping("/get/engineer/{id}")
     public ResponseEntity<List<Project>> getEngineerProjects(@PathVariable String id){
         List<Project> projects  = ProjectService.getProjectsByEngineerID(Integer.valueOf(id));
         return new ResponseEntity<>(projects,HttpStatus.OK);
     }
 
-    @GetMapping("/projectsByConstructionType/{id}")
-    public ResponseEntity<List<Project>> getprojectsByConstructionTypes(@PathVariable String id){
+    @GetMapping("/get/construction_type/{id}")
+    public ResponseEntity<List<Project>> getProjectsByConstructionTypes(@PathVariable String id){
         List<Project> projects  = ProjectService.getProjectsByConstructionType(Integer.valueOf(id));
         return new ResponseEntity<>(projects,HttpStatus.OK);
     }
+
     @PostMapping("/add")
     public ResponseEntity<String> addNewProject(@RequestBody Project newProject) {
         try {
@@ -56,6 +65,26 @@ public class ProjectController {
         try {
             ProjectService.delete(id);
             return new ResponseEntity<>("Project deleted successfully", HttpStatus.OK);
+        } catch (IllegalStateException e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @PutMapping("/update/requirementsState/{id}/{state}")
+    public ResponseEntity<String> updateRequirementsState(@PathVariable Integer id, @PathVariable Boolean state) {
+        try {
+            ProjectService.updateProjectRequirementsState(id, state);
+            return new ResponseEntity<>("Budget state updated successfully", HttpStatus.OK);
+        } catch (IllegalStateException e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @PutMapping("/update/budgetState/{id}/{state}")
+    public ResponseEntity<String> updateBudgetState(@PathVariable Integer id, @PathVariable Boolean state) {
+        try {
+            ProjectService.updateProjectBudgetState(id, state);
+            return new ResponseEntity<>("Budget state updated successfully", HttpStatus.OK);
         } catch (IllegalStateException e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
         }

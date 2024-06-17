@@ -58,12 +58,24 @@ public class ProjectService {
     ProjectService.projectRepository.save(editProject);
   }
 
-    public static List<Integer> getAllProjectsIds() {
-        List<Project> projects = ProjectService.projectRepository.findAll();
-        List<Integer> projectIds = new ArrayList<>();
-        for (Project project : projects){
-            projectIds.add(project.getId());
-        }
-        return projectIds;
-    }
+  public static void updateProjectRequirementsState(Integer projectID, Boolean status) {
+    Project project = ProjectService.projectRepository.findById(projectID);
+    project.setRequirementsState(status);
+    ProjectService.projectRepository.save(project);
+  }
+
+  public static void updateProjectBudgetState(Integer projectID, Boolean status) {
+    Project project = ProjectService.projectRepository.findById(projectID);
+    project.setBudgetState(status);
+    ProjectService.projectRepository.save(project);
+  }
+
+  public static List<Integer> getAllProjectsIds() {
+      List<Project> projects = ProjectService.projectRepository.findAll();
+      List<Integer> projectIds = new ArrayList<>();
+      for (Project project : projects){
+          projectIds.add(project.getId());
+      }
+      return projectIds;
+  }
 }

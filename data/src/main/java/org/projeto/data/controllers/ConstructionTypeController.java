@@ -17,6 +17,11 @@ public class ConstructionTypeController {
         this.constructionTypeService = constructionTypeService;
     }
 
+    @GetMapping("/get/all")
+    public ResponseEntity<Iterable<ConstructionType>> getAllConstructionTypes() {
+        return new ResponseEntity<>(ConstructionTypeService.getAllConstructionTypes(), HttpStatus.OK);
+    }
+
     @PostMapping("/add")
     public ResponseEntity<String> addNewConstructionType(@RequestBody ConstructionType newType) {
         try {

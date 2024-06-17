@@ -1,7 +1,6 @@
 package org.projeto.data.services;
 
 import org.projeto.data.entities.State;
-import org.projeto.data.repositories.StageRepository;
 import org.projeto.data.repositories.StateRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -45,6 +44,6 @@ public class StateService {
     }
 
     public static State getStateByDescription(String description) {
-        return StateService.stateRepository.findByDescription(description).orElseThrow(() -> new IllegalStateException("State with description " + description + " does not exist"));
+        return StateService.stateRepository.findByDescription(description).orElse(null);
     }
 }

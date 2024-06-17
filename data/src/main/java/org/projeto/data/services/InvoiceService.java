@@ -46,4 +46,10 @@ public class InvoiceService {
   public static List<Invoice> findInvoicesByClientId(Integer id) {
     return InvoiceService.invoiceRepository.findInvoicesByClient_Id(id);
   }
+
+  public static void payInvoice(Long id) {
+    Invoice invoice = InvoiceService.invoiceRepository.findById(id).orElseThrow(() -> new IllegalStateException("The Invoice with id " + id + " does not exist"));
+    invoice.setPaid(true);
+    InvoiceService.invoiceRepository.save(invoice);
+  }
 }

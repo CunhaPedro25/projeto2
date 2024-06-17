@@ -13,5 +13,59 @@
 }
 
 #app {
-  @apply flex flex-col w-screen h-screen;
+  @apply flex flex-col w-screen h-screen bg-background-900;
+}
+
+button, .button{
+  @apply flex gap-2 items-center rounded-xl w-fit px-4 py-1 transition-colors duration-150 cursor-pointer select-none;
+
+  &:hover{
+    @apply bg-background-900/80;
+  }
+
+  &.primary{
+    @apply bg-primary-600;
+
+    &:hover{
+      @apply bg-primary-600/50;
+    }
+  }
+}
+
+input, select, textarea{
+  @apply rounded-xl bg-background-900 text-white py-2 px-2 ring-0 outline-0 border-0;
+
+  &:disabled {
+    @apply bg-opacity-45 text-gray-500;
+  }
+}
+
+
+table {
+  @apply rounded-lg overflow-hidden text-left rtl:text-right text-xl table-auto w-full select-text;
+
+  thead {
+    @apply bg-background-800;
+
+    tr{
+      @apply bg-background-800;
+    }
+  }
+
+  th, td{
+    @apply px-4 py-2;
+  }
+
+  tbody{
+    @apply divide-y divide-background-800 truncate;
+
+    tr{
+      @apply bg-background-700 border-background-800 truncate;
+
+      &:nth-child(odd){
+        @apply bg-background-600;
+      }
+
+    }
+  }
 }

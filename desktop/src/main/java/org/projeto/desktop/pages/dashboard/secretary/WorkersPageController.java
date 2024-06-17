@@ -1,32 +1,22 @@
 package org.projeto.desktop.pages.dashboard.secretary;
 
 import javafx.animation.PauseTransition;
-import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.collections.transformation.FilteredList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Duration;
 import org.projeto.data.entities.Team;
 import org.projeto.data.entities.User;
-import org.projeto.data.repositories.UserRepository;
 import org.projeto.data.services.TeamService;
 import org.projeto.data.services.UserService;
 import org.projeto.desktop.SceneManager;
-import org.projeto.desktop.components.RegisterFormController;
-import org.projeto.desktop.pages.modals.AddUserModalController;
 import org.projeto.desktop.pages.modals.AssignTeamModalController;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import javax.xml.transform.Source;
 
 
 @Component
@@ -74,9 +64,8 @@ public class WorkersPageController {
     }
 
     private void populateTableView() {
-        ObservableList<User> entities = FXCollections.observableArrayList(UserService.getAllUsers());
-        FilteredList<User> filteredData = new FilteredList<>(entities, user -> user.getUserType().getType().equals("Worker"));
-        table.setItems(filteredData);
+        ObservableList<User> entities = FXCollections.observableArrayList(UserService.getAllWorkers());
+        table.setItems(entities);
 
 
         assignTeam.setDisable(true);

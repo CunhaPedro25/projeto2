@@ -26,8 +26,8 @@ public class Project {
   @JoinColumn(name = "client", nullable = false)
   private User client;
 
-  @ManyToOne(fetch = FetchType.EAGER, optional = false)
-  @JoinColumn(name = "engineer", nullable = false)
+  @ManyToOne(fetch = FetchType.EAGER)
+  @JoinColumn(name = "engineer")
   private User engineer;
 
   @ManyToOne(fetch = FetchType.EAGER, optional = false)

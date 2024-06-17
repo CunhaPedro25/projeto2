@@ -1,5 +1,6 @@
 package org.projeto.data.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -39,17 +40,20 @@ public class Construction {
   @JoinColumn(name = "state")
   private State state;
 
-    @Column(name = "last_update")
-    private Instant lastUpdate;
+  @Column(name = "last_update")
+  private Instant lastUpdate;
 
-    @OneToMany(mappedBy = "construction")
-    private Set<Complaint> complaints = new LinkedHashSet<>();
+  @JsonIgnore
+  @OneToMany(mappedBy = "construction")
+  private Set<Complaint> complaints = new LinkedHashSet<>();
 
-    @OneToMany(mappedBy = "construction")
-    private Set<ConstructionMaterial> constructionMaterials = new LinkedHashSet<>();
+  @JsonIgnore
+  @OneToMany(mappedBy = "construction")
+  private Set<ConstructionMaterial> constructionMaterials = new LinkedHashSet<>();
 
-    @OneToMany(mappedBy = "construction")
-    private Set<ConstructionTeam> constructionTeams = new LinkedHashSet<>();
+  @JsonIgnore
+  @OneToMany(mappedBy = "construction")
+  private Set<ConstructionTeam> constructionTeams = new LinkedHashSet<>();
 
   @Column(name = "name", length = Integer.MAX_VALUE)
   private String name;

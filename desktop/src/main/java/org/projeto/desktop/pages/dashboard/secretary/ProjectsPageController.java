@@ -1,7 +1,6 @@
 package org.projeto.desktop.pages.dashboard.secretary;
 
 import javafx.animation.PauseTransition;
-import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -14,15 +13,12 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Duration;
 import org.projeto.data.entities.Project;
-import org.projeto.data.entities.User;
 import org.projeto.data.services.ProjectService;
 import org.projeto.desktop.SceneManager;
 import org.projeto.desktop.pages.modals.AddProjectModalController;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 @Component
 public class ProjectsPageController {
@@ -34,6 +30,8 @@ public class ProjectsPageController {
     public TableColumn<Project, String> engineerColumn;
     @FXML
     public TableColumn<Project,String> requirements_create_dateColumn;
+    @FXML
+    public TableColumn<Project, String> requirementsAcceptedColumn;
     @FXML
     public TableColumn<Project, LocalDate> budget_create_dateColumn;
     @FXML
@@ -64,17 +62,26 @@ public class ProjectsPageController {
         });
         engineerColumn.setCellValueFactory(cellData -> {
             Project project = cellData.getValue();
+            if(project.getEngineer() == null) return new SimpleStringProperty("Pending");
             String engineer = project.getEngineer().getName();
             return new SimpleStringProperty(engineer);
         });
         requirements_create_dateColumn.setCellValueFactory(new PropertyValueFactory<>("requirementsCreateDate"));
-        budget_create_dateColumn.setCellValueFactory(new PropertyValueFactory<>("requirementsCreateDate"));
+        requirementsAcceptedColumn.setCellValueFactory(cellData -> {
+            Project project = cellData.getValue();
+            return new SimpleStringProperty(
+                    project.getRequirementsState() == null ? "Pending" :
+                            project.getRequirementsState() ? "Accepted" : "Rejected"
+            );
+        });
 
+        budget_create_dateColumn.setCellValueFactory(new PropertyValueFactory<>("budgetCreateDate"));
 
         acceptedColumn.setCellValueFactory(cellData -> {
             Project project = cellData.getValue();
             return new SimpleStringProperty(
-                    project.getBudgetState() == null ? "Pending" :
+                    project.getBudgetState() == null && project.getBudget() == null ? "" :
+                            project.getBudgetState() == null ? "Pending" :
                             project.getBudgetState() ? "Accepted" : "Rejected"
             );
         });

@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/invoice")
+@RequestMapping("/api/invoices")
 public class InvoiceController {
 
     @Autowired
@@ -53,9 +53,19 @@ public class InvoiceController {
         return new ResponseEntity<>(invoices, HttpStatus.OK);
     }
 
-    @GetMapping("/client/{clientId}")
+    @GetMapping("/get/client/{clientId}")
     public ResponseEntity<List<Invoice>> getInvoicesByClientId(@PathVariable Integer clientId) {
         List<Invoice> invoices = InvoiceService.findInvoicesByClientId(clientId);
         return new ResponseEntity<>(invoices, HttpStatus.OK);
+    }
+
+    @PutMapping("/pay/{id}")
+    public ResponseEntity<String> payInvoice(@PathVariable Long id) {
+        try {
+            InvoiceService.payInvoice(id);
+            return new ResponseEntity<>("Invoice paid successfully", HttpStatus.OK);
+        } catch (IllegalStateException e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+        }
     }
 }

@@ -3,7 +3,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox spacing="10.0" styleClass="background" stylesheets="@../../../assets/styles/global.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.projeto.desktop.pages.dashboard.secretary.TeamsPageController">
+<VBox spacing="10.0" styleClass="background" stylesheets="@../../../assets/styles/global.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.projeto.desktop.pages.dashboard.admin.TeamsPageController">
 
     <GridPane hgap="10.0">
 

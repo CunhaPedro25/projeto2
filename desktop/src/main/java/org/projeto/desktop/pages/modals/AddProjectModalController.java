@@ -15,6 +15,7 @@ import org.projeto.desktop.SceneManager;
 import org.projeto.desktop.components.ProjectFormController;
 import org.springframework.stereotype.Component;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -91,6 +92,7 @@ public class AddProjectModalController {
                     editProject.setRequirementsCreateDate(LocalDate.now());
                     editProject.setClient(UserService.findUserByEmail(projectFormController.clientComboBox.getValue()));
                     editProject.setEngineer(UserService.findUserByEmail(projectFormController.engineerComboBox.getValue()));
+                    editProject.setBudget(new BigDecimal(projectFormController.budget.getText()));
 
                     ProjectService.update(editProject);
                     SceneManager.closeWindow(save);
@@ -105,7 +107,6 @@ public class AddProjectModalController {
                 Project project = Project.builder()
                         .client(UserService.findUserByEmail(projectFormController.clientComboBox.getValue()))
                         .engineer(UserService.findUserByEmail(projectFormController.engineerComboBox.getValue()))
-                        .requirementsDocument(projectFormController.requirements_document.getText())
                         .requirementsCreateDate(LocalDate.now())
                         .constructionType(constructionType)
                         .budgetCreateDate(null)
@@ -124,8 +125,10 @@ public class AddProjectModalController {
         edit = true;
         editProject = selectedProject;
         projectFormController.clientComboBox.setValue(selectedProject.getClient().getEmail());
-        projectFormController.engineerComboBox.setValue(selectedProject.getEngineer().getEmail());
-        projectFormController.requirements_document.setText(selectedProject.getRequirementsDocument());
+        if (selectedProject.getEngineer() != null)
+            projectFormController.engineerComboBox.setValue(selectedProject.getEngineer().getEmail());
+        if (selectedProject.getRequirementsDocument() != null)
+            projectFormController.requirements_document.setText(selectedProject.getRequirementsDocument());
     }
 
     private static class ClientListCell extends ListCell<User> {

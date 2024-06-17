@@ -20,6 +20,10 @@ public class Invoice {
   private Integer id;
 
   @ManyToOne(fetch = FetchType.EAGER, optional = false)
+  @JoinColumn(name = "project", nullable = false)
+  private Project project;
+
+  @ManyToOne(fetch = FetchType.EAGER, optional = false)
   @JoinColumn(name = "stage", nullable = false)
   private Stage stage;
 

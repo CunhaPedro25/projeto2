@@ -74,6 +74,14 @@ public class TeamService {
 
   }
 
+  public static User getLeaderByTeamId(Long id) {
+    Optional<Team> teamOptional = teamRepository.findById(id);
+    if (teamOptional.isPresent()) {
+      return teamOptional.get().getLeader();
+    } else {
+      throw new IllegalStateException("Team with id " + id + " does not exist");
+    }
+  }
 
   public static List<String> getLeaderNames() {
     return teamRepository.findAll().stream()

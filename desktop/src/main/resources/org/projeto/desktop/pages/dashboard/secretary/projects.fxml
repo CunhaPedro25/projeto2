@@ -36,8 +36,9 @@
             <TableColumn fx:id="clientColumn" prefWidth="75.0" text="Client" />
             <TableColumn fx:id="engineerColumn" prefWidth="75.0" text="Engineer" />
             <TableColumn fx:id="requirements_create_dateColumn" prefWidth="75.0" text="Requirements Date" />
+            <TableColumn fx:id="requirementsAcceptedColumn" prefWidth="75.0" text="Requirements Accepted" />
             <TableColumn fx:id="budget_create_dateColumn" prefWidth="75.0" text="Budget Date" />
-            <TableColumn fx:id="acceptedColumn" prefWidth="75.0" text="Accepted" />
+            <TableColumn fx:id="acceptedColumn" prefWidth="75.0" text="Budget Accepted" />
         </columns>
         <columnResizePolicy>
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />

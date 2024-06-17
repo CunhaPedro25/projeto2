@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/team")
@@ -18,12 +19,6 @@ public class TeamController {
     public TeamController(TeamService teamService) {
     }
 
-    @GetMapping("/teams")
-    public ResponseEntity<List<Team>> getAllTeams() {
-        List<Team> teams = TeamService.getTeams();
-        return new ResponseEntity<>(teams, HttpStatus.OK);
-    }
-
     @PostMapping("/add")
     public ResponseEntity<String> addNewTeam(@RequestBody Team newTeam) {
         try {
@@ -31,6 +26,41 @@ public class TeamController {
             return new ResponseEntity<>("Team added successfully", HttpStatus.CREATED);
         } catch (IllegalStateException e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @GetMapping("/get/all")
+    public ResponseEntity<List<Team>> getAllTeams() {
+        List<Team> teams = TeamService.getTeams();
+        return new ResponseEntity<>(teams, HttpStatus.OK);
+    }
+
+    @GetMapping("/get/free")
+    public ResponseEntity<List<Team>> getFreeTeams() {
+        List<Team> teams = TeamService.getTeams();
+        List<Team> freeTeams = teams.stream()
+                .filter(team -> !team.getBusy())
+                .collect(Collectors.toList());
+        return new ResponseEntity<>(freeTeams, HttpStatus.OK);
+    }
+
+    @GetMapping("/get/{id}")
+    public ResponseEntity<Team> getTeamById(@PathVariable Long id) {
+        try {
+            Team team = TeamService.getTeamById(id);
+            return new ResponseEntity<>(team, HttpStatus.OK);
+        } catch (IllegalStateException e) {
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @GetMapping("/get/leader/{id}")
+    public ResponseEntity<User> getLeaderByTeamId(@PathVariable Long id) {
+        try {
+            User leader = TeamService.getLeaderByTeamId(id);
+            return new ResponseEntity<>(leader, HttpStatus.OK);
+        } catch (IllegalStateException e) {
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
         }
     }
 

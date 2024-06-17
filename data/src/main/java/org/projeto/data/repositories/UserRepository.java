@@ -10,17 +10,17 @@ import java.util.Optional;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
-  User findById(Integer id);
+    User findById(Integer id);
 
-  User findByEmail(String email);
+    User findByEmail(String email);
 
 
-  boolean existsByEmail(String email);
+    boolean existsByEmail(String email);
 
-  @Query("SELECT e FROM #{#entityName} e WHERE e.phone = ?1")
-  Optional<User> findByPhone(String phone);
+    @Query("SELECT e FROM #{#entityName} e WHERE e.phone = ?1")
+    Optional<User> findByPhone(String phone);
 
-  List<User> findByUserTypeId(Integer id);
+    List<User> findByUserTypeId(Integer id);
 
 
     User findByName(String name);
