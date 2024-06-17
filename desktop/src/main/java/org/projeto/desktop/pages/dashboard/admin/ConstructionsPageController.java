@@ -141,6 +141,7 @@ public class ConstructionsPageController {
             cause.printStackTrace();
             SceneManager.openErrorAlert("Error", "It was not possible to add the material. Please try again.");
         }
+        populateTableView();
     }
 
     @FXML
@@ -167,7 +168,7 @@ public class ConstructionsPageController {
                 SceneManager.openErrorAlert("Error", "It was not possible to delete the construction. Please try again.");
             }
         }
-
+        populateTableView();
     }
 
 }

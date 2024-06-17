@@ -4,7 +4,6 @@ import javafx.animation.PauseTransition;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
@@ -65,9 +64,8 @@ public class WorkersPageController {
     }
 
     private void populateTableView() {
-        ObservableList<User> entities = FXCollections.observableArrayList(UserService.getAllUsers());
-        FilteredList<User> filteredData = new FilteredList<>(entities, user -> user.getUserType().getType().equals("Worker"));
-        table.setItems(filteredData);
+        ObservableList<User> entities = FXCollections.observableArrayList(UserService.getAllWorkers());
+        table.setItems(entities);
 
 
         assignTeam.setDisable(true);
@@ -95,5 +93,6 @@ public class WorkersPageController {
                     AssignTeamModalController assignTeamModalController = (AssignTeamModalController) controller;
                     assignTeamModalController.setSelectedUser(selectedUser);
                 });
+        populateTableView();
     }
 }

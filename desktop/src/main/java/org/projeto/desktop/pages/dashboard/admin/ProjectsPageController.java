@@ -31,6 +31,8 @@ public class ProjectsPageController {
     @FXML
     public TableColumn<Project,String> requirements_create_dateColumn;
     @FXML
+    public TableColumn<Project, String> requirementsAcceptedColumn;
+    @FXML
     public TableColumn<Project, LocalDate> budget_create_dateColumn;
     @FXML
     public TableColumn<Project, String> acceptedColumn;
@@ -65,13 +67,21 @@ public class ProjectsPageController {
             return new SimpleStringProperty(engineer);
         });
         requirements_create_dateColumn.setCellValueFactory(new PropertyValueFactory<>("requirementsCreateDate"));
-        budget_create_dateColumn.setCellValueFactory(new PropertyValueFactory<>("requirementsCreateDate"));
+        requirementsAcceptedColumn.setCellValueFactory(cellData -> {
+            Project project = cellData.getValue();
+            return new SimpleStringProperty(
+                    project.getRequirementsState() == null ? "Pending" :
+                            project.getRequirementsState() ? "Accepted" : "Rejected"
+            );
+        });
 
+        budget_create_dateColumn.setCellValueFactory(new PropertyValueFactory<>("budgetCreateDate"));
 
         acceptedColumn.setCellValueFactory(cellData -> {
             Project project = cellData.getValue();
             return new SimpleStringProperty(
-                    project.getBudgetState() == null ? "Pending" :
+                    project.getBudgetState() == null && project.getBudget() == null ? "" :
+                            project.getBudgetState() == null ? "Pending" :
                             project.getBudgetState() ? "Accepted" : "Rejected"
             );
         });
@@ -125,11 +135,13 @@ public class ProjectsPageController {
             e.printStackTrace();
             SceneManager.openErrorAlert("Error", "It was not possible to edit the project. Please try again.");
         }
+        populateTableView();
     }
 
     @FXML
     public void openNewProjectModal() {
         SceneManager.openNewModal("pages/modals/add-project.fxml", "Add Project", true);
+        populateTableView();
     }
 
     public void delete(ActionEvent actionEvent) {
