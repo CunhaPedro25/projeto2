@@ -12,16 +12,14 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/material")
 public class MaterialController {
-    private final MaterialService materialService;
 
     @Autowired
     public MaterialController(MaterialService materialService) {
-        this.materialService = materialService;
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Material> getMaterialById(@PathVariable Integer id) {
-        Material material = materialService.getMaterialByID(id);
+        Material material = MaterialService.getMaterialByID(id);
         if (material != null) {
             return new ResponseEntity<>(material, HttpStatus.OK);
         } else {
@@ -32,7 +30,7 @@ public class MaterialController {
     @PostMapping("/add")
     public ResponseEntity<String> addNewMaterial(@RequestBody Material newMaterial) {
         try {
-            materialService.addNew(newMaterial);
+            MaterialService.addNew(newMaterial);
             return new ResponseEntity<>("Material added successfully", HttpStatus.CREATED);
         } catch (IllegalStateException e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
@@ -42,7 +40,7 @@ public class MaterialController {
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> deleteMaterial(@PathVariable Long id) {
         try {
-            materialService.delete(id);
+            MaterialService.delete(id);
             return new ResponseEntity<>("Material deleted successfully", HttpStatus.OK);
         } catch (IllegalStateException e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);

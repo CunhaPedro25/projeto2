@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
@@ -13,14 +10,18 @@
       fx:controller="org.projeto.desktop.pages.dashboard.secretary.ProjectsPageController">
 
     <GridPane hgap="10.0">
-        <HBox alignment="CENTER_LEFT" spacing="10.0">
-            <Label>Search</Label>
-            <TextField fx:id="searchField" />
+
+
+        <HBox GridPane.columnIndex="1" alignment="CENTER_RIGHT">
+            <Button fx:id="newProject" onAction="#openNewProjectModal">
+                New Project
+            </Button>
+            <Button fx:id="delete" onAction="#delete">
+                Delete
+            </Button>
         </HBox>
 
-        <Button fx:id="newProject" GridPane.columnIndex="1">
-            New Project
-        </Button>
+
         <columnConstraints>
             <ColumnConstraints hgrow="ALWAYS" />
             <ColumnConstraints fillWidth="false" halignment="RIGHT" />
@@ -34,7 +35,8 @@
         <columns>
             <TableColumn fx:id="clientColumn" prefWidth="75.0" text="Client" />
             <TableColumn fx:id="engineerColumn" prefWidth="75.0" text="Engineer" />
-            <TableColumn fx:id="create_dateColumn" prefWidth="75.0" text="Create Date" />
+            <TableColumn fx:id="requirements_create_dateColumn" prefWidth="75.0" text="Requirements Date" />
+            <TableColumn fx:id="budget_create_dateColumn" prefWidth="75.0" text="Budget Date" />
             <TableColumn fx:id="acceptedColumn" prefWidth="75.0" text="Accepted" />
         </columns>
         <columnResizePolicy>

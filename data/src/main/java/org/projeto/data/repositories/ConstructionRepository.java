@@ -7,12 +7,12 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface ConstructionRepository  extends JpaRepository<Construction, Long> {
+public interface ConstructionRepository extends JpaRepository<Construction, Long> {
   Construction findById (Integer id);
 
   List<Construction> findByProject_Id(Integer id);
 
   List<Construction> findConstructionsByProject_IdAndState_Id(Integer project_id, Integer state_id);
 
-  List<Construction> findConstructionsByTeam_Id(Integer id);
+    Construction findByName(String value);
 }

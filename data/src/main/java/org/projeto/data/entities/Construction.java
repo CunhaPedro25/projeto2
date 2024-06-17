@@ -4,6 +4,9 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.math.BigDecimal;
+import java.time.Instant;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -23,10 +26,6 @@ public class Construction {
   private Project project;
 
   @ManyToOne(fetch = FetchType.EAGER)
-  @JoinColumn(name = "team")
-  private Team team;
-
-  @ManyToOne(fetch = FetchType.EAGER)
   @JoinColumn(name = "stage")
   private Stage stage;
 
@@ -39,5 +38,20 @@ public class Construction {
   @ManyToOne(fetch = FetchType.EAGER)
   @JoinColumn(name = "state")
   private State state;
+
+    @Column(name = "last_update")
+    private Instant lastUpdate;
+
+    @OneToMany(mappedBy = "construction")
+    private Set<Complaint> complaints = new LinkedHashSet<>();
+
+    @OneToMany(mappedBy = "construction")
+    private Set<ConstructionMaterial> constructionMaterials = new LinkedHashSet<>();
+
+    @OneToMany(mappedBy = "construction")
+    private Set<ConstructionTeam> constructionTeams = new LinkedHashSet<>();
+
+  @Column(name = "name", length = Integer.MAX_VALUE)
+  private String name;
 
 }

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox spacing="10.0" stylesheets="@../../../assets/styles/global.css"
+      styleClass="background"
+      xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="org.projeto.desktop.pages.dashboard.secretary.ConstructionsPageController">
+
+    <GridPane hgap="10.0">
+
+        <HBox GridPane.columnIndex="1" alignment="CENTER_RIGHT">
+            <Button fx:id="newConstruction" onAction="#openNewConstructionModal">
+                New Construction
+            </Button>
+            <Button fx:id="delete" onAction="#delete">
+                Delete
+            </Button>
+            <Button fx:id="addMaterial" onAction="#addMaterial">
+                Add Material
+            </Button>
+        </HBox>
+
+        <columnConstraints>
+            <ColumnConstraints hgrow="ALWAYS" />
+            <ColumnConstraints fillWidth="false" halignment="RIGHT" />
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints />
+        </rowConstraints>
+    </GridPane>
+
+    <TableView fx:id="table" minHeight="200.0">
+        <columns>
+            <TableColumn fx:id="nameColumn" prefWidth="75.0" text="Name" />
+            <TableColumn fx:id="constructionTypeColumn" prefWidth="75.0" text="Construction Type" />
+            <TableColumn fx:id="projectColumn" prefWidth="75.0" text="Project" />
+            <TableColumn fx:id="stageColumn" prefWidth="75.0" text="Stage" />
+            <TableColumn fx:id="stateColumn" prefWidth="75.0" text="State" />
+            <TableColumn fx:id="lastUpdateColumn" prefWidth="75.0" text="Last Update" />
+        </columns>
+        <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+        </columnResizePolicy>
+    </TableView>
+</VBox>

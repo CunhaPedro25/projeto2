@@ -10,17 +10,15 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/state")
 public class StateController {
-    private final StateService stateService;
 
     @Autowired
     public StateController(StateService stateService) {
-        this.stateService = stateService;
     }
 
     @PostMapping("/add")
     public ResponseEntity<String> addNewState(@RequestBody State newState) {
         try {
-            stateService.addNew(newState);
+            StateService.addNew(newState);
             return new ResponseEntity<>("State added successfully", HttpStatus.CREATED);
         } catch (IllegalStateException e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
@@ -30,7 +28,7 @@ public class StateController {
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> deleteState(@PathVariable Long id) {
         try {
-            stateService.delete(id);
+            StateService.delete(id);
             return new ResponseEntity<>("State deleted successfully", HttpStatus.OK);
         } catch (IllegalStateException e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);

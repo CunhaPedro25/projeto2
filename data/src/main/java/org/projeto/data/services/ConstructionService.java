@@ -5,8 +5,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.projeto.data.repositories.ConstructionRepository;
 
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class ConstructionService {
@@ -15,27 +21,56 @@ public class ConstructionService {
     @Autowired
     public ConstructionService(ConstructionRepository constructionRepository) {ConstructionService.constructionRepository = constructionRepository;}
 
-    public List<Construction> findByProjectID(Integer id){
+    public static List<Construction> findByProjectID(Integer id){
         return ConstructionService.constructionRepository.findByProject_Id(id);
     }
 
-    public List<Construction> findConstructionsByProjectAndAndState(Integer projectID, Integer stateID){
+    public static List<Construction> findConstructionsByProjectAndAndState(Integer projectID, Integer stateID){
         return ConstructionService.constructionRepository.findConstructionsByProject_IdAndState_Id(projectID, stateID);
     }
-
-    public List<Construction> findConstructionsByTeam_Id(Integer teamID){
-        return ConstructionService.constructionRepository.findConstructionsByTeam_Id(teamID);
+    public static List<Construction> getAllConstructions(){
+        return ConstructionService.constructionRepository.findAll();
     }
 
-    public void addNew(Construction newConstruction){
+    public static void addNew(Construction newConstruction){
         ConstructionService.constructionRepository.save(newConstruction);
     }
-    public void delete(Long constructionID){
+    public static void delete(Long constructionID){
         Optional<Construction> existingCosntruction = ConstructionService.constructionRepository.findById(constructionID);
         if (existingCosntruction.isPresent()){
             ConstructionService.constructionRepository.deleteById(constructionID);
         }else {
             throw new IllegalStateException("That construction does not exist");
         }
+    }
+
+    public static Construction findById(Integer id) {
+        return ConstructionService.constructionRepository.findById(id);
+    }
+
+    public static void update(Construction editConstruction) {
+        LocalDateTime localDateTime = LocalDate.now().atStartOfDay();
+        ZoneId zoneId = ZoneId.systemDefault();
+        Instant instant = localDateTime.atZone(zoneId).toInstant();
+        editConstruction.setLastUpdate(instant);
+        ConstructionService.constructionRepository.save(editConstruction);
+    }
+
+    public static List<Integer> getAllConstructionIds() {
+        return ConstructionService.constructionRepository.findAll()
+                .stream()
+                .map(Construction::getId)
+                .collect(Collectors.toList());
+    }
+
+    public static List<String> getAllConstructionNames() {
+        return ConstructionService.constructionRepository.findAll()
+                .stream()
+                .map(Construction::getName)
+                .collect(Collectors.toList());
+    }
+
+    public static Construction findByName(String value) {
+        return ConstructionService.constructionRepository.findByName(value);
     }
 }

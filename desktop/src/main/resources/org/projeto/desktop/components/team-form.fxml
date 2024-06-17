@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox spacing="30.0" stylesheets="@../assets/styles/global.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.projeto.desktop.components.TeamFormController">
+
+    <VBox spacing="5.0">
+        <HBox fillHeight="false" spacing="10.0">
+            <VBox HBox.hgrow="ALWAYS">
+                <Label contentDisplay="BOTTOM" styleClass="form-label" text="Leader" />
+                <ComboBox fx:id="leaderComboBox" layoutX="10.0" layoutY="10.0" />
+            </VBox>
+            <VBox HBox.hgrow="ALWAYS">
+                <Label contentDisplay="BOTTOM" styleClass="form-label" text="Daily Value" />
+                <TextField fx:id="daily_value" />
+            </VBox>
+        </HBox>
+
+        <HBox fillHeight="false" spacing="10.0">
+
+            <VBox HBox.hgrow="ALWAYS">
+                <Label contentDisplay="BOTTOM" styleClass="form-label" text="Start date" />
+                <DatePicker fx:id="start_date" />
+            </VBox>
+            <VBox HBox.hgrow="ALWAYS">
+                <Label contentDisplay="BOTTOM" styleClass="form-label" text="End date" />
+                <DatePicker fx:id="end_date" />
+            </VBox>
+        </HBox>
+        <HBox fillHeight="false" spacing="10.0">
+            <VBox HBox.hgrow="ALWAYS">
+                <Label fx:id="constructionLabel" contentDisplay="BOTTOM" styleClass="form-label" text="Add team to Constructions" />
+                <ComboBox fx:id="constructionComboBox" />
+            </VBox>
+        </HBox>
+
+    </VBox>
+
+</VBox>

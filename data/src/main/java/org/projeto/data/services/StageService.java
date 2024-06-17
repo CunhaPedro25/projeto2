@@ -5,6 +5,7 @@
   import org.springframework.stereotype.Service;
   import org.projeto.data.repositories.StageRepository;
 
+  import java.util.ArrayList;
   import java.util.List;
   import java.util.Objects;
 
@@ -17,12 +18,12 @@
       StageService.stageRepository = stageRepository;
     }
 
-    public List<Stage> getStage(){ return StageService.stageRepository.findAll();}
+    public static List<Stage> getStage(){ return StageService.stageRepository.findAll();}
 
-    public void addNew(Stage newStage){
+    public static void addNew(Stage newStage){
       StageService.stageRepository.save(newStage);
     }
-    public void delete(Long id){
+    public static void delete(Long id){
       boolean exists = StageService.stageRepository.existsById(id);
       if (!exists){
         throw new IllegalStateException("Stage with id"+id+"does not exist");
@@ -30,14 +31,26 @@
         StageService.stageRepository.deleteById(id);
       }
     }
-    public void update(Long id, String desc){
+    public static void update(Long id, String desc){
       Stage stage = StageService.stageRepository.findById(id).orElseThrow(()-> new IllegalStateException( "Stage with id "+ id + " does not exist! "));
 
       if (desc != null && !desc.isEmpty() && !Objects.equals(stage.getName(), desc)){
         stage.setName(desc);
       }
     }
-    public List<Stage> findByConstructionType(Integer id){
+    public static List<Stage> findByConstructionType(Integer id){
       return StageService.stageRepository.findByConstructionType_Id(id);
+    }
+    public static List<String> getAllStageNames(){
+        List<Stage> stages = StageService.stageRepository.findAll();
+        List<String> stageNames = new ArrayList<>();
+        for (Stage stage : stages){
+            stageNames.add(stage.getName());
+        }
+        return stageNames;
+    }
+
+    public static Stage getStageByName(String name) {
+        return StageService.stageRepository.findByName(name);
     }
   }

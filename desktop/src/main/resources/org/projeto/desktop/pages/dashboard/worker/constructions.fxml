@@ -4,7 +4,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox spacing="10.0" styleClass="background" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.projeto.desktop.pages.dashboard.client.ConstructionsController">
+<VBox spacing="10.0" styleClass="background" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.projeto.desktop.pages.dashboard.worker.ConstructionsController">
     <padding>
         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
     </padding>
@@ -15,9 +15,11 @@
             <TextField />
         </HBox>
 
-        <Button fx:id="newConstruction" text="New Construction" GridPane.columnIndex="1">
-            New project
-        </Button>
+        <HBox GridPane.columnIndex="1" alignment="CENTER_RIGHT">
+            <Button fx:id="newConstruction" text="New Construction">
+                New project
+            </Button>
+        </HBox>
         <columnConstraints>
             <ColumnConstraints hgrow="ALWAYS" />
             <ColumnConstraints fillWidth="false" halignment="RIGHT" />
@@ -30,8 +32,8 @@
     <TableView fx:id="table">
         <columns>
             <TableColumn fx:id="teamColumn" prefWidth="75.0" text="Equipa" />
-            <TableColumn fx:id="finishedColumn" prefWidth="75.0" text="Terminada?" />
             <TableColumn fx:id="stageColumn" prefWidth="75.0" text="Etapa" />
+            <TableColumn fx:id="stateColumn" prefWidth="75.0" text="Estado" />
             <TableColumn fx:id="lastUpdateColumn" prefWidth="75.0" text="Ultima atualização" />
         </columns>
         <columnResizePolicy>

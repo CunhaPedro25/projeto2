@@ -14,29 +14,27 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/api/invoice")
 public class InvoiceController {
-    private final InvoiceService invoiceService;
 
     @Autowired
     public InvoiceController(InvoiceService invoiceService) {
-        this.invoiceService = invoiceService;
     }
 
     @GetMapping("/invoices")
     public ResponseEntity<List<Invoice>> getAllInvoices() {
-        List<Invoice> invoices = invoiceService.getInvoice();
+        List<Invoice> invoices = InvoiceService.getInvoice();
         return new ResponseEntity<>(invoices, HttpStatus.OK);
     }
 
     @PostMapping("/add")
     public ResponseEntity<String> addNewInvoice(@RequestBody Invoice newInvoice) {
-        invoiceService.addNew(newInvoice);
+        InvoiceService.addNew(newInvoice);
         return new ResponseEntity<>("Invoice added successfully", HttpStatus.CREATED);
     }
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> deleteInvoice(@PathVariable Long id) {
         try {
-            invoiceService.delete(id);
+            InvoiceService.delete(id);
             return new ResponseEntity<>("Invoice deleted successfully", HttpStatus.OK);
         } catch (IllegalStateException e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
@@ -45,19 +43,19 @@ public class InvoiceController {
 
     @GetMapping("/stage/{stageId}")
     public ResponseEntity<Optional<Invoice>> getInvoiceByStageId(@PathVariable Integer stageId) {
-        Optional<Invoice> invoice = invoiceService.findByStageId(stageId);
+        Optional<Invoice> invoice = InvoiceService.findByStageId(stageId);
         return new ResponseEntity<>(invoice, HttpStatus.OK);
     }
 
     @GetMapping("/issueDate")
     public ResponseEntity<List<Invoice>> getInvoicesByIssueDate(@RequestParam LocalDate issueDate) {
-        List<Invoice> invoices = invoiceService.findInvoicesByIssueDate(issueDate);
+        List<Invoice> invoices = InvoiceService.findInvoicesByIssueDate(issueDate);
         return new ResponseEntity<>(invoices, HttpStatus.OK);
     }
 
     @GetMapping("/client/{clientId}")
     public ResponseEntity<List<Invoice>> getInvoicesByClientId(@PathVariable Integer clientId) {
-        List<Invoice> invoices = invoiceService.findInvoicesByClientId(clientId);
+        List<Invoice> invoices = InvoiceService.findInvoicesByClientId(clientId);
         return new ResponseEntity<>(invoices, HttpStatus.OK);
     }
 }

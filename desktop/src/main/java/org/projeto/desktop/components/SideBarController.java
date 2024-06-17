@@ -21,6 +21,7 @@ public class SideBarController {
 
     public void initialize() {
         try {
+            System.out.println("SideBarController: " + CurrentUser.type);
             switch (CurrentUser.type) {
                 case "client":
                     pageFactory = new ClientPageFactory();
@@ -30,6 +31,9 @@ public class SideBarController {
                     break;
                 case "secretary":
                     pageFactory = new SecretaryPageFactory();
+                    break;
+                case "admin":
+                    pageFactory = new AdminPageFactory();
                     break;
             }
 
@@ -45,6 +49,7 @@ public class SideBarController {
             CurrentUser.currentPage = pages.get(0);
         } catch (Exception e) {
             System.out.println("SideBarController: " + e.getCause());
+            e.printStackTrace();
         }
     }
 

@@ -10,5 +10,5 @@ import java.util.Optional;
 @Repository
 public interface MaterialRepository  extends JpaRepository<Material, Long>  {
   Material findById(Integer id);
-  Optional<Material> findMaterialByName(String name);
+  Material findMaterialByName(String name);
 }
